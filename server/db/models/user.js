@@ -1,9 +1,10 @@
 'use strict';
 var crypto = require('crypto');
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema
 var _ = require('lodash');
 
-var schema = new mongoose.Schema({
+var schema = new Schema({
     email: {
         type: String
     },
@@ -14,8 +15,24 @@ var schema = new mongoose.Schema({
         type: String
     },
     fitbit: {
-        id: String
-        // Steps: Number
+        id: String,
+        steps: Number,
+        sleep: Number,
+        badges: [Schema.Types.Mixed]
+    },
+    creature: {
+        name: {
+            type: String,
+            default: 'Rafi',
+            required: true
+        },
+        kind: String,
+        fitness: Number,
+        sleep: Number,
+        swag: [String],
+        age: Number
+
+
     }
 
 });
