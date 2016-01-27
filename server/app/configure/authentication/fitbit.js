@@ -1,21 +1,20 @@
 'use strict';
-
 var passport = require('passport');
 var mongoose = require('mongoose');
 var UserModel = mongoose.model('User');
 var FitbitStrategy = require( 'passport-fitbit-oauth2' ).FitbitOAuth2Strategy;
+
 module.exports = function (app) {
 
     var fitbitConfig = app.getValue('env').FITBIT;
 
-
-
     passport.use(new FitbitStrategy({
-        clientID:     fitbitConfig.clientID,
+        clientID: fitbitConfig.clientID,
         clientSecret: fitbitConfig.clientSecret,
         callbackURL: fitbitConfig.callbackURL
-      },
-      function (accessToken, refreshToken, profile, done) {
+    },
+    
+    function (accessToken, refreshToken, profile, done) {
         console.log("THIS IS THE PROFILE YOOOOOOOOO", profile);
         UserModel.findOne({'fitbit.id': profile.id}).exec()
             .then(function (user) {
@@ -28,27 +27,24 @@ module.exports = function (app) {
                     });
                 }
             })
-            // .then(function (userFound) {
-            //     UserModel.findOneAndUpdate(
-            //         {'fitbit.id': userFound.fitbit.id},
-            //         {})
-            // })
             .then(function (userToLogin) {
                 done(null, userToLogin);
             }, function (err, user) {
                 console.error('This is a major error');
                 done(err);
         });
-      }
+    }
     ));
+
     app.get('/auth/fitbit', passport.authenticate('fitbit', { 
         scope: ['activity','heartrate','location','profile'] }
     ));
 
     app.get( '/auth/fitbit/callback', passport.authenticate( 'fitbit', {
-            successRedirect: '/auth/fitbit/success',
-            failureRedirect: '/auth/fitbit/failure'
+        successRedirect: '/auth/fitbit/success',
+        failureRedirect: '/auth/fitbit/failure'
     }));
+    
     // var FitbitClient = require('fitbit-client-oauth2');
 
     // var client = new FitbitClient(fitbitConfig.clientID, fitbitConfig.clientSecret );
