@@ -16,6 +16,10 @@ var schema = new Schema({
     },
     fitbit: {
         id: String,
+        tokens: {
+            access_token: String,
+            refresh_token: String
+        },
         steps: Number,
         sleep: Number,
         badges: [Schema.Types.Mixed]
@@ -31,10 +35,7 @@ var schema = new Schema({
         sleep: Number,
         swag: [String],
         age: Number
-
-
     }
-
 });
 
 // method to remove sensitive information from user objects before sending them out
