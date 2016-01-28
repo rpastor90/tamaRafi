@@ -4,6 +4,8 @@ var mongoose = require('mongoose');
 var UserModel = mongoose.model('User');
 var FitbitStrategy = require('passport-fitbit-oauth2').FitbitOAuth2Strategy;
 var FitbitClient = require('fitbit-client-oauth2');
+var helper = require('./helper');
+
 module.exports = function (app) {
 
     var fitbitConfig = app.getValue('env').FITBIT;
@@ -33,18 +35,17 @@ module.exports = function (app) {
                 }
             })
             .then(function (userToLogin) {
-                var client = new FitbitClient(fitbitConfig.clientID, fitbitConfig.clientSecret);
-                // client.getSleepSummary(userToLogin.fitbit.tokens, {})
-                // .then(function (res) {
-                //     console.log('THIS IS THE SLEEP SUMMARY', res)
-                // })
-                // .then(null, function (err) {
-                //     console.error(err)
-                // })
-                client.getDailyActivitySummary(userToLogin.fitbit.tokens, {})
+                helper.getDailyActivitySummary(userToLogin.fitbit.tokens, {})
                 .then(function (res) {
                     userToLogin.fitbit.steps = res.summary.steps
                     return userToLogin;
+                })
+                .then(function (userSteps) {
+                    return helper.getSleepSummary(userSteps.fitbit.tokens, {})
+                    .then(function (userSleep) {
+                        userSteps.fitbit.sleep = userSleep.summary.totalMinutesAsleep;
+                        return userSteps;
+                    })
                 })
                 .then(function (user) {
                     UserModel.findOneAndUpdate({ _id: user._id }, { fitbit: user.fitbit })
@@ -65,7 +66,7 @@ module.exports = function (app) {
     ));
 
     app.get('/auth/fitbit', passport.authenticate('fitbit', { 
-        scope: ['activity','heartrate','location','profile'] }
+        scope: ['activity','heartrate','location','profile', 'sleep', 'social'] }
     ));
 
     app.get( '/auth/fitbit/callback', passport.authenticate( 'fitbit', {
