@@ -1,0 +1,17 @@
+<h1>Welcome to the Jungle, n3wB</h1>
+<div class="container">
+	<div class="row">
+	    <div class="col-md-6"><animal > ANIMAL</animal></div>
+	  
+	    <div class="col-md-6">
+	    	<h1>Name YO Pet</h1>
+	    	<form novalidate class="simple-form">
+			    Name: <input type="text" ng-model="animal.name" /><br />
+			    Gender: <input type="radio" ng-model="animal.gender" value="male"/>male
+			    <input type="radio" ng-model="animal.gender" value="female" />female
+			    <input type="radio" ng-model="animal.gender" value="non-conforming" />Non-conforming<br />
+			    <input type="button" ng-click="reset()" value="Reset" />
+			    <input type="submit" ng-click="update(animal)" value="Save" />
+			  </form>
+	    </div>
+</div>
