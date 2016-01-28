@@ -15,12 +15,13 @@ module.exports = function (app) {
     },
 
     function (accessToken, refreshToken, profile, done) {
-
         UserModel.findOne({'fitbit.id': profile.id}).exec()
             .then(function (user) {
                 if (user) return user;
                 else {
                     return UserModel.create({
+                        name: profile.displayName,
+                        avatar: profile._json.user.avatar,
                         fitbit: {
                             id: profile.id,
                             tokens: {
@@ -33,6 +34,13 @@ module.exports = function (app) {
             })
             .then(function (userToLogin) {
                 var client = new FitbitClient(fitbitConfig.clientID, fitbitConfig.clientSecret);
+                // client.getSleepSummary(userToLogin.fitbit.tokens, {})
+                // .then(function (res) {
+                //     console.log('THIS IS THE SLEEP SUMMARY', res)
+                // })
+                // .then(null, function (err) {
+                //     console.error(err)
+                // })
                 client.getDailyActivitySummary(userToLogin.fitbit.tokens, {})
                 .then(function (res) {
                     userToLogin.fitbit.steps = res.summary.steps
@@ -64,5 +72,5 @@ module.exports = function (app) {
         successRedirect: '/auth/fitbit/success',
         failureRedirect: '/auth/fitbit/failure'
     }));
-    
+
 };
