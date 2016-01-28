@@ -4,9 +4,15 @@ module.exports = router;
 var mongoose = require('mongoose');
 var User = mongoose.models.User;
 
-var http = require('http');
+var ensureAuthenticated = function (req, res, next) {
+    if (req.isAuthenticated()) {
+        next();
+    } else {
+        res.status(401).end();
+    }
+};
 
-router.get('/', function (req, res, next) {
+router.get('/', ensureAuthenticated, function (req, res, next) {
 	User.find({})
     .then(function (users) {
         res.status(200).send(users);
@@ -14,7 +20,7 @@ router.get('/', function (req, res, next) {
     .then(null, next);
 });
 
-router.get('/:userId', function (req, res, next) {
+router.get('/:userId', ensureAuthenticated, function (req, res, next) {
 	User.find({ _id: req.params.userId })
     .then(function (user) {
         res.status(200).send(user);
