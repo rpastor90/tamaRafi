@@ -2,7 +2,8 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6">
-            <animal> ANIMAL</animal>
+            <animal ng-repeat="animal in animals" ng-show="animal.idx === onDisplay"> ANIMAL</animal>
+            <button class="btn btn-default" ng-click="nextAnimal()">Show next animal</button>
         </div>
         <div class="col-md-6">
             <h1>Name YO Pet</h1>
