@@ -33,10 +33,16 @@ module.exports = function (app) {
             })
             .then(function (userToLogin) {
                 var client = new FitbitClient(fitbitConfig.clientID, fitbitConfig.clientSecret);
-                console.log(userToLogin.fitbit.tokens)
-                client.getTimeSeries(userToLogin.fitbit.tokens, {})
+                client.getDailyActivitySummary(userToLogin.fitbit.tokens, {})
                 .then(function (res) {
-                    console.log('THIS IS THE STEPS', res)
+                    userToLogin.fitbit.steps = res.summary.steps
+                    return userToLogin;
+                })
+                .then(function (user) {
+                    UserModel.findOneAndUpdate({ _id: user._id }, { fitbit: user.fitbit })
+                    .then(function () {
+                        console.log('User has been saved!')
+                    })
                 })
                 .then(null, function (err) {
                     console.error(err)
@@ -58,7 +64,5 @@ module.exports = function (app) {
         successRedirect: '/auth/fitbit/success',
         failureRedirect: '/auth/fitbit/failure'
     }));
-
-    // FitbitApiClient.get("", accessToken, accessTokenSecret, [userId])
-
+    
 };
