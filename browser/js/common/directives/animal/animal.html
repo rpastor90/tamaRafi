@@ -1,7 +1,7 @@
-<div class="animalContainer">
-	<p>{{animal.name}}</p>
-	<img ng-src="{{animal.picture}}">
-		<p><strong>Bio: </strong>{{animal.bio}}</p>
-		<p><strong>Goals: </strong>{{animal.goals}}</p>
-	</div>
+<div class="animalContainer" ng-model="animal.kind">
+    <p>{{animal.name}}</p>
+    <img ng-src="{{animal.picture}}">
+    <p><strong>Bio: </strong>{{animal.bio}}</p>
+    <p><strong>Goals: </strong>{{animal.goals}}</p>
+</div>
 </div>

@@ -30,6 +30,7 @@ router.get('/:userId', ensureAuthenticated, function (req, res, next) {
     .then(null, next);
 });
 
+
 // NOTE TO PEOPLE WORKING IN THIS USER ROUTE 
 
 // The following are possibilites for the last argument to the getSleepTimeSeries:
@@ -82,4 +83,13 @@ router.get('/:userId/activityTimeSeriesTest', function (req, res, next) {
         console.log(res, "WE ARE GETTING ACTIVITY TEST DATA")
     })
 })
+
+
+router.put('/:userId', ensureAuthenticated, function (req, res, next) {
+    User.findByIdAndUpdate(req.params.userId, { creature: req.body }, { new: true })
+    .then(function (user) {
+        console.log("This is the updated user:", user);
+        res.status(201).json(user);
+    });
+});
 

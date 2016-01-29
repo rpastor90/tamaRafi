@@ -37,7 +37,7 @@ module.exports = function (app) {
             .then(function (userToLogin) {
                 helper.getDailyActivitySummary(userToLogin.fitbit.tokens, {})
                 .then(function (res) {
-                    userToLogin.fitbit.steps = res.summary.steps
+                    userToLogin.fitbit.steps = res.summary.steps;
                     return userToLogin;
                 })
                 .then(function (userSteps) {
@@ -45,17 +45,17 @@ module.exports = function (app) {
                     .then(function (userSleep) {
                         userSteps.fitbit.sleep = userSleep.summary.totalMinutesAsleep;
                         return userSteps;
-                    })
+                    });
                 })
                 .then(function (user) {
                     UserModel.findOneAndUpdate({ _id: user._id }, { fitbit: user.fitbit })
                     .then(function () {
-                        console.log('User has been saved!')
-                    })
+                        console.log('User has been saved!');
+                    });
                 })
                 .then(null, function (err) {
-                    console.error(err)
-                })
+                    console.error(err);
+                });
                 done(null, userToLogin);
             }, function (err, user) {
                 console.error('This is a major error');

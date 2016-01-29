@@ -91,6 +91,7 @@ client.getDailyActivitySummary = function(token, options) {
     return helper.createRequestPromise(options);
 };
 
+
 // This function gets a summary of a specific activity data (see routes/user.js) for a specified period of time
 client.getActivityTimeSeries = function(token, options, periodOfTime, typeOfData) {
     options = buildTimeSeriesOptions(options, periodOfTime, typeOfData);
@@ -101,3 +102,5 @@ client.getActivityTimeSeries = function(token, options, periodOfTime, typeOfData
 };
 
 module.exports = client;
+
+
