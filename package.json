@@ -59,6 +59,7 @@
     "passport-facebook": "^1.0.3",
     "passport-fitbit-oauth2": "^1.0.1",
     "passport-google-oauth": "^0.1.5",
+    "passport-jawbone": "^1.0.3",
     "passport-local": "^1.0.0",
     "passport-twitter": "^1.0.2",
     "request-promise": "^2.0.0",

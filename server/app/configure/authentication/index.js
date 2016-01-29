@@ -11,7 +11,7 @@ var ENABLED_AUTH_STRATEGIES = [
     // 'local',
     //'twitter',
     //'facebook',
-    // 'google'
+    'jawbone',
     'fitbit'
 ];
 

@@ -1,22 +1,22 @@
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body {
-  background: #fdfdfd;
+    background-image: url('https://hdwallpapers.cat/wallpaper_mirror/green_and_blue_sky_nature_cartoon_hd-wallpaper-1515828.jpg');
 }
 
 @mixin clearfix {
-  &:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
 }
 
 #main {
-  padding-top: 20px;
-  margin: 0 auto;
+    padding-top: 20px;
+    margin: 0 auto;
 }
 
 @import 'directives/main';
