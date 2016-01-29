@@ -1,7 +1,7 @@
 'use strict';
 var crypto = require('crypto');
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema
+var Schema = mongoose.Schema;
 var _ = require('lodash');
 
 var schema = new Schema({
@@ -34,9 +34,10 @@ var schema = new Schema({
         },
         kind: String,
         fitness: Number,
-        sleep: Number,
+        sleep: String,
         swag: [String],
-        age: Number
+        age: Number,
+        gender: String
     }
 });
 
