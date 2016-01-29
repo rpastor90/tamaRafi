@@ -1,24 +1,14 @@
 module.exports = {
   "DATABASE_URI": "mongodb://localhost:27017/tamarafi",
   "SESSION_SECRET": "Optimus Prime is my real dad",
-  "TWITTER": {
-    "consumerKey": "INSERT_TWITTER_CONSUMER_KEY_HERE",
-    "consumerSecret": "INSERT_TWITTER_CONSUMER_SECRET_HERE",
-    "callbackUrl": "INSERT_TWITTER_CALLBACK_HERE"
-  },
-  "FACEBOOK": {
-    "clientID": "INSERT_FACEBOOK_CLIENTID_HERE",
-    "clientSecret": "INSERT_FACEBOOK_CLIENT_SECRET_HERE",
-    "callbackURL": "INSERT_FACEBOOK_CALLBACK_HERE"
-  },
-  "GOOGLE": {
-    "clientID": "INSERT_GOOGLE_CLIENTID_HERE",
-    "clientSecret": "INSERT_GOOGLE_CLIENT_SECRET_HERE",
-    "callbackURL": "INSERT_GOOGLE_CALLBACK_HERE"
-  },
   "FITBIT": {
     "clientID": "227F6K",
     "clientSecret": "5ec40fd4d543d361bd814ef2b12867c5",
     "callbackURL": "http://localhost:1337/auth/fitbit/callback"
+  },
+  "JAWBONE": {
+    "clientID": "F9-zBR_MuBg",
+    "clientSecret": "595eccf96717aea8891b0bac761b5bf22017cd2b",
+    "callbackURL": "http://localhost:1337/auth/jawbone/callback"
   }
 };
