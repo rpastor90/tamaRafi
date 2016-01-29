@@ -38,6 +38,15 @@ var schema = new Schema({
         swag: [String],
         age: Number,
         gender: String
+    },
+    jawbone: {
+        id: String,
+        tokens: {
+            access_token: String,
+            refresh_token: String
+        },
+        steps: Number,
+        sleep: Number
     }
 });
 
