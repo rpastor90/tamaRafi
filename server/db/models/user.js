@@ -36,7 +36,8 @@ var schema = new Schema({
         fitness: Number,
         sleep: String,
         swag: [String],
-        age: Number
+        age: Number,
+        gender: String
     }
 });
 
