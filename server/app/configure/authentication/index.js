@@ -8,11 +8,8 @@ var mongoose = require('mongoose');
 var UserModel = mongoose.model('User');
 
 var ENABLED_AUTH_STRATEGIES = [
-    // 'local',
-    //'twitter',
-    //'facebook',
-    'jawbone',
-    'fitbit'
+    'fitbit',
+    'jawbone'
 ];
 
 module.exports = function (app) {

@@ -16,16 +16,6 @@ var schema = new Schema({
     salt: {
         type: String
     },
-    fitbit: {
-        id: String,
-        tokens: {
-            access_token: String,
-            refresh_token: String
-        },
-        steps: Number,
-        sleep: Number,
-        badges: [Schema.Types.Mixed]
-    },
     creature: {
         name: {
             type: String,
@@ -38,6 +28,16 @@ var schema = new Schema({
         swag: [String],
         age: Number,
         gender: String
+    },
+    fitbit: {
+        id: String,
+        tokens: {
+            access_token: String,
+            refresh_token: String
+        },
+        steps: Number,
+        sleep: Number,
+        badges: [Schema.Types.Mixed]
     },
     jawbone: {
         id: String,

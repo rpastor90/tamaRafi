@@ -29,9 +29,9 @@ router.get('/:userId', ensureAuthenticated, function (req, res, next) {
 });
 
 router.put('/:userId', ensureAuthenticated, function (req, res, next) {
-    User.findByIdAndUpdate(req.params.userId, {creature: req.body}, {new: true})
-        .then(function (user) {
-            console.log("this is the updated user", user);
-            res.status(201).json(user);
-        });
+    User.findByIdAndUpdate(req.params.userId, { creature: req.body }, { new: true })
+    .then(function (user) {
+        console.log("This is the updated user:", user);
+        res.status(201).json(user);
+    });
 });

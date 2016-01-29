@@ -44,4 +44,5 @@ client.getDailyActivitySummary = function(token, options) {
     options.access_token = token.token.access_token;
     return helper.createRequestPromise(options);
 };
+
 module.exports = client;
