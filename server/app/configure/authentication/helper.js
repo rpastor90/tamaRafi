@@ -8,6 +8,8 @@ var helper = require('fitbit-client-oauth2/src/helpers');
 var fitbitConfig = require(path.join(__dirname, '../../../env')).FITBIT;
 var client = new FitbitClient(fitbitConfig.clientID, fitbitConfig.clientSecret);
 
+// The following are just helper functions:
+
 function buildDailySleepSummaryOptions(options) {
     var uri = config.FITBIT_BASE_API_URL_TOKEN + '/1/user/{userId}/sleep/date/{date}.json';
     options = assign({
@@ -19,7 +21,6 @@ function buildDailySleepSummaryOptions(options) {
 }
 
 function buildSleepTimeSeriesOptions(options, period, typeOfData) {
-    console.log("building times series options");
     var uri = config.FITBIT_BASE_API_URL_TOKEN + '/1/user/{userId}/{resource-path}/date/{date}/{period}.json';
     options = assign({
         userId: '-',
@@ -43,6 +44,26 @@ function buildDailyActivitySummaryOptions(options) {
     return options;
 }
 
+function buildTimeSeriesOptions(options, period, typeOfData) {
+  var url = config.FITBIT_BASE_API_URL_TOKEN + '/1/user/{userId}/{resourcePath}/date/{baseDate}/{period}.json';
+
+  options = assign({
+    userId: '-',
+    resourcePath: 'activities/tracker/' + typeOfData,
+    baseDate: 'today',
+    period: period,
+    units: 'IMPERIAL'
+  }, options);
+
+  options.url = url.replace('{userId}', options.userId)
+    .replace('{resourcePath}', options.resourcePath)
+    .replace('{baseDate}', options.baseDate)
+    .replace('{period}', options.period);
+
+  return options;
+}
+
+// This function gets a summary of one night of sleep
 client.getSleepSummary = function(token, options) {
     options = buildDailySleepSummaryOptions(options);
     token = this.createToken(token);
@@ -51,24 +72,16 @@ client.getSleepSummary = function(token, options) {
     return helper.createRequestPromise(options);
 };
 
-//The following are the possible resource paths
-// sleep/startTime  
-// sleep/timeInBed  
-// sleep/minutesAsleep  
-// sleep/awakeningsCount  
-// sleep/minutesAwake  
-// sleep/minutesToFallAsleep  
-// sleep/minutesAfterWakeup  
-// sleep/efficiency
-
+// The following gets a summary of specific sleep data (see router/user.js) for a specified period
 client.getSleepTimeSeries = function(token, options, periodOfTime, typeOfData) {
     
     options = buildSleepTimeSeriesOptions(options, periodOfTime, typeOfData); 
     token = this.createToken(token);
     options.access_token = token.token.access_token;
-    return helper.createRequestPromise(options)
-    
-}
+    return helper.createRequestPromise(options)    
+};
+
+// This function gets a summary of one day's activity
 
 client.getDailyActivitySummary = function(token, options) {
     options = helper.buildDailyActivitySummaryOptions(options);
@@ -77,4 +90,14 @@ client.getDailyActivitySummary = function(token, options) {
     options.access_token = token.token.access_token;
     return helper.createRequestPromise(options);
 };
+
+// This function gets a summary of a specific activity data (see routes/user.js) for a specified period of time
+client.getActivityTimeSeries = function(token, options, periodOfTime, typeOfData) {
+    options = buildTimeSeriesOptions(options, periodOfTime, typeOfData);
+    token = this.createToken(token);
+    options.access_token = token.token.access_token;
+    return helper.createRequestPromise(options);
+
+};
+
 module.exports = client;
