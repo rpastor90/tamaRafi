@@ -54,6 +54,8 @@ var schema = new Schema({
     }
 });
 
+
+// PASSWORD ENCRYPTION STUFF
 // method to remove sensitive information from user objects before sending them out
 schema.methods.sanitize = function() {
     return _.omit(this.toJSON(), ['password', 'salt']);

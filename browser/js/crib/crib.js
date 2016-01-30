@@ -4,7 +4,7 @@ app.config(function ($stateProvider) {
         url: '/crib',
         templateUrl: 'js/crib/crib.html',
         resolve: {
-            user: function (AuthService, $state) {
+            user: function (AuthService) {
                 return AuthService.getLoggedInUser()
                 .then(function (user) {
                     return user;
@@ -15,7 +15,7 @@ app.config(function ($stateProvider) {
 
 });
 
-app.factory('CribFactory', function ($http, AuthService) {
-    var CribFactoryFactory = {};
+app.factory('CribFactory', function () {
+    var CribFactory = {};
     return CribFactory;
 });

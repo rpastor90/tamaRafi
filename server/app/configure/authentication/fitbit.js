@@ -50,14 +50,14 @@ module.exports = function (app) {
                 .then(function (user) {
                     UserModel.findOneAndUpdate({ _id: user._id }, { fitbit: user.fitbit })
                     .then(function () {
-                        console.log('Fitbit user has been updated and saved!');
+                        console.log('User has been saved!');
                     });
                 })
                 .then(null, function (err) {
                     console.error(err);
                 });
                 done(null, userToLogin);
-            }, function (err, user) {
+            }, function (err) {
                 console.error('This is a major error');
                 done(err);
         });
@@ -65,8 +65,8 @@ module.exports = function (app) {
 
     ));
 
-    app.get('/auth/fitbit', passport.authenticate('fitbit', 
-        { scope: ['activity', 'heartrate', 'location', 'profile', 'sleep', 'social'] }
+    app.get('/auth/fitbit', passport.authenticate('fitbit', { 
+        scope: ['activity','heartrate','location','profile', 'sleep', 'social'] }
     ));
 
     app.get( '/auth/fitbit/callback', passport.authenticate( 'fitbit', {
