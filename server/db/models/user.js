@@ -7,27 +7,26 @@ var _ = require('lodash');
 var schema = new Schema({
     name: String,
     avatar: String,
-    email: {
-        type: String
-    },
     password: {
         type: String
     },
     salt: {
         type: String
     },
-    creature: {
+    animal: {
         name: {
             type: String,
             default: 'Rafi',
             required: true
         },
-        kind: String,
-        fitness: Number,
+        species: String,
+        totalSteps: Number,
         sleep: String,
-        swag: [String],
-        age: Number,
-        gender: String
+        level: {
+            type: Number,
+            default: 1
+        },
+        swag: [String]
     },
     fitbit: {
         id: String,
@@ -36,8 +35,7 @@ var schema = new Schema({
             refresh_token: String
         },
         steps: Number,
-        sleep: Number,
-        badges: [Schema.Types.Mixed]
+        sleep: Number
     },
     jawbone: {
         id: String,

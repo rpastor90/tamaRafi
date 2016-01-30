@@ -50,7 +50,7 @@ module.exports = function (app) {
                 .then(function (user) {
                     UserModel.findOneAndUpdate({ _id: user._id }, { fitbit: user.fitbit })
                     .then(function () {
-                        console.log('Fitbit user has updated and been saved!');
+                        console.log('Fitbit user has been updated and saved!');
                     });
                 })
                 .then(null, function (err) {
@@ -70,7 +70,7 @@ module.exports = function (app) {
     ));
 
     app.get( '/auth/fitbit/callback', passport.authenticate( 'fitbit', {
-        successRedirect: '/forkInTheRoad',
+        successRedirect: '/welcome',
         failureRedirect: '/auth/fitbit/failure'
     }));
 
