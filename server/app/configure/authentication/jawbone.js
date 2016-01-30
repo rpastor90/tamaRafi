@@ -4,19 +4,26 @@ var mongoose = require('mongoose');
 var UserModel = mongoose.model('User');
 var JawboneStrategy = require('passport-jawbone').Strategy;
 
-
 module.exports = function(app) {
 
     var jawboneConfig = app.getValue('env').JAWBONE;
-
+    
     passport.use(new JawboneStrategy({
         clientID: jawboneConfig.clientID,
         clientSecret: jawboneConfig.clientSecret,
         callbackURL: jawboneConfig.callbackURL,
-        passReqToCallback: true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
+        passReqToCallback: true
     },
 
     function (req, accessToken, refreshToken, profile, done) {
+        
+        var options = {
+            access_token: accessToken,
+            client_secret: jawboneConfig.clientSecret
+        }
+
+        var up = require('jawbone-up')(options);
+
         UserModel.findOne({'jawbone.id': profile.meta.user_xid}).exec()
             .then(function (user) {
                 if (user) return user;
@@ -35,23 +42,59 @@ module.exports = function(app) {
                 }
             })
             .then(function (userToLogin) {
-                done(null, userToLogin);
-            }, function (err, user) {
-                console.error('This is a major error');
-                done(err);
+                var stepsAndDates = [];
+                var sleepAndDates = [];
+                up.moves.get({}, function (err, body) {
+                    if (err) {
+                        console.log('Error: ' + err);
+                    } else {
+                        var tenDays = JSON.parse(body).data.items;
+                        tenDays.forEach(function (oneDay) {
+                            var temp = {};
+                            temp.date = oneDay.date;
+                            temp.steps = Number(oneDay.title.split(' ')[0].split(',').join(''));
+                            stepsAndDates.push(temp);
+                        })
+                    }
+                    userToLogin.jawbone.steps = stepsAndDates;
+                    userToLogin.save()
+                    .then(function (stepsSavedUser) {
+                        up.sleeps.get({}, function (err, body) {
+                            if (err) {
+                                console.log('Error: ', err);
+                            } else {
+                                var tenDays = JSON.parse(body).data.items;
+                                tenDays.forEach(function (oneDay) {
+                                    var temp = {};
+                                    temp.date = oneDay.date;
+                                    var hours = Number(oneDay.title.split(' ')[1].slice(0, -1))*60;
+                                    var minutes = Number(oneDay.title.split(' ')[2].slice(0, -1));
+                                    temp.sleep = hours + minutes;
+                                    sleepAndDates.push(temp);
+                                })
+                            }
+                            stepsSavedUser.jawbone.sleeps = sleepAndDates;
+                            stepsSavedUser.save()
+                            .then(function () {
+                                console.log('Jawbone user has been updated and saved!')
+                            });
+                        })
+                    })
+                    done(null, userToLogin);
+                })
             })
-    	}
+        }, function (err, user) {
+            console.error('This is a major error');
+            done(err);
+        })
+    );
+
+    app.get('/auth/jawbone', passport.authenticate('jawbone',
+        { scope: 'move_read sleep_read' }
     ));
 
-    app.get('/auth/jawbone', passport.authorize('jawbone', { 
-    	scope : 'move_read' }
-    ));
-
-    app.get('/auth/jawbone/callback', passport.authorize('jawbone', {
-		scope: ['move_read'],
-		failureRedirect: '/auth/jawbone/failure'
-	}), function (req, res) {
-		res.redirect('/auth/jawbone/success');
-		}
-	);
+    app.get( '/auth/jawbone/callback', passport.authenticate( 'jawbone', {
+        successRedirect: '/auth/fitbit/success',
+        failureRedirect: '/auth/fitbit/failure'
+    }));
 };
