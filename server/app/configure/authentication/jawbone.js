@@ -56,7 +56,7 @@ module.exports = function(app) {
                             stepsAndDates.push(temp);
                         })
                     }
-                    userToLogin.jawbone.steps = stepsAndDates;
+                    userToLogin.jawbone.steps = stepsAndDates.slice(0, 7);
                     userToLogin.save()
                     .then(function (stepsSavedUser) {
                         up.sleeps.get({}, function (err, body) {
@@ -73,7 +73,7 @@ module.exports = function(app) {
                                     sleepAndDates.push(temp);
                                 })
                             }
-                            stepsSavedUser.jawbone.sleeps = sleepAndDates;
+                            stepsSavedUser.jawbone.sleeps = sleepAndDates.slice(0, 7);
                             stepsSavedUser.save()
                             .then(function () {
                                 console.log('Jawbone user has been updated and saved!')
@@ -94,7 +94,7 @@ module.exports = function(app) {
     ));
 
     app.get( '/auth/jawbone/callback', passport.authenticate( 'jawbone', {
-        successRedirect: '/auth/fitbit/success',
+        successRedirect: '/welcome',
         failureRedirect: '/auth/fitbit/failure'
     }));
 };
