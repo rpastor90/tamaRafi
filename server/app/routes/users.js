@@ -3,8 +3,7 @@ var router = require('express').Router();
 module.exports = router;
 var mongoose = require('mongoose');
 var User = mongoose.models.User;
-var path = require('path');
-var helper = require(path.join(__dirname, '../configure/authentication/helper'));
+
 
 router.use('/:userId/sleep', require('./sleep'));
 router.use('/:userId/activity', require('./activity'));
