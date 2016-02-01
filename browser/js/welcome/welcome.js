@@ -3,9 +3,9 @@ app.config(function ($stateProvider) {
     $stateProvider.state('welcome', {
         url: '/welcome',
         controller: function(user, $state) {
-            console.log('this is the welcome state,', user)
+            console.log(' Welcome:', user)
             // check if animal's species is set instead of user.fitbit/jawbone
-            if (user.animal.species) {
+            if (user.animal.species && user.animal.name) {
                 // switch firstTimeUser to crib once crib state is set up
                 $state.go('crib');
             } else {
