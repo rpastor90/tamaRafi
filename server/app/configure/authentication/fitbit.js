@@ -35,8 +35,10 @@ module.exports = function (app) {
                 }
             })
             .then(function (userToLogin) {
+                console.log(userToLogin, "this is the user to log in")
                 helper.getDailyActivitySummary(userToLogin.fitbit.tokens, {})
                 .then(function (res) {
+                    console.log("BROKEN", res)
                     userToLogin.fitbit.steps = res.summary.steps;
                     return userToLogin;
                 })
