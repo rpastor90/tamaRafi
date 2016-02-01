@@ -40,12 +40,12 @@ router.put('/:userId', ensureAuthenticated, function (req, res, next) {
     });
 });
 
-router.get('/:userId/getSwag/:swagId', function (req, res, next) {
+router.put('/:userId/getSwag/:swagId', function (req, res, next) {
     if (!req.user) return 'User not found!'
     Swag.findOne({ _id: req.params.swagId })
     .then(function(swag) {
         req.user.animal.swags.push(swag);
-        console.log(swag, req.user)
+        req.user.animal.money = req.user.animal.money - swag.price;
         return req.user.save();
     })
     .then(user => res.send(user))
