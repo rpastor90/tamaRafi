@@ -78,7 +78,7 @@ module.exports = function(app) {
                                 })
                             }
                             stepsSavedUser.jawbone.sleeps = sleepAndDates.slice(0, 7);
-                            ]stepsSavedUser.save()
+                            stepsSavedUser.save()
                             .then(function () {
                                 console.log('Jawbone user has been updated and saved!')
                             });
