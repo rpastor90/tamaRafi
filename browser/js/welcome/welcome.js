@@ -13,7 +13,7 @@ app.config(function ($stateProvider) {
             }
         },
         resolve: {
-            user: function (AuthService, $state) {
+            user: function (AuthService) {
                 return AuthService.getLoggedInUser()
                 .then(function (user) {
                     return user;
