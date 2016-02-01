@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 var _ = require('lodash');
 
 var schema = new Schema({
-    username: String,
+    name: String,
     avatar: String,
     animal: {
         name: {
