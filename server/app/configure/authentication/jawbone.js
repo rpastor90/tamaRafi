@@ -38,6 +38,10 @@ module.exports = function(app) {
                                 refresh_token: refreshToken
                             }
                         }
+                    })
+                    .then(null, function (err) {
+
+                        console.error('this is the errorr', err)
                     });
                 }
             })
@@ -74,7 +78,7 @@ module.exports = function(app) {
                                 })
                             }
                             stepsSavedUser.jawbone.sleeps = sleepAndDates.slice(0, 7);
-                            stepsSavedUser.save()
+                            ]stepsSavedUser.save()
                             .then(function () {
                                 console.log('Jawbone user has been updated and saved!')
                             });
