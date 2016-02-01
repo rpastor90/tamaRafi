@@ -22,6 +22,8 @@ var Promise = require('bluebird');
 var chalk = require('chalk');
 var connectToDb = require('./server/db');
 var User = Promise.promisifyAll(mongoose.model('User'));
+var Swag = Promise.promisifyAll(mongoose.model('Swag'));
+
 
 var seedUsers = function () {
 
@@ -40,15 +42,49 @@ var seedUsers = function () {
 
 };
 
+var seedSwag = function () {
+
+    var swags = [
+        {
+            name: 'chair',
+            category: 'furniture',
+            price: 100,
+            imageUrl: 'http://www.sheilazellerinteriors.com/wp-content/uploads/2012/01/Eames-Lounge-Chair-and-Stool.png'
+        },
+        {
+            name: 'bed',
+            category: 'furniture',
+            price: 200,
+            imageUrl: 'http://preciousfurnishers.com/wp-content/uploads/2015/07/Bed7.png'
+        },
+        {
+            name: "santa's hat",
+            category: 'hat',
+            price: 20,
+            imageUrl: 'http://orig13.deviantart.net/a201/f/2012/324/5/e/christmas_hat_png_by_xhipstaswift-d5lkmu8.png'
+        },
+        {
+            name: "rocky's hat",
+            category: 'hat',
+            price: 40,
+            imageUrl: 'http://www.cappelleriamelegari.com/images/large/h2/HPIM2554_lrg.jpg'
+        }
+    ];
+
+    return Swag.createAsync(swags);
+
+}; 
+
 connectToDb.then(function () {
-    User.findAsync({}).then(function (users) {
-        if (users.length === 0) {
-            return seedUsers();
+    Swag.findAsync({}).then(function (swags) {
+        if (swags.length === 0) {
+            return seedSwag();
         } else {
-            console.log(chalk.magenta('Seems to already be user data, exiting!'));
+            console.log(chalk.magenta('Swags have been seeded!'));
             process.kill(0);
         }
-    }).then(function () {
+    })
+    .then(function () {
         console.log(chalk.green('Seed successful!'));
         process.kill(0);
     }).catch(function (err) {
