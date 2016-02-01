@@ -38,6 +38,10 @@ module.exports = function(app) {
                                 refresh_token: refreshToken
                             }
                         }
+                    })
+                    .then(null, function (err) {
+
+                        console.error('this is the errorr', err)
                     });
                 }
             })
