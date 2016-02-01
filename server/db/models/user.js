@@ -7,26 +7,32 @@ var _ = require('lodash');
 var schema = new Schema({
     name: String,
     avatar: String,
-    password: {
-        type: String
-    },
-    salt: {
-        type: String
-    },
     animal: {
         name: {
             type: String,
-            default: 'Rafi',
-            required: true
+            // default: 'Rafi',
+            // required: true,
+            unique: true
         },
         species: String,
-        totalSteps: Number,
-        sleep: String,
+        xp: {
+            type: Number,
+            default: 0
+        },
         level: {
             type: Number,
             default: 1
         },
-        swag: [String]
+        money: Number,
+        totalSteps: {
+            type: Number,
+            default: 0
+        },
+        swags: [{ 
+            type: Schema.Types.ObjectId, 
+            ref: 'Swag' 
+        }],
+        friends: [String]
     },
     fitbit: {
         id: String,
