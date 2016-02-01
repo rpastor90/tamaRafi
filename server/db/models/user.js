@@ -23,7 +23,10 @@ var schema = new Schema({
             type: Number,
             default: 1
         },
-        money: Number,
+        money: {
+            type: Number,
+            default: 0
+        },
         totalSteps: {
             type: Number,
             default: 0
