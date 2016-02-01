@@ -3,6 +3,7 @@ var router = require('express').Router();
 module.exports = router;
 var mongoose = require('mongoose');
 var User = mongoose.models.User;
+var Swag = mongoose.models.Swag;
 
 
 router.use('/:userId/sleep', require('./sleep'));
@@ -38,5 +39,17 @@ router.put('/:userId', ensureAuthenticated, function (req, res, next) {
         console.log("This is the updated user:", user);
         res.status(201).json(user);
     });
+});
+
+router.get('/:userId/getSwag/:swagId', function (req, res, next) {
+    if (!req.user) return 'User not found!'
+    Swag.findOne({ _id: req.params.swagId })
+    .then(function(swag) {
+        req.user.animal.swags.push(swag);
+        console.log(swag, req.user)
+        return req.user.save();
+    })
+    .then(user => res.send(user))
+    .then(null, next)
 });
 

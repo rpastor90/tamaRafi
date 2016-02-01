@@ -1,0 +1,14 @@
+ <div class="col-xs-4 col-md-2">
+
+ 	<img src="{{swag.imageUrl}}" class="img-responsive book" ng-click="showMoreInfo()" ng-show="!moreInfo"/><div class="btn btn-default" ng-click="purchase(swag)">Get this swag</div>
+
+ 	<div ng-show="insufficientFunds">You don't got the green for this.</div>
+
+  	<div class="img-responsive book" ng-click="showMoreInfo()" ng-show="moreInfo">
+  		{{swag.name}} <br>
+  		{{swag.category}} <br>
+  		{{swag.price}} <br>
+
+  	</div>
+
+  </div>

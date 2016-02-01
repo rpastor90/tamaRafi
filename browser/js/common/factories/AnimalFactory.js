@@ -1,4 +1,4 @@
-app.factory('AnimalFactory', function() {
+app.factory('AnimalFactory', function($http) {
     var AnimalFactory = {};
     var animals = [{
         name: 'Trap Giraffe',
@@ -21,9 +21,32 @@ app.factory('AnimalFactory', function() {
         goals: 'Slimmer physique',
         species: 'hog',
         idx: 2
-    }]
+    }];
+    
     AnimalFactory.fetchAnimals = function() {
         return animals;
+    };
+
+    AnimalFactory.fetchSwag = function() {
+        return $http.get('/api/swag')
+        var shelves = [];
+        .then(function(swags) {
+
+            swags.
+        })
+    };
+
+    AnimalFactory.purchase = function(user, swag) {
+        if (user.animal.money >= swag.price) {
+            return $http.get('/api/users/' + user._id + '/getSwag/' + swag._id)
+            .then(function(purchase) {
+                console.log(purchase, "PURCHASE")
+                return purchase.data;
+                })
+        } else {
+            return 'unsuccessful purchase';
+        }
     }
+
     return AnimalFactory;
 })
