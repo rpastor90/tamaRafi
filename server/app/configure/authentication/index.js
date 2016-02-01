@@ -9,7 +9,8 @@ var UserModel = mongoose.model('User');
 
 var ENABLED_AUTH_STRATEGIES = [
     'fitbit',
-    'jawbone'
+    'jawbone',
+    'misfit'
 ];
 
 module.exports = function (app) {
