@@ -10,8 +10,8 @@ var schema = new Schema({
     animal: {
         name: {
             type: String,
-            default: 'Rafi',
-            required: true,
+            // default: 'Rafi',
+            // required: true,
             unique: true
         },
         species: String,
