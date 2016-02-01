@@ -10,5 +10,10 @@ module.exports = {
     "clientID": "F9-zBR_MuBg",
     "clientSecret": "595eccf96717aea8891b0bac761b5bf22017cd2b",
     "callbackURL": "http://localhost:1337/auth/jawbone/callback"
+  },
+  "MISFIT": {
+    "clientID" : "88ODtMCBQUeEvV5O",
+    "clientSecret" : "cugXq4w9DXpeHqQJTcWOgfeCyD1cwnYq",
+    "callbackURL" : "http://localhost:1337/auth/misfit/callback"
   }
 };

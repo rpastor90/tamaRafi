@@ -51,6 +51,14 @@ var schema = new Schema({
             date: Number,
             sleep: Number
         }]
+    },
+    misfit: {
+        id: String,
+        tokens: {
+            access_token: String,
+            refresh_token: String
+        },
+
     }
 });
 
