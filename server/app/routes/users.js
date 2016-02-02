@@ -5,7 +5,6 @@ var mongoose = require('mongoose');
 var User = mongoose.models.User;
 var Swag = mongoose.models.Swag;
 
-
 router.use('/:userId/sleep', require('./sleep'));
 router.use('/:userId/activity', require('./activity'));
 
@@ -51,4 +50,3 @@ router.put('/:userId/getSwag/:swagId', function (req, res, next) {
     .then(user => res.send(user))
     .then(null, next)
 });
-

@@ -2,9 +2,10 @@
 var router = require('express').Router();
 module.exports = router;
 
-console.log("in index")
 router.use('/users', require('./users'));
 router.use('/swag', require('./swag'));
+// router.use('/animals', require('./animals'));
+
 
 // Make sure this is after all of
 // the registered routes!
