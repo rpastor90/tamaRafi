@@ -8,6 +8,5 @@ app.directive('shelf', function () {
         		$scope.moreInfo =  $scope.moreInfo ? false : true;
     		}
         }
-
     };
 });

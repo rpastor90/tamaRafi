@@ -19,10 +19,11 @@ module.exports = function (app) {
     function (accessToken, refreshToken, profile, done) {
         UserModel.findOne({'fitbit.id': profile.id}).exec()
             .then(function (user) {
+                console.log(user)
                 if (user) return user;
                 else {
                     return UserModel.create({
-                        name: profile.displayName,
+                        name: profile._json.user.fullName,
                         avatar: profile._json.user.avatar,
                         fitbit: {
                             id: profile.id,
@@ -35,10 +36,8 @@ module.exports = function (app) {
                 }
             })
             .then(function (userToLogin) {
-                console.log(userToLogin, "this is the user to log in")
                 helper.getDailyActivitySummary(userToLogin.fitbit.tokens, {})
                 .then(function (res) {
-                    console.log("BROKEN", res)
                     userToLogin.fitbit.steps = res.summary.steps;
                     return userToLogin;
                 })
@@ -50,7 +49,7 @@ module.exports = function (app) {
                     });
                 })
                 .then(function (user) {
-                    return UserModel.findOneAndUpdate({ _id: user._id }, { fitbit: user.fitbit })
+                    UserModel.findOneAndUpdate({ _id: user._id }, { fitbit: user.fitbit })
                     .then(function () {
                         console.log('User has been saved!');
                     });
@@ -68,7 +67,7 @@ module.exports = function (app) {
     ));
 
     app.get('/auth/fitbit', passport.authenticate('fitbit', { 
-        scope: ['activity','heartrate','location','profile', 'sleep', 'social'] }
+        scope: ['activity','heartrate','location','profile','sleep','social'] }
     ));
 
     app.get( '/auth/fitbit/callback', passport.authenticate( 'fitbit', {

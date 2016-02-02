@@ -6,13 +6,13 @@ var _ = require('lodash');
 var Animal = mongoose.models.Animal;
 
 var schema = new Schema({
-    name: String,
+    name: {
+        type: String,
+        unique: true
+    },
     avatar: String,
     animal: {
-        name: {
-            type: String,
-            unique: true
-        },
+        name: String,
         species: String,
         xp: {
             type: Number,
@@ -33,15 +33,15 @@ var schema = new Schema({
         swags: [{
             type: Schema.Types.ObjectId,
             ref: 'Swag'
-        }],
-        user: {
-            type: Schema.Types.ObjectId,
-            ref: 'User'
-        },
-        friends: [{
-            type: Schema.Types.ObjectId,
-            ref: 'Animal'
         }]
+        // user: {
+        //     type: Schema.Types.ObjectId,
+        //     ref: 'User'
+        // },
+        // friends: [{
+        //     type: Schema.Types.ObjectId,
+        //     ref: 'User'
+        // }]
     },
     // animal: {
     //     type: Schema.Types.ObjectId,

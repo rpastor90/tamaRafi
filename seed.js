@@ -21,26 +21,26 @@ var mongoose = require('mongoose');
 var Promise = require('bluebird');
 var chalk = require('chalk');
 var connectToDb = require('./server/db');
-var User = Promise.promisifyAll(mongoose.model('User'));
+// var User = Promise.promisifyAll(mongoose.model('User'));
 var Swag = Promise.promisifyAll(mongoose.model('Swag'));
 
 
-var seedUsers = function () {
+// var seedUsers = function () {
 
-    var users = [
-        {
-            email: 'testing@fsa.com',
-            password: 'password'
-        },
-        {
-            email: 'obama@gmail.com',
-            password: 'potus'
-        }
-    ];
+//     var users = [
+//         {
+//             email: 'testing@fsa.com',
+//             password: 'password'
+//         },
+//         {
+//             email: 'obama@gmail.com',
+//             password: 'potus'
+//         }
+//     ];
 
-    return User.createAsync(users);
+//     return User.createAsync(users);
 
-};
+// };
 
 var seedSwag = function () {
 

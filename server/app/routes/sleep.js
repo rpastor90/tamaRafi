@@ -20,7 +20,6 @@ module.exports = router;
 // 1d, 7d, 30d, 1w, 1m, 3m, 6m, 1y, or max.
 
 router.get('/timeseries', function (req, res, next) {
-	// console.log(req.user, "REQ USEr")
     return helper.getSleepTimeSeries(req.user.fitbit.tokens, {}, '7d', 'minutesAsleep' )
     .then(function (sleepData) {
         console.log(sleepData, "THIS IS THE SLEEP DATA")
@@ -28,7 +27,6 @@ router.get('/timeseries', function (req, res, next) {
 });
 
 router.post('/timeseries', function (req, res, next) {
-	console.log("got in the post")
     return helper.postSleepLog(req.user.fitbit.tokens, {}, req.body )
     .then(function (sleepData) {
         console.log(sleepData, "THIS IS THE SLEEP DATA")
