@@ -16,5 +16,13 @@
 	</div>
 	<a ui-sref="rewards"><img id="trophy" src="http://www.clker.com/cliparts/d/8/9/b/1298268524507354096Trophy.svg.med.png"/></a>
 
+	<!-- <div class="dock_left"></div> -->
+		<div class="dock" ng-mouseover="toggleShown()" ng-show="isShown">
+			<ul>
+		    <li ng-repeat="swag in swags"><a><img ng-src="{{swag.imageUrl}}" alt="Home"></a></li>
+		</ul>
+		</div>
+	<!-- <div class="dock_right"></div> -->
+
 
 </div>

@@ -28,9 +28,9 @@ app.factory('CribFactory', function () {
 
 app.controller('CribCtrl', function ($scope, $state, user, AuthService, swags, AnimalFactory) {
     $scope.user = user;
-
+    $scope.isShown = false;
     $scope.swags = swags;
-    console.log(swags)
+    $scope.toggle = function9
     $scope.logout = function () {
         AuthService.logout()
         .then(function () {
