@@ -26,6 +26,15 @@ app.factory('FirstTimeUserFactory', function ($http, $state, AuthService) {
             $state.go('crib');
         });
     };
+    // FirstTimeUserFactory.createAnimal = function (animal) {
+    //     return $http.post('/api/animals/')
+    //     .then(function (animal) {
+    //         return animal.data;
+    //     })
+    //     .then(function() {
+    //         $state.go('crib');
+    //     });
+    // };
     return FirstTimeUserFactory;
 });
 

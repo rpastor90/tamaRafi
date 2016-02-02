@@ -4,7 +4,6 @@ module.exports = router;
 var mongoose = require('mongoose');
 var User = mongoose.models.User;
 
-
 router.use('/:userId/sleep', require('./sleep'));
 router.use('/:userId/activity', require('./activity'));
 
@@ -38,4 +37,3 @@ router.put('/:userId', ensureAuthenticated, function (req, res, next) {
         res.status(201).json(user);
     });
 });
-

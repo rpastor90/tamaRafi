@@ -50,7 +50,7 @@ module.exports = function (app) {
                     });
                 })
                 .then(function (user) {
-                    UserModel.findOneAndUpdate({ _id: user._id }, { fitbit: user.fitbit })
+                    return UserModel.findOneAndUpdate({ _id: user._id }, { fitbit: user.fitbit })
                     .then(function () {
                         console.log('User has been saved!');
                     });
