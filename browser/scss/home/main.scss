@@ -2,15 +2,15 @@
     h1 {
     	font-family: "Courier New";
     	font-weight: bold;
-    	font-size: 100px;
+    	font-size: 80px;
         text-align: center;
         color: white;
         border: 10px dotted white;
         border-radius: 15px;
-        padding: 50px 0px 50px 0px;
+        padding: 3%;
         width: 80%;
         margin: auto;
-        margin-top: 200px;
+        margin-top: 150px;
     }
     button {
 	    margin-top: 50px;
@@ -30,4 +30,7 @@
 	button:hover {
 		box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 	}
+    img {
+        margin-top: 10%;
+    }
 }
