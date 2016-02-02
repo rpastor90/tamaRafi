@@ -42,6 +42,7 @@ module.exports = function (app) {
                 helper.getDailyActivitySummary(userToLogin.fitbit.tokens, {})
                 .then(function (res) {
                     userToLogin.fitbit.steps = res.summary.steps;
+                    userToLogin.animal.totalSteps += res.summary.steps;
                     return userToLogin;
                 })
                 .then(function (userSteps) {
@@ -52,8 +53,8 @@ module.exports = function (app) {
                     });
                 })
                 .then(function (user) {
-                    UserModel.findOneAndUpdate({ _id: user._id }, { fitbit: user.fitbit })
-                    .then(function () {
+                    UserModel.findOneAndUpdate({ _id: user._id }, { fitbit: user.fitbit, animal: user.animal })
+                    .then(function (user) {
                         console.log('User has been saved!');
                     });
                 })
