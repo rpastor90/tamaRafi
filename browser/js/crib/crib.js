@@ -29,4 +29,8 @@ app.controller('CribCtrl', function ($scope, $state, user, AuthService) {
            $state.go('home');
         });
     };
+
+    $scope.startCallback = function() {
+        console.log("hello");
+    }
 });
