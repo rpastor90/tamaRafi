@@ -4,16 +4,10 @@ app.config(function ($stateProvider) {
         url: '/crib',
         templateUrl: 'js/crib/crib.html',
         controller: 'CribCtrl',
+        data : { authenticate: true },
         resolve: {
             user: function (AuthService, $state) {
-                return AuthService.getLoggedInUser()
-                .then(function (user) {
-                    if (user) {
-                        return user;
-                    } else {
-                        $state.go('home');
-                    }
-                });
+                return AuthService.getLoggedInUser();
             }
         }
     });
@@ -28,11 +22,7 @@ app.factory('CribFactory', function () {
 
 app.controller('CribCtrl', function ($scope, $state, user, AuthService) {
     $scope.user = user;
-
-    if (!user) {
-
-    }
-
+    
     $scope.logout = function () {
         AuthService.logout()
         .then(function () {
