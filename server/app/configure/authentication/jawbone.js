@@ -60,6 +60,7 @@ module.exports = function(app) {
                         })
                     }
                     userToLogin.jawbone.steps = stepsAndDates.slice(0, 7);
+                    userToLogin.animal.totalSteps = stepsAndDates[0].steps;
                     userToLogin.save()
                     .then(function (stepsSavedUser) {
                         up.sleeps.get({}, function (err, body) {
