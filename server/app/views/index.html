@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <base href="/" />
     <title>TAMARAFI</title>
-    <meta HTTP-EQUIV="X-UA-COMPATIBLE" CONTENT="IE=EmulateIE9" >
+    <meta HTTP-EQUIV="X-UA-COMPATIBLE" CONTENT="IE=EmulateIE9">
     <link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="/style.css" />
     <script src="/lodash/index.js"></script>
@@ -16,8 +17,31 @@
     <script src="/angular-ui-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="/socket.io-client/socket.io.js"></script>
     <script src="/main.js"></script>
+    <script>
+    $(document).ready(function() {
+        var d = new Date();
+        var n = d.getHours();
+        if (n >= 5 && n <= 8)
+            document.body.className = "morning";
+        else if (n > 8 && n <= 11)
+            document.body.className = "late-morning";
+        else if (n > 11 && n <= 14)
+            document.body.className = "afternoon";
+        else if (n > 14 && n <= 17)
+            document.body.className = "late-afternoon";
+        else if (n > 17 && n <= 19)
+            document.body.className = "evening";
+        else if (n > 19 && n <= 21)
+            document.body.className = "late-evening";
+        else if (n > 21 && n <= 1)
+            document.body.className = "night";
+        else
+            document.body.className = "late-night";
+    });
+    </script>
 </head>
 <body ng-app="FullstackGeneratedApp">
     <div id="main" ui-view></div>
 </body>
+
 </html>
