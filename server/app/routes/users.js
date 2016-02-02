@@ -39,6 +39,13 @@ router.put('/:userId', ensureAuthenticated, function (req, res, next) {
     });
 });
 
+router.get('/:userId/getSwag', function(req, res, next) {
+    User.findOne({ _id: req.params.userId })
+    .populate('animal.swags')
+    .then( user => {
+        res.json(user)})
+});
+
 router.put('/:userId/getSwag/:swagId', function (req, res, next) {
     if (!req.user) return 'User not found!'
     Swag.findOne({ _id: req.params.swagId })

@@ -30,10 +30,12 @@ var schema = new Schema({
             type: Number,
             default: 0
         },
-        swags: [{
+        swags: [
+        {
             type: Schema.Types.ObjectId,
             ref: 'Swag'
-        }]
+                }
+        ]
         // user: {
         //     type: Schema.Types.ObjectId,
         //     ref: 'User'

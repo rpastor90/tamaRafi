@@ -8,6 +8,12 @@ app.config(function ($stateProvider) {
         resolve: {
             user: function (AuthService, $state) {
                 return AuthService.getLoggedInUser();
+            },
+            swags: function(AnimalFactory, AuthService) {
+                return AuthService.getLoggedInUser()
+                .then(function(user) {
+                    return AnimalFactory.fetchSwagByUser(user)
+                })  
             }
         }
     });
@@ -20,9 +26,11 @@ app.factory('CribFactory', function () {
     return CribFactory;
 });
 
-app.controller('CribCtrl', function ($scope, $state, user, AuthService) {
+app.controller('CribCtrl', function ($scope, $state, user, AuthService, swags, AnimalFactory) {
     $scope.user = user;
-    
+
+    $scope.swags = swags;
+    console.log(swags)
     $scope.logout = function () {
         AuthService.logout()
         .then(function () {
@@ -32,5 +40,7 @@ app.controller('CribCtrl', function ($scope, $state, user, AuthService) {
 
     $scope.startCallback = function() {
         console.log("hello");
-    }
+    };
+    
+   
 });

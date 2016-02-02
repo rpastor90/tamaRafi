@@ -47,6 +47,13 @@ app.factory('AnimalFactory', function($http) {
         })
     };
 
+     AnimalFactory.fetchSwagByUser = function(user) {
+        return $http.get('/api/users/' + user._id + '/getSwag')
+        .then(function(res) {
+           return res.data.animal.swags;
+        })
+    };
+
     AnimalFactory.purchase = function(user, swag) {
         if (user.animal.money >= swag.price) {
             return $http.put('/api/users/' + user._id + '/getSwag/' + swag._id)
