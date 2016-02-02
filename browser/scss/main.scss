@@ -1,5 +1,6 @@
 * {
     box-sizing: border-box;
+    font-family: "Courier New";
 }
 
 body {
@@ -44,4 +45,5 @@ body {
 @import 'tutorial/main';
 @import 'login/main';
 @import 'crib/main';
+@import 'leaderboard/main';
 @import 'health/main';
