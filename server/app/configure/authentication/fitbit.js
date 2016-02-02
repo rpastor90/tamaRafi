@@ -19,7 +19,6 @@ module.exports = function (app) {
     function (accessToken, refreshToken, profile, done) {
         UserModel.findOne({'fitbit.id': profile.id}).exec()
             .then(function (user) {
-                console.log(user)
                 if (user) return user;
                 else {
                     return UserModel.create({
@@ -36,6 +35,10 @@ module.exports = function (app) {
                 }
             })
             .then(function (userToLogin) {
+                // the tokens may change after a certain amount of time
+                // here we are reassigning the refresh and access tokens
+                userToLogin.fitbit.tokens.access_token = accessToken;
+                userToLogin.fitbit.tokens.refresh_token = refreshToken;
                 helper.getDailyActivitySummary(userToLogin.fitbit.tokens, {})
                 .then(function (res) {
                     userToLogin.fitbit.steps = res.summary.steps;

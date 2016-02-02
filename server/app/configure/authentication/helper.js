@@ -106,7 +106,6 @@ client.getSleepSummary = function (token, options) {
 
 // The following gets a summary of specific sleep data (see router/user.js) for a specified period
 client.getSleepTimeSeries = function (token, options, periodOfTime, typeOfData) {
-    console.log("in sleep time series function")
     options = buildSleepTimeSeriesOptions(options, periodOfTime, typeOfData);
     token = this.createToken(token);
     options.access_token = token.token.access_token;
@@ -122,7 +121,7 @@ client.postSleepLog = function (token, options, body) {
 
 // This function gets a summary of one day's activity
 client.getDailyActivitySummary = function (token, options) {
-    options = helper.buildDailyActivitySummaryOptions(options);
+    options = buildDailyActivitySummaryOptions(options);
     token = this.createToken(token);
     //TODO: improve this way of getting the token
     options.access_token = token.token.access_token;
