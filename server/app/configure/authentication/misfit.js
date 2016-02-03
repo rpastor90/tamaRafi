@@ -23,6 +23,7 @@ module.exports = function (app) {
 
     var misfitConfig = app.getValue('env').MISFIT;
 
+
     var misfitHandler = new Misfit({
     clientId: misfitConfig.clientID,
     clientSecret: misfitConfig.clientSecret,
@@ -37,6 +38,7 @@ module.exports = function (app) {
             ]
         });
 
+
     passport.use(new MisfitStrategy({
         clientID: misfitConfig.clientID,
         clientSecret: misfitConfig.clientSecret,
@@ -48,6 +50,7 @@ module.exports = function (app) {
             'tracking',
             'sessions',
             'sleeps'
+
             ]
         },
 
@@ -84,10 +87,12 @@ module.exports = function (app) {
         }));
 
 
+
 app.get('/auth/misfit',
   passport.authenticate('misfit'));
 
 app.get('/auth/misfit/callback',
+
   passport.authenticate('misfit', { failureRedirect: '/auth/misfit/failure' }),
   function(req, res) {
 

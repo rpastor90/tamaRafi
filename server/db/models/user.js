@@ -3,17 +3,16 @@ var crypto = require('crypto');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var _ = require('lodash');
+var Animal = mongoose.models.Animal;
 
 var schema = new Schema({
-    username: String,
+    name: {
+        type: String,
+        unique: true
+    },
     avatar: String,
     animal: {
-        name: {
-            type: String,
-            // default: 'Rafi',
-            // required: true,
-            unique: true
-        },
+        name: String,
         species: String,
         xp: {
             type: Number,
@@ -23,17 +22,31 @@ var schema = new Schema({
             type: Number,
             default: 1
         },
-        money: Number,
+        money: {
+            type: Number,
+            default: 0
+        },
         totalSteps: {
             type: Number,
             default: 0
         },
-        swags: [{ 
-            type: Schema.Types.ObjectId, 
-            ref: 'Swag' 
-        }],
-        friends: [String]
+        swags: [{
+            type: Schema.Types.ObjectId,
+            ref: 'Swag'
+        }]
+        // user: {
+        //     type: Schema.Types.ObjectId,
+        //     ref: 'User'
+        // },
+        // friends: [{
+        //     type: Schema.Types.ObjectId,
+        //     ref: 'User'
+        // }]
     },
+    // animal: {
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'Animal'
+    // },
     fitbit: {
         id: String,
         tokens: {

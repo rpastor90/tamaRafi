@@ -3,6 +3,8 @@ var router = require('express').Router();
 module.exports = router;
 
 router.use('/users', require('./users'));
+router.use('/swag', require('./swag'));
+// router.use('/animals', require('./animals'));
 
 // Make sure this is after all of
 // the registered routes!

@@ -16,7 +16,6 @@ module.exports = function(app) {
     },
 
     function (req, accessToken, refreshToken, profile, done) {
-        
         var options = {
             access_token: accessToken,
             client_secret: jawboneConfig.clientSecret
@@ -29,7 +28,7 @@ module.exports = function(app) {
                 if (user) return user;
                 else {
                     return UserModel.create({
-                        name: profile.data.first,
+                        name: profile.data.first + " " + profile.data.last,
                         avatar: 'jawbone.com/' + profile.data.image,
                         jawbone: {
                             id: profile.meta.user_xid,
@@ -40,12 +39,12 @@ module.exports = function(app) {
                         }
                     })
                     .then(null, function (err) {
-
                         console.error('this is the errorr', err)
                     });
                 }
             })
             .then(function (userToLogin) {
+                console.log(userToLogin);
                 var stepsAndDates = [];
                 var sleepAndDates = [];
                 up.moves.get({}, function (err, body) {
@@ -61,6 +60,7 @@ module.exports = function(app) {
                         })
                     }
                     userToLogin.jawbone.steps = stepsAndDates.slice(0, 7);
+                    userToLogin.animal.totalSteps = stepsAndDates[0].steps;
                     userToLogin.save()
                     .then(function (stepsSavedUser) {
                         up.sleeps.get({}, function (err, body) {

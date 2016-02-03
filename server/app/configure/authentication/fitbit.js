@@ -21,7 +21,7 @@ module.exports = function (app) {
                 if (user) return user;
                 else {
                     return UserModel.create({
-                        name: profile.displayName,
+                        name: profile._json.user.fullName,
                         avatar: profile._json.user.avatar,
                         fitbit: {
                             id: profile.id,
@@ -34,9 +34,14 @@ module.exports = function (app) {
                 }
             })
             .then(function (userToLogin) {
+                // the tokens may change after a certain amount of time
+                // here we are reassigning the refresh and access tokens
+                userToLogin.fitbit.tokens.access_token = accessToken;
+                userToLogin.fitbit.tokens.refresh_token = refreshToken;
                 helper.getDailyActivitySummary(userToLogin.fitbit.tokens, {})
                 .then(function (res) {
                     userToLogin.fitbit.steps = res.summary.steps;
+                    userToLogin.animal.totalSteps += res.summary.steps;
                     return userToLogin;
                 })
                 .then(function (userSteps) {
@@ -47,9 +52,10 @@ module.exports = function (app) {
                     });
                 })
                 .then(function (user) {
-                    UserModel.findOneAndUpdate({ _id: user._id }, { fitbit: user.fitbit })
-                    .then(function () {
-                        console.log('Fitbit user has been updated and saved!');
+
+                    UserModel.findOneAndUpdate({ _id: user._id }, { fitbit: user.fitbit, animal: user.animal })
+                    .then(function (user) {
+                        console.log('User has been saved!');
                     });
                 })
                 .then(null, function (err) {
@@ -64,8 +70,10 @@ module.exports = function (app) {
 
     ));
 
-    app.get('/auth/fitbit', passport.authenticate('fitbit',
-        { scope: ['activity', 'heartrate', 'location', 'profile', 'sleep', 'social'] }
+
+
+    app.get('/auth/fitbit', passport.authenticate('fitbit', {
+        scope: ['activity','heartrate','location','profile','sleep','social'] }
     ));
 
     app.get( '/auth/fitbit/callback', passport.authenticate( 'fitbit', {
