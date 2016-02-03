@@ -6,7 +6,7 @@ app.config(function ($stateProvider) {
         controller: 'CribCtrl',
         data : { authenticate: true },
         resolve: {
-            user: function (AuthService, $state) {
+            user: function (AuthService) {
                 return AuthService.getLoggedInUser();
             }
         }
