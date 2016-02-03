@@ -30,6 +30,7 @@ app.factory('SwagFactory', function ($http) {
         })
     };
 
+
     SwagFactory.purchase = function(user, swag) {
         if (user.animal.money >= swag.price) {
             return $http.put('/api/users/' + user._id + '/getSwag/' + swag._id)
