@@ -3,7 +3,7 @@ var crypto = require('crypto');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var _ = require('lodash');
-var Animal = mongoose.models.Animal;
+// var Animal = mongoose.models.Animal;
 
 var schema = new Schema({
     name: {

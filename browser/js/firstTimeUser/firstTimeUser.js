@@ -8,14 +8,14 @@ app.config(function ($stateProvider) {
             animals: function (AnimalFactory) {
                 return AnimalFactory.fetchAnimals();
             },
-            user: function (AuthService, $state) {
+            user: function (AuthService) {
                 return AuthService.getLoggedInUser();
             }
         }
     });
 });
 
-app.factory('FirstTimeUserFactory', function ($http, $state, AuthService) {
+app.factory('FirstTimeUserFactory', function ($http, $state) {
     var FirstTimeUserFactory = {};
     FirstTimeUserFactory.update = function (user) {
         return $http.put('/api/users/' + user._id, user)

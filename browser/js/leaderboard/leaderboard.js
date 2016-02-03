@@ -5,14 +5,14 @@ app.config(function ($stateProvider) {
         controller: 'LeaderboardCtrl',
         data : { authenticate: true },
         resolve: {
-            user: function (AuthService, $state) {
+            user: function (AuthService) {
                 return AuthService.getLoggedInUser();
             }
         }
     });
 });
 
-app.factory('LeaderboardFactory', function ($http, $state, AuthService) {
+app.factory('LeaderboardFactory', function ($http) {
     var LeaderboardFactory = {};
     LeaderboardFactory.getEveryone = function () {
         return $http.get('/api/users/')

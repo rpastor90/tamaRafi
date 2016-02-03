@@ -1,0 +1,31 @@
+.shelf {
+    border-width: 2px;
+    height: 10px;
+    width: 60%;
+    background: #c74b61;
+    background-image: -webkit-linear-gradient(left, #61c74b, #c74b61, #4b61c7);
+    background-image: -moz-linear-gradient(left, #61c74b, #c74b61, #4b61c7);
+    background-image: -ms-linear-gradient(left, #61c74b, #c74b61, #4b61c7);
+    background-image: -o-linear-gradient(left, #61c74b, #c74b61, #4b61c7);
+}
+
+.swag {
+    width: 10%;
+    margin-right: 20px;
+    margin-left: 20px;
+    border: 5px dotted white;
+    padding: 5px;
+}
+
+#store {
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    text-shadow: 1px 1px black;
+    margin-top: 100px;
+    .logout-btn {
+        margin-top: 10px;
+        border-width: 3px;
+        padding: 2px 5px;
+    }
+}
