@@ -9,24 +9,31 @@ app.config(function ($stateProvider) {
             user: function (AuthService) {
                 return AuthService.getLoggedInUser();
             },
-            swags: function(AnimalFactory, AuthService) {
+            swags: function(SwagFactory, AuthService, $animate) {
                 return AuthService.getLoggedInUser()
                 .then(function(user) {
-                    return AnimalFactory.fetchSwagByUser(user)
-                })  
+                    return SwagFactory.fetchSwagByUser(user)
+                })
             }
         }
     });
 
 });
 
-app.factory('CribFactory', function () {
-    var CribFactory = {};
-
-    return CribFactory;
+app.directive('setPosition', function () {
+    console.log("in position set")
+    return {
+        restrict: 'A',
+        link: function (scope, element, attrs, controller) {
+            console.log(scope, element, attrs, controller)
+            console.log(arguments)
+            element.css('top', '100px')
+        }
+    };
 });
+  
 
-app.controller('CribCtrl', function ($scope, $state, user, AuthService, swags, AnimalFactory) {
+app.controller('CribCtrl', function ($scope, $state, user, AuthService, swags, SwagFactory) {
     // var tracker2 = function() {
     //     var obj = document.getElementById("beingMoved")
       
@@ -43,27 +50,35 @@ app.controller('CribCtrl', function ($scope, $state, user, AuthService, swags, A
            $state.go('home');
         });
     };
-
-    $scope.onStart = function () {
-        console.log( document.getElementById("beingMoved").offsetLeft)
-        console.log("you started!")
-    }
-
-    $scope.tracker = function(input) {
-        console.log(this, "this is the tracker function ")
-        var obj = document.getElementById("beingMoved")
-      
-        console.log(obj.offsetTop, obj.scrollLeft, obj.clientLeft)
+    $scope.setPositions = function() {
+        console.log(document.getElementById('#currentItem'))
+        // return swags.map(function(swag) {
+        //                 $animate.addClass(swag, "cribSwag", {position: 'fixed'}, {left: swag.posX}, {top: swag.posY})
+        //                 console.log(swag)
+    
     };
+    $scope.onStart = function (event, helper, swag) {
+        console.log(arguments, "args")
+        console.log(event.pageX, event.pageY)
+        console.log("testing", $scope.testing)
+        console.log("you started!")
+    };
+
+    $scope.onStop = function (event, helper, swag) {
+        console.log(arguments, "args on stop")
+        console.log(event.pageX, event.pageY)
+        console.log("you stopped!")
+        SwagFactory.updateSwagPosition(swag._id, {posX: event.pageX, posY: event.pageY})
+    };
+
     
     $scope.startCallback = function() {
         console.log("hello");
 
     };
-    $scope.getCoords = function() {
-        $('#beingMoved').draggable()
-        console.log(this, "THIS")
-        console.log(arguments, "ARGS")
+    $scope.onDrag = function(event) {
+        // console.log(event.pageX, event.pageY)
+        // console.log("draggin")
     }
     
    

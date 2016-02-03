@@ -21,7 +21,7 @@
 
 	<div class="dock" ng-show="showSwag" >
 		<ul>
-		    <li id="beingMoved" ng-repeat="swag in swags" data-drag="true" jqyoui-draggable="{onStart: 'onStart'}"  jqyoui-droppable="{onDrop: tracker2()}"><a><img ng-src="{{swag.imageUrl}}" alt="Home"></a></li>
+		    <li id="currentItem" ng-repeat="swag in swags" data-drag="true" ng-model="swag"  jqyoui-draggable="{onStart: 'onStart(swag)', onDrag:'onDrag', onStop:'onStop(swag)'}"  jqyoui-droppable set-position><a><img ng-src="{{swag.imageUrl}}" alt="Home"></a></li>
 		</ul>
 	</div>
 

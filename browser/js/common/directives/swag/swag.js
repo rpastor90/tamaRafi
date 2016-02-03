@@ -40,6 +40,21 @@ app.factory('SwagFactory', function ($http) {
         } else {
             return 'unsuccessful purchase';
         }
-    }
+    };
+
+    SwagFactory.fetchSwagByUser = function(user) {
+    return $http.get('/api/users/' + user._id + '/getSwag')
+    .then(function(res) {
+       return res.data.animal.swags;
+        });
+    };
+
+    SwagFactory.updateSwagPosition = function(swagId, coordinates) {
+        console.log("update swag position")
+        return $http.put('/api/swags/' + swagId, coordinates)
+        .then(output => console.log(output, "OUT"))
+    };
+
+
     return SwagFactory;
 });
