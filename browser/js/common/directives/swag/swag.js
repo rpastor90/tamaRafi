@@ -50,9 +50,8 @@ app.factory('SwagFactory', function ($http) {
     };
 
     SwagFactory.updateSwagPosition = function(swagId, coordinates) {
-        console.log("update swag position")
         return $http.put('/api/swags/' + swagId, coordinates)
-        .then(output => console.log(output, "OUT"))
+        .then(res => res.data)
     };
 
 

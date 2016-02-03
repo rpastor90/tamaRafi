@@ -20,17 +20,7 @@ app.config(function ($stateProvider) {
 
 });
 
-app.directive('setPosition', function () {
-    console.log("in position set")
-    return {
-        restrict: 'A',
-        link: function (scope, element, attrs, controller) {
-            console.log(scope, element, attrs, controller)
-            console.log(arguments)
-            element.css('top', '100px')
-        }
-    };
-});
+
   
 
 app.controller('CribCtrl', function ($scope, $state, user, AuthService, swags, SwagFactory) {
@@ -52,10 +42,7 @@ app.controller('CribCtrl', function ($scope, $state, user, AuthService, swags, S
     };
     $scope.setPositions = function() {
         console.log(document.getElementById('#currentItem'))
-        // return swags.map(function(swag) {
-        //                 $animate.addClass(swag, "cribSwag", {position: 'fixed'}, {left: swag.posX}, {top: swag.posY})
-        //                 console.log(swag)
-    
+     
     };
     $scope.onStart = function (event, helper, swag) {
         console.log(arguments, "args")
@@ -65,10 +52,8 @@ app.controller('CribCtrl', function ($scope, $state, user, AuthService, swags, S
     };
 
     $scope.onStop = function (event, helper, swag) {
-        console.log(arguments, "args on stop")
-        console.log(event.pageX, event.pageY)
-        console.log("you stopped!")
-        SwagFactory.updateSwagPosition(swag._id, {posX: event.pageX, posY: event.pageY})
+        console.log("on stop")
+        SwagFactory.updateSwagPosition(swag._id, {posX: event.pageX + 'px', posY: event.pageY + 'px'})
     };
 
     
@@ -77,9 +62,26 @@ app.controller('CribCtrl', function ($scope, $state, user, AuthService, swags, S
 
     };
     $scope.onDrag = function(event) {
-        // console.log(event.pageX, event.pageY)
-        // console.log("draggin")
+        console.log(event.pageX, event.pageY)
+        console.log("draggin")
     }
-    
    
 });
+app.directive('setPosition', function () {
+    console.log("in position set")
+    return {
+        restrict: 'A',
+        link: function (scope, element, attrs, controller) {
+            console.log(scope, element, attrs)
+            if (scope.swag.posX && scope.swag.posY){
+                element.css('border', '3px solid black');
+                element.css('position', 'fixed');
+                element.css('left', scope.swag.posX);
+                element.css('top', scope.swag.posY);
+            }
+        }
+    };
+});
+
+
+

@@ -7,8 +7,8 @@ var schema = new Schema({
 	category: String,
 	price: Number,
 	imageUrl: String,
-	posX: Number,
-	posY: Number
+	posX: String,
+	posY: String
 });
 
 mongoose.model('Swag', schema);
