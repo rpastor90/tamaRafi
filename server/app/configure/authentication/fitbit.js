@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var UserModel = mongoose.model('User');
 var FitbitStrategy = require('passport-fitbit-oauth2').FitbitOAuth2Strategy;
 // var FitbitClient = require('fitbit-client-oauth2');
+
 var helper = require('./helper');
 
 module.exports = function (app) {
@@ -53,6 +54,7 @@ module.exports = function (app) {
                     });
                 })
                 .then(function (user) {
+
                     UserModel.findOneAndUpdate({ _id: user._id }, { fitbit: user.fitbit, animal: user.animal })
                     .then(function () {
                         console.log('User has been saved!');
@@ -62,7 +64,7 @@ module.exports = function (app) {
                     console.error(err);
                 });
                 done(null, userToLogin);
-            }, function (err) {
+            }, function (err, user) {
                 console.error('This is a major error');
                 done(err);
         });
@@ -70,7 +72,9 @@ module.exports = function (app) {
 
     ));
 
-    app.get('/auth/fitbit', passport.authenticate('fitbit', { 
+
+
+    app.get('/auth/fitbit', passport.authenticate('fitbit', {
         scope: ['activity','heartrate','location','profile','sleep','social'] }
     ));
 
