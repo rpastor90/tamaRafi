@@ -18,8 +18,8 @@
 	</div>
 	
 
-	<a ng-show='swags && !saved && !showSwag'><button class='logout-btn' ng-click="showSwag = true">CUSTOMIZE YOUR CRIB</button></a>
-	<a ng-show='showSwag && !saved'><button class='logout-btn' ng-click="saved = true">SAVE CHANGES</button></a>
+	<a ng-show='swags && !customizing'><button class='logout-btn' ng-click="showSwag = true; toggleButtons()">CUSTOMIZE YOUR CRIB</button></a>
+	<a ng-show='showSwag && customizing'><button class='logout-btn' ng-click="toggleButtons(); saveSwagPositions()">SAVE CHANGES</button></a>
 
 	<div class="dock" ng-show="showSwag" >
 		<ul>

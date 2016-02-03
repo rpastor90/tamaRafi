@@ -35,7 +35,17 @@ var schema = new Schema({
             type: Schema.Types.ObjectId,
             ref: 'Swag'
                 }
+        ],
+        swagPositions: [
+        {
+            swag: String,
+            posX: String,
+            posY: String
+        }
         ]
+
+        
+
         // user: {
         //     type: Schema.Types.ObjectId,
         //     ref: 'User'

@@ -43,17 +43,16 @@ app.factory('SwagFactory', function ($http) {
     };
 
     SwagFactory.fetchSwagByUser = function(user) {
-    return $http.get('/api/users/' + user._id + '/getSwag')
-    .then(function(res) {
-       return res.data.animal.swags;
-        });
+        return $http.get('/api/users/' + user._id + '/getSwag')
+        .then(function(res) {
+           return res.data.animal.swags;
+            });
     };
 
-    SwagFactory.updateSwagPosition = function(swagId, coordinates) {
-        return $http.put('/api/swags/' + swagId, coordinates)
+    SwagFactory.updateSwagPositions = function(swagPositions, user) {
+        return $http.put('/api/users/' + user._id + 'updateCrib', swagPositions)
         .then(res => res.data)
-    };
-
+    }; 
 
     return SwagFactory;
 });
