@@ -3,7 +3,7 @@ app.config(function ($stateProvider) {
     $stateProvider.state('welcome', {
         url: '/welcome',
         controller: function(user, $state) {
-            console.log(' Welcome:', user)
+            console.log('Welcome:', user.name)
             // check if animal's species is set instead of user.fitbit/jawbone
             if (user.animal.species && user.animal.name) {
                 // switch firstTimeUser to crib once crib state is set up
@@ -14,10 +14,7 @@ app.config(function ($stateProvider) {
         },
         resolve: {
             user: function (AuthService) {
-                return AuthService.getLoggedInUser()
-                .then(function (user) {
-                    return user;
-                });
+                return AuthService.getLoggedInUser();
             }
         }
     });

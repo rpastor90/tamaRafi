@@ -3,19 +3,13 @@ app.config(function ($stateProvider) {
         url: '/firstTimeUser',
         templateUrl: 'js/firstTimeUser/firstTimeUser.html',
         controller: 'FirstTimeUserCtrl',
+        data : { authenticate: true },
         resolve: {
             animals: function (AnimalFactory) {
                 return AnimalFactory.fetchAnimals();
             },
             user: function (AuthService, $state) {
-                return AuthService.getLoggedInUser()
-                .then(function (user) {
-                    if (user) {
-                        return user;
-                    } else {
-                        $state.go('home');
-                    }
-                });
+                return AuthService.getLoggedInUser();
             }
         }
     });
@@ -32,6 +26,15 @@ app.factory('FirstTimeUserFactory', function ($http, $state, AuthService) {
             $state.go('crib');
         });
     };
+    // FirstTimeUserFactory.createAnimal = function (animal) {
+    //     return $http.post('/api/animals/')
+    //     .then(function (animal) {
+    //         return animal.data;
+    //     })
+    //     .then(function() {
+    //         $state.go('crib');
+    //     });
+    // };
     return FirstTimeUserFactory;
 });
 
@@ -40,9 +43,9 @@ app.controller('FirstTimeUserCtrl', function ($scope, $state, FirstTimeUserFacto
 
     $scope.logout = function() {
         AuthService.logout()
-            .then(function() {
-                $state.go('home');
-            });
+        .then(function() {
+            $state.go('home');
+        });
     };
 
     var species = ['charmander', 'squirtle', 'bulbasaur'];
