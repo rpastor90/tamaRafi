@@ -44,40 +44,27 @@ module.exports = function(app) {
                 }
             })
             .then(function (userToLogin) {
-                console.log(userToLogin);
-                var stepsAndDates = [];
-                var sleepAndDates = [];
                 up.moves.get({}, function (err, body) {
                     if (err) {
                         console.log('Error: ' + err);
                     } else {
-                        var tenDays = JSON.parse(body).data.items;
-                        tenDays.forEach(function (oneDay) {
-                            var temp = {};
-                            temp.date = oneDay.date;
-                            temp.steps = Number(oneDay.title.split(' ')[0].split(',').join(''));
-                            stepsAndDates.push(temp);
-                        })
+                        var steps = JSON.parse(body).data.items;
+                        steps = steps[0].title.split(' ')[0].split(',').join('')
                     }
-                    userToLogin.jawbone.steps = stepsAndDates.slice(0, 7);
-                    userToLogin.animal.totalSteps = stepsAndDates[0].steps;
+                    userToLogin.jawbone.steps = steps;
+                    userToLogin.animal.totalSteps += steps;
                     userToLogin.save()
                     .then(function (stepsSavedUser) {
                         up.sleeps.get({}, function (err, body) {
                             if (err) {
                                 console.log('Error: ', err);
                             } else {
-                                var tenDays = JSON.parse(body).data.items;
-                                tenDays.forEach(function (oneDay) {
-                                    var temp = {};
-                                    temp.date = oneDay.date;
-                                    var hours = Number(oneDay.title.split(' ')[1].slice(0, -1))*60;
-                                    var minutes = Number(oneDay.title.split(' ')[2].slice(0, -1));
-                                    temp.sleep = hours + minutes;
-                                    sleepAndDates.push(temp);
-                                })
+                                var sleep = JSON.parse(body).data.items[0];
+                                var hours = Number(sleep.title.split(' ')[1].slice(0, -1))*60;
+                                var minutes = Number(sleep.title.split(' ')[2].slice(0, -1));
+                                sleep = (hours + minutes);
                             }
-                            stepsSavedUser.jawbone.sleeps = sleepAndDates.slice(0, 7);
+                            stepsSavedUser.jawbone.sleep = sleep;
                             stepsSavedUser.save()
                             .then(function () {
                                 console.log('Jawbone user has been updated and saved!')
