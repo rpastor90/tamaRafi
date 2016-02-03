@@ -1,5 +1,6 @@
 module.exports = {
-  "DATABASE_URI": "mongodb://admin:password@ds055575.mongolab.com:55575/tamarafi",
+
+  "DATABASE_URI" : "mongodb://admin:password@ds055575.mongolab.com:55575/tamarafi",
   "SESSION_SECRET": "Optimus Prime is my real dad",
   "FITBIT": {
     "clientID": "227F6K",

@@ -6,22 +6,11 @@ var _ = require('lodash');
 // var Animal = mongoose.models.Animal;
 
 var schema = new Schema({
-    name: {
-        type: String,
-        unique: true
-    },
+    name: String,
     avatar: String,
     animal: {
         name: String,
         species: String,
-        xp: {
-            type: Number,
-            default: 0
-        },
-        level: {
-            type: Number,
-            default: 1
-        },
         money: {
             type: Number,
             default: 0
@@ -50,15 +39,12 @@ var schema = new Schema({
         //     type: Schema.Types.ObjectId,
         //     ref: 'User'
         // },
+
         // friends: [{
         //     type: Schema.Types.ObjectId,
         //     ref: 'User'
         // }]
     },
-    // animal: {
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'Animal'
-    // },
     fitbit: {
         id: String,
         tokens: {
@@ -74,14 +60,8 @@ var schema = new Schema({
             access_token: String,
             refresh_token: String
         },
-        steps: [{
-            date: Number,
-            steps: Number
-        }],
-        sleeps: [{
-            date: Number,
-            sleep: Number
-        }]
+        steps: Number,
+        sleep: Number
     },
     misfit: {
         id: String,
