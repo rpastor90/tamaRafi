@@ -1,20 +1,22 @@
 <div class='crib'>
-	<div class='center'>
-	<h1>CRIB STATE</h1>
-	<a ng-show='user' ng-click="logout()"><button class='logout-btn'>LOGOUT</button></a>
-	<a ng-show='user' ui-sref="store"><button class='logout-btn'>STORE</button></a>
-	<a ng-show='user' ui-sref="health"><button class='logout-btn'>HEALTH</button></a>
-	<a ng-show='user' ui-sref="leaderboard"><button class='logout-btn'>LEADERBOARD</button></a>
-	<img src="{{user.animal.imageUrl}}">
-	</div>
+	<div class='notTheDock'>
+		<div class='center'>
+			<h1>CRIB STATE</h1>
+			<a ng-show='user' ng-click="logout()"><button class='logout-btn'>LOGOUT</button></a>
+			<a ng-show='user' ui-sref="store"><button class='logout-btn'>STORE</button></a>
+			<a ng-show='user' ui-sref="health"><button class='logout-btn'>HEALTH</button></a>
+			<a ng-show='user' ui-sref="leaderboard"><button class='logout-btn'>LEADERBOARD</button></a>
+			<img src="{{user.animal.imageUrl}}">
+		</div>
 	
 
-	<a ng-show='swags && !customizing'><button class='logout-btn' ng-click="showSwag = true; toggleButtons()">CUSTOMIZE YOUR CRIB</button></a>
-	<a ng-show='showSwag && customizing'><button class='logout-btn' ng-click="toggleButtons(); saveSwagPositions()">SAVE CHANGES</button></a>
+		<a ng-show='swags && !customizing'><button class='logout-btn' ng-click="showSwag = true; toggleButtons()">CUSTOMIZE YOUR CRIB</button></a>
+		<a ng-show='showSwag && customizing'><button class='logout-btn' ng-click="toggleButtons(); saveSwagPositions()">SAVE CHANGES</button></a>
 
+	</div>
 	<div class="dock" ng-show="showSwag" >
 		<ul>
-		    <li id="currentItem" ng-repeat="swag in swags" data-drag="true" ng-model="swag"  jqyoui-draggable="{onStart: 'onStart(swag)', onDrag:'onDrag', onStop:'onStop(swag)'}"  jqyoui-droppable set-position><a><img ng-src="{{swag.imageUrl}}" alt="Home"></a></li>
+		    <li id="currentItem" ng-repeat="swag in swags" data-drag="true" ng-model="swag"  jqyoui-draggable="{onStart: 'onStart(swag)', onDrag:'onDrag', onStop:'onStop(swag)'}"  jqyoui-droppable="{onDrop: 'onDrop(swag)'}" set-position><a><img ng-src="{{swag.imageUrl}}" alt="Home"></a></li>
 		</ul>
 	</div>
 
