@@ -10,3 +10,11 @@ router.get('/', function (req, res, next) {
 	})
 	.then(null, next);
 });
+
+router.put('/:swagId', function (req, res, next) {
+	Swag.findOneAndUpdate({ _id: req.params.swagId }, req.body, {new:true})
+	.then(function(swag) {
+		res.send(swag);
+	})
+	.then(null, next);
+});
