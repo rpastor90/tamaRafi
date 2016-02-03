@@ -26,11 +26,11 @@
 }
 
 .dock {
-    /*visibility:hidden;*/
+    bottom:10px;
+    position:absolute;
+    width:100%;
 
-    ul{
-    display: inline-block;
-    /*float: left;*/
+    ul {
     width: 100%;
     margin: 0px;
     padding: 0px;
@@ -40,14 +40,9 @@
 
     }
 }
-.dock:hover {
-    visibility:visible;
-}
 .dock ul li {
 width: auto;
-height: auto;
 display: inline-block;
-bottom: 0;
 vertical-align: bottom;
 margin-left: 50px ;
 margin-top: -43px;
@@ -73,33 +68,6 @@ margin-top: -50px;
 width: 100%;
 position: absolute;
 bottom: 0;
-left: 0;
-border: none;
 padding: 0px 0px 0px 30px;
 }
-.dock_left{
-width: 31px;
--webkit-transform: rotate(33deg);
--moz-transform: rotate(33deg);
--o-transform: rotate(33deg);
-position: relative;
-background: #EEE;
-overflow: hidden;
-float: left;
-height: 100px;
-z-index: 2;
-margin: -18px;
-}
-.dock_right{
-width: 36px;
--webkit-transform: rotate(-33deg);
--moz-transform: rotate(-33deg);
--o-transform: rotate(-33deg);
-position: relative;
-background: #EEE;
-overflow: hidden;
-float: left;
-height: 100px;
-z-index: 2;
-margin: -18px;
-}
+

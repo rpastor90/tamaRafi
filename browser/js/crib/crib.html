@@ -5,8 +5,8 @@
 	<a ng-show='user' ng-click="logout()"><button class='logout-btn'>LOGOUT</button></a>
 	<a ng-show='user' ui-sref="health"><button class='logout-btn'>HEALTH</button></a>
 	<a ng-show='user' ui-sref="leaderboard"><button class='logout-btn'>LEADERBOARD</button></a>
+	<a ui-sref="rewards"><img id="trophy" src="http://www.clker.com/cliparts/d/8/9/b/1298268524507354096Trophy.svg.med.png"/></a>
 
-	<a ui-sref="rewards"><img class="trophy" src="http://www.clker.com/cliparts/d/8/9/b/1298268524507354096Trophy.svg.med.png"/></a>
 	<div data-drag="true" jqyoui-draggable  jqyoui-droppable><img class="trophy" src="http://gallery.yopriceville.com/var/albums/Free-Clipart-Pictures/Fruit-PNG/Large_Painted_Red_Apple_PNG_Clipart.png?m=1375308000" /></div>
 	<img class="trophy" src="http://107.170.40.46/wp-content/uploads/2012/09/Social-Media-Tree-PNG-700px-e1356547066755.png"/>
 
@@ -14,15 +14,14 @@
 
 
 	</div>
-	<a ui-sref="rewards"><img id="trophy" src="http://www.clker.com/cliparts/d/8/9/b/1298268524507354096Trophy.svg.med.png"/></a>
+	
 
-	<!-- <div class="dock_left"></div> -->
-		<div class="dock" ng-mouseover="toggleShown()" ng-show="isShown">
-			<ul>
-		    <li ng-repeat="swag in swags"><a><img ng-src="{{swag.imageUrl}}" alt="Home"></a></li>
+	<a ng-show='swags'><button class='logout-btn' ng-click="showSwag = true">CUSTOMIZE YOUR CRIB</button></a>
+
+	<div class="dock" ng-show="showSwag" >
+		<ul>
+		    <li id="beingMoved" ng-repeat="swag in swags" data-drag="true" jqyoui-draggable="{onStart: 'onStart'}"  jqyoui-droppable="{onDrop: tracker2()}"><a><img ng-src="{{swag.imageUrl}}" alt="Home"></a></li>
 		</ul>
-		</div>
-	<!-- <div class="dock_right"></div> -->
-
+	</div>
 
 </div>
