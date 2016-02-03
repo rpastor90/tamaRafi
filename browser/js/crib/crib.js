@@ -38,25 +38,25 @@ app.controller('CribCtrl', function ($scope, $state, user, AuthService, swags, S
         });
     };
     $scope.setPositions = function() {
-        console.log(document.getElementById('#currentItem'))
+        
      
     };
     $scope.onStart = function (event, helper, swag) {
-        console.log(arguments, "args")
-        console.log(event.pageX, event.pageY)
-        console.log("testing", $scope.testing)
-        console.log("you started!")
+        
     };
 
     $scope.onStop = function (event, helper, swag) {
-        console.log("on stop")
-        swagPositions[swag._id] = {posX: event.pageX + 'px', posY: event.pageY + 'px'};
+        var swagPositionObj = {};
+        swagPositionObj.swag = swag._id;
+        swagPositionObj.posX = event.pageX + 'px';
+        swagPositionObj.posY = event.pageY + 'px';
+        swagPositions.push(swagPositionObj);
         console.log(swagPositions)
         // SwagFactory.updateSwagPosition(swag._id, {posX: event.pageX + 'px', posY: event.pageY + 'px'})
     };
     
     $scope.startCallback = function() {
-        console.log("hello");
+   
 
     };
     $scope.onDrag = function(event) {
@@ -69,21 +69,25 @@ app.controller('CribCtrl', function ($scope, $state, user, AuthService, swags, S
     };
 
     $scope.saveSwagPositions = function() {
-            console.log(key) // key here is the swag._id
+            console.log(swagPositions, "SWAG POS") // key here is the swag._id
         SwagFactory.updateSwagPositions(swagPositions, user)
     }
    
 });
 app.directive('setPosition', function () {
-    console.log("in position set")
     return {
         restrict: 'A',
         link: function (scope, element, attrs, controller) {
-            console.log(scope, element, attrs)
+            for (var i = 0; i < scope.user.animal.swagPositions.length; i++) {
+                if (scope.user.animal.swagPositions[i].swag === scope.swag._id) {
+                    element.css('position', 'fixed');
+                    element.css('left', scope.user.animal.swagPositions[i].posX);
+                    element.css('top', scope.user.animal.swagPositions[i].posY);
+                }
+            }
+            if (scope.swag._id)
             if (scope.swag.posX && scope.swag.posY){
-                element.css('position', 'fixed');
-                element.css('left', scope.swag.posX);
-                element.css('top', scope.swag.posY);
+                
             }
         }
     };
