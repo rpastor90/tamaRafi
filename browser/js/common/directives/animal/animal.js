@@ -9,25 +9,22 @@ app.factory('AnimalFactory', function () {
     var AnimalFactory = {};
     
     var animals = [{
-        name: 'Trap Giraffe',
-        picture: "https://media.giphy.com/media/PiiQ5B1XxxiX6/giphy.gif",
+        picture: "http://i.imgur.com/VexuoSc.gif",
         bio: 'Never forgets to skip leg day',
         goals: 'Monster trapezii & gold chains',
-        species: 'giraffe',
+        species: 'Charmander',
         idx: 0
     }, {
-        name: 'Get Swole Kangaroo',
-        picture: "https://media.giphy.com/media/1zMfdhVHejLDG/giphy.gif",
+        picture: "http://25.media.tumblr.com/tumblr_lxb7i2z3oQ1qm7xzeo1_500.gif",
         bio: 'A driven athlete. Tends to have a work hard/play hard attitude',
         goals: 'Better diet & sleep',
-        species: 'kangaroo',
+        species: 'Squirtle',
         idx: 1
     }, {
-        name: 'Hungry Hog',
-        picture: "http://31.media.tumblr.com/d734bb9abfd268b063b40a3c3b9d4323/tumblr_mv7apkoXVY1rfg20go1_500.gif",
+        picture: "https://45.media.tumblr.com/539791143e3a9f7f8f949a0ea957936b/tumblr_nlpbghvXv31u9ftrro1_500.gif",
         bio: 'An appetite for self-improvement',
         goals: 'Slimmer physique',
-        species: 'hog',
+        species: 'Bulbasaur',
         idx: 2
     }];
 
