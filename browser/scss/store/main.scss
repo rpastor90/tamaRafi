@@ -1,8 +1,10 @@
 .shelf {
     border-width: 2px;
     height: 10px;
-    width: 60%;
+    width: 50%;
     background: #c74b61;
+    border: none;
+    box-shadow: 3px 3px 1px black;
     background-image: -webkit-linear-gradient(left, #61c74b, #c74b61, #4b61c7);
     background-image: -moz-linear-gradient(left, #61c74b, #c74b61, #4b61c7);
     background-image: -ms-linear-gradient(left, #61c74b, #c74b61, #4b61c7);
@@ -15,6 +17,7 @@
     margin-left: 20px;
     border: 5px dotted white;
     padding: 5px;
+    box-shadow: 3px 3px 1px black;
 }
 
 #store {
