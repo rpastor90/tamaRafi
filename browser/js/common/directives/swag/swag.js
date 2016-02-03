@@ -41,6 +41,20 @@ app.factory('SwagFactory', function ($http) {
         } else {
             return 'unsuccessful purchase';
         }
-    }
+    };
+
+    SwagFactory.fetchSwagByUser = function(user) {
+        return $http.get('/api/users/' + user._id + '/getSwag')
+        .then(function(res) {
+           return res.data.animal.swags;
+            });
+    };
+
+    SwagFactory.updateSwagPositions = function(swagPositions, user) {
+        console.log("SwagFactory.updateSwagPositions")
+        return $http.put('/api/users/' + user._id + '/updateCrib', swagPositions)
+        .then(res => res.data)
+    }; 
+
     return SwagFactory;
 });
