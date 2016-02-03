@@ -19,9 +19,15 @@ var schema = new Schema({
             type: Number,
             default: 0
         },
-        swags: [{
+        swags: [
+        {
             type: Schema.Types.ObjectId,
             ref: 'Swag'
+        }],
+        swagPositions: [{
+            swag: String,
+            posX: String,
+            posY: String
         }],
         lastLoggedIn: Date,
         lastLoggedInSteps: {
