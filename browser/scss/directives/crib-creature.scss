@@ -1,0 +1,15 @@
+#creatureContainer {
+    width: 250px;
+    height: 300px;
+    display: block;
+    background-image: 'http://createalittle.com/wp-content/uploads/2014/01/panda_colour.png';
+
+
+}
+
+@keyframes sprite {
+    to {
+        background-position: -3000px;
+    }
+
+}
