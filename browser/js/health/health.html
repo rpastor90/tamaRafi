@@ -1,10 +1,29 @@
 <a ng-show='user' ng-click="logout()"><button class='logout-btn'>LOGOUT</button></a>
 <a ng-show='user' ui-sref="crib"><button class='logout-btn'>CRIB</button></a>
-<div id='outer' style="margin-top:40px; padding:10px">
-    <div id="main" style="width:600px; height:200px; margin: 0px auto; ">
-        <div id="div1"></div>
-        <div id="div2"></div>
-        <div id="div3"></div>
+<div class="healthArea">
+  <div id="eyes">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-lg-6 col-sm-6">
+          <center>
+            <canvas id="doughnut" class="chart chart-doughnut" chart-data="data" chart-labels="labels">
+            </canvas>
+          </center>
+        </div>
+        <div class="col-md-6 col-lg-6 col-sm-6">
+          <center>
+            <canvas id="doughnut" class="chart chart-doughnut" chart-data="data" chart-labels="labels">
+            </canvas>
+          </center>   
+        </div>
+      </div>
     </div>
+  </div>
+  <div>
+    <center>
+      <img src="http://vignette4.wikia.nocookie.net/anthropomorphicmadness/images/4/48/Mouth_Closed_Smile.png/revision/latest?cb=20120512222937" id="mouth" ng-show="percentDiff >= 75">
+      <img src="http://cdn.flaticon.com/png/256/53957.png" id="mouth" ng-show="percentDiff < 75 && percentDiff > 30">
+      <img src="http://vignette2.wikia.nocookie.net/officialinanimations/images/2/27/Sad-mouth-closed-noteeth.png/revision/latest?cb=20140418130230" id="mouth" ng-show="percentDiff <= 30">
+    </center>
+  </div>
 </div>
-
