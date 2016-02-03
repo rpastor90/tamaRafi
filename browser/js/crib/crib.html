@@ -2,6 +2,7 @@
 	<div class='center'>
 	<h1>CRIB STATE</h1>
 	{{swags}}
+	user: {{user}}
 	<a ng-show='user' ng-click="logout()"><button class='logout-btn'>LOGOUT</button></a>
 	<a ng-show='user' ui-sref="store"><button class='logout-btn'>STORE</button></a>
 	<a ng-show='user' ui-sref="health"><button class='logout-btn'>HEALTH</button></a>
@@ -13,11 +14,12 @@
 
 	<img class="trophy" src="https://cdn0.iconfinder.com/data/icons/customicondesign-office7-shadow-png/256/Sport-dumbbell.png"/>
 
-
+	<img src="{{user.animal.imageUrl}}">
 	</div>
 	
 
-	<a ng-show='swags'><button class='logout-btn' ng-click="showSwag = true">CUSTOMIZE YOUR CRIB</button></a>
+	<a ng-show='swags && !saved && !showSwag'><button class='logout-btn' ng-click="showSwag = true">CUSTOMIZE YOUR CRIB</button></a>
+	<a ng-show='showSwag && !saved'><button class='logout-btn' ng-click="saved = true">SAVE CHANGES</button></a>
 
 	<div class="dock" ng-show="showSwag" >
 		<ul>
