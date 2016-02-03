@@ -1,4 +1,6 @@
-<reward ng-repeat="item in swag"></reward>
-<div class="col-xs-12 shelf col-md-12 col-lg-12"></div>
-
-
+<div ng-repeat='category in swags' class='row'>
+<center>
+	<swag ng-repeat='swag in category'></swag>
+	<hr class='shelf'>
+	</center>
+</div>

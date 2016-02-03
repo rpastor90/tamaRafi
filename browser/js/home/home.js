@@ -16,7 +16,7 @@ app.config(function ($stateProvider) {
             }
         },
         resolve: {
-            user: function(AuthService, $state) {
+            user: function(AuthService) {
                 return AuthService.getLoggedInUser()
                 .then(function (user) {
                     // user should not be allowed to go home when logged in
