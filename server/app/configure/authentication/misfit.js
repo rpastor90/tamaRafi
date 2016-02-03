@@ -73,11 +73,11 @@ module.exports = function (app) {
                 }
             })
 
-            .then(user => {
-                misfitHandler.getSummary(authenticatedToken, '2015-11-05', '2016-01-10', function(err, summary) {
+            .then(user => { //get summary is limited to 30 days!!!
+                misfitHandler.getSummary(authenticatedToken, '2016-01-01', '2016-01-10', function(err, summary) {
                     console.error('error : ', err)
-                    console.log("Token: ", authenticatedToken)
                     console.log(summary)
+
                     });
                 })
             .then(null, err => console.error(err))
