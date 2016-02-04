@@ -35,7 +35,8 @@ module.exports = function (app) {
                     });
                 }
             })
-            .then(function (userToLogin) {8
+            .then(function (userToLogin) {
+                console.log("this is the originial user to log in", userToLogin)
                 // the tokens may change after a certain amount of time
                 // here we are reassigning the refresh and access tokens
                 userToLogin.fitbit.tokens.access_token = accessToken;
@@ -44,34 +45,29 @@ module.exports = function (app) {
                 helper.getDailyActivitySummary(userToLogin.fitbit.tokens, {})
                 .then(function (stepData) {
                     userToLogin.fitbit.steps = stepData.summary.steps;
-                    // userToLogin.animal.totalSteps += stepData.summary.steps;
-                    // userToLogin.animal.money += 10;
-                    userToLogin.fitbit.steps = steps;
                     var currentDate = new Date();
-                    
-                    //FIX THISSSSSSSSSSSSSSSSSSSS!!!!!!!!
+
                     // update money only once per day
-                    if (userToLogin.animal.lastLoggedIn.getFullYear() !== currentDate.getFullYear()) {
-                        if (userToLogin.animal.lastLoggedIn.getDate() !== currentDate.getDate()) {
-                            if (userToLogin.animal.lastLoggedIn.getMonth() !== currentDate.getMonth()) {
-                                userToLogin.animal.lastLoggedInSteps = userToLogin.fitbit.steps;
-                                userToLogin.animal.totalSteps += userToLogin.fitbit.steps;
-                                userToLogin.animal.money += 10;
-                            }
-                        }
+                    if (userToLogin.animal.lastLoggedIn.getFullYear() !== currentDate.getFullYear() 
+                        || userToLogin.animal.lastLoggedIn.getDate() !== currentDate.getDate() 
+                        || userToLogin.animal.lastLoggedIn.getMonth() !== currentDate.getMonth()) {
+                            userToLogin.animal.lastLoggedIn = currentDate;
+                            userToLogin.animal.lastLoggedInSteps = userToLogin.fitbit.steps;
+                            userToLogin.animal.totalSteps += userToLogin.fitbit.steps;
+                            userToLogin.animal.money += 10;
                     }
                     // update steps every time user logs in for that day
-                    if (userToLogin.animal.lastLoggedIn.getFullYear() === currentDate.getFullYear()) {
-                        if (userToLogin.animal.lastLoggedIn.getDate() === currentDate.getDate()) {
-                            if (userToLogin.animal.lastLoggedIn.getMonth() === currentDate.getMonth()) {
-                                userToLogin.animal.totalSteps += (userToLogin.fitbit.steps - userToLogin.animal.lastLoggedInSteps);
-                                userToLogin.animal.lastLoggedInSteps = (userToLogin.fitbit.steps - userToLogin.animal.lastLoggedInSteps);
-                            }
-                        }
+                    if (userToLogin.animal.lastLoggedIn.getFullYear() === currentDate.getFullYear()
+                        && userToLogin.animal.lastLoggedIn.getDate() === currentDate.getDate()
+                        && userToLogin.animal.lastLoggedIn.getMonth() === currentDate.getMonth()) {
+                        var newDifference = userToLogin.fitbit.steps - userToLogin.animal.lastLoggedInSteps;
+                            userToLogin.animal.lastLoggedInSteps += newDifference;
+                            userToLogin.animal.totalSteps += newDifference;
                     }
                     return userToLogin;
                 })
                 .then(function (userSteps) {
+                    console.log("This is the updated user step at login", userSteps)
                     return helper.getSleepSummary(userSteps.fitbit.tokens, {})
                     .then(function (userSleep) {
                         userSteps.fitbit.sleep = userSleep.summary.totalMinutesAsleep;
