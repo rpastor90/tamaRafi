@@ -7,6 +7,7 @@
     background: url('http://i.imgur.com/cBu0kJM.png') no-repeat center center fixed;
     position: fixed;
     background-size:cover;
+    z-index: -1;
     width: 100%;
     height: 100%;
     #trophy {
@@ -19,15 +20,15 @@
     	width: 40%;
     }
     button {
-    	float: right;
-    	margin-right: 10px;
-    	margin-left: 10px;
+        float: right;
+        margin-right: 10px;
+        margin-left: 10px;
     }
 }
 
 .dock {
     bottom:10px;
-    position:absolute;
+    position:relative;
     width:100%;
 
     ul {
@@ -74,4 +75,14 @@ position: absolute;
 bottom: 0;
 padding: 0px 0px 0px 30px;
 }
+
+.notTheDock li {
+    height: 100px;
+    width: 100px;
+    img {
+        width:100%
+    }
+}
+
+
 

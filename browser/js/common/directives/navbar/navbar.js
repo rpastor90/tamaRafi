@@ -1,19 +1,10 @@
-app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) {
+app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state, UserFactory) {
 
     return {
         restrict: 'E',
         scope: {},
         templateUrl: 'js/common/directives/navbar/navbar.html',
         link: function (scope) {
-
-            scope.items = [
-                { label: 'Home', state: 'home' },
-                { label: 'About', state: 'about' }
-                // { label: 'Documentation', state: 'docs' },
-                // { label: 'Members Only', state: 'membersOnly', auth: true }
-            ];
-
-            scope.user = null;
 
             scope.isLoggedIn = function () {
                 return AuthService.isAuthenticated();
@@ -26,8 +17,12 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
             };
 
             var setUser = function () {
-                AuthService.getLoggedInUser().then(function (user) {
-                    scope.user = user;
+                AuthService.getLoggedInUser()
+                .then(function (user) {
+                    return UserFactory.getUser(user)
+                    .then(function (foundUser) {
+                        scope.user = foundUser;
+                    })
                 });
             };
 

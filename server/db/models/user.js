@@ -13,7 +13,7 @@ var schema = new Schema({
         species: String,
         money: {
             type: Number,
-            default: 0
+            default: 100
         },
         totalSteps: {
             type: Number,
@@ -23,23 +23,20 @@ var schema = new Schema({
         {
             type: Schema.Types.ObjectId,
             ref: 'Swag'
-                }
-        ],
-        swagPositions: [
-        {
+        }],
+        swagPositions: [{
             swag: String,
             posX: String,
             posY: String
+        }],
+        lastLoggedIn: {
+            type: Date,
+            default: Date.now
+        },
+        lastLoggedInSteps: {
+            type: Number,
+            default: 0
         }
-        ]
-
-        
-
-        // user: {
-        //     type: Schema.Types.ObjectId,
-        //     ref: 'User'
-        // },
-
         // friends: [{
         //     type: Schema.Types.ObjectId,
         //     ref: 'User'
