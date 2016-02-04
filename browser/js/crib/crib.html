@@ -3,7 +3,6 @@
 	<h1>CRIB STATE</h1>
 	{{swags}}
 	user: {{user}}
-
 	<div data-drag="true" jqyoui-draggable  jqyoui-droppable><img class="trophy" src="http://gallery.yopriceville.com/var/albums/Free-Clipart-Pictures/Fruit-PNG/Large_Painted_Red_Apple_PNG_Clipart.png?m=1375308000" /></div>
 	<img class="trophy" src="http://107.170.40.46/wp-content/uploads/2012/09/Social-Media-Tree-PNG-700px-e1356547066755.png"/>
 
@@ -11,7 +10,7 @@
 
 	<img src="{{user.animal.imageUrl}}">
 	</div>
-	
+
 
 	<a ng-show='swags && !customizing'><button class='logout-btn' ng-click="showSwag = true; toggleButtons()">CUSTOMIZE YOUR CRIB</button></a>
 	<a ng-show='showSwag && customizing'><button class='logout-btn' ng-click="toggleButtons(); saveSwagPositions()">SAVE CHANGES</button></a>

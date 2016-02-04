@@ -1,5 +1,6 @@
 'use strict';
-window.app = angular.module('FullstackGeneratedApp', ['fsaPreBuilt', 'ui.router', 'ui.bootstrap', 'ngAnimate', 'ngDragDrop']);
+window.app = angular.module('FullstackGeneratedApp', ['fsaPreBuilt', 'ui.router', 'ui.bootstrap', 'ngAnimate', 'ngDragDrop', 'chart.js']);
+>>>>>>> master
 
 app.config(function ($urlRouterProvider, $locationProvider) {
     // This turns off hashbang urls (/#about) and changes it to something normal (/about)
@@ -53,3 +54,15 @@ app.run(function ($rootScope, AuthService, $state) {
     });
 
 });
+
+// app.run(function ($rootScope, BackgroundFactory, $interval) {
+//     var allClasses = Object.keys(BackgroundFactory);
+//     // $interval(function () {
+//     //     var className = _.sample(allClasses);
+//     //     $rootScope.timeOfDay = BackgroundFactory[className];
+//     // }, 1000);
+
+//     // $rootScope.timeOfDay = "afternoon";
+// });
+
+
