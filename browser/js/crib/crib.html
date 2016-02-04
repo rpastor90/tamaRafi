@@ -1,10 +1,12 @@
 <div class='crib'>
 	<div class='notTheDock'>
 
+    <crib-creature></crib-creature>
+
 		<a ng-show='swags && !customizing'><button class='logout-btn' ng-click="showSwag = true; toggleButtons(); makeCustomizable()">CUSTOMIZE YOUR CRIB</button></a>
 		<a ng-show='showSwag && customizing'><button class='logout-btn' ng-click="toggleButtons(); saveSwagPositionsAndSizes()">SAVE CHANGES</button></a>
 		<a ng-show='showSwag && customizing'><button class='logout-btn' ng-click="reset()">RESET CRIB</button></a>
-		<crib-creature></crib-creature>
+
 	</div>
 	<footer class="dock" ng-show="showSwag" >
 		<ul>
@@ -14,10 +16,3 @@
 </div>
 
 
-<!-- data-drag="true"
-jqyoui-draggable="{onStart: 'onStart(swag)', onDrag:'onDrag', onStop:'onStop(swag)'}" jqyoui-droppable -->
-
-<!-- // value: "{onStart: 'onStart(swag)', onDrag:'onDrag', onStop:'onStop(swag)'}" -->
-             <!--  
-
-              data-drag="true" jqyoui-draggable="{onStart: 'onStart(swag)', onDrag:'onDrag', onStop:'onStop(swag)'}"  -->
