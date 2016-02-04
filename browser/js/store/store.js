@@ -8,21 +8,20 @@ app.config(function ($stateProvider) {
     		swags: function(SwagFactory) {
     			return SwagFactory.fetchSwag()
     		},
-    		user : function (AuthService) {
-                return AuthService.getLoggedInUser()  
+    		user : function (AuthService, UserFactory) {
+                return AuthService.getLoggedInUser()
+                    .then(function (user) {
+                        return UserFactory.getUser(user);
+                    })  
             } 
     	}
     })
 })
 
-app.controller('StoreCtrl', function ($scope, $state, user, swags, SwagFactory, AuthService) {
+app.controller('StoreCtrl', function ($scope, $state, user, swags, SwagFactory, AuthService, UserFactory) {
     $scope.user = user;
     $scope.swags = swags;
-    $scope.purchase = function(swag) {
-        if (SwagFactory.purchase(user, swag) === 'unsuccessful purchase') {
-            $scope.insufficientFunds = true;
-        } 
-    }
+
     $scope.logout = function () {
         AuthService.logout()
         .then(function () {
