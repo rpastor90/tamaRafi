@@ -29,7 +29,10 @@ var schema = new Schema({
             posX: String,
             posY: String
         }],
-        lastLoggedIn: Date,
+        lastLoggedIn: {
+            type: Date,
+            default: Date.now
+        },
         lastLoggedInSteps: {
             type: Number,
             default: 0
