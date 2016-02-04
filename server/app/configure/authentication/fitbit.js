@@ -35,15 +35,40 @@ module.exports = function (app) {
                     });
                 }
             })
-            .then(function (userToLogin) {
+            .then(function (userToLogin) {8
                 // the tokens may change after a certain amount of time
                 // here we are reassigning the refresh and access tokens
                 userToLogin.fitbit.tokens.access_token = accessToken;
                 userToLogin.fitbit.tokens.refresh_token = refreshToken;
+
                 helper.getDailyActivitySummary(userToLogin.fitbit.tokens, {})
-                .then(function (res) {
-                    userToLogin.fitbit.steps = res.summary.steps;
-                    userToLogin.animal.totalSteps += res.summary.steps;
+                .then(function (stepData) {
+                    userToLogin.fitbit.steps = stepData.summary.steps;
+                    // userToLogin.animal.totalSteps += stepData.summary.steps;
+                    // userToLogin.animal.money += 10;
+                    userToLogin.fitbit.steps = steps;
+                    var currentDate = new Date();
+                    
+                    //FIX THISSSSSSSSSSSSSSSSSSSS!!!!!!!!
+                    // update money only once per day
+                    if (userToLogin.animal.lastLoggedIn.getFullYear() !== currentDate.getFullYear()) {
+                        if (userToLogin.animal.lastLoggedIn.getDate() !== currentDate.getDate()) {
+                            if (userToLogin.animal.lastLoggedIn.getMonth() !== currentDate.getMonth()) {
+                                userToLogin.animal.lastLoggedInSteps = userToLogin.fitbit.steps;
+                                userToLogin.animal.totalSteps += userToLogin.fitbit.steps;
+                                userToLogin.animal.money += 10;
+                            }
+                        }
+                    }
+                    // update steps every time user logs in for that day
+                    if (userToLogin.animal.lastLoggedIn.getFullYear() === currentDate.getFullYear()) {
+                        if (userToLogin.animal.lastLoggedIn.getDate() === currentDate.getDate()) {
+                            if (userToLogin.animal.lastLoggedIn.getMonth() === currentDate.getMonth()) {
+                                userToLogin.animal.totalSteps += (userToLogin.fitbit.steps - userToLogin.animal.lastLoggedInSteps);
+                                userToLogin.animal.lastLoggedInSteps = (userToLogin.fitbit.steps - userToLogin.animal.lastLoggedInSteps);
+                            }
+                        }
+                    }
                     return userToLogin;
                 })
                 .then(function (userSteps) {
@@ -54,7 +79,6 @@ module.exports = function (app) {
                     });
                 })
                 .then(function (user) {
-
                     UserModel.findOneAndUpdate({ _id: user._id }, { fitbit: user.fitbit, animal: user.animal })
                     .then(function () {
                         console.log('User has been saved!');

@@ -1,17 +1,24 @@
-app.directive('swag', function() {
+app.directive('swag', function(UserFactory) {
     return {
         restrict: 'E',
         templateUrl: 'js/common/directives/swag/swag.html',
-        link: function($scope) {
+        link: function ($scope) {
             $scope.moreInfo = false;
             $scope.showMoreInfo = function() {
                 $scope.moreInfo = $scope.moreInfo ? false : true;
+            };
+            $scope.purchase = function (user, swag) {
+                console.log("SWAG PURCHSE FUNCTION RAN");
+                UserFactory.makeAPurchase(user, swag)
+                    .then(function (purchase) {
+                        console.log("THIS IS A PURCHASE IN SWAG DIRECTIVE", purchase);
+                    });
             }
         }
     };
 });
 
-app.factory('SwagFactory', function ($http) {
+app.factory('SwagFactory', function ($http, UserFactory) {
     var SwagFactory = {};
 
     SwagFactory.fetchSwag = function() {
@@ -30,30 +37,18 @@ app.factory('SwagFactory', function ($http) {
         })
     };
 
-    SwagFactory.purchase = function(user, swag) {
-        if (user.animal.money >= swag.price) {
-            return $http.put('/api/users/' + user._id + '/getSwag/' + swag._id)
-            .then(function(purchase) {
-                if (purchase === 'User not found!') return 'You must be logged in to make a purchase.'
-                return purchase.data;
-            })
-        } else {
-            return 'unsuccessful purchase';
-        }
-    };
-
     SwagFactory.fetchSwagByUser = function(user) {
         return $http.get('/api/users/' + user._id + '/getSwag')
-        .then(function(res) {
-           return res.data.animal.swags;
+            .then(function (res) {
+                return res.data.animal.swags;
             });
     };
 
     SwagFactory.updateSwagPositions = function(swagPositions, user) {
         console.log("SwagFactory.updateSwagPositions")
         return $http.put('/api/users/' + user._id + '/updateCrib', swagPositions)
-        .then(res => res.data)
-    }; 
+            .then(res => res.data)
+    };
 
     return SwagFactory;
 });

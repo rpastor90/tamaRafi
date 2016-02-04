@@ -1,6 +1,6 @@
 * {
     box-sizing: border-box;
-    font-family: "Courier New";
+    font-family: "Lucida Console", monospace;
 }
 
 .morning {
@@ -9,38 +9,38 @@
 }
 
 .late-morning {
-    background: url('http://i.imgur.com/FNiaUHf.png') no-repeat center center fixed; 
+    background: url('http://i.imgur.com/FNiaUHf.png') no-repeat center center fixed;
     background-size: cover;
 }
 
 .afternoon {
-    background: url('http://i.imgur.com/ivAD212.png') no-repeat center center fixed; 
+    background: url('http://i.imgur.com/ivAD212.png') no-repeat center center fixed;
     background-size: cover;
 }
 
 .late-afternoon {
-    background: url('http://i.imgur.com/jV7tukD.png') no-repeat center center fixed; 
+    background: url('http://i.imgur.com/jV7tukD.png') no-repeat center center fixed;
     background-size: cover;
 }
 
 .evening {
-    background: url('http://i.imgur.com/aQ6VTTf.png') no-repeat center center fixed; 
+    background: url('http://i.imgur.com/aQ6VTTf.png') no-repeat center center fixed;
     background-size: cover;
 }
 
 .late-evening {
-    background: url('http://i.imgur.com/4faBE7f.png') no-repeat center center fixed; 
+    background: url('http://i.imgur.com/4faBE7f.png') no-repeat center center fixed;
     background-size: cover;
 }
 
 .night {
-    background: url('http://i.imgur.com/jYY4Xvy.png') no-repeat center center fixed; 
+    background: url('http://i.imgur.com/jYY4Xvy.png') no-repeat center center fixed;
     background-size: cover;
 }
 
 .late-night {
     background: url('http://i.imgur.com/YdHLaT3.png') no-repeat center center fixed;
-    background-size: cover;    
+    background-size: cover;
 }
 
 .logout-btn {
@@ -54,7 +54,6 @@
     text-decoration: none;
     display: inline-block;
     font-size: 20px;
-    font-family: "Courier New";
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 

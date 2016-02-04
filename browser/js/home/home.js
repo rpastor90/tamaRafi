@@ -16,10 +16,13 @@ app.config(function ($stateProvider) {
             }
         },
         resolve: {
-            user: function(AuthService) {
+            user: function(AuthService, $state) {
                 return AuthService.getLoggedInUser()
                 .then(function (user) {
                     // user should not be allowed to go home when logged in
+                    if (user) {
+                        $state.go('crib');
+                    }
                     return user;
                 })
             }
