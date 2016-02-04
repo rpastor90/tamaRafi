@@ -1,7 +1,7 @@
 app.config( $stateProvider => {
     $stateProvider.state('creatureComputer', {
-        url: '/creaturecomputer',
-        templateUrl: 'js/firstTimeUser/firstTimeUser.html',
+        url: '/creature-computer',
+        templateUrl: 'js/creature-computer/creature-computer.html',
         resolve: {
             user: function(AuthService) {
                 return AuthService.getLoggedInUser();
@@ -11,10 +11,10 @@ app.config( $stateProvider => {
 })
 
 app.controller('creatureComputerCtrl', function ($scope, $state, user, AuthService) {
-    $scope.user = user
+
+    $scope.user = user;
 
     $scope.friends = ['TamaKat', 'TamaJess', 'TamaGabe'];
 
-    $scope.animals = animals
 
 });
