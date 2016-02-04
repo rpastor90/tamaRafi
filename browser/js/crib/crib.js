@@ -47,13 +47,30 @@ app.controller('CribCtrl', function ($scope, $state, user, AuthService, swags, S
     };
 
     $scope.onStop = function (event, helper, swag) {
-        // Create the position object
+        var bool = false;
+        var indexStore = null;
+        swagPositions.forEach(function (swagObj, i) {
+            console.log("swagObj in onStop function", swagObj)
+            if (swagObj.swag === swag._id) {
+                bool = true;
+                indexStore = i;
+            }
+        });
+
         var swagPositionObj = {};
-        swagPositionObj.swag = swag._id;
-        swagPositionObj.posX = event.pageX + 'px';
-        swagPositionObj.posY = event.pageY + 'px';
+
+        if (!bool) {
+            swagPositionObj.swag = swag._id;
+            // Create the position object
+            swagPositionObj.posX = event.pageX + 'px';
+            swagPositionObj.posY = event.pageY + 'px';
+            swagPositions.push(swagPositionObj);
+        } else {
+            swagPositions[indexStore].posX = event.pageX + 'px';
+            swagPositions[indexStore].posY = event.pageY + 'px';
+        }
         // And push to the swagPositions array
-        swagPositions.push(swagPositionObj);
+        console.log("updated swagPositions", swagPositions);
 
         // Remove this element from the dock and set position
         var detached = $(event.target).detach();
