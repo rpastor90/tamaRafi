@@ -50,5 +50,14 @@ app.factory('SwagFactory', function ($http, UserFactory) {
             .then(res => res.data)
     };
 
+     SwagFactory.updateSwagSizes = function(swagSizes, user) {
+        console.log("SwagFactory.updateSwagSizes", swagSizes)
+        return $http.put('/api/users/' + user._id + '/updateCribSizes', swagSizes)
+            .then(res => {
+                console.log("res.data:", res.data)
+                return res.data
+            });
+    };
+
     return SwagFactory;
 });
