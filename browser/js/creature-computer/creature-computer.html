@@ -1,9 +1,12 @@
 <div class='creaturecomputer'>
-    <div id='fake-nav'> Welcome to the Social Animal
-    <div class='center'>
-        {{friends}}
-        <div>
-        </div>
+    <div id='fake-nav'> welcome back to the social animal, {{user.animal.name}} !
     </div>
-</div>
+
+    <div id='profilepic'>
+        <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiXyc4Q1-uTcYW0nk-ggYQVt964ASl0aLB4GiTesge6d_bx2RG'>
+
+     </div>
+      <div id='profiletext'>{{user.animal.name}}</div>
+        ng-repeat='friend in friends'>
+        {{friend}}
 </div>

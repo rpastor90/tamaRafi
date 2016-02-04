@@ -3,6 +3,31 @@
     font-family: "Courier New";
 }
 
+#fake-nav {
+    background-color: #3b5998;
+    color: white;
+    font-family: "Lucida Grande";
+    font-size: 35px;
+}
+
+#profilepic {
+    max-height: 50px;
+    width: 50px;
+    display: inline-block;
+    float:left;
+    img {
+        width: 100%;
+        height:100%;
+    }
+}
+
+#profiletext {
+    background-color: white;
+    color: black;
+    font-family: 'helvetica';
+    height: 50px;
+}
+
 .morning {
     background: url('http://i.imgur.com/LZfwlLd.png') no-repeat center center fixed;
     background-size: cover;
