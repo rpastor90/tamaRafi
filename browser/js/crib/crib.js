@@ -8,14 +8,14 @@ app.config(function ($stateProvider) {
         resolve: {
             user : function (AuthService, UserFactory) {
                 return AuthService.getLoggedInUser()
-                    .then(function (user) {
-                        return UserFactory.getUser(user);
-                    })  
+                .then(function (user) {
+                    return UserFactory.getUser(user);
+                })  
+            },
+            swags: function(SwagFactory, $animate, user) {
+                console.log("swag factory resolve swags", user)
+                return SwagFactory.fetchSwagByUser(user)
             }
-            // swags: function(SwagFactory, $animate, user) {
-            //     console.log("swag factory resolve swags", user)
-            //     return SwagFactory.fetchSwagByUser(user)
-            // }
         }
     });
 
@@ -24,13 +24,13 @@ app.config(function ($stateProvider) {
 
   
 
-app.controller('CribCtrl', function ($scope, $state, user, AuthService, SwagFactory) {
+app.controller('CribCtrl', function ($scope, $state, user, AuthService, SwagFactory, swags) {
     
     var swagPositions = [];
 
     $scope.user = user;
     $scope.isShown = false;
-    $scope.swags = user.animal.swags;
+    $scope.swags = swags;
     // $scope.toggle = function9
     $scope.logout = function () {
         AuthService.logout()

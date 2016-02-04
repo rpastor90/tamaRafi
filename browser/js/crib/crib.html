@@ -10,13 +10,13 @@
 
 	<img src="{{user.animal.imageUrl}}">
 	</div>
-	
-	<a ng-show='swags && !customizing'><button class='logout-btn' ng-click="showSwag = true; toggleButtons()">CUSTOMIZE YOUR CRIB</button></a>
-	<a ng-show='showSwag && customizing'><button class='logout-btn' ng-click="toggleButtons(); saveSwagPositions()">SAVE CHANGES</button></a>
-
-	<div class="dock" ng-show="showSwag" >
+	<div style="float: right; margin-top: 50px">
+		<a ng-show='swags && !customizing'><button class='logout-btn' ng-click="showSwag = true; toggleButtons()">CUSTOMIZE YOUR CRIB</button></a>
+		<a ng-show='showSwag && customizing'><button class='logout-btn' ng-click="toggleButtons(); saveSwagPositions()">SAVE CHANGES</button></a>
+	</div>
+	<footer class="dock" ng-show="showSwag" >
 		<ul>
 		    <li id="currentItem" ng-repeat="swag in swags track by $index" data-drag="true" ng-model="swag" jqyoui-draggable="{onStart: 'onStart(swag)', onDrag:'onDrag', onStop:'onStop(swag)'}" jqyoui-droppable set-position><a><img ng-src="{{swag.imageUrl}}" alt="Home"></a></li>
 		</ul>
-	</div>
+	</footer>
 </div>
