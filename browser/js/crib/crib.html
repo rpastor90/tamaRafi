@@ -7,6 +7,9 @@
 	<a ng-show='user' ui-sref="store"><button class='logout-btn'>STORE</button></a>
 	<a ng-show='user' ui-sref="health"><button class='logout-btn'>HEALTH</button></a>
 	<a ng-show='user' ui-sref="leaderboard"><button class='logout-btn'>LEADERBOARD</button></a>
+    <crib-creature></crib-creature>
+	</div>
+
 	<a ui-sref="rewards"><img id="trophy" src="http://www.clker.com/cliparts/d/8/9/b/1298268524507354096Trophy.svg.med.png"/></a>
 
 	<div data-drag="true" jqyoui-draggable  jqyoui-droppable><img class="trophy" src="http://gallery.yopriceville.com/var/albums/Free-Clipart-Pictures/Fruit-PNG/Large_Painted_Red_Apple_PNG_Clipart.png?m=1375308000" /></div>
@@ -16,7 +19,7 @@
 
 	<img src="{{user.animal.imageUrl}}">
 	</div>
-	
+
 
 	<a ng-show='swags && !customizing'><button class='logout-btn' ng-click="showSwag = true; toggleButtons()">CUSTOMIZE YOUR CRIB</button></a>
 	<a ng-show='showSwag && customizing'><button class='logout-btn' ng-click="toggleButtons(); saveSwagPositions()">SAVE CHANGES</button></a>
