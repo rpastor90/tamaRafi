@@ -61,25 +61,22 @@ module.exports = function(app) {
                     userToLogin.jawbone.steps = steps;
                     var currentDate = new Date();
                     
-                    //FIX THISSSSSSSSSSSSSSSSSSSS!!!!!!!!
                     // update money only once per day
-                    if (userToLogin.animal.lastLoggedIn.getFullYear() !== currentDate.getFullYear()) {
-                        if (userToLogin.animal.lastLoggedIn.getDate() !== currentDate.getDate()) {
-                            if (userToLogin.animal.lastLoggedIn.getMonth() !== currentDate.getMonth()) {
-                                userToLogin.animal.lastLoggedInSteps = userToLogin.jawbone.steps;
-                                userToLogin.animal.totalSteps += userToLogin.jawbone.steps;
-                                userToLogin.animal.money += 10;
-                            }
-                        }
+                    if (userToLogin.animal.lastLoggedIn.getFullYear() !== currentDate.getFullYear() 
+                        || userToLogin.animal.lastLoggedIn.getDate() !== currentDate.getDate() 
+                        || userToLogin.animal.lastLoggedIn.getMonth() !== currentDate.getMonth()) {
+                            userToLogin.animal.lastLoggedIn = currentDate;
+                            userToLogin.animal.lastLoggedInSteps = userToLogin.jawbone.steps;
+                            userToLogin.animal.totalSteps += userToLogin.jawbone.steps;
+                            userToLogin.animal.money += 10;
                     }
                     // update steps every time user logs in for that day
-                    if (userToLogin.animal.lastLoggedIn.getFullYear() === currentDate.getFullYear()) {
-                        if (userToLogin.animal.lastLoggedIn.getDate() === currentDate.getDate()) {
-                            if (userToLogin.animal.lastLoggedIn.getMonth() === currentDate.getMonth()) {
-                                userToLogin.animal.totalSteps += (userToLogin.jawbone.steps - userToLogin.animal.lastLoggedInSteps);
-                                userToLogin.animal.lastLoggedInSteps = (userToLogin.jawbone.steps - userToLogin.animal.lastLoggedInSteps);
-                            }
-                        }
+                    if (userToLogin.animal.lastLoggedIn.getFullYear() === currentDate.getFullYear()
+                        && userToLogin.animal.lastLoggedIn.getDate() === currentDate.getDate()
+                        && userToLogin.animal.lastLoggedIn.getMonth() === currentDate.getMonth()) {
+                        var newDifference = userToLogin.jawbone.steps - userToLogin.animal.lastLoggedInSteps;
+                            userToLogin.animal.lastLoggedInSteps += newDifference;
+                            userToLogin.animal.totalSteps += newDifference;
                     }
                     
                     userToLogin.save()
