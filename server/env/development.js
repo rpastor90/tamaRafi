@@ -16,5 +16,10 @@ module.exports = {
     "clientID" : "88ODtMCBQUeEvV5O",
     "clientSecret" : "cugXq4w9DXpeHqQJTcWOgfeCyD1cwnYq",
     "callbackURL" : "http://localhost:1337/auth/misfit/callback"
+  },
+  "GITHUB": {
+    "clientID" : "02977a4184db9593546a",
+    "clientSecret" : "ad88fe8bc6400405d209e7476f03ce546f2a510d",
+    "callbackURL" : "http://localhost:1337/auth/github/callback"
   }
 };

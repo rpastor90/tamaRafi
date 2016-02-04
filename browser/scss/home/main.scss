@@ -10,8 +10,9 @@
         width: 60%;
         margin: auto;
         margin-top: 150px;
-        box-shadow: 3px 3px 1px black;
-        text-shadow: 3px 3px black;
+        box-shadow: 5px 5px 3px black;
+        text-shadow: 5px 5px black;
+        -webkit-animation-duration: 1s;
     }
     button {
 	    margin-top: 50px;
