@@ -22,7 +22,6 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state, 
                     return UserFactory.getUser(user)
                     .then(function (foundUser) {
                         scope.user = foundUser;
-                        scope.monies = Math.floor(foundUser.animal.money)
                     })
                 });
             };
@@ -41,4 +40,10 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state, 
 
     };
 
+});
+
+app.filter('roundDown', function(){
+    return function(input) {
+        return Math.floor(input);
+    }
 });
