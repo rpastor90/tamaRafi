@@ -82,8 +82,41 @@ router.put('/:userId/updateCrib', function(req, res, next) {
         user.save()
         .then(() => {res.send() })
         .then(null, next)
-    });       
+    });
+
 });
+
+router.put('/:userId/updateCribSizes', function(req, res, next) {
+    console.log("in updating sizes route", req)
+    User.findOne({ _id: req.params.userId })
+    .then(function(user) {
+        // Loop trough req.body (an array of position objects)
+        for (var i = 0; i< req.body.length; i++) {
+            var existingSwag = false;
+            // Loop through swagPositions field on user.animal
+            for (var j = 0; j< user.animal.swagSizes.length; j++) {
+                // If the swag from req.body already exists on user.animal
+                if (req.body[i].swag === user.animal.swagSizes[j].swag) {
+                    _.assign(user.animal.swagSizes[j], req.body[i]);
+                    existingSwag = true;
+                };
+            };
+
+            // If you've gone through whole loop, add this swag to the user model
+            if (!existingSwag){
+                user.animal.swagSizes.push(req.body[i]);
+            };
+        };
+        console.log(user, "USER AFTER UPDATE")
+        user.save()
+        .then(() => {res.send() })
+        .then(null, next)
+    });
+
+});
+
+
+
 
 
 
