@@ -60,14 +60,14 @@ module.exports = function (app) {
                     if (userToLogin.animal.lastLoggedIn.getFullYear() === currentDate.getFullYear()
                         && userToLogin.animal.lastLoggedIn.getDate() === currentDate.getDate()
                         && userToLogin.animal.lastLoggedIn.getMonth() === currentDate.getMonth()) {
-                        var newDifference = userToLogin.fitbit.steps - userToLogin.animal.lastLoggedInSteps;
+                            var newDifference = userToLogin.fitbit.steps - userToLogin.animal.lastLoggedInSteps;
                             userToLogin.animal.lastLoggedInSteps += newDifference;
                             userToLogin.animal.totalSteps += newDifference;
+                            userToLogin.animal.money += (newDifference * 0.002);
                     }
                     return userToLogin;
                 })
                 .then(function (userSteps) {
-                    console.log("This is the updated user step at login", userSteps)
                     return helper.getSleepSummary(userSteps.fitbit.tokens, {})
                     .then(function (userSleep) {
                         userSteps.fitbit.sleep = userSleep.summary.totalMinutesAsleep;
@@ -77,7 +77,7 @@ module.exports = function (app) {
                 .then(function (user) {
                     UserModel.findOneAndUpdate({ _id: user._id }, { fitbit: user.fitbit, animal: user.animal })
                     .then(function () {
-                        console.log('User has been saved!');
+                        console.log('Fitbit user has been saved!');
                     });
                 })
                 .then(null, function (err) {

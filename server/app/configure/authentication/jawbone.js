@@ -60,7 +60,7 @@ module.exports = function(app) {
                     }
                     userToLogin.jawbone.steps = steps;
                     var currentDate = new Date();
-                    
+                    console.log('THIS IS THE JAWBONE STEPS', steps)
                     // update money only once per day
                     if (userToLogin.animal.lastLoggedIn.getFullYear() !== currentDate.getFullYear() 
                         || userToLogin.animal.lastLoggedIn.getDate() !== currentDate.getDate() 
@@ -74,9 +74,10 @@ module.exports = function(app) {
                     if (userToLogin.animal.lastLoggedIn.getFullYear() === currentDate.getFullYear()
                         && userToLogin.animal.lastLoggedIn.getDate() === currentDate.getDate()
                         && userToLogin.animal.lastLoggedIn.getMonth() === currentDate.getMonth()) {
-                        var newDifference = userToLogin.jawbone.steps - userToLogin.animal.lastLoggedInSteps;
+                            var newDifference = userToLogin.jawbone.steps - userToLogin.animal.lastLoggedInSteps;
                             userToLogin.animal.lastLoggedInSteps += newDifference;
                             userToLogin.animal.totalSteps += newDifference;
+                            userToLogin.animal.money += (newDifference * 0.002);
                     }
                     
                     userToLogin.save()
