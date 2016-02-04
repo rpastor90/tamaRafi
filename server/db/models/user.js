@@ -29,6 +29,11 @@ var schema = new Schema({
             posX: String,
             posY: String
         }],
+        swagSizes: [{
+            swag: String,
+            height: String,
+            width: String
+        }],
         lastLoggedIn: {
             type: Date,
             default: Date.now
@@ -37,10 +42,6 @@ var schema = new Schema({
             type: Number,
             default: 0
         }
-        // friends: [{
-        //     type: Schema.Types.ObjectId,
-        //     ref: 'User'
-        // }]
     },
     fitbit: {
         id: String,
