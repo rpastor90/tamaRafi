@@ -2,18 +2,18 @@ app.config(function ($stateProvider) {
     $stateProvider.state('rewards', {
     	url: '/rewards',
     	templateUrl: 'js/rewards/rewards.html',
-    	controller: function($scope, swags, AnimalFactory, user){
+    	controller: function($scope, swags, UserFactory, user){
     		$scope.swags = swags;
-    		$scope.purchase = function(swag) {
-    			if (AnimalFactory.purchase(user, swag) === 'unsuccessful purchase') {
+    		UserFactory.makeAPurchase = function(swag) {
+    			if (UserFactory.makeAPurchase(user, swag) === 'unsuccessful purchase') {
     				$scope.insufficientFunds = true;
     			} 
     		}
     		
     	},
     	resolve: {
-    		swags: function(AnimalFactory) {
-    			return AnimalFactory.fetchSwag()
+    		swags: function(SwagFactory) {
+    			return SwagFactory.fetchSwag()
     		},
     		user : function (AuthService) {
                 return AuthService.getLoggedInUser()  

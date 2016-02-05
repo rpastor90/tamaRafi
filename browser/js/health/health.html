@@ -7,9 +7,9 @@
             <canvas id="doughnut2" class="chart chart-doughnut" chart-data="sleepData" chart-labels="labels2"></canvas>
         </div>
     </div>
-    <center>
+    <div class='center'>
         <img id="mouth" src="http://vignette4.wikia.nocookie.net/anthropomorphicmadness/images/4/48/Mouth_Closed_Smile.png/revision/latest?cb=20120512222937" ng-show="(sleepPercentDiff + stepsPercentDiff/2) >= 75">
         <img id="mouth" src="http://cdn.flaticon.com/png/256/53957.png" ng-show="(sleepPercentDiff + stepsPercentDiff/2) < 75 && percentDiff > 30">
         <img id="mouth" src="http://vignette2.wikia.nocookie.net/officialinanimations/images/2/27/Sad-mouth-closed-noteeth.png/revision/latest?cb=20140418130230" ng-show="(sleepPercentDiff + stepsPercentDiff/2) <= 30">
-    </center>
+    </div>
 </div>

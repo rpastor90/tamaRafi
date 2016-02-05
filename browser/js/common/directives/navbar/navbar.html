@@ -1,6 +1,5 @@
 <nav class="navbar navbar-static-top">
     <div class="container">
-    <center>
         <div ng-show="user" class="buttons">
             <span class='coins'>{{ user.animal.money | roundDown }}</span>
             <a ui-sref="store"><img style='width:8%' src='https://38.media.tumblr.com/9056c3040c618c65888244befef39321/tumblr_mhpc6eUvag1rrftcdo1_500.gif'></a>
@@ -8,6 +7,5 @@
             <img class='logout-btn' ng-controller='LeaderboardCtrl' ng-click='showLeaderboard()' src='http://i.imgur.com/IGLeBkU.png'>
             <a ng-click="logout()"><img class='logout-btn' src='http://i.imgur.com/8CR2GUu.png'></a>
         </div>
-        </center>
     </div>
 </nav>

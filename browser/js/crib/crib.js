@@ -10,12 +10,12 @@ app.config(function ($stateProvider) {
         resolve: {
             user: function (AuthService, UserFactory) {
                 return AuthService.getLoggedInUser()
-                    .then(function(user) {
-                        return UserFactory.getUser(user);
-                    })
+                .then(function (user) {
+                    return UserFactory.getUser(user);
+                })
             },
             swags: function (SwagFactory, $animate, user) {
-                return SwagFactory.fetchSwagByUser(user)
+                return SwagFactory.fetchSwagByUser (user)
             }
         }
     });
@@ -30,16 +30,16 @@ app.controller('CribCtrl', function ($scope, $state, user, AuthService, SwagFact
     $scope.user = user;
     $scope.isShown = false;
     $scope.swags = swags;
-    // $scope.toggle = function9
+
     $scope.logout = function() {
         AuthService.logout()
-            .then(function() {
-                $state.go('home');
-            });
+        .then(function() {
+            $state.go('home');
+        });
     };
 
     var onDragStop = function(event, ui, swag) {
-        console.log(arguments, "ARGUMENTS");
+        console.log(ui.helper.context.style.width, "UI AND EVET")
         var bool = false;
         var indexStore = null;
         swagPositions.forEach(function(swagObj, i) {
@@ -55,12 +55,14 @@ app.controller('CribCtrl', function ($scope, $state, user, AuthService, SwagFact
         if (!bool) {
             swagPositionObj.swag = swag._id;
             // Create the position object
-            swagPositionObj.posX = event.pageX + 'px';
-            swagPositionObj.posY = event.pageY + 'px';
+            console.log('EVENT PAGE X AND Y BEFORE PUSHED', event.pageX, event.pageY)
+            swagPositionObj.posX = event.pageX - Number(ui.helper.context.style.width.split('.')[0])/2 + 'px';
+            swagPositionObj.posY = event.pageY + Number(ui.helper.context.style.height.split('.')[0])/2 + 'px';
+            console.log('AFTER', swagPositionObj)
             swagPositions.push(swagPositionObj);
         } else {
-            swagPositions[indexStore].posX = event.pageX + 'px';
-            swagPositions[indexStore].posY = event.pageY + 'px';
+            swagPositions[indexStore].posX = event.pageX - Number(ui.helper.context.style.width.split('.')[0])/2 + 'px';
+            swagPositions[indexStore].posY = event.pageY + Number(ui.helper.context.style.height.split('.')[0])/2 + 'px';
         }
         // And push to the swagPositions array
         console.log("updated swagPositions", swagPositions);
@@ -71,12 +73,17 @@ app.controller('CribCtrl', function ($scope, $state, user, AuthService, SwagFact
         var detached = $(event.target).detach();
         $('.notTheDock').append(detached);
         detached.css('position', 'fixed');
-        detached.css('left', event.pageX + 'px');
-        detached.css('top', event.pageY + 'px');
+        console.log('UI POSITION', ui.position)
+        console.log('this is the width', ui.helper.context, event.pageX)
+        // console.log('this is the height', Number(ui.helper.context.style.height.split('.')[0]))
+        if (ui.helper.context.style.width && ui.helper.context.style.height) {
+            detached.css('left', event.pageX - Number(ui.helper.context.style.width.split('.')[0])/2  + 'px');
+            detached.css('top', event.pageY + Number(ui.helper.context.style.height.split('.')[0])/2 + 'px');
+        }
     };
 
     var onResizeStop = function(event, ui, swag) {
-
+        console.log(ui, 'THIS IS THE UI ON RESIZE FUNC')
         var bool = false;
         var indexStore = null;
         swagSizes.forEach(function(swagObj, i) {
@@ -89,23 +96,29 @@ app.controller('CribCtrl', function ($scope, $state, user, AuthService, SwagFact
 
         var swagSizeObj = {};
 
+        // if (!bool) {
+        //     swagSizeObj.swag = swag._id;
+        //     swagSizeObj.height = ui.helper.context.style.height + 'px';
+        //     swagSizeObj.width = ui.helper.context.style.width + 'px';
+        //     swagSizes.push(swagSizeObj);
+        // } else {
+        //     swagSizes[indexStore].height = ui.helper.context.style.height + 'px';
+        //     swagSizes[indexStore].width = ui.helper.context.style.width + 'px';
+        // }
         if (!bool) {
-
             swagSizeObj.swag = swag._id;
-            swagSizeObj.height = ui.size.height + 'px';
-            swagSizeObj.width = ui.size.width + 'px';
+            swagSizeObj.height = Number(ui.helper.context.style.height.split('.')[0])/2 + 'px';
+            swagSizeObj.width = Number(ui.helper.context.style.width.split('.')[0])/2 + 'px';
             swagSizes.push(swagSizeObj);
 
         } else {
-            swagSizes[indexStore].height = ui.size.height + 'px';
-            swagSizes[indexStore].width = ui.size.width + 'px';
+            swagSizes[indexStore].height = Number(ui.helper.context.style.height.split('.')[0])/2 + 'px';
+            swagSizes[indexStore].width = Number(ui.helper.context.style.width.split('.')[0])/2 + 'px';
         }
-        console.log(swagSizes, "SWAG SIZES")
     }
 
     $scope.onDrag = function(event) {
         console.log(event.pageX, event.pageY)
-        console.log("draggin")
     };
 
     $scope.toggleButtons = function() {
@@ -113,7 +126,6 @@ app.controller('CribCtrl', function ($scope, $state, user, AuthService, SwagFact
     };
 
     $scope.saveSwagPositionsAndSizes = function() {
-        console.log(swagPositions, "SWAG POS") // key here is the swag._id
         SwagFactory.updateSwagPositions(swagPositions, user)
         SwagFactory.updateSwagSizes(swagSizes, user)
     };
@@ -141,7 +153,7 @@ app.controller('CribCtrl', function ($scope, $state, user, AuthService, SwagFact
             // cribItem[0].draggable = true;
             cribItem.resizable({
                 resize: function(e, ui) {
-                    console.log(e, ui, "in resize")
+                    // console.log(e, ui, "in resize")
                 },
                 autohide: true,
                 stop: function(e, ui) {
@@ -158,7 +170,6 @@ app.controller('CribCtrl', function ($scope, $state, user, AuthService, SwagFact
 });
 
 app.directive('setPosition', function() {
-    console.log("in directive")
     return {
         restrict: 'A',
         link: function(scope, element, attrs, controller) {

@@ -1,45 +1,34 @@
 .crib {
-    background: url('http://i.imgur.com/ROPeDxE.png') no-repeat center center fixed;
+    background: url('http://i.imgur.com/d8C45QS.png') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
     position: fixed;
     top: 0;
     left: 0;
-    background-image: 100% 100%;
     min-width: 100%;
     min-height: 100%;
     z-index: -1;
     .logout-btn {
-        margin-top: 400px;
-        width: 150px;
-    }
-}
-.modal-dialog {
-    .leaderboard {
-        color: black;
-        font-size: 20px;
-        font-weight: bold;
-        background: url('http://rs271.pbsrc.com/albums/jj140/99alongway/Confetti.gif~c200');
-        .panel-heading {
-            font-size: 30px;
-            text-align: center;
-        }
-        table {
-            margin-bottom: 0;
-        }
+        margin-top: 45%;
+        float: right;
+        margin-right: 20px;
     }
 }
 
 .dock {
-    bottom: 10px;
-    position: relative;
     width: 100%;
-    top: 400px;
+    position: absolute;
+    bottom: 1px;
     ul {
+        text-align: center;
         width: 100%;
+        height: 70px;
         margin: 0px;
         padding: 0px;
         list-style: none;
         background: rgba(0, 0, 0, 0.3);
-        padding-right: 76px;
     }
 }
 
@@ -85,5 +74,21 @@
     width: 100px;
     img {
         width: 100%
+    }
+}
+
+.modal-dialog {
+    .leaderboard {
+        color: black;
+        font-size: 20px;
+        font-weight: bold;
+        background: url('http://rs271.pbsrc.com/albums/jj140/99alongway/Confetti.gif~c200');
+        .panel-heading {
+            font-size: 30px;
+            text-align: center;
+        }
+        table {
+            margin-bottom: 0;
+        }
     }
 }
