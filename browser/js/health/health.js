@@ -1,4 +1,4 @@
-app.controller('HealthCtrl', function($scope, $uibModal, UserFactory, AuthService) {
+app.controller('HealthCtrl', function ($scope, $uibModal, UserFactory, AuthService) {
     $scope.animationsEnabled = true;
 
     $scope.showHealth = function() {
@@ -14,7 +14,7 @@ app.controller('HealthCtrl', function($scope, $uibModal, UserFactory, AuthServic
         });
     };
 })
-.controller('OpenHealthCtrl', function($scope, user, $uibModalInstance) {
+.controller('OpenHealthCtrl', function ($scope, user, $uibModalInstance) {
 
     if (user.jawbone !== undefined) { 
         // visualize user's most recently updated steps for the day

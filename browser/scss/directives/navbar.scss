@@ -15,11 +15,12 @@ navbar {
   }
 
   .coins {
-    color: white;
+    color: yellow;
     font-weight: bold;
-    font-size: 40px;
+    font-size: 35px;
     z-index: 1;
-    position: absolute;
+    position: relative;
     text-shadow: 3px 3px black;
+    top: 20;
   }
 }

@@ -1,4 +1,4 @@
-app.config(function($stateProvider) {
+app.config(function ($stateProvider) {
 
     $stateProvider.state('crib', {
         url: '/crib',
@@ -8,14 +8,13 @@ app.config(function($stateProvider) {
             authenticate: true
         },
         resolve: {
-            user: function(AuthService, UserFactory) {
+            user: function (AuthService, UserFactory) {
                 return AuthService.getLoggedInUser()
                     .then(function(user) {
                         return UserFactory.getUser(user);
                     })
             },
-            swags: function(SwagFactory, $animate, user) {
-                console.log("swag factory resolve swags", user)
+            swags: function (SwagFactory, $animate, user) {
                 return SwagFactory.fetchSwagByUser(user)
             }
         }
@@ -23,7 +22,7 @@ app.config(function($stateProvider) {
 
 });
 
-app.controller('CribCtrl', function($scope, $state, user, AuthService, SwagFactory, swags) {
+app.controller('CribCtrl', function ($scope, $state, user, AuthService, SwagFactory, swags) {
 
     var swagPositions = [];
     var swagSizes = [];
