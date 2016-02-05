@@ -15,8 +15,8 @@ app.config(function ($stateProvider) {
     		swags: function(AnimalFactory) {
     			return AnimalFactory.fetchSwag()
     		},
-    		user : function (AuthService) {
-                return AuthService.getLoggedInUser()  
+    		user : function (UserFactory) {
+                return UserFactory.getUser();  
                } 
     	}
     })

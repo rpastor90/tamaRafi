@@ -9,10 +9,7 @@ app.config(function ($stateProvider) {
     			return SwagFactory.fetchSwag()
     		},
     		user : function (AuthService, UserFactory) {
-                return AuthService.getLoggedInUser()
-                    .then(function (user) {
-                        return UserFactory.getUser(user);
-                    })  
+                return UserFactory.getUser();
             } 
     	}
     })

@@ -5,8 +5,8 @@ app.config(function ($stateProvider) {
         controller: 'LeaderboardCtrl',
         data : { authenticate: true },
         resolve: {
-            user: function (AuthService) {
-                return AuthService.getLoggedInUser();
+            user: function (UserFactory) {
+                return UserFactory.getUser();
             }
         }
     });
