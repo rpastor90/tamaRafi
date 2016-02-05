@@ -87,7 +87,6 @@ router.put('/:userId/updateCrib', function(req, res, next) {
 });
 
 router.put('/:userId/updateCribSizes', function(req, res, next) {
-    console.log("in updating sizes route", req)
     User.findOne({ _id: req.params.userId })
     .then(function(user) {
         // Loop trough req.body (an array of position objects)

@@ -8,17 +8,16 @@ app.directive('swag', function(UserFactory) {
                 $scope.moreInfo = $scope.moreInfo ? false : true;
             };
             $scope.purchase = function (user, swag) {
-                console.log("SWAG PURCHSE FUNCTION RAN");
                 UserFactory.makeAPurchase(user, swag)
-                    .then(function (purchase) {
-                        console.log("THIS IS A PURCHASE IN SWAG DIRECTIVE", purchase);
-                    });
+                .then(function () {
+                    console.log("User has made a purchase!");
+                })
             }
         }
     };
 });
 
-app.factory('SwagFactory', function ($http, UserFactory) {
+app.factory('SwagFactory', function ($http) {
     var SwagFactory = {};
 
     SwagFactory.fetchSwag = function() {
@@ -39,24 +38,22 @@ app.factory('SwagFactory', function ($http, UserFactory) {
 
     SwagFactory.fetchSwagByUser = function(user) {
         return $http.get('/api/users/' + user._id + '/getSwag')
-            .then(function (res) {
-                return res.data.animal.swags;
-            });
+        .then(function (res) {
+            return res.data.animal.swags;
+        });
     };
 
     SwagFactory.updateSwagPositions = function(swagPositions, user) {
-        console.log("SwagFactory.updateSwagPositions")
         return $http.put('/api/users/' + user._id + '/updateCrib', swagPositions)
-            .then(res => res.data)
+        .then(res => res.data)
     };
 
      SwagFactory.updateSwagSizes = function(swagSizes, user) {
         console.log("SwagFactory.updateSwagSizes", swagSizes)
         return $http.put('/api/users/' + user._id + '/updateCribSizes', swagSizes)
-            .then(res => {
-                console.log("res.data:", res.data)
-                return res.data
-            });
+        .then(res => {
+            return res.data
+        });
     };
 
     return SwagFactory;

@@ -1,17 +1,3 @@
-app.config(function ($stateProvider) {
-    $stateProvider.state('leaderboard', {
-        url: '/leaderboard',
-        templateUrl: 'js/leaderboard/leaderboard.html',
-        controller: 'LeaderboardCtrl',
-        data : { authenticate: true },
-        resolve: {
-            user: function (UserFactory) {
-                return UserFactory.getUser();
-            }
-        }
-    });
-});
-
 app.factory('LeaderboardFactory', function ($http) {
     var LeaderboardFactory = {};
     LeaderboardFactory.getEveryone = function () {
@@ -23,7 +9,23 @@ app.factory('LeaderboardFactory', function ($http) {
     return LeaderboardFactory;
 });
 
-app.controller('LeaderboardCtrl', function ($scope, $state, LeaderboardFactory, user, AuthService) {
+app.controller('LeaderboardCtrl', function ($scope, $uibModal) {
+    $scope.animationsEnabled = true;
+
+    $scope.showLeaderboard = function() {
+        $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: '/js/leaderboard/leaderboard.html',
+            controller: 'OpenLeaderboardCtrl',
+            resolve: {
+                user: function(AuthService) {
+                    return AuthService.getLoggedInUser();
+                }
+            }
+        });
+    };
+})
+.controller('OpenLeaderboardCtrl', function($scope, $uibModalInstance, user, LeaderboardFactory) {
     $scope.user = user;
     
     var fullstackers = [
@@ -33,7 +35,7 @@ app.controller('LeaderboardCtrl', function ($scope, $state, LeaderboardFactory, 
         },
         {
             name: 'Katkat',
-            animal: { totalSteps: 99999999999 }
+            animal: { totalSteps: 99999999 }
         },
         {
             name: 'Sethwazhere',
@@ -58,11 +60,4 @@ app.controller('LeaderboardCtrl', function ($scope, $state, LeaderboardFactory, 
             return b.animal.totalSteps - a.animal.totalSteps;
         })
     })
-
-    $scope.logout = function() {
-        AuthService.logout()
-        .then(function() {
-            $state.go('home');
-        });
-    };
-});
+})

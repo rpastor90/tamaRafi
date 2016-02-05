@@ -51,16 +51,16 @@ module.exports = function(app) {
                 // here we are reassigning the refresh and access tokens
                 userToLogin.jawbone.tokens.access_token = accessToken;
                 userToLogin.jawbone.tokens.refresh_token = refreshToken;
+
+                var steps;
                 up.moves.get({}, function (err, body) {
                     if (err) {
                         console.log('Error: ' + err);
                     } else {
-                        var steps = JSON.parse(body).data.items;
-                        steps = steps[0].title.split(' ')[0].split(',').join('')
+                        steps = JSON.parse(body).data.items[0].title.split(' ')[0].split(',').join('');
+                        userToLogin.jawbone.steps = steps;
                     }
-                    userToLogin.jawbone.steps = steps;
                     var currentDate = new Date();
-                    console.log('THIS IS THE JAWBONE STEPS', steps)
                     // update money only once per day
                     if (userToLogin.animal.lastLoggedIn.getFullYear() !== currentDate.getFullYear() 
                         || userToLogin.animal.lastLoggedIn.getDate() !== currentDate.getDate() 
