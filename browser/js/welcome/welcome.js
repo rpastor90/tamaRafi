@@ -13,8 +13,8 @@ app.config(function ($stateProvider) {
             }
         },
         resolve: {
-            user: function (AuthService) {
-                return AuthService.getLoggedInUser();
+            user: function (UserFactory) {
+                return UserFactory.getUser();
             }
         }
     });

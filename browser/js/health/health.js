@@ -5,11 +5,8 @@ app.config(function ($stateProvider) {
     controller: 'HealthCtrl',
     data : { authenticate: true },
     resolve: {
-      user: function (AuthService) {
-          return AuthService.getLoggedInUser()
-          .then(function (user) {
-              return user;
-          });
+      user: function (UserFactory) {
+          return UserFactory.getUser();
       }
     },
     controller: function ($scope, $state, user, AuthService) {

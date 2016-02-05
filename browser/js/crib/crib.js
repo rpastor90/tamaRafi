@@ -6,23 +6,16 @@ app.config(function ($stateProvider) {
         controller: 'CribCtrl',
         data : { authenticate: true },
         resolve: {
-            user : function (AuthService, UserFactory) {
-                return AuthService.getLoggedInUser()
-                .then(function (user) {
-                    return UserFactory.getUser(user);
-                })  
+            user : function (UserFactory) {
+                return UserFactory.getUser();
             },
             swags: function(SwagFactory, $animate, user) {
-                console.log("swag factory resolve swags", user)
                 return SwagFactory.fetchSwagByUser(user)
             }
         }
     });
 
 });
-
-
-  //console
 
 app.controller('CribCtrl', function ($scope, $state, user, AuthService, SwagFactory, swags) {
     
