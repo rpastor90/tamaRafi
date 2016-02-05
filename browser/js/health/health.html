@@ -1,27 +1,15 @@
-<div class="healthArea">
-    <div id="eyes">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 col-lg-6 col-sm-6">
-                    <center>
-                        <canvas id="doughnut" class="chart chart-doughnut" chart-data="data" chart-labels="labels">
-                        </canvas>
-                    </center>
-                </div>
-                <div class="col-md-6 col-lg-6 col-sm-6">
-                    <center>
-                        <canvas id="doughnut" class="chart chart-doughnut" chart-data="data" chart-labels="labels">
-                        </canvas>
-                    </center>
-                </div>
-            </div>
+<div class="health-area">
+    <div class='eyes'>
+        <div class='eye'>
+            <canvas id="doughnut1" class="chart chart-doughnut" chart-data="stepsData" chart-labels="labels1"></canvas>
+        </div>
+        <div class='eye'>
+            <canvas id="doughnut2" class="chart chart-doughnut" chart-data="sleepData" chart-labels="labels2"></canvas>
         </div>
     </div>
-    <div>
-        <center>
-            <img src="http://vignette4.wikia.nocookie.net/anthropomorphicmadness/images/4/48/Mouth_Closed_Smile.png/revision/latest?cb=20120512222937" id="mouth" ng-show="percentDiff >= 75">
-            <img src="http://cdn.flaticon.com/png/256/53957.png" id="mouth" ng-show="percentDiff < 75 && percentDiff > 30">
-            <img src="http://vignette2.wikia.nocookie.net/officialinanimations/images/2/27/Sad-mouth-closed-noteeth.png/revision/latest?cb=20140418130230" id="mouth" ng-show="percentDiff <= 30">
-        </center>
-    </div>
+    <center>
+        <img id="mouth" src="http://vignette4.wikia.nocookie.net/anthropomorphicmadness/images/4/48/Mouth_Closed_Smile.png/revision/latest?cb=20120512222937" ng-show="(sleepPercentDiff + stepsPercentDiff/2) >= 75">
+        <img id="mouth" src="http://cdn.flaticon.com/png/256/53957.png" ng-show="(sleepPercentDiff + stepsPercentDiff/2) < 75 && percentDiff > 30">
+        <img id="mouth" src="http://vignette2.wikia.nocookie.net/officialinanimations/images/2/27/Sad-mouth-closed-noteeth.png/revision/latest?cb=20140418130230" ng-show="(sleepPercentDiff + stepsPercentDiff/2) <= 30">
+    </center>
 </div>

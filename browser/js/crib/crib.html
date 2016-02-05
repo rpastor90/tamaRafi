@@ -1,18 +1,14 @@
 <div class='crib'>
 	<div class='notTheDock'>
-
-    <crib-creature></crib-creature>
-
+		<crib-creature ng-controller='HealthCtrl' ng-click='showHealth()' style='width: 50%'></crib-creature>	
 		<a ng-show='swags && !customizing'><button class='logout-btn' ng-click="showSwag = true; toggleButtons(); makeCustomizable()">CUSTOMIZE YOUR CRIB</button></a>
 		<a ng-show='showSwag && customizing'><button class='logout-btn' ng-click="toggleButtons(); saveSwagPositionsAndSizes()">SAVE CHANGES</button></a>
 		<a ng-show='showSwag && customizing'><button class='logout-btn' ng-click="reset()">RESET CRIB</button></a>
-
 	</div>
+
 	<footer class="dock" ng-show="showSwag" >
 		<ul>
 		    <li id="currentItem"  ng-repeat="swag in swags track by $index"  ng-model="swag"  set-position><a><img ng-src="{{swag.imageUrl}}" alt="Home"></a></li>
 		</ul>
 	</footer>
 </div>
-
-

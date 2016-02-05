@@ -36,7 +36,6 @@ module.exports = function (app) {
                 }
             })
             .then(function (userToLogin) {
-                console.log("this is the originial user to log in", userToLogin)
                 // the tokens may change after a certain amount of time
                 // here we are reassigning the refresh and access tokens
                 userToLogin.fitbit.tokens.access_token = accessToken;
@@ -46,7 +45,6 @@ module.exports = function (app) {
                 .then(function (stepData) {
                     userToLogin.fitbit.steps = stepData.summary.steps;
                     var currentDate = new Date();
-
                     // update money only once per day
                     if (userToLogin.animal.lastLoggedIn.getFullYear() !== currentDate.getFullYear() 
                         || userToLogin.animal.lastLoggedIn.getDate() !== currentDate.getDate() 

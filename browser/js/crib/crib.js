@@ -1,16 +1,18 @@
-app.config(function ($stateProvider) {
+app.config(function($stateProvider) {
 
     $stateProvider.state('crib', {
         url: '/crib',
         templateUrl: 'js/crib/crib.html',
         controller: 'CribCtrl',
-        data : { authenticate: true },
+        data: {
+            authenticate: true
+        },
         resolve: {
-            user : function (AuthService, UserFactory) {
+            user: function(AuthService, UserFactory) {
                 return AuthService.getLoggedInUser()
-                .then(function (user) {
-                    return UserFactory.getUser(user);
-                })  
+                    .then(function(user) {
+                        return UserFactory.getUser(user);
+                    })
             },
             swags: function(SwagFactory, $animate, user) {
                 console.log("swag factory resolve swags", user)
@@ -21,33 +23,27 @@ app.config(function ($stateProvider) {
 
 });
 
+app.controller('CribCtrl', function($scope, $state, user, AuthService, SwagFactory, swags) {
 
-  //console
-
-app.controller('CribCtrl', function ($scope, $state, user, AuthService, SwagFactory, swags) {
-    
     var swagPositions = [];
     var swagSizes = [];
-
 
     $scope.user = user;
     $scope.isShown = false;
     $scope.swags = swags;
     // $scope.toggle = function9
-    $scope.logout = function () {
+    $scope.logout = function() {
         AuthService.logout()
-        .then(function () {
-           $state.go('home');
-        });
+            .then(function() {
+                $state.go('home');
+            });
     };
-  
-    
 
-    var onDragStop = function (event, ui, swag) {
-         console.log(arguments, "ARGUMENTS");
+    var onDragStop = function(event, ui, swag) {
+        console.log(arguments, "ARGUMENTS");
         var bool = false;
         var indexStore = null;
-        swagPositions.forEach(function (swagObj, i) {
+        swagPositions.forEach(function(swagObj, i) {
             console.log("swagObj in onStop function", swagObj)
             if (swagObj.swag === swag._id) {
                 bool = true;
@@ -81,10 +77,10 @@ app.controller('CribCtrl', function ($scope, $state, user, AuthService, SwagFact
     };
 
     var onResizeStop = function(event, ui, swag) {
-       
+
         var bool = false;
         var indexStore = null;
-        swagSizes.forEach(function (swagObj, i) {
+        swagSizes.forEach(function(swagObj, i) {
             console.log("swagObj in onStop function", swagObj)
             if (swagObj.swag === swag._id) {
                 bool = true;
@@ -95,7 +91,7 @@ app.controller('CribCtrl', function ($scope, $state, user, AuthService, SwagFact
         var swagSizeObj = {};
 
         if (!bool) {
-             
+
             swagSizeObj.swag = swag._id;
             swagSizeObj.height = ui.size.height + 'px';
             swagSizeObj.width = ui.size.width + 'px';
@@ -106,11 +102,7 @@ app.controller('CribCtrl', function ($scope, $state, user, AuthService, SwagFact
             swagSizes[indexStore].width = ui.size.width + 'px';
         }
         console.log(swagSizes, "SWAG SIZES")
-
     }
-    
-
-
 
     $scope.onDrag = function(event) {
         console.log(event.pageX, event.pageY)
@@ -128,7 +120,7 @@ app.controller('CribCtrl', function ($scope, $state, user, AuthService, SwagFact
     };
 
     $scope.reset = function() {
-        var cribItems= $('.notTheDock li').toArray();
+        var cribItems = $('.notTheDock li').toArray();
         cribItems.forEach(function(cribItem) {
             $(cribItem).detach();
             $('.dock ul').append(cribItem);
@@ -142,47 +134,35 @@ app.controller('CribCtrl', function ($scope, $state, user, AuthService, SwagFact
 
     $scope.makeCustomizable = function() {
         var allCribItems = $('.crib li').toArray();
-      
         allCribItems.forEach(function(cribItem, idx) {
             // console.log(cribItem)
             cribItem = $(cribItem);
             // cribItem.attr('data-drag','true')
             // cribItem.attr('jqyoui-draggable', "{onStart: 'onStart(swag)', onDrag:'onDrag', onStop:'onStop(swag)'}" );
             // cribItem[0].draggable = true;
-            
-
             cribItem.resizable({
-                        resize: function(e, ui) {
-                            console.log(e, ui, "in resize")
-                            },
-                        autohide: true,
-                        stop: function(e, ui) {
-
-                                return onResizeStop(e, ui, $scope.swags[idx])
-
-                               
-                        }
-                        })
+                resize: function(e, ui) {
+                    console.log(e, ui, "in resize")
+                },
+                autohide: true,
+                stop: function(e, ui) {
+                    return onResizeStop(e, ui, $scope.swags[idx])
+                }
+            })
             cribItem.draggable({
-                stop: function (event, ui) {
+                stop: function(event, ui) {
                     return onDragStop(event, ui, $scope.swags[idx])
                 }
             });
         });
-        
-        
     }
-   
 });
-app.directive('setPosition', function () {
+
+app.directive('setPosition', function() {
     console.log("in directive")
     return {
         restrict: 'A',
-        link: function (scope, element, attrs, controller) {
-
-
-
-
+        link: function(scope, element, attrs, controller) {
             for (var i = 0; i < scope.user.animal.swagPositions.length; i++) {
                 if (scope.user.animal.swagPositions[i].swag === scope.swag._id) {
                     var detached = $(element).detach();
@@ -191,9 +171,9 @@ app.directive('setPosition', function () {
                     element.css('left', scope.user.animal.swagPositions[i].posX);
                     element.css('top', scope.user.animal.swagPositions[i].posY);
 
-                    };   
                 };
-             for (var i = 0; i < scope.user.animal.swagSizes.length; i++) {
+            };
+            for (var i = 0; i < scope.user.animal.swagSizes.length; i++) {
                 if (scope.user.animal.swagSizes[i].swag === scope.swag._id) {
                     var detached = $(element).detach();
                     $('.notTheDock').append(detached);
@@ -201,14 +181,8 @@ app.directive('setPosition', function () {
                     element.css('width', scope.user.animal.swagSizes[i].width);
                     element.css('height', scope.user.animal.swagSizes[i].height);
 
-                    };   
-                }
-
+                };
             }
-
         }
-    });
-
-
-
-
+    }
+});
