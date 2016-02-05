@@ -17,13 +17,10 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state, 
             };
 
             var setUser = function () {
-                AuthService.getLoggedInUser()
-                .then(function (user) {
-                    return UserFactory.getUser(user)
-                    .then(function (foundUser) {
-                        scope.user = foundUser;
-                    })
-                });
+                return UserFactory.getUser()
+                .then(function (foundUser) {
+                    scope.user = foundUser;
+                })
             };
 
             var removeUser = function () {

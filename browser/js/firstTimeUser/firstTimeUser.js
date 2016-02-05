@@ -8,8 +8,8 @@ app.config(function ($stateProvider) {
             animals: function (AnimalFactory) {
                 return AnimalFactory.fetchAnimals();
             },
-            user: function (AuthService) {
-                return AuthService.getLoggedInUser();
+            user: function (UserFactory) {
+                return UserFactory.getUser();
             }
         }
     });

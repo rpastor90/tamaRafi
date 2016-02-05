@@ -8,14 +8,11 @@ app.config(function ($stateProvider) {
             authenticate: true
         },
         resolve: {
-            user: function (AuthService, UserFactory) {
-                return AuthService.getLoggedInUser()
-                .then(function (user) {
-                    return UserFactory.getUser(user);
-                })
+            user : function (UserFactory) {
+                return UserFactory.getUser();
             },
-            swags: function (SwagFactory, $animate, user) {
-                return SwagFactory.fetchSwagByUser (user)
+            swags: function(SwagFactory, $animate, user) {
+                return SwagFactory.fetchSwagByUser(user);
             }
         }
     });
