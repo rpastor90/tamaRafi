@@ -1,0 +1,28 @@
+.shelf {
+    border-width: 2px;
+    height: 15px;
+    width: 50%;
+    background: #c74b61;
+    box-shadow: 3px 3px 1px black;
+    background-image: -webkit-linear-gradient(left, #61c74b, #c74b61, #4b61c7);
+    background-image: -moz-linear-gradient(left, #61c74b, #c74b61, #4b61c7);
+    background-image: -ms-linear-gradient(left, #61c74b, #c74b61, #4b61c7);
+    background-image: -o-linear-gradient(left, #61c74b, #c74b61, #4b61c7);
+}
+
+.swag {
+    width: 10%;
+    margin-right: 20px;
+    margin-left: 20px;
+    border: 5px dotted white;
+    padding: 5px;
+    box-shadow: 3px 3px 1px black;
+}
+
+#store {
+    margin-top: 50px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    text-shadow: 1px 1px black;
+}
