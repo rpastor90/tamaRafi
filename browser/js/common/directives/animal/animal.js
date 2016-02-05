@@ -14,8 +14,8 @@ app.factory('AnimalFactory', function () {
         goals: 'Monster trapezii & gold chains',
         species: 'Panda',
         idx: 0,
-        animationForward: 'sprite .5s steps(12) infinite',
-        animationBack: 'sprite 1.5s steps(12) infinite',
+        animationForward: 'panda .5s steps(12) infinite',
+        animationBack: 'panda 1.5s steps(12) infinite',
         animateStyle: {
             'width': '250px',
             'height': '354px',
@@ -27,8 +27,8 @@ app.factory('AnimalFactory', function () {
         goals: 'Better diet & sleep',
         species: 'Rhino',
         idx: 1,
-        animationForward: 'sprite .5s steps(10) infinite',
-        animationBack: 'sprite 1.5s steps(10) infinite',
+        animationForward: 'rhino .5s steps(10) infinite',
+        animationBack: 'rhino 1.5s steps(10) infinite',
         animateStyle: {
             'width': '149px',
             'height': '95px',

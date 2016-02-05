@@ -11,8 +11,6 @@ app.controller('CreatureCtrl', function ($scope) {
     var creature = document.getElementById('creatureContainer');
     var reverse = false;
     $scope.animal = $scope.user.animal
-    console.dir(creature)
-    $animateCss
 
 
     var incrementer = 0;
