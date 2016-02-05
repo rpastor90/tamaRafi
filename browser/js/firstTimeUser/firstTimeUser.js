@@ -39,7 +39,7 @@ app.controller('FirstTimeUserCtrl', function ($scope, $state, FirstTimeUserFacto
         });
     };
 
-    var species = ['charmander', 'squirtle', 'bulbasaur'];
+    var species = ['Panda', 'Rhino', 'bulbasaur'];
 
     $scope.update = FirstTimeUserFactory.update;
     $scope.animals = animals;

@@ -1,4 +1,4 @@
-<div class='crib'>
+<div class='crib'>git
 	<div class='center'>
 	<h1>CRIB STATE</h1>
 <!-- 	{{swags}}
@@ -15,19 +15,16 @@
 	<div data-drag="true" jqyoui-draggable  jqyoui-droppable><img class="trophy" src="http://gallery.yopriceville.com/var/albums/Free-Clipart-Pictures/Fruit-PNG/Large_Painted_Red_Apple_PNG_Clipart.png?m=1375308000" /></div>
 	<img class="trophy" src="http://107.170.40.46/wp-content/uploads/2012/09/Social-Media-Tree-PNG-700px-e1356547066755.png"/>
 
-	<img class="trophy" src="https://cdn0.iconfinder.com/data/icons/customicondesign-office7-shadow-png/256/Sport-dumbbell.png"/>
+	<div class='notTheDock'>
 
-	<img src="{{user.animal.imageUrl}}">
+
+		<a ng-show='swags && !customizing'><button class='logout-btn' ng-click="showSwag = true; toggleButtons()">CUSTOMIZE YOUR CRIB</button></a>
+		<a ng-show='showSwag && customizing'><button class='logout-btn' ng-click="toggleButtons(); saveSwagPositions()">SAVE CHANGES</button></a>
+		<crib-creature></crib-creature>
 	</div>
-
-
-	<a ng-show='swags && !customizing'><button class='logout-btn' ng-click="showSwag = true; toggleButtons()">CUSTOMIZE YOUR CRIB</button></a>
-	<a ng-show='showSwag && customizing'><button class='logout-btn' ng-click="toggleButtons(); saveSwagPositions()">SAVE CHANGES</button></a>
-
-	<div class="dock" ng-show="showSwag" >
+	<footer class="dock" ng-show="showSwag" >
 		<ul>
-		    <li id="currentItem" ng-repeat="swag in swags" data-drag="true" ng-model="swag"  jqyoui-draggable="{onStart: 'onStart(swag)', onDrag:'onDrag', onStop:'onStop(swag)'}"  jqyoui-droppable set-position><a><img ng-src="{{swag.imageUrl}}" alt="Home"></a></li>
+		    <li id="currentItem" ng-repeat="swag in swags track by $index" data-drag="true" ng-model="swag" jqyoui-draggable="{onStart: 'onStart(swag)', onDrag:'onDrag', onStop:'onStop(swag)'}" jqyoui-droppable set-position><a><img ng-src="{{swag.imageUrl}}" alt="Home"></a></li>
 		</ul>
-	</div>
-
+	</footer>
 </div>
