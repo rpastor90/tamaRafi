@@ -3,6 +3,10 @@
 	width:10%;
 }
 
+#computer {
+    width: 20%;
+}
+
 .crib {
     background: url('http://i.imgur.com/ROPeDxE.png') no-repeat center center fixed;
     position: fixed;
@@ -55,27 +59,27 @@ margin-top: -43px;
     }
 }
 .dock ul li a {
-display: block;
-height: 100px;
-width: 100px;
-position: relative;
--webkit-transition-property: width, height,margin-top;
--webkit-transition-duration: 0.5s;
--o-transition-property: width, height,margin-top;
--o-transition-duration: 0.5s;
--moz-transition-property: width, height,margin-top;
--moz-transition-duration: 0.5s;
+    display: block;
+    height: 100px;
+    width: 100px;
+    position: relative;
+    -webkit-transition-property: width, height,margin-top;
+    -webkit-transition-duration: 0.5s;
+    -o-transition-property: width, height,margin-top;
+    -o-transition-duration: 0.5s;
+    -moz-transition-property: width, height,margin-top;
+    -moz-transition-duration: 0.5s;
 }
 .dock ul li a:hover {
-width: 150px;
-height: 150px;
-margin-top: -50px;
+    width: 150px;
+    height: 150px;
+    margin-top: -50px;
 }
 .dock ul li a img {
-width: 100%;
-position: absolute;
-bottom: 0;
-padding: 0px 0px 0px 30px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    padding: 0px 0px 0px 30px;
 }
 
 .notTheDock li {
