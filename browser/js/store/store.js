@@ -9,16 +9,13 @@ app.config(function ($stateProvider) {
     			return SwagFactory.fetchSwag()
     		},
     		user : function (AuthService, UserFactory) {
-                return AuthService.getLoggedInUser()
-                    .then(function (user) {
-                        return UserFactory.getUser(user);
-                    })  
+                return UserFactory.getUser();
             } 
     	}
     })
 })
 
-app.controller('StoreCtrl', function ($scope, $state, user, swags, SwagFactory, AuthService, UserFactory) {
+app.controller('StoreCtrl', function ($scope, $state, user, swags, AuthService) {
     $scope.user = user;
     $scope.swags = swags;
 

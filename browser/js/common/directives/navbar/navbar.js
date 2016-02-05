@@ -17,14 +17,10 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state, 
             };
 
             var setUser = function () {
-                AuthService.getLoggedInUser()
-                .then(function (user) {
-                    return UserFactory.getUser(user)
-                    .then(function (foundUser) {
-                        scope.user = foundUser;
-                        scope.monies = Math.floor(foundUser.animal.money)
-                    })
-                });
+                return UserFactory.getUser()
+                .then(function (foundUser) {
+                    scope.user = foundUser;
+                })
             };
 
             var removeUser = function () {
@@ -41,4 +37,10 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state, 
 
     };
 
+});
+
+app.filter('roundDown', function(){
+    return function(input) {
+        return Math.floor(input);
+    }
 });

@@ -1,80 +1,73 @@
 
-.trophy {
-	width:10%;
-}
 
 #computer {
     width: 20%;
 }
 
 .crib {
-    background: url('http://i.imgur.com/ROPeDxE.png') no-repeat center center fixed;
+    background: url('http://i.imgur.com/d8C45QS.png') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
     position: fixed;
     top: 0;
     left: 0;
     min-width: 100%;
     min-height: 100%;
     z-index: -1;
-    #trophy {
-    	margin-top: 10%;
-        width: 10%;
-    }
-    h1 {
-    	color: white;
-    	margin: 0 auto;
-    	width: 40%;
-    }
-    button {
+    .logout-btn {
+        margin-top: 45%;
         float: right;
-        margin-right: 10px;
-        margin-left: 10px;
+        margin-right: 20px;
     }
 }
 
 .dock {
-    bottom:10px;
-    position:relative;
-    width:100%;
-    top:400px;
-
-    ul {
     width: 100%;
-    margin: 0px;
-    padding: 0px;
-    list-style: none;
-    background: rgba(0, 0, 0, 0.3);
-    padding-right: 76px;
-
+    position: absolute;
+    bottom: 1px;
+    ul {
+        text-align: center;
+        width: 100%;
+        height: 70px;
+        margin: 0px;
+        padding: 0px;
+        list-style: none;
+        background: rgba(0, 0, 0, 0.3);
     }
 }
-.dock ul li {
-width: auto;
-display: inline-block;
-vertical-align: bottom;
-margin-left: 50px ;
-margin-top: -43px;
 
+.dock ul li {
+    width: auto;
+    display: inline-block;
+    vertical-align: bottom;
+    margin-left: 50px;
+    margin-top: -43px;
     .cribSwag {
         position: absolute;
     }
 }
+
 .dock ul li a {
     display: block;
     height: 100px;
     width: 100px;
     position: relative;
-    -webkit-transition-property: width, height,margin-top;
+    -webkit-transition-property: width, height, margin-top;
     -webkit-transition-duration: 0.5s;
-    -o-transition-property: width, height,margin-top;
+    -o-transition-property: width, height, margin-top;
     -o-transition-duration: 0.5s;
-    -moz-transition-property: width, height,margin-top;
+    -moz-transition-property: width, height, margin-top;
     -moz-transition-duration: 0.5s;
 }
+
 .dock ul li a:hover {
     width: 150px;
     height: 150px;
     margin-top: -50px;
 }
+
 .dock ul li a img {
     width: 100%;
     position: absolute;
@@ -86,9 +79,22 @@ margin-top: -43px;
     height: 100px;
     width: 100px;
     img {
-        width:100%
+        width: 100%
     }
 }
 
-
-
+.modal-dialog {
+    .leaderboard {
+        color: black;
+        font-size: 20px;
+        font-weight: bold;
+        background: url('http://rs271.pbsrc.com/albums/jj140/99alongway/Confetti.gif~c200');
+        .panel-heading {
+            font-size: 30px;
+            text-align: center;
+        }
+        table {
+            margin-bottom: 0;
+        }
+    }
+}
