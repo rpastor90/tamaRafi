@@ -15,6 +15,15 @@ var schema = new Schema({
             type: Number,
             default: 0
         },
+        picture: String,
+        animationForward: String,
+        animationBack: String,
+        animateStyle: {
+            'width': String,
+            'height': String,
+            'background-image': String
+        },
+
         totalSteps: {
             type: Number,
             default: 0
@@ -33,7 +42,7 @@ var schema = new Schema({
         }
         ]
 
-        
+
 
         // user: {
         //     type: Schema.Types.ObjectId,

@@ -21,10 +21,10 @@ app.config(function ($stateProvider) {
 });
 
 
-  
+
 
 app.controller('CribCtrl', function ($scope, $state, user, AuthService, swags, SwagFactory) {
-    
+
     var swagPositions = [];
 
     $scope.user = user;
@@ -38,11 +38,11 @@ app.controller('CribCtrl', function ($scope, $state, user, AuthService, swags, S
         });
     };
     $scope.setPositions = function() {
-        
-     
+
+
     };
     $scope.onStart = function (event, helper, swag) {
-        
+
     };
 
     $scope.onStop = function (event, helper, swag) {
@@ -54,9 +54,9 @@ app.controller('CribCtrl', function ($scope, $state, user, AuthService, swags, S
         console.log(swagPositions)
         // SwagFactory.updateSwagPosition(swag._id, {posX: event.pageX + 'px', posY: event.pageY + 'px'})
     };
-    
+
     $scope.startCallback = function() {
-   
+
 
     };
     $scope.onDrag = function(event) {
@@ -72,7 +72,7 @@ app.controller('CribCtrl', function ($scope, $state, user, AuthService, swags, S
             console.log(swagPositions, "SWAG POS") // key here is the swag._id
         SwagFactory.updateSwagPositions(swagPositions, user)
     }
-   
+
 });
 app.directive('setPosition', function () {
     return {
@@ -87,7 +87,7 @@ app.directive('setPosition', function () {
             }
             if (scope.swag._id)
             if (scope.swag.posX && scope.swag.posY){
-                
+
             }
         }
     };

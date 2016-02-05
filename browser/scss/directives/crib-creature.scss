@@ -1,7 +1,21 @@
 #creatureContainer {
-    width: 250px;
-    height: 354px;
-    background-image: url('http://createalittle.com/wp-content/uploads/2014/01/panda_colour.png');
+    width: 149px;
+    height: 95px;
+    background-image: url("http://i.imgur.com/OfL5Alp.png");
+    @keyframes sprite
+        {
+
+            0% {
+                background-position:-1478px;
+        }
+        100% {
+
+        background-position: 0px;
+
+
+    }
+
+}
 
 }
 
@@ -9,16 +23,4 @@ crib-creature {
     display: block;
 }
 
-@keyframes sprite {
-    0% {
-        background-position: 0px;
 
-    }
-
-    100% {
-        background-position: 3000px;
-
-
-    }
-
-}

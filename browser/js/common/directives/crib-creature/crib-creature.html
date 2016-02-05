@@ -1,33 +1,4 @@
-<div id="creatureContainer" ng-style=""></div>
+<div id="creatureContainer" ></div>
 
 
 
-<script type="text/javascript">
-    var mover = document.getElementById('creatureContainer');
-    var reverse = false;
-
-
-
-    var increaser = 0;
-    function moveContainer () {
-        if (reverse === false){ // walking across
-            mover.style.transform = "scaleX(1)"
-            mover.style.animation = "sprite .5s steps(12) infinite"
-            increaser += 0.5;
-            if (increaser >= 100) reverse = true
-            };
-        if (reverse === true) { // walking back
-            mover.style.transform = "scaleX(-1)"
-            mover.style.animation = "sprite 1.5s steps(12) infinite"
-            increaser -= 0.2;
-            if (increaser <= 0) reverse = false
-        }
-
-        var str = increaser.toString() + '%';
-        mover.style.marginLeft = str;
-
-        requestAnimationFrame(moveContainer);
-    }
-
-    moveContainer();
-</script>

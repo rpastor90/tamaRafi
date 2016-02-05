@@ -19,7 +19,7 @@ app.factory('AnimalFactory', function () {
         animateStyle: {
             'width': '250px',
             'height': '354px',
-            'background-image': 'http://createalittle.com/wp-content/uploads/2014/01/panda_colour.png',
+            'background-image': 'url("http://createalittle.com/wp-content/uploads/2014/01/panda_colour.png")'
         }
     }, {
         picture: "http://i.imgur.com/OfL5Alp.png",
@@ -27,11 +27,12 @@ app.factory('AnimalFactory', function () {
         goals: 'Better diet & sleep',
         species: 'Rhino',
         idx: 1,
+        animationForward: 'sprite .5s steps(10) infinite',
+        animationBack: 'sprite 1.5s steps(10) infinite',
         animateStyle: {
-            'width': '1487px',
+            'width': '149px',
             'height': '95px',
-            'background-image': 'http://i.imgur.com/OfL5Alp.png',
-            'animationForward': 'sprite .5s'
+            'background-image': 'url("http://i.imgur.com/OfL5Alp.png")'
         }
     }, {
         picture: "https://45.media.tumblr.com/539791143e3a9f7f8f949a0ea957936b/tumblr_nlpbghvXv31u9ftrro1_500.gif",
