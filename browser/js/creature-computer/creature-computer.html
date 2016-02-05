@@ -1,17 +1,17 @@
-<div id='creaturecomputer' >
-	
-    <div id='fake-nav' class="contents"> welcome back to the social animal, {{user.animal.name}} !
-    </div>
-     
+<!-- Modal -->
+<div id="myModal" class="modal fade">
+	<div id='creaturecomputer' class="modal-dialog model-lg" >
+		
+	    <div id='fake-nav' class="contents"> welcome back to the social animal, {{user.animal.name}} !
+	    </div>
+	     
 
 
-      <div id='profiletext' class="contents">{{user.animal.name}}
-       <span><img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiXyc4Q1-uTcYW0nk-ggYQVt964ASl0aLB4GiTesge6d_bx2RG'></span></div>
-       <div ng-repeat='friend in friends' class="contents"> <span>{{friend.name}}</span> <span>{{friend.post}}</span></div>
-        
-       
-
- 
+	      <div id='profiletext' class="contents">{{user.animal.name}}
+	       <span><img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiXyc4Q1-uTcYW0nk-ggYQVt964ASl0aLB4GiTesge6d_bx2RG'></span></div>
+	       <div ng-repeat='friend in friends' class="contents"> <span>{{friend.name}}</span> <span>{{friend.post}}</span></div>
+	         
+	</div>
 </div>
 
 

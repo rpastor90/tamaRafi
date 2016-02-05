@@ -40,8 +40,6 @@ app.controller('CribCtrl', function ($scope, $state, user, AuthService, SwagFact
            $state.go('home');
         });
     };
-  
-    
 
     var onDragStop = function (event, ui, swag) {
          console.log(arguments, "ARGUMENTS");

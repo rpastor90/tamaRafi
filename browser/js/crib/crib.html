@@ -7,7 +7,7 @@
 		<a ng-show='showSwag && customizing'><button class='logout-btn' ng-click="toggleButtons(); saveSwagPositionsAndSizes()">SAVE CHANGES</button></a>
 		<a ng-show='showSwag && customizing'><button class='logout-btn' ng-click="reset()">RESET CRIB</button></a>
 
-		<a ui-sref="creatureComputer"><img id="computer" src="http://i1017.photobucket.com/albums/af297/iKP/Pixel%20Art/Isometric%20Pixel%20Art/SwanComputer_Assembled.png"/></a>
+		<a ng-controller="ModalCtrl" ng-click="open()" id="#myComputer"><img id="computer" src="http://i1017.photobucket.com/albums/af297/iKP/Pixel%20Art/Isometric%20Pixel%20Art/SwanComputer_Assembled.png"/></a>
 
 	</div>
 	<footer class="dock" ng-show="showSwag" >
@@ -20,31 +20,8 @@
 
 
 
-<!-- MODAL BELOW? -->
 
 
-<!-- Trigger the modal with a button -->
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
 
-<!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Modal Header</h4>
-      </div>
-      <div class="modal-body">
-        <p>Some text in the modal.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-
-  </div>
-</div>
 
 
