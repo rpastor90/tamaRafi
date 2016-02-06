@@ -4,18 +4,13 @@ app.config(function ($stateProvider) {
         url: '/welcome',
         controller: function(user, $state) {
             console.log('Welcome:', user.name)
-            if (!user.animal) {
-                $state.go('firstTimeUser');
+            // check if animal's species is set instead of user.fitbit/jawbone
+            if (user.animal.species && user.animal.name) {
+                // switch firstTimeUser to crib once crib state is set up
+                $state.go('crib');
             } else {
-                 $state.go('crib');
+                $state.go('firstTimeUser');
             }
-            // // check if animal's species is set instead of user.fitbit/jawbone
-            // if (user.animal.species && user.animal.name) {
-            //     // switch firstTimeUser to crib once crib state is set up
-            //     $state.go('crib');
-            // } else {
-            //     $state.go('firstTimeUser');
-            // }
         },
         resolve: {
             user: function (UserFactory) {
