@@ -1,12 +1,38 @@
-<div class='creaturecomputer'>
-    <div id='fake-nav'> welcome back to the social animal, {{user.animal.name}} !
-    </div>
+<div class="quicklook-modal">
+   <div  id='creaturecomputer' class="container">
+   		<div class="row" id="header">
+		  	<div id="profilepic" class="col-xs-3"><img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiXyc4Q1-uTcYW0nk-ggYQVt964ASl0aLB4GiTesge6d_bx2RG'></div>
+		   	<div ng-click="close()" class="col-xs-9"> <h1> welcome back to the social animal, {{user.name}} !</h1></div>
 
-    <div id='profilepic'>
-        <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiXyc4Q1-uTcYW0nk-ggYQVt964ASl0aLB4GiTesge6d_bx2RG'>
+		</div>
+	
+		<div ng-repeat='friend in friends' id="post">
+			<div class="row" id="contents" class=" col-xs-12"> <span id="friendName">{{friend.name}}</span> <span id="friendPost">{{friend.post}}</span>
+			</div>
+			<div class="row friendpic">
+				<div class="col-xs-10">
+					<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiXyc4Q1-uTcYW0nk-ggYQVt964ASl0aLB4GiTesge6d_bx2RG'>
+				</div>
+				<div class = "col-xs-2" >
+					<span>comments </span><img src="https://ac3d197e9505f18c50e0-32b9f49f48b2c22be12b40ee79e2acc4.ssl.cf1.rackcdn.com/icon/logos_and_badges_like_button/j2lm0CeHbQRxugFMmozK/like-button-2015-06.png">
+				</div>
+			</div>
+		</div>
+		
 
-     </div>
-      <div id='profiletext'>{{user.animal.name}}</div>
-        ng-repeat='friend in friends'>
-        {{friend}}
+		<div id="addfriend" class="row">
+			<div class="col-xs-8"></div>
+		    <div class="col-xs-4">
+			   <form  ng-controller=	"CreatureComputerCtrl">
+				  <input type="text" ng-model="friend.name" name="name" />
+				  <button ng-click="addFriend(friend)"><img src="http://www.katiemillettyoga.com/__images/website-components/add-friend-button.png"/></button>
+				</form>
+			</div>
+		</div>
+		
+	
+		</div>
+   </div>
 </div>
+
+

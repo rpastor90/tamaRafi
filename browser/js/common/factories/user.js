@@ -23,6 +23,13 @@ app.factory('UserFactory', function ($http, AuthService) {
         }
     };
 
+    userFactory.addFriend = function(user, nameOfFriendToAdd) {
+    	return $http.put('/api/users/' + user._id + '/addFriend', nameOfFriendToAdd)
+    	.then(function(res) {
+    		console.log(res, "RES IN FACTORY")
+    	})
+    }
+
 	return userFactory;
 });
 

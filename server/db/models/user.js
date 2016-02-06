@@ -66,6 +66,11 @@ var schema = new Schema({
         //     ref: 'User'
         // }]
     },
+    friends: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        }],
     fitbit: {
         id: String,
         tokens: {

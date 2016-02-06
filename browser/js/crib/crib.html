@@ -1,10 +1,14 @@
 
 <div class='crib'>
 	<div class='notTheDock'>
+
+		<a ng-controller="CreatureComputerCtrl" ng-click="showSocial()" ><img id="computer" src="http://i1017.photobucket.com/albums/af297/iKP/Pixel%20Art/Isometric%20Pixel%20Art/SwanComputer_Assembled.png"/></a>
+
 		<crib-creature ng-hide="showSwag" ng-controller='HealthCtrl' ng-click='showHealth()' style='width: 50%'></crib-creature>
 		<a ng-show='swags && !customizing'><img src='http://i.imgur.com/Ox6woYj.png' class='logout-btn' ng-click="showSwag = true; toggleButtons(); makeCustomizable()"></a>
 		<a ng-show='showSwag && customizing'><button class='logout-btn' ng-click="toggleButtons(); saveSwagPositionsAndSizes()">save</button></a>
 		<a ng-show='showSwag && customizing'><button class='logout-btn' ng-click="reset()">reset</button></a>
+
 	</div>
 	<div class="dock" ng-show="showSwag">
 		<ul>
@@ -12,4 +16,8 @@
 		</ul>
 	</div>
 </div>
+
+
 <!-- reset then save does not populate dock and remain saved -->
+
+

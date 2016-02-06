@@ -87,6 +87,7 @@ router.put('/:userId/updateCrib', function(req, res, next) {
 });
 
 router.put('/:userId/updateCribSizes', function(req, res, next) {
+
     User.findOne({ _id: req.params.userId })
     .then(function(user) {
         // Loop trough req.body (an array of position objects)
@@ -114,6 +115,26 @@ router.put('/:userId/updateCribSizes', function(req, res, next) {
 
 });
 
+router.put('/:userId/addFriend', function(req, res, next) {
+    
+    var userToAddFriendTo;
+    User.findOne({ _id: req.params.userId })
+    .then(function(user){
+        userToAddFriendTo = user;
+        return User.findOne({ name: req.body.name})
+    })
+    .then(function(userWhoIsFriend) {
+        userToAddFriendTo.friends.push(userWhoIsFriend._id);
+        return userToAddFriendTo;
+    })
+    .then(function(user) {
+        return user.save();
+    })
+    .then(user => {
+        res.send(user)
+    })
+    .then(null,next)
+})
 
 
 
