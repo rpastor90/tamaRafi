@@ -8,8 +8,8 @@ app.config(function ($stateProvider) {
             animals: function (AnimalFactory) {
                 return AnimalFactory.fetchAnimals();
             },
-            user: function (AuthService) {
-                return AuthService.getLoggedInUser();
+            user: function (UserFactory) {
+                return UserFactory.getUser();
             }
         }
     });
@@ -18,6 +18,7 @@ app.config(function ($stateProvider) {
 app.factory('FirstTimeUserFactory', function ($http, $state) {
     var FirstTimeUserFactory = {};
     FirstTimeUserFactory.update = function (user) {
+        console.log("this is the update info for the user", user)
         return $http.put('/api/users/' + user._id, user)
         .then(function (updatedUser) {
             return updatedUser;

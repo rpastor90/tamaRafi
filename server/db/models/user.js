@@ -13,7 +13,7 @@ var schema = new Schema({
         species: String,
         money: {
             type: Number,
-            default: 0
+            default: 100
         },
         picture: String,
         animationForward: String,
@@ -32,14 +32,26 @@ var schema = new Schema({
         {
             type: Schema.Types.ObjectId,
             ref: 'Swag'
-                }
-        ],
-        swagPositions: [
-        {
+        }],
+        swagPositions: [{
             swag: String,
             posX: String,
             posY: String
+        }],
+        swagSizes: [{
+            swag: String,
+            height: String,
+            width: String
+        }],
+        lastLoggedIn: {
+            type: Date,
+            default: Date.now
+        },
+        lastLoggedInSteps: {
+            type: Number,
+            default: 0
         }
+
         ]
 
 

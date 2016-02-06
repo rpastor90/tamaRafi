@@ -40,10 +40,29 @@ module.exports = function (app) {
                 // here we are reassigning the refresh and access tokens
                 userToLogin.fitbit.tokens.access_token = accessToken;
                 userToLogin.fitbit.tokens.refresh_token = refreshToken;
+
                 helper.getDailyActivitySummary(userToLogin.fitbit.tokens, {})
-                .then(function (res) {
-                    userToLogin.fitbit.steps = res.summary.steps;
-                    userToLogin.animal.totalSteps += res.summary.steps;
+                .then(function (stepData) {
+                    userToLogin.fitbit.steps = stepData.summary.steps;
+                    var currentDate = new Date();
+                    // update money only once per day
+                    if (userToLogin.animal.lastLoggedIn.getFullYear() !== currentDate.getFullYear() 
+                        || userToLogin.animal.lastLoggedIn.getDate() !== currentDate.getDate() 
+                        || userToLogin.animal.lastLoggedIn.getMonth() !== currentDate.getMonth()) {
+                            userToLogin.animal.lastLoggedIn = currentDate;
+                            userToLogin.animal.lastLoggedInSteps = userToLogin.fitbit.steps;
+                            userToLogin.animal.totalSteps += userToLogin.fitbit.steps;
+                            userToLogin.animal.money += 10;
+                    }
+                    // update steps every time user logs in for that day
+                    if (userToLogin.animal.lastLoggedIn.getFullYear() === currentDate.getFullYear()
+                        && userToLogin.animal.lastLoggedIn.getDate() === currentDate.getDate()
+                        && userToLogin.animal.lastLoggedIn.getMonth() === currentDate.getMonth()) {
+                            var newDifference = userToLogin.fitbit.steps - userToLogin.animal.lastLoggedInSteps;
+                            userToLogin.animal.lastLoggedInSteps += newDifference;
+                            userToLogin.animal.totalSteps += newDifference;
+                            userToLogin.animal.money += (newDifference * 0.002);
+                    }
                     return userToLogin;
                 })
                 .then(function (userSteps) {
@@ -54,10 +73,9 @@ module.exports = function (app) {
                     });
                 })
                 .then(function (user) {
-
                     UserModel.findOneAndUpdate({ _id: user._id }, { fitbit: user.fitbit, animal: user.animal })
                     .then(function () {
-                        console.log('User has been saved!');
+                        console.log('Fitbit user has been saved!');
                     });
                 })
                 .then(null, function (err) {

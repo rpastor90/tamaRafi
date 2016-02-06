@@ -1,9 +1,8 @@
 .shelf {
     border-width: 2px;
-    height: 10px;
+    height: 15px;
     width: 50%;
     background: #c74b61;
-    border: none;
     box-shadow: 3px 3px 1px black;
     background-image: -webkit-linear-gradient(left, #61c74b, #c74b61, #4b61c7);
     background-image: -moz-linear-gradient(left, #61c74b, #c74b61, #4b61c7);
@@ -21,14 +20,10 @@
 }
 
 #store {
+    text-align: center;
+    margin-top: 50px;
     color: white;
     font-weight: bold;
     font-size: 20px;
     text-shadow: 1px 1px black;
-    margin-top: 100px;
-    .logout-btn {
-        margin-top: 10px;
-        border-width: 3px;
-        padding: 2px 5px;
-    }
 }

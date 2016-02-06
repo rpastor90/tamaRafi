@@ -1,30 +1,15 @@
-<div class='crib'>git
-	<div class='center'>
-	<h1>CRIB STATE</h1>
-<!-- 	{{swags}}
-	user: {{user}} -->
-	<a ng-show='user' ng-click="logout()"><button class='logout-btn'>LOGOUT</button></a>
-	<a ng-show='user' ui-sref="store"><button class='logout-btn'>STORE</button></a>
-	<a ng-show='user' ui-sref="health"><button class='logout-btn'>HEALTH</button></a>
-	<a ng-show='user' ui-sref="leaderboard"><button class='logout-btn'>LEADERBOARD</button></a>
-    <crib-creature></crib-creature>
-	</div>
 
-	<a ui-sref="rewards"><img id="trophy" src="http://www.clker.com/cliparts/d/8/9/b/1298268524507354096Trophy.svg.med.png"/></a>
-
-	<div data-drag="true" jqyoui-draggable  jqyoui-droppable><img class="trophy" src="http://gallery.yopriceville.com/var/albums/Free-Clipart-Pictures/Fruit-PNG/Large_Painted_Red_Apple_PNG_Clipart.png?m=1375308000" /></div>
-	<img class="trophy" src="http://107.170.40.46/wp-content/uploads/2012/09/Social-Media-Tree-PNG-700px-e1356547066755.png"/>
-
+<div class='crib'>
 	<div class='notTheDock'>
-
-
-		<a ng-show='swags && !customizing'><button class='logout-btn' ng-click="showSwag = true; toggleButtons()">CUSTOMIZE YOUR CRIB</button></a>
-		<a ng-show='showSwag && customizing'><button class='logout-btn' ng-click="toggleButtons(); saveSwagPositions()">SAVE CHANGES</button></a>
-		<crib-creature></crib-creature>
+		<crib-creature ng-hide="showSwag" ng-controller='HealthCtrl' ng-click='showHealth()' style='width: 50%'></crib-creature>
+		<a ng-show='swags && !customizing'><img src='http://i.imgur.com/Ox6woYj.png' class='logout-btn' ng-click="showSwag = true; toggleButtons(); makeCustomizable()"></a>
+		<a ng-show='showSwag && customizing'><button class='logout-btn' ng-click="toggleButtons(); saveSwagPositionsAndSizes()">save</button></a>
+		<a ng-show='showSwag && customizing'><button class='logout-btn' ng-click="reset()">reset</button></a>
 	</div>
-	<footer class="dock" ng-show="showSwag" >
+	<div class="dock" ng-show="showSwag">
 		<ul>
-		    <li id="currentItem" ng-repeat="swag in swags track by $index" data-drag="true" ng-model="swag" jqyoui-draggable="{onStart: 'onStart(swag)', onDrag:'onDrag', onStop:'onStop(swag)'}" jqyoui-droppable set-position><a><img ng-src="{{swag.imageUrl}}" alt="Home"></a></li>
+		    <li id="currentItem" ng-repeat="swag in swags track by $index" ng-model="swag" set-position><a><img ng-src="{{swag.imageUrl}}" alt="Home"></a></li>
 		</ul>
-	</footer>
+	</div>
 </div>
+<!-- reset then save does not populate dock and remain saved -->

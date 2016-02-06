@@ -87,10 +87,10 @@ var seedSwag = function () {
             imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/7/71/Pixelart-tv-iso-2.png'
         },
         {
-            name: "mic",
+            name: "pc",
             category: 'random',
-            price: 100,
-            imageUrl: 'http://orig01.deviantart.net/4781/f/2013/283/0/3/pixel_microphone_by_captaintoog-d69emwf.png'
+            price: 500,
+            imageUrl: 'http://orig12.deviantart.net/6950/f/2012/224/b/e/tumbln_all_day_by_samblye1-d5augsh.png'
         },
         {
             name: "flower",

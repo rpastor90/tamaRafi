@@ -1,17 +1,11 @@
 <nav class="navbar navbar-static-top">
     <div class="container">
-        <div class="navbar-header">
-            <fullstack-logo></fullstack-logo>
-        </div>
-        <ul class="nav navbar-nav">
-            <li ng-repeat="item in items" ng-show="!item.auth || isLoggedIn()">
-                <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
-            </li>
-        </ul>
-        <button ng-show="!user" ui-sref="login" class="btn login-button">Login</button>
-        <div ng-show="user" class="welcome">
-            <span>Welcome, {{ user.name }}!</span>
-            <a ng-click="logout()">Logout</a>
+        <div ng-show="user" class="buttons">
+            <span class='coins'>{{ user.animal.money | roundDown }}</span>
+            <a ui-sref="store"><img style='width:8%' src='https://38.media.tumblr.com/9056c3040c618c65888244befef39321/tumblr_mhpc6eUvag1rrftcdo1_500.gif'></a>
+            <a ui-sref="crib"><img class='logout-btn' src='http://i.imgur.com/v7QeGZc.png'></a>
+            <img class='logout-btn' ng-controller='LeaderboardCtrl' ng-click='showLeaderboard()' src='http://i.imgur.com/IGLeBkU.png'>
+            <a ng-click="logout()"><img class='logout-btn' src='http://i.imgur.com/8CR2GUu.png'></a>
         </div>
     </div>
 </nav>
