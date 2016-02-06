@@ -5,11 +5,13 @@ app.factory('UserFactory', function ($http, AuthService) {
 	userFactory.getUser = function () {
 		return AuthService.getLoggedInUser()
     .then(function (user) {
-      return $http.get('/api/users/' + user._id)
-  		.then(function (foundUser) {
-  			angular.copy(foundUser.data[0], cachedUser);
-  			return cachedUser;
-  		});
+      if (user) {
+        return $http.get('/api/users/' + user._id)
+    		.then(function (foundUser) {
+    			angular.copy(foundUser.data[0], cachedUser);
+    			return cachedUser;
+    		});
+      }
     });
 	}
 
