@@ -7,19 +7,33 @@ app.directive('animal', function () {
 
 app.factory('AnimalFactory', function () {
     var AnimalFactory = {};
-    
+
     var animals = [{
-        picture: "http://i.imgur.com/VexuoSc.gif",
+        picture: "http://createalittle.com/wp-content/uploads/2014/01/panda_colour.png",
         bio: 'Never forgets to skip leg day',
         goals: 'Monster trapezii & gold chains',
-        species: 'Charmander',
-        idx: 0
+        species: 'Panda',
+        idx: 0,
+        animationForward: 'panda .5s steps(12) infinite',
+        animationBack: 'panda 1.5s steps(12) infinite',
+        animateStyle: {
+            'width': '250px',
+            'height': '354px',
+            'background-image': 'url("http://createalittle.com/wp-content/uploads/2014/01/panda_colour.png")'
+        }
     }, {
-        picture: "http://25.media.tumblr.com/tumblr_lxb7i2z3oQ1qm7xzeo1_500.gif",
+        picture: "http://i.imgur.com/OfL5Alp.png",
         bio: 'A driven athlete. Tends to have a work hard/play hard attitude',
         goals: 'Better diet & sleep',
-        species: 'Squirtle',
-        idx: 1
+        species: 'Rhino',
+        idx: 1,
+        animationForward: 'rhino .5s steps(10) infinite',
+        animationBack: 'rhino 1.5s steps(10) infinite',
+        animateStyle: {
+            'width': '149px',
+            'height': '95px',
+            'background-image': 'url("http://i.imgur.com/OfL5Alp.png")'
+        }
     }, {
         picture: "https://45.media.tumblr.com/539791143e3a9f7f8f949a0ea957936b/tumblr_nlpbghvXv31u9ftrro1_500.gif",
         bio: 'An appetite for self-improvement',

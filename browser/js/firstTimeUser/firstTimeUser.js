@@ -40,16 +40,17 @@ app.controller('FirstTimeUserCtrl', function ($scope, $state, FirstTimeUserFacto
         });
     };
 
-    var species = ['charmander', 'squirtle', 'bulbasaur'];
+    // var species = ['Panda', 'Rhino', 'bulbasaur'];
 
     $scope.update = FirstTimeUserFactory.update;
     $scope.animals = animals;
     $scope.onDisplay = 0;
-    $scope.user.animal.species = species[0];
+    $scope.user.animal = $scope.animals[$scope.onDisplay]
+    // $scope.user.animal.species = species[0];
 
     $scope.nextAnimal = function () {
         if ($scope.onDisplay >= 2) $scope.onDisplay = 0;
         else $scope.onDisplay++;
-        $scope.user.animal.species = species[$scope.onDisplay];
+        $scope.user.animal = $scope.animals[$scope.onDisplay]
     };
 });

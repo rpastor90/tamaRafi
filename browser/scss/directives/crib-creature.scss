@@ -1,17 +1,10 @@
-#creatureContainer {
-    width: 250px;
-    height: 354px;
-    background-image: url('http://i.imgur.com/IZDNBHv.png');
-    position: absolute;
-    bottom: 0;
-    left: 200px;
-}
+
 
 crib-creature {
     display: block;
 }
 
-@keyframes sprite {
+@keyframes panda {
     0% {
         background-position: 0px;
 
@@ -22,5 +15,14 @@ crib-creature {
 
 
     }
+}
 
+@keyframes rhino {
+    0% {
+        background-position: 0px;
+    }
+
+    100% {
+        background-position: 1478px;
+    }
 }

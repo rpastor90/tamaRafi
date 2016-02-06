@@ -15,6 +15,15 @@ var schema = new Schema({
             type: Number,
             default: 100
         },
+        picture: String,
+        animationForward: String,
+        animationBack: String,
+        animateStyle: {
+            'width': String,
+            'height': String,
+            'background-image': String
+        },
+
         totalSteps: {
             type: Number,
             default: 0
@@ -42,6 +51,20 @@ var schema = new Schema({
             type: Number,
             default: 0
         }
+
+        ]
+
+
+
+        // user: {
+        //     type: Schema.Types.ObjectId,
+        //     ref: 'User'
+        // },
+
+        // friends: [{
+        //     type: Schema.Types.ObjectId,
+        //     ref: 'User'
+        // }]
     },
     friends: [
         {
