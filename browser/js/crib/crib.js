@@ -23,6 +23,7 @@ app.controller('CribCtrl', function ($scope, $state, user, AuthService, SwagFact
 
     var swagPositions = [];
     var swagSizes = [];
+    console.dir(user)
 
     $scope.user = user;
     $scope.isShown = false;

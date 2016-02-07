@@ -35,11 +35,18 @@ app.factory('AnimalFactory', function () {
             'background-image': 'url("http://i.imgur.com/OfL5Alp.png")'
         }
     }, {
-        picture: "https://45.media.tumblr.com/539791143e3a9f7f8f949a0ea957936b/tumblr_nlpbghvXv31u9ftrro1_500.gif",
+        picture: "http://i.imgur.com/6HwBpck.png ",
         bio: 'An appetite for self-improvement',
         goals: 'Slimmer physique',
         species: 'Bulbasaur',
-        idx: 2
+        idx: 2,
+        animationForward: 'bird .5 steps(14) infinite',
+        animationBack: 'bird 2s steps(14) infinite',
+        animateStyle: {
+            'width': '175px',
+            'height': '200px',
+            'background-image': 'url("http://i.imgur.com/6HwBpck.png")'
+        }
     }];
 
     AnimalFactory.fetchAnimals = function () {
