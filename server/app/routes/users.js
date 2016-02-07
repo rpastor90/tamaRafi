@@ -26,7 +26,9 @@ router.get('/', ensureAuthenticated, function (req, res, next) {
 });
 
 router.get('/:userId', ensureAuthenticated, function (req, res, next) {
-	User.find({ _id: req.params.userId })
+	console.log("getting a specific user")
+    User.find({ _id: req.params.userId })
+    .populate('friends')
     .then(function (user) {
         res.status(200).send(user);
     })

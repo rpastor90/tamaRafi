@@ -1,4 +1,4 @@
-app.controller('CreatureComputerCtrl', function ($scope, AuthService, $uibModal) {
+app.controller('CreatureComputerCtrl', function ($scope, $uibModal, UserFactory) {
     // Modal stuff
     $scope.animationsEnabled = true;
    
@@ -10,8 +10,8 @@ app.controller('CreatureComputerCtrl', function ($scope, AuthService, $uibModal)
             templateUrl: '/js/creature-computer/creature-computer.html',
             controller: 'OpenComputerController',
             resolve: {
-                user: function(AuthService) {
-                    return AuthService.getLoggedInUser();
+                user: function() {
+                    return UserFactory.getUser();
                 }
             }
         });
@@ -22,11 +22,12 @@ app.controller('CreatureComputerCtrl', function ($scope, AuthService, $uibModal)
 
 .controller('OpenComputerController', function ($scope, $uibModalInstance, user, UserFactory) {
     $scope.user = user;
-    $scope.friends = [{name: 'TamaKat', post:'Missed you at the gym today, bro.'},
-            {name: 'TamaJess', post:'Jog in Central Park this weekend?'},
-            {name: 'TamaGabe', post:'Been meaning to tell you, you\'ve been looking so swole lately.  What\'s your routine?'}
-             ];
-
+    // $scope.friends = [{name: 'TamaKat', post:'Missed you at the gym today, bro.'},
+    //         {name: 'TamaJess', post:'Jog in Central Park this weekend?'},
+    //         {name: 'TamaGabe', post:'Been meaning to tell you, you\'ve been looking so swole lately.  What\'s your routine?'}
+    //          ];
+    console.log(user);
+    $scope.friends = user.friends;
      $scope.addFriend = function(friendName) {
         UserFactory.addFriend(user, friendName)
      }
