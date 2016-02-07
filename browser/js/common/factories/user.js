@@ -4,16 +4,15 @@ app.factory('UserFactory', function($http, AuthService) {
 
     userFactory.getUser = function() {
         return AuthService.getLoggedInUser()
-            .then(function(user) {
-              console.log('AIDNKJSANDAS', user)
-              if (user) {
+        .then(function(user) {
+            if (user) {
                 return $http.get('/api/users/' + user._id)
-                    .then(function(foundUser) {
-                        angular.copy(foundUser.data[0], cachedUser);
-                        return cachedUser;
-                    });
-                }
-            });
+                .then(function(foundUser) {
+                    angular.copy(foundUser.data[0], cachedUser);
+                    return cachedUser;
+                });
+            }
+        });
     }
 
     userFactory.makeAPurchase = function(user, swag) {

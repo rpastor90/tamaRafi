@@ -6,18 +6,37 @@
     left: 100px;
     bottom: 1px;
 }
-
 crib-creature {
     display: block;
     position: absolute;
     bottom: 1px;
 }
 
-@keyframes sprite {
+@keyframes panda {
     0% {
         background-position: 0px;
     }
     100% {
         background-position: 3000px;
+    }
+}
+
+@keyframes rhino {
+    0% {
+        background-position: 1478px;
+    }
+
+    100% {
+        background-position: 0px;
+    }
+}
+
+@keyframes bird {
+    0% {
+        background-position: 2570px;
+    }
+
+    100% {
+        background-position: 0px;
     }
 }

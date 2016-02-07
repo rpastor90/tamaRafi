@@ -23,6 +23,7 @@ app.controller('CribCtrl', function ($scope, $state, user, AuthService, SwagFact
 
     var swagPositions = [];
     var swagSizes = [];
+    console.dir(user)
 
     $scope.user = user;
     $scope.isShown = false;
@@ -34,6 +35,7 @@ app.controller('CribCtrl', function ($scope, $state, user, AuthService, SwagFact
             $state.go('home');
         });
     };
+
 
     var onDragStop = function(event, ui, swag) {
         console.log(ui.helper.context.style.width, "UI AND EVET")
@@ -48,6 +50,7 @@ app.controller('CribCtrl', function ($scope, $state, user, AuthService, SwagFact
         });
 
         var swagPositionObj = {};
+
 
         if (!bool) {
             swagPositionObj.swag = swag._id;
@@ -164,6 +167,8 @@ app.controller('CribCtrl', function ($scope, $state, user, AuthService, SwagFact
             });
         });
     }
+
+
 });
 
 app.directive('setPosition', function() {
@@ -177,6 +182,8 @@ app.directive('setPosition', function() {
                     element.css('position', 'fixed');
                     element.css('left', scope.user.animal.swagPositions[i].posX);
                     element.css('top', scope.user.animal.swagPositions[i].posY);
+
+
 
                 };
             };
