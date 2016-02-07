@@ -1,19 +1,23 @@
-
-
+#creatureContainer {
+    width: 250px;
+    height: 354px;
+    background-image: url('http://i.imgur.com/IZDNBHv.png');
+    position: absolute;
+    left: 100px;
+    bottom: 1px;
+}
 crib-creature {
     display: block;
+    position: absolute;
+    bottom: 1px;
 }
 
 @keyframes panda {
     0% {
         background-position: 0px;
-
     }
-
     100% {
         background-position: 3000px;
-
-
     }
 }
 
