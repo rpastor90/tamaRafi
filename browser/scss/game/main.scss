@@ -1,25 +1,18 @@
-.character {
-  height: 100px;
-  width: 100px;
-  background-color: red;
-  /*position: relative;*/
-}
-.left-char {
-  float: left;
-  background-color: red;
+.gameContainer {
+  /*text-align: center;*/
   position: absolute;
   bottom: 0;
-  margin-bottom: 20px;
-  margin-left: 20px;
-  left: 0;
+  /*margin: 0 auto;*/
+  width: 50%;
+  display: block;
+  left: 25%;
+}
+.left-char {
+  text-align: center;
+  background-color: red;
 }
 
 .right-char {
-  float: right;
-  background-color: red;
-  position: absolute;
-  bottom: 0;
-  margin-bottom: 20px;
-  margin-right: 20px;
-  right: 0;
+  text-align: center;
+  background-color: green;
 }

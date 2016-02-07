@@ -8,8 +8,36 @@ module.exports = function (server) {
 
     io = socketio(server);
 
-    io.on('connection', function () {
-        console.log('Hey, youre connected');
+    var movesHistory = {};
+
+    io.on('connection', function (socket) {
+      console.log('Hey, youre connected');
+      var room;
+
+      socket.on('disconnect', function () {
+        console.log("I'm Out...");
+        socket.disconnect();
+      });
+
+      // socket.on('wantToJoinRoom', function (roomName) {
+      //   room = roomName;
+      //   socket.join(room);
+
+      //   if(!movesHistory[room]) movesHistory[room] = [];
+
+      //   socket.emit('movesHistory', movesHistory[room]);
+      // });
+
+      socket.on('moveLeft', function () {
+        socket.emit('toTheLeftToTheLeft');
+        socket.broadcast.emit('toTheLeftToTheLeft');
+      });
+
+      socket.on('moveRight', function () {
+        socket.emit('toTheRightToTheRight');
+        socket.broadcast.emit('toTheRightToTheRight');
+      });
+       
         // Now have access to socket, wowzers!
     });
     
