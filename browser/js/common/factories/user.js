@@ -6,12 +6,12 @@ app.factory('UserFactory', function ($http, AuthService) {
 		return AuthService.getLoggedInUser()
     .then(function (user) {
       if (user){
-      return $http.get('/api/users/' + user._id)
-  		.then(function (foundUser) {
-  			angular.copy(foundUser.data[0], cachedUser);
-  			return cachedUser;
-  		});
-    }
+        return $http.get('/api/users/' + user._id)
+    		.then(function (foundUser) {
+    			angular.copy(foundUser.data[0], cachedUser);
+    			return cachedUser;
+    		});
+      }
     });
 	}
 
