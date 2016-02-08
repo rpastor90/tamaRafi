@@ -35,10 +35,22 @@ app.config(function ($stateProvider) {
     });
 
     socket.on('getSomeUsers', function (users) {
+      var user;
       console.log(users);
-      leftChar.css('background-image', "url('" + users[0].animal.picture + "')");
-      leftChar.css('height', users[0].animal.animateStyle.height);
-      leftChar.css('width', users[0].animal.animateStyle.width);
+      for (var i = 0; i < users.length; i++) {
+        if (users[i]) {
+          user = users[i];
+          break;
+        }
+      }
+      leftChar.css('background-image', "url('" + user.animal.picture + "')");
+      leftChar.css('height', user.animal.animateStyle.height);
+      leftChar.css('width', user.animal.animateStyle.width);
+
+      rightChar.css('background-image', "url('" + user.animal.picture + "')");
+      rightChar.css('height', user.animal.animateStyle.height);
+      rightChar.css('width', user.animal.animateStyle.width);
+      rightChar.css('transform', 'scaleX(-1)');
     })
 
     socket.on('toTheLeftToTheLeft', function () {
