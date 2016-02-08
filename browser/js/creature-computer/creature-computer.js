@@ -21,18 +21,24 @@ app.controller('CreatureComputerCtrl', function ($scope, $uibModal, UserFactory)
 
 .controller('OpenComputerController', function ($scope, $uibModalInstance, user, UserFactory) {
     $scope.user = user;
-    // $scope.friends = [{name: 'TamaKat', post:'Missed you at the gym today, bro.'},
-    //         {name: 'TamaJess', post:'Jog in Central Park this weekend?'},
-    //         {name: 'TamaGabe', post:'Been meaning to tell you, you\'ve been looking so swole lately.  What\'s your routine?'}
-    //          ];
     console.log(user);
     $scope.friends = user.animal.friends;
+    $scope.posts = user.animal.posts;
+    console.log($scope.friends);
      $scope.addFriend = function(friendName) {
-        UserFactory.addFriend(user, friendName)
+        UserFactory.addFriend(user, friendName);
+        
      };
      $scope.goToFriendPage = function(friend) {
+       console.log("going to firend page")
         $scope.friend = friend;
-        $(.creaturecomputer)
+        console.log($scope.friend, "SCOPE FRIEND")
+        $scope.showPostForm = true;
+
      };
+     $scope.createPost = function(post) {
+        console.log(post);
+        UserFactory.addPost(user, post, $scope.friend)
+     }
 
 })

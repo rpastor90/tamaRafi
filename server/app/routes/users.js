@@ -27,7 +27,8 @@ router.get('/', ensureAuthenticated, function (req, res, next) {
 
 router.get('/:userId', ensureAuthenticated, function (req, res, next) {
     User.find({ _id: req.params.userId })
-    .populate('friends')
+    .populate('animal.friends')
+    .populate('animal.posts.author')
     .then(function (user) {
         res.status(200).send(user);
     })
@@ -131,11 +132,33 @@ router.put('/:userId/addFriend', function(req, res, next) {
         return userToAddFriendTo;
     })
     .then(function(user) {
+        return user.populate('animal.friends')
+    })
+    .then(function(user) {
+        console.log(user, "user before save")
         return user.save();
     })
     .then(user => {
         res.send(user)
     })
+    .then(null,next)
+})
+
+router.put('/:userId/addPost', function(req, res, next) {
+    console.log(req.body.friend, "FRIEND")
+    User.findOne({ _id: req.params.userId })
+    .then(function(user){
+        return User.findOne({ _id: req.body.friend._id})
+    })
+    .then(function(userToAddPostTo) {
+        var postObj = {};
+        postObj.text = req.body.post;
+        postObj.author = req.params.userId;
+        userToAddPostTo.animal.posts.push(postObj);
+        return userToAddPostTo;
+    })
+    .then(user => {return user.save()})
+    .then(user => {return res.send(user)})
     .then(null,next)
 })
 

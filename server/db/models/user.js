@@ -54,16 +54,16 @@ var schema = new Schema({
         {
             type: Schema.Types.ObjectId,
             ref: 'User'
-        }]
-        // user: {
-        //     type: Schema.Types.ObjectId,
-        //     ref: 'User'
-        // },
-
-        // friends: [{
-        //     type: Schema.Types.ObjectId,
-        //     ref: 'User'
-        // }]
+        }],
+        posts: [ 
+        {
+            text: String,
+            author: {
+                type: Schema.Types.ObjectId,
+                ref: 'User'
+            }
+        }
+        ]
     },
     fitbit: {
         id: String,

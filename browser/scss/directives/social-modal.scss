@@ -8,7 +8,7 @@
     	#creaturecomputer {
     	    font-family: Tahoma;
     	    width: 93%;
-    	    height: 93%;
+    	    height: 40em;
     	    margin: auto;
     	    padding-left: 1%;
     	    padding-top: 3%;
@@ -18,14 +18,6 @@
     	    h1 {
     	        font-size: 1.7em;
     	    }
-    	    form {
-    	        img {
-    	            min-width: 100%;
-    	            height: 100%;
-    	        }
-    	        float:right;
-    	        position:absolute;
-    	    }
     	    #header {
     	        background: #3b5998;
     	        color: white;
@@ -34,10 +26,15 @@
     	    #friendName {
     	        font-size: 1.5em;
     	        font-weight: bold;
+                text-decoration: underline;
+                color:#0B0080;
     	    }
     	    #friendPost {
     	        font-size: 1.25em;
     	    }
+            #allPosts {
+                margin-bottom: 4%;
+            }
     	    #post {
     	        border: .1em solid black;
     	       
@@ -47,8 +44,11 @@
     	            margin-left: 1.5%;
     	        }
     	    }
-    	    #friendpic {
+    	    .friendpic {
     	        min-width: 7%;
+                img {
+                    max-width: 30%;
+                }
     	    }
     	    .col-xs-2 {
     	        span {
@@ -59,9 +59,26 @@
     	            max-width: 50%;
     	        }
     	    }
-            form img {
-                max-width:100%;
+            #addfriend {
+                text-align:center;
             }
+            form {
+                button {
+                    max-width:15%;
+                }
+                img {
+                    max-width:100%
+
+                    }
+            }
+            #postingForm {
+                text-align:center;
+                form {
+                    float:none;
+                    margin:auto;
+                }
+            }
+
     	}
     }
 }
