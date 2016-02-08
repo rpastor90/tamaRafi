@@ -11,14 +11,13 @@ module.exports = function (server) {
     var movesHistory = {};
 
     io.on('connection', function (socket) {
-      console.log('Hey, youre connected');
       var room;
 
       socket.on('disconnect', function () {
         console.log("I'm Out...");
         socket.disconnect();
       });
-
+      console.log("this is the room", io.sockets)
       // socket.on('wantToJoinRoom', function (roomName) {
       //   room = roomName;
       //   socket.join(room);
