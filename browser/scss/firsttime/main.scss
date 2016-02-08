@@ -11,24 +11,33 @@
 		text-shadow: 2px 2px black;
 	}
 	.row {
-		width: 70%;
+		width: 90%;
 		height: 70%;
 	}
 	span {
+		font-size: 50px;
+	}
+	.name-input {
+		color: black;
+		margin: 10px;
+		height: 70px;
+		border-radius: 20px;
+		border: none;
 		font-size: 20px;
+		width: 50%;
+		padding: 10px;
+		border: solid 5px white;
+		background-color: #D3D3D3;
 	}
 }
 
 .animalContainer {
 	img {
-		width: 320px;
-		height: 450px;
 		border: 5px dotted white;
 		padding: 5px;
 		box-shadow: 3px 3px 1px black;
 		margin-bottom: 20px;
-
-
+		object-fit: cover;
 	}
 	p {
 		font-size: 20px;
