@@ -9,7 +9,7 @@ app.factory('AnimalFactory', function () {
     var AnimalFactory = {};
 
     var animals = [{
-        picture: "http://createalittle.com/wp-content/uploads/2014/01/panda_colour.png",
+        picture: "http://i.imgur.com/FdWT67J.png",
         bio: 'Never forgets to skip leg day',
         goals: 'Monster trapezii & gold chains',
         species: 'Panda',
@@ -22,7 +22,7 @@ app.factory('AnimalFactory', function () {
             'background-image': 'url("http://createalittle.com/wp-content/uploads/2014/01/panda_colour.png")'
         }
     }, {
-        picture: "http://i.imgur.com/OfL5Alp.png",
+        picture: "https://files.slack.com/files-pri/T024FPYBQ-F0LK4V1BR/singleframerhino.png",
         bio: 'A driven athlete. Tends to have a work hard/play hard attitude',
         goals: 'Better diet & sleep',
         species: 'Rhino',
@@ -35,7 +35,7 @@ app.factory('AnimalFactory', function () {
             'background-image': 'url("http://i.imgur.com/OfL5Alp.png")'
         }
     }, {
-        picture: "http://i.imgur.com/6HwBpck.png ",
+        picture: "https://files.slack.com/files-pri/T024FPYBQ-F0LK5QDUG/singleframebird.png",
         bio: 'An appetite for self-improvement',
         goals: 'Slimmer physique',
         species: 'Bird',

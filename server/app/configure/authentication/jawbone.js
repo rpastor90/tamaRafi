@@ -51,7 +51,7 @@ module.exports = function(app) {
                 // here we are reassigning the refresh and access tokens
                 userToLogin.jawbone.tokens.access_token = accessToken;
                 userToLogin.jawbone.tokens.refresh_token = refreshToken;
-
+                
                 var steps;
                 up.moves.get({}, function (err, body) {
                     if (err) {
@@ -61,6 +61,7 @@ module.exports = function(app) {
                         userToLogin.jawbone.steps = steps;
                     }
                     var currentDate = new Date();
+
                     // update money only once per day
                     if (userToLogin.animal.lastLoggedIn.getFullYear() !== currentDate.getFullYear() 
                         || userToLogin.animal.lastLoggedIn.getDate() !== currentDate.getDate() 
@@ -74,10 +75,16 @@ module.exports = function(app) {
                     if (userToLogin.animal.lastLoggedIn.getFullYear() === currentDate.getFullYear()
                         && userToLogin.animal.lastLoggedIn.getDate() === currentDate.getDate()
                         && userToLogin.animal.lastLoggedIn.getMonth() === currentDate.getMonth()) {
-                            var newDifference = userToLogin.jawbone.steps - userToLogin.animal.lastLoggedInSteps;
-                            userToLogin.animal.lastLoggedInSteps += newDifference;
-                            userToLogin.animal.totalSteps += newDifference;
-                            userToLogin.animal.money += (newDifference * 0.002);
+                            // first time login 
+                            if (userToLogin.animal.totalSteps === 0) {
+                                userToLogin.animal.totalSteps += userToLogin.jawbone.steps;
+                                userToLogin.animal.lastLoggedInSteps = userToLogin.jawbone.steps
+                            } else {
+                                var newDifference = userToLogin.jawbone.steps - userToLogin.animal.lastLoggedInSteps;
+                                userToLogin.animal.lastLoggedInSteps += newDifference;
+                                userToLogin.animal.totalSteps += newDifference;
+                                userToLogin.animal.money += (newDifference * 0.002);
+                            }
                     }
                     
                     userToLogin.save()

@@ -109,7 +109,6 @@ router.put('/:userId/updateCribSizes', function(req, res, next) {
                 user.animal.swagSizes.push(req.body[i]);
             };
         };
-        console.log(user, "USER AFTER UPDATE")
         user.save()
         .then(() => {res.send() })
         .then(null, next)
@@ -161,12 +160,3 @@ router.put('/:userId/addPost', function(req, res, next) {
     .then(user => {return res.send(user)})
     .then(null,next)
 })
-
-
-
-
-
-
-
-
-

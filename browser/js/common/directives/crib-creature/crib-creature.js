@@ -15,7 +15,6 @@ app.controller('CreatureCtrl', function ($scope) {
     var reverse = false;
     $scope.animal = $scope.user.animal;
 
-
     var incrementer = 0;
     function moveContainer () {
         if (reverse === false){ // walking across
@@ -36,7 +35,7 @@ app.controller('CreatureCtrl', function ($scope) {
 
         requestAnimationFrame(moveContainer);
     }
-
+    
     moveContainer();
 
 });

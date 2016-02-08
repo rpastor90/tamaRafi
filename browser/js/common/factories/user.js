@@ -15,6 +15,15 @@ app.factory('UserFactory', function($http, AuthService) {
         });
     }
 
+    userFactory.updateUser = function (user) {
+        console.log("this is the user in update user", user);
+        return $http.put('/api/users/' + user._id, user)
+        .then(function (updatedUser) {
+            angular.copy(updatedUser.data[0], cachedUser);
+            return cachedUser;
+        });
+    }
+
     userFactory.makeAPurchase = function(user, swag) {
         if (user.animal.money >= swag.price) {
             return $http.put('/api/users/' + user._id + '/getSwag/' + swag._id)
