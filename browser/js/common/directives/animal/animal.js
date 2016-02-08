@@ -38,7 +38,7 @@ app.factory('AnimalFactory', function () {
         picture: "http://i.imgur.com/6HwBpck.png ",
         bio: 'An appetite for self-improvement',
         goals: 'Slimmer physique',
-        species: 'Bulbasaur',
+        species: 'Bird',
         idx: 2,
         animationForward: 'bird .5 steps(14) infinite',
         animationBack: 'bird 2s steps(14) infinite',
@@ -54,4 +54,4 @@ app.factory('AnimalFactory', function () {
     };
 
     return AnimalFactory;
-})
+});
