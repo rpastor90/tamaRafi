@@ -13,12 +13,14 @@ app.config(function ($stateProvider) {
 .controller('GameCtrl', function ($scope, socket, user) {
   // Socket listeners
   // ================
+  // socket.removeListener('connect');
   socket.on('connect', function () {
     var room = 'room';
 
     // socket.emit('wantToJoinRoom', room)
 
     socket.emit('connection');
+    socket.emit('captureUser', user)
     var leftChar = $('.left-char');
     var rightChar = $('.right-char');
     var gameContainer = $('.gameContainer');
@@ -32,6 +34,25 @@ app.config(function ($stateProvider) {
         }
     });
 
+    socket.on('getSomeUsers', function (users) {
+      var user;
+      console.log(users);
+      for (var i = 0; i < users.length; i++) {
+        if (users[i]) {
+          user = users[i];
+          break;
+        }
+      }
+      leftChar.css('background-image', "url('" + user.animal.picture + "')");
+      leftChar.css('height', user.animal.animateStyle.height);
+      leftChar.css('width', user.animal.animateStyle.width);
+
+      rightChar.css('background-image', "url('" + user.animal.picture + "')");
+      rightChar.css('height', user.animal.animateStyle.height);
+      rightChar.css('width', user.animal.animateStyle.width);
+      rightChar.css('transform', 'scaleX(-1)');
+    })
+
     socket.on('toTheLeftToTheLeft', function () {
       var pos = gameContainer.css('left');
       var change = (+pos.slice(0, -2) - 5).toString() + "px";
@@ -44,4 +65,5 @@ app.config(function ($stateProvider) {
       gameContainer.css('left', change);
     });
   });
+  console.log("this is the frontend Socket", socket)
 });
