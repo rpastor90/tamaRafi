@@ -26,8 +26,9 @@ router.get('/', ensureAuthenticated, function (req, res, next) {
 });
 
 router.get('/:userId', ensureAuthenticated, function (req, res, next) {
-    console.log("this is the found user", req.foundUser);
-	User.find({ _id: req.params.userId })
+    User.find({ _id: req.params.userId })
+    .populate('animal.friends')
+    .populate('animal.posts.author')
     .then(function (user) {
         res.status(200).send(user);
     })
@@ -122,18 +123,42 @@ router.put('/:userId/addFriend', function(req, res, next) {
     User.findOne({ _id: req.params.userId })
     .then(function(user){
         userToAddFriendTo = user;
+        // req body will hold name of ANIMAL, so we will
+        // search for the USER with an animal with that name
         return User.findOne({ name: req.body.name})
     })
     .then(function(userWhoIsFriend) {
-        userToAddFriendTo.friends.push(userWhoIsFriend._id);
+        userToAddFriendTo.animal.friends.push(userWhoIsFriend._id);
         return userToAddFriendTo;
     })
     .then(function(user) {
+        return user.populate('animal.friends')
+    })
+    .then(function(user) {
+        console.log(user, "user before save")
         return user.save();
     })
     .then(user => {
         res.send(user)
     })
+    .then(null,next)
+})
+
+router.put('/:userId/addPost', function(req, res, next) {
+    console.log(req.body.friend, "FRIEND")
+    User.findOne({ _id: req.params.userId })
+    .then(function(user){
+        return User.findOne({ _id: req.body.friend._id})
+    })
+    .then(function(userToAddPostTo) {
+        var postObj = {};
+        postObj.text = req.body.post;
+        postObj.author = req.params.userId;
+        userToAddPostTo.animal.posts.push(postObj);
+        return userToAddPostTo;
+    })
+    .then(user => {return user.save()})
+    .then(user => {return res.send(user)})
     .then(null,next)
 })
 
