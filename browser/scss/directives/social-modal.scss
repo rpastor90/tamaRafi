@@ -8,7 +8,7 @@
     	#creaturecomputer {
     	    font-family: Tahoma;
     	    width: 93%;
-    	    height: 40em;
+    	    height: 43em;
     	    margin: auto;
     	    padding-left: 1%;
     	    padding-top: 3%;
@@ -32,7 +32,7 @@
     	    #friendPost {
     	        font-size: 1.25em;
     	    }
-            #allPosts {
+            .allPosts {
                 margin-bottom: 4%;
             }
     	    #post {
@@ -47,7 +47,7 @@
     	    .friendpic {
     	        min-width: 7%;
                 img {
-                    max-width: 30%;
+                    max-width: 15%;
                 }
     	    }
     	    .col-xs-2 {
