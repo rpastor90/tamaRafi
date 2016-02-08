@@ -49,22 +49,22 @@ var schema = new Schema({
         lastLoggedInSteps: {
             type: Number,
             default: 0
-        }
-        // user: {
-        //     type: Schema.Types.ObjectId,
-        //     ref: 'User'
-        // },
-
-        // friends: [{
-        //     type: Schema.Types.ObjectId,
-        //     ref: 'User'
-        // }]
-    },
-    friends: [
+        },
+        friends: [
         {
             type: Schema.Types.ObjectId,
             ref: 'User'
         }],
+        posts: [ 
+        {
+            text: String,
+            author: {
+                type: Schema.Types.ObjectId,
+                ref: 'User'
+            }
+        }
+        ]
+    },
     fitbit: {
         id: String,
         tokens: {
