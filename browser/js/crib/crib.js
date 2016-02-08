@@ -24,7 +24,6 @@ app.controller('CribCtrl', function ($scope, $state, user, AuthService, SwagFact
 
     var swagPositions = [];
     var swagSizes = [];
-    console.dir(user)
 
     $scope.user = user;
     $scope.isShown = false;
@@ -56,14 +55,16 @@ app.controller('CribCtrl', function ($scope, $state, user, AuthService, SwagFact
         if (!bool) {
             swagPositionObj.swag = swag._id;
             // Create the position object
+            console.log("ui.helper", ui.helper)
+            console.log("EVENT:", event)
             console.log('EVENT PAGE X AND Y BEFORE PUSHED', event.pageX, event.pageY)
-            swagPositionObj.posX = event.pageX - Number(ui.helper.context.style.width.split('.')[0])/2 + 'px';
-            swagPositionObj.posY = event.pageY + Number(ui.helper.context.style.height.split('.')[0])/2 + 'px';
+            swagPositionObj.posX = event.pageX - Number(ui.helper.context.style.width.slice(0,-2))/2 + 'px';
+            swagPositionObj.posY = event.pageY + Number(ui.helper.context.style.height.slice(0,-2))/2 + 'px';
             console.log('AFTER', swagPositionObj)
             swagPositions.push(swagPositionObj);
         } else {
-            swagPositions[indexStore].posX = event.pageX - Number(ui.helper.context.style.width.split('.')[0])/2 + 'px';
-            swagPositions[indexStore].posY = event.pageY + Number(ui.helper.context.style.height.split('.')[0])/2 + 'px';
+            swagPositions[indexStore].posX = event.pageX - Number(ui.helper.context.style.width.slice(0,-2))/2  + 'px';
+            swagPositions[indexStore].posY = event.pageY + Number(ui.helper.context.style.height.slice(0,-2))/2  + 'px';
         }
         // And push to the swagPositions array
         console.log("updated swagPositions", swagPositions);
@@ -76,11 +77,12 @@ app.controller('CribCtrl', function ($scope, $state, user, AuthService, SwagFact
         detached.css('position', 'fixed');
         console.log('UI POSITION', ui.position)
         console.log('this is the width', ui.helper.context, event.pageX)
-        // console.log('this is the height', Number(ui.helper.context.style.height.split('.')[0]))
-        if (ui.helper.context.style.width && ui.helper.context.style.height) {
-            detached.css('left', event.pageX - Number(ui.helper.context.style.width.split('.')[0])/2  + 'px');
-            detached.css('top', event.pageY + Number(ui.helper.context.style.height.split('.')[0])/2 + 'px');
-        }
+        console.log('this is the height', ui.helper.context.style.width, ui.helper.context.style.height);
+        //getting rid of this && ui.helper.context.style.height
+            console.log("in reset")
+            detached.css('left', (event.pageX + 'px'));
+            detached.css('top', (event.pageY + 'px'));
+        
     };
 
     var onResizeStop = function(event, ui, swag) {
@@ -108,13 +110,13 @@ app.controller('CribCtrl', function ($scope, $state, user, AuthService, SwagFact
         // }
         if (!bool) {
             swagSizeObj.swag = swag._id;
-            swagSizeObj.height = Number(ui.helper.context.style.height.split('.')[0])/2 + 'px';
-            swagSizeObj.width = Number(ui.helper.context.style.width.split('.')[0])/2 + 'px';
+            swagSizeObj.height = ui.helper.context.style.height;
+            swagSizeObj.width = ui.helper.context.style.width;
             swagSizes.push(swagSizeObj);
 
         } else {
-            swagSizes[indexStore].height = Number(ui.helper.context.style.height.split('.')[0])/2 + 'px';
-            swagSizes[indexStore].width = Number(ui.helper.context.style.width.split('.')[0])/2 + 'px';
+            swagSizes[indexStore].height = ui.helper.context.style.height;
+            swagSizes[indexStore].width = ui.helper.context.style.width;
         }
     }
 
