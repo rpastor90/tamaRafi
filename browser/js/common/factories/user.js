@@ -39,6 +39,7 @@ app.factory('UserFactory', function($http, AuthService) {
         toSend.post = post;
         toSend.friend = friend;
         return $http.put('/api/users/' + user._id + '/addPost', toSend)
+        .then(res => res.data)
     }
 
     return userFactory;

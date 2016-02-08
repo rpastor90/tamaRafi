@@ -39,6 +39,7 @@ app.controller('CreatureComputerCtrl', function ($scope, $uibModal, UserFactory)
      $scope.createPost = function(post) {
         console.log(post);
         UserFactory.addPost(user, post, $scope.friend)
+        .then(()=>{$scope.showPostForm = false; })
      }
 
 })
