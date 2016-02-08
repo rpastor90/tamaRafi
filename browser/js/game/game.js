@@ -11,8 +11,6 @@ app.config(function ($stateProvider) {
   });
 })
 .controller('GameCtrl', function ($scope, socket, user) {
-
-  
   // Socket listeners
   // ================
   socket.on('connect', function () {

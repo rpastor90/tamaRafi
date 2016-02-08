@@ -17,7 +17,7 @@ module.exports = function (server) {
         console.log("I'm Out...");
         socket.disconnect();
       });
-      console.log("this is the room", io.sockets)
+      // console.log("this is the room", io.sockets)
       // socket.on('wantToJoinRoom', function (roomName) {
       //   room = roomName;
       //   socket.join(room);
