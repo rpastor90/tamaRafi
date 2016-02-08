@@ -9,7 +9,8 @@ app.config(function ($stateProvider) {
         },
         resolve: {
             user : function (UserFactory) {
-                return UserFactory.getUser();
+                return UserFactory.getUser()
+                    
             },
             swags: function(SwagFactory, $animate, user) {
                 return SwagFactory.fetchSwagByUser(user);

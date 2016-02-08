@@ -9,48 +9,35 @@ app.config(function ($stateProvider) {
                 return AnimalFactory.fetchAnimals();
             },
             user: function (UserFactory) {
-                return UserFactory.getUser();
+                return UserFactory.getUser()
+                .then(function (user) {
+                    return user;
+                });
             }
         }
     });
 });
 
-app.factory('FirstTimeUserFactory', function ($http, $state) {
-    var FirstTimeUserFactory = {};
-    FirstTimeUserFactory.update = function (user) {
-        console.log("this is the update info for the user", user)
-        return $http.put('/api/users/' + user._id, user)
-        .then(function (updatedUser) {
-            return updatedUser;
-        })
-        .then(function() {
-            $state.go('crib');
-        });
-    };
-    return FirstTimeUserFactory;
-});
-
-app.controller('FirstTimeUserCtrl', function ($scope, $state, FirstTimeUserFactory, animals, user, AuthService) {
+app.controller('FirstTimeUserCtrl', function ($scope, $state, UserFactory, animals, user, AuthService) {
     $scope.user = user;
 
-    $scope.logout = function() {
-        AuthService.logout()
-        .then(function() {
-            $state.go('home');
-        });
+    $scope.update = function (user) {
+        return UserFactory.updateUser(user)
+        .then(function () {
+            $state.go('crib');
+        })
     };
 
-    // var species = ['Panda', 'Rhino', 'bulbasaur'];
 
-    $scope.update = FirstTimeUserFactory.update;
     $scope.animals = animals;
     $scope.onDisplay = 0;
-    $scope.user.animal = $scope.animals[$scope.onDisplay]
-    // $scope.user.animal.species = species[0];
-
+    
+    $scope.user.animal = Object.assign({}, $scope.user.animal, $scope.animals[$scope.onDisplay]);
+    
     $scope.nextAnimal = function () {
         if ($scope.onDisplay >= 2) $scope.onDisplay = 0;
         else $scope.onDisplay++;
-        $scope.user.animal = $scope.animals[$scope.onDisplay]
+        $scope.user.animal = Object.assign({}, $scope.user.animal, $scope.animals[$scope.onDisplay]);
     };
+
 });

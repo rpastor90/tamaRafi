@@ -58,10 +58,15 @@ module.exports = function (app) {
                     if (userToLogin.animal.lastLoggedIn.getFullYear() === currentDate.getFullYear()
                         && userToLogin.animal.lastLoggedIn.getDate() === currentDate.getDate()
                         && userToLogin.animal.lastLoggedIn.getMonth() === currentDate.getMonth()) {
-                            var newDifference = userToLogin.fitbit.steps - userToLogin.animal.lastLoggedInSteps;
-                            userToLogin.animal.lastLoggedInSteps += newDifference;
-                            userToLogin.animal.totalSteps += newDifference;
-                            userToLogin.animal.money += (newDifference * 0.002);
+                            if (userToLogin.animal.totalSteps === 0) {
+                                userToLogin.animal.totalSteps += userToLogin.fitbit.steps;
+                                userToLogin.animal.lastLoggedInSteps = userToLogin.fitbit.steps
+                            } else {
+                                var newDifference = userToLogin.fitbit.steps - userToLogin.animal.lastLoggedInSteps;
+                                userToLogin.animal.lastLoggedInSteps += newDifference;
+                                userToLogin.animal.totalSteps += newDifference;
+                                userToLogin.animal.money += (newDifference * 0.002);
+                            }
                     }
                     return userToLogin;
                 })

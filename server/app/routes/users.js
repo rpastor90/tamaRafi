@@ -26,7 +26,6 @@ router.get('/', ensureAuthenticated, function (req, res, next) {
 });
 
 router.get('/:userId', ensureAuthenticated, function (req, res, next) {
-    console.log("this is the found user", req.foundUser);
 	User.find({ _id: req.params.userId })
     .then(function (user) {
         res.status(200).send(user);
@@ -108,7 +107,6 @@ router.put('/:userId/updateCribSizes', function(req, res, next) {
                 user.animal.swagSizes.push(req.body[i]);
             };
         };
-        console.log(user, "USER AFTER UPDATE")
         user.save()
         .then(() => {res.send() })
         .then(null, next)
@@ -136,12 +134,3 @@ router.put('/:userId/addFriend', function(req, res, next) {
     })
     .then(null,next)
 })
-
-
-
-
-
-
-
-
-
