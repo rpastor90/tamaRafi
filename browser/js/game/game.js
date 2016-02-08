@@ -13,12 +13,14 @@ app.config(function ($stateProvider) {
 .controller('GameCtrl', function ($scope, socket, user) {
   // Socket listeners
   // ================
+  // socket.removeListener('connect');
   socket.on('connect', function () {
     var room = 'room';
 
     // socket.emit('wantToJoinRoom', room)
 
     socket.emit('connection');
+    socket.emit('captureUser', user)
     var leftChar = $('.left-char');
     var rightChar = $('.right-char');
     var gameContainer = $('.gameContainer');
@@ -32,6 +34,13 @@ app.config(function ($stateProvider) {
         }
     });
 
+    socket.on('getSomeUsers', function (users) {
+      console.log(users);
+      leftChar.css('background-image', "url('" + users[0].animal.picture + "')");
+      leftChar.css('height', users[0].animal.animateStyle.height);
+      leftChar.css('width', users[0].animal.animateStyle.width);
+    })
+
     socket.on('toTheLeftToTheLeft', function () {
       var pos = gameContainer.css('left');
       var change = (+pos.slice(0, -2) - 5).toString() + "px";
@@ -44,4 +53,5 @@ app.config(function ($stateProvider) {
       gameContainer.css('left', change);
     });
   });
+  console.log("this is the frontend Socket", socket)
 });

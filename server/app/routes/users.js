@@ -26,7 +26,6 @@ router.get('/', ensureAuthenticated, function (req, res, next) {
 });
 
 router.get('/:userId', ensureAuthenticated, function (req, res, next) {
-    console.log("this is the found user", req.foundUser);
 	User.find({ _id: req.params.userId })
     .then(function (user) {
         res.status(200).send(user);
