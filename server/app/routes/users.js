@@ -123,10 +123,12 @@ router.put('/:userId/addFriend', function(req, res, next) {
     User.findOne({ _id: req.params.userId })
     .then(function(user){
         userToAddFriendTo = user;
+        // req body will hold name of ANIMAL, so we will
+        // search for the USER with an animal with that name
         return User.findOne({ name: req.body.name})
     })
     .then(function(userWhoIsFriend) {
-        userToAddFriendTo.friends.push(userWhoIsFriend._id);
+        userToAddFriendTo.animal.friends.push(userWhoIsFriend._id);
         return userToAddFriendTo;
     })
     .then(function(user) {

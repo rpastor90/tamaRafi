@@ -28,7 +28,8 @@ app.factory('UserFactory', function($http, AuthService) {
     userFactory.addFriend = function(user, nameOfFriendToAdd) {
         return $http.put('/api/users/' + user._id + '/addFriend', nameOfFriendToAdd)
             .then(function(res) {
-                console.log(res, "RES IN FACTORY")
+
+                console.log(res, "RES IN FACTORY", should have friends on animal now)
             })
     }
 

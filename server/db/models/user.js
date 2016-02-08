@@ -50,7 +50,12 @@ var schema = new Schema({
         lastLoggedInSteps: {
             type: Number,
             default: 0
-        }
+        },
+        friends: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        }]
         // user: {
         //     type: Schema.Types.ObjectId,
         //     ref: 'User'
@@ -61,11 +66,6 @@ var schema = new Schema({
         //     ref: 'User'
         // }]
     },
-    friends: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'User'
-        }],
     fitbit: {
         id: String,
         tokens: {

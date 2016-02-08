@@ -4,7 +4,6 @@ app.controller('CreatureComputerCtrl', function ($scope, $uibModal, UserFactory)
    
 
     $scope.showSocial = function () {
-        console.log("opening?")
         $uibModal.open({
             animation: $scope.animationsEnabled,
             templateUrl: '/js/creature-computer/creature-computer.html',
@@ -27,9 +26,13 @@ app.controller('CreatureComputerCtrl', function ($scope, $uibModal, UserFactory)
     //         {name: 'TamaGabe', post:'Been meaning to tell you, you\'ve been looking so swole lately.  What\'s your routine?'}
     //          ];
     console.log(user);
-    $scope.friends = user.friends;
+    $scope.friends = user.animal.friends;
      $scope.addFriend = function(friendName) {
         UserFactory.addFriend(user, friendName)
-     }
+     };
+     $scope.goToFriendPage = function(friend) {
+        $scope.friend = friend;
+        $(.creaturecomputer)
+     };
 
 })
