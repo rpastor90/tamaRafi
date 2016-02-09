@@ -22,7 +22,7 @@ app.factory('AnimalFactory', function () {
             'background-image': 'url("http://createalittle.com/wp-content/uploads/2014/01/panda_colour.png")'
         }
     }, {
-        picture: "https://files.slack.com/files-pri/T024FPYBQ-F0LK4V1BR/singleframerhino.png",
+        picture: "http://i.imgur.com/NlwDVd7.png",
         bio: 'A driven athlete. Tends to have a work hard/play hard attitude',
         goals: 'Better diet & sleep',
         species: 'Rhino',
@@ -30,12 +30,12 @@ app.factory('AnimalFactory', function () {
         animationForward: 'rhino .5s steps(10) infinite',
         animationBack: 'rhino 1.5s steps(10) infinite',
         animateStyle: {
-            'width': '149px',
-            'height': '95px',
-            'background-image': 'url("http://i.imgur.com/OfL5Alp.png")'
+            'width': '295px',
+            'height': '190px',
+            'background-image': 'url("http://i.imgur.com/YgP6OTf.png")'
         }
     }, {
-        picture: "https://files.slack.com/files-pri/T024FPYBQ-F0LK5QDUG/singleframebird.png",
+        picture: "http://i.imgur.com/ESsA3Kw.png",
         bio: 'An appetite for self-improvement',
         goals: 'Slimmer physique',
         species: 'Bird',

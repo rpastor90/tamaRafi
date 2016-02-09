@@ -53,7 +53,7 @@ var seedSwag = function () {
         {
             name: 'bed',
             category: 'furniture',
-            price: 500,
+            price: 300,
             imageUrl: 'http://40.media.tumblr.com/c72c5681278fb5cacacd58047007590a/tumblr_njxcsc0C7I1r7ueqyo1_400.png'
         },
         {
@@ -78,7 +78,7 @@ var seedSwag = function () {
             name: "top hat",
             category: 'hat',
             price: 15,
-            imageUrl: 'http://pixelartmaker.com/art/2ab246e020409fc.png'
+            imageUrl: 'http://i.imgur.com/VPNeE3i.png'
         },
         {
             name: "tv",
