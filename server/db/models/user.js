@@ -12,7 +12,7 @@ var schema = new Schema({
         species: String,
         money: {
             type: Number,
-            default: 100
+            default: 1000
         },
         picture: String,
         animationForward: String,
