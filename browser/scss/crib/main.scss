@@ -108,7 +108,11 @@
 
     .health-area {
         width: 700px;
-        background-color: white;
+        height: 700px;
+        background: url('http://i.imgur.com/BNpVeae.jpg');
+        background-size: 1000px;
+        background-position: -150px -400px;
+        background-repeat: none;
         border: 10px solid black;
         .eyes {
             text-align:center;
@@ -131,8 +135,11 @@
         }
 
         #mouth {
-            width: 10%;
-            padding-bottom: 50px;
+            width: 20%;
+            position: absolute;
+            bottom: 0;
+            margin-bottom: 80px;
+            margin-right: 20px;
         }
         .center {
             text-align: center;
