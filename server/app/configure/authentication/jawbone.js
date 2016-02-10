@@ -57,6 +57,7 @@ module.exports = function(app) {
                     if (err) {
                         console.log('Error: ' + err);
                     } else {
+                        // console.log('JAWBONE STEPS FOR THE WEEK', JSON.parse(body).data)
                         steps = JSON.parse(body).data.items[0].title.split(' ')[0].split(',').join('');
                         userToLogin.jawbone.steps = steps;
                     }

@@ -30,8 +30,7 @@ app.controller('CribCtrl', function ($rootScope, $scope, $state, user, AuthServi
     $scope.swags = swags;
 
     $scope.isHat = false;
-    
-    var pandaHatSprite = 'http://i.imgur.com/fMwP5tf.png';
+        var pandaHatSprite = 'http://i.imgur.com/fMwP5tf.png';
 
     $scope.wearHat = function (swag) {
         if (swag.name === 'top hat') {

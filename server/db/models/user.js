@@ -10,6 +10,8 @@ var schema = new Schema({
     animal: {
         name: String,
         species: String,
+        stepsGoal: Number,
+        sleepGoal: Number,
         money: {
             type: Number,
             default: 1000

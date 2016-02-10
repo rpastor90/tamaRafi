@@ -1,4 +1,4 @@
-app.factory('UserFactory', function($http, AuthService) {
+app.factory('UserFactory', function($http, AuthService, $rootScope) {
     var userFactory = {};
     var cachedUser = {};
 
@@ -8,6 +8,7 @@ app.factory('UserFactory', function($http, AuthService) {
             if (user) {
                 return $http.get('/api/users/' + user._id)
                 .then(function(foundUser) {
+                    $rootScope.cardsLoading = false; 
                     angular.copy(foundUser.data[0], cachedUser);
                     return cachedUser;
                 });
@@ -16,7 +17,6 @@ app.factory('UserFactory', function($http, AuthService) {
     }
 
     userFactory.updateUser = function (user) {
-        console.log("this is the user in update user", user);
         return $http.put('/api/users/' + user._id, user)
         .then(function (updatedUser) {
             angular.copy(updatedUser.data[0], cachedUser);
@@ -27,20 +27,18 @@ app.factory('UserFactory', function($http, AuthService) {
     userFactory.makeAPurchase = function(user, swag) {
         if (user.animal.money >= swag.price) {
             return $http.put('/api/users/' + user._id + '/getSwag/' + swag._id)
-                .then(function(purchase) {
-                    angular.copy(purchase.data, cachedUser);
-                    return cachedUser;
-                })
+            .then(function(purchase) {
+                angular.copy(purchase.data, cachedUser);
+                return cachedUser;
+            })
         }
     };
 
     userFactory.addFriend = function(user, nameOfFriendToAdd) {
         return $http.put('/api/users/' + user._id + '/addFriend', nameOfFriendToAdd)
-            .then(function(res) {
-
-                console.log(res, "RES IN FACTORY", "should have friends on animal now")
-                return res.data;
-            })
+        .then(function(res) {
+            return res.data;
+        })
     };
     userFactory.addPost = function(user, post, friend) {
         var toSend = {};
