@@ -35,7 +35,7 @@ app.controller('HealthCtrl', function ($scope, $uibModal) {
         $scope.sleep = (user.fitbit.sleep/60).toFixed(1);
     }
 
-    var stepsDifference = ($scope.goalSteps - $scope.steps).toFixed(1);
+    var stepsDifference = ($scope.goalSteps - $scope.steps);
     $scope.stepsPercentDiff = ($scope.steps / $scope.goalSteps) * 100;
 
     var sleepDifference = ($scope.goalSleep - $scope.sleep).toFixed(1);
