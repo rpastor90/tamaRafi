@@ -14,6 +14,7 @@ app.config(function ($stateProvider) {
   // Socket listeners
   // ================
   // socket.removeListener('connect');
+
   socket.on('connect', function () {
     var room = 'room';
 
@@ -25,6 +26,11 @@ app.config(function ($stateProvider) {
     var rightChar = $('.right-char');
     var gameContainer = $('.gameContainer');
 
+    // var marg = ((screen.width - Number(gameContainer.css('width').slice(0, -2)))/2).toString() + "px";
+    // console.log(marg);
+    // console.log("width", gameContainer.css('width'))
+    // gameContainer.css('marginLeft', marg);
+
     $('body').keydown(function (e) {
         if (e.keyCode === 37) {
           socket.emit('moveLeft');
@@ -34,24 +40,24 @@ app.config(function ($stateProvider) {
         }
     });
 
-    socket.on('getSomeUsers', function (users) {
-      var user;
-      console.log(users);
-      for (var i = 0; i < users.length; i++) {
-        if (users[i]) {
-          user = users[i];
-          break;
-        }
-      }
-      leftChar.css('background-image', "url('" + user.animal.picture + "')");
-      leftChar.css('height', user.animal.animateStyle.height);
-      leftChar.css('width', user.animal.animateStyle.width);
+    // socket.on('getSomeUsers', function (users) {
+    //   var user;
+    //   console.log(users);
+    //   for (var i = 0; i < users.length; i++) {
+    //     if (users[i]) {
+    //       user = users[i];
+    //       break;
+    //     }
+    //   }
+    //   leftChar.css('background-image', "url('" + user.animal.picture + "')");
+    //   leftChar.css('height', user.animal.animateStyle.height);
+    //   leftChar.css('width', user.animal.animateStyle.width);
 
-      rightChar.css('background-image', "url('" + user.animal.picture + "')");
-      rightChar.css('height', user.animal.animateStyle.height);
-      rightChar.css('width', user.animal.animateStyle.width);
-      rightChar.css('transform', 'scaleX(-1)');
-    })
+    //   rightChar.css('background-image', "url('" + user.animal.picture + "')");
+    //   rightChar.css('height', user.animal.animateStyle.height);
+    //   rightChar.css('width', user.animal.animateStyle.width);
+    //   rightChar.css('transform', 'scaleX(-1)');
+    // })
 
     socket.on('toTheLeftToTheLeft', function () {
       var pos = gameContainer.css('left');
