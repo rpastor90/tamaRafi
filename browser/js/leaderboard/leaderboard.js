@@ -30,24 +30,24 @@ app.controller('LeaderboardCtrl', function ($scope, $uibModal) {
     
     var fullstackers = [
         {
-            name: 'Joe',
-            animal: { totalSteps: 5000 }
+            name: 'tamaJoe',
+            animal: { totalSteps: 5832 }
         },
         {
-            name: 'Katkat',
-            animal: { totalSteps: 99999999 }
+            name: 'Katniss',
+            animal: { totalSteps: 40929 }
         },
         {
             name: 'Sethwazhere',
-            animal: { totalSteps: 1972394 }
+            animal: { totalSteps: 32394 }
         },
         {
             name: 'Mark',
-            animal: { totalSteps: 51432 }
+            animal: { totalSteps: 9432 }
         },
         {
             name: 'Jess',
-            animal: { totalSteps: 1893847 }
+            animal: { totalSteps: 33847 }
         }
     ]
 

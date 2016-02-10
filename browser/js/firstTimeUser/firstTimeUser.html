@@ -10,10 +10,26 @@
                 <button class='logout-btn' ng-click="nextAnimal()">NEXT</button>
             </div>
             <div class="col-md-6">
-                <form novalidate class="simple-form">
-                    <span>Name:</span>
-                    <input class='name-input' type="text" ng-model="user.animal.name">
-                    <input class='logout-btn' type="submit" ng-click="update(user)" value="SAVE" />
+                <form novalidate>
+                    <ul>
+                        <li>
+                            <span>Name:</span>
+                            <input class='name-input' type="text" ng-model="user.animal.name" ng-required>
+                        </li>
+                        <li>
+                            <span>Daily Steps Goal:</span>                            
+                            <input class='name-input' style='width: 25%' type="number" ng-model="user.animal.stepsGoal" ng-required>
+                            <p>* We recommend at least 10,000 steps per day :)</p>
+                        </li>
+                        <li>
+                            <span>Sleep Goal:</span>
+                            <input class='name-input' style='width: 22%' type="number" ng-model="user.animal.sleepGoal" placeholder="hours" ng-required>
+                            <p>* We recommend at least 7-8 hours per night :)</p>
+                        </li>
+                        <li>
+                            <input class='logout-btn' type="submit" ng-click="update(user)" value="SAVE"/>
+                        </li>
+                    </ul>
                 </form>
             </div>
         </div>

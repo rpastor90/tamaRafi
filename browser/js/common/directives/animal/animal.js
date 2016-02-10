@@ -30,9 +30,9 @@ app.factory('AnimalFactory', function () {
         animationForward: 'rhino .5s steps(10) infinite',
         animationBack: 'rhino 1.5s steps(10) infinite',
         animateStyle: {
-            'width': '149px',
-            'height': '95px',
-            'background-image': 'url("http://i.imgur.com/OfL5Alp.png")'
+            'width': '295px',
+            'height': '190px',
+            'background-image': 'url("http://i.imgur.com/YgP6OTf.png")'
         }
     }, {
         picture: "http://i.imgur.com/ESsA3Kw.png",

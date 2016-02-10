@@ -2,11 +2,7 @@
     position: absolute;
     left: 100px;
     bottom: 1px;
-}
-crib-creature {
-    display: block;
-    position: absolute;
-    bottom: 1px;
+    z-index: 1;
 }
 
 @keyframes panda {
@@ -20,7 +16,7 @@ crib-creature {
 
 @keyframes rhino {
     0% {
-        background-position: 1478px;
+        background-position: 2956px;
     }
 
     100% {
