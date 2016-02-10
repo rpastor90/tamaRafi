@@ -9,19 +9,19 @@
 module.exports = {
     "DATABASE_URI": process.env.MONGOLAB_URI,
     "SESSION_SECRET": process.env.SESSION_SECRET,
-    "TWITTER": {
-        "consumerKey": process.env.TWITTER_CONSUMER_KEY,
-        "consumerSecret": process.env.TWITTER_CONSUMER_SECRET,
-        "callbackUrl": process.env.TWITTER_CALLBACK
+    "FITBIT": {
+        "clientID": process.env.FITBIT_CLIENT_ID,
+        "clientSecret": process.env.FITBIT_CLIENT_SECRET,
+        "callbackURL": process.env.FITBIT_CALLBACK_URL 
     },
-    "FACEBOOK": {
-        "clientID": process.env.FACEBOOK_APP_ID,
-        "clientSecret": process.env.FACEBOOK_CLIENT_SECRET,
-        "callbackURL": process.env.FACEBOOK_CALLBACK_URL
+    "JAWBONE": {
+        "clientID": process.env.JAWBONE_CLIENT_ID,
+        "clientSecret": process.env.JAWBONE_CLIENT_SECRET,
+        "callbackURL": process.env.JAWBONE_CALLBACK_URL 
     },
-    "GOOGLE": {
-        "clientID": process.env.GOOGLE_CLIENT_ID,
-        "clientSecret": process.env.GOOGLE_CLIENT_SECRET,
-        "callbackURL": process.env.CALLBACK_URL
+    "MISFIT": {
+        "clientID": process.env.MISFIT_CLIENT_ID,
+        "clientSecret": process.env.MISFIT_CLIENT_SECRET,
+        "callbackURL": process.env.MISFIT_CALLBACK_URL 
     }
 };
