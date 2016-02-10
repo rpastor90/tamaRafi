@@ -87,15 +87,15 @@ var seedSwag = function () {
             imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/7/71/Pixelart-tv-iso-2.png'
         },
         {
-            name: "pc",
-            category: 'random',
-            price: 500,
-            imageUrl: 'http://orig12.deviantart.net/6950/f/2012/224/b/e/tumbln_all_day_by_samblye1-d5augsh.png'
-        },
-        {
-            name: "flower",
+            name: "valentine",
             category: 'random',
             price: 10,
+            imageUrl: 'http://wifflegif.com/assets/8bitheart-desaturated-300bd91aca8a3fa03fd6f91b71340682.png'
+        },
+        {
+            name: "fire flower",
+            category: 'random',
+            price: 50,
             imageUrl: 'http://4.bp.blogspot.com/-wV7ycgn04kU/US-3RFqJZSI/AAAAAAAAE7k/EJrEh7-EgqM/s1600/flower_pixelart3.png'
         }
     ];

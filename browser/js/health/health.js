@@ -38,7 +38,7 @@ app.controller('HealthCtrl', function ($scope, $uibModal) {
     var stepsDifference = ($scope.goalSteps - $scope.steps);
     $scope.stepsPercentDiff = ($scope.steps / $scope.goalSteps) * 100;
 
-    var sleepDifference = ($scope.goalSleep - $scope.sleep);
+    var sleepDifference = ($scope.goalSleep - $scope.sleep).toFixed(1);
     $scope.sleepPercentDiff = ($scope.sleep / $scope.goalSleep) * 100;
 
     $scope.labels1 = ["stepped", "steps left"];
