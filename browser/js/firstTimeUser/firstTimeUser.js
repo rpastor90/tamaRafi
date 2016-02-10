@@ -9,10 +9,7 @@ app.config(function ($stateProvider) {
                 return AnimalFactory.fetchAnimals();
             },
             user: function (UserFactory) {
-                return UserFactory.getUser()
-                .then(function (user) {
-                    return user;
-                });
+                return UserFactory.getUser();
             }
         }
     });
@@ -23,11 +20,10 @@ app.controller('FirstTimeUserCtrl', function ($scope, $state, UserFactory, anima
 
     $scope.update = function (user) {
         return UserFactory.updateUser(user)
-        .then(function () {
+        .then(function (hi) {
             $state.go('crib');
         })
     };
-
 
     $scope.animals = animals;
     $scope.onDisplay = 0;
