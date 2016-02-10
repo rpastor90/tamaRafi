@@ -1,16 +1,32 @@
 .gameContainer {
   position: absolute;
   bottom: 0;
-  width: 50%;
   display: block;
-  left: 25%;
+  height: 364px;
+  width: 1022px;
+  left: 20%;
+  background-image: url('http://i.imgur.com/ySUi52m.png');
+  /*margin-bottom: 10%;*/
 }
-.left-char {
+/*.left-char {
   text-align: center;
-  background-color: red;
+  background-image: url('http://i.imgur.com/x1V12Km.png');
+  height: 450px;
+  width: 250px;
 }
 
 .right-char {
   text-align: center;
-  background-color: green;
+  background-image: url('http://i.imgur.com/JJAe0Cn.png');
+  width: 175px;
+  height: 200px;
+  margin-top: 25%;
 }
+
+.rope {
+  background-image: url('http://www.clker.com/cliparts/1/f/b/a/1343058936264656341rope-hi.png');
+  height: 40px;
+  margin-top: 25%;
+/*  width: 200px;
+}
+*/
