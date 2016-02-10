@@ -14,7 +14,7 @@ app.controller('HealthCtrl', function ($scope, $uibModal) {
         });
     };
 })
-.controller('OpenHealthCtrl', function ($scope, user) {
+.controller('OpenHealthCtrl', function ($scope, user, $uibModalInstance) {
     // set goals
     $scope.goalSteps = user.animal.stepsGoal;
     $scope.goalSleep = user.animal.sleepGoal;
