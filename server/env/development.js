@@ -4,7 +4,7 @@ module.exports = {
   "SESSION_SECRET": "Optimus Prime is my real dad",
   "FITBIT": {
     "clientID": "227F6K",
-    "clientSecret": "825ebb9d2e57d8fdef51d93c001613ae",
+    "clientSecret": "aef24e49026f0f2cce0ca0eda9405831", 
     "callbackURL": "http://localhost:1337/auth/fitbit/callback"
   },
   "JAWBONE": {
