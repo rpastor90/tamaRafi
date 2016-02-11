@@ -21,12 +21,13 @@ app.config(function ($stateProvider) {
 
     // socket.emit('wantToJoinRoom', room)
 
-    socket.emit('connection');
-    socket.emit('captureUser', user)
+    // socket.emit('connection');
+    // socket.emit('captureUser', user);
     var leftChar = $('.left-char');
     var rightChar = $('.right-char');
-    var gameContainer = $('.gameContainer');
-    var width = screen.width/2;
+    var gameContainer = $('.tugOwar');
+    var width = screen.width;
+    console.log(screen.width);
     // var marg = ((screen.width - Number(gameContainer.css('width').slice(0, -2)))/2).toString() + "px";
     // console.log(marg);
     // console.log("width", gameContainer.css('width'))
@@ -61,20 +62,23 @@ app.config(function ($stateProvider) {
     // })
 
     socket.on('toTheLeftToTheLeft', function () {
-      var pos = gameContainer.css('left');
+      var pos = gameContainer.css('marginLeft');
+      console.log(pos);
       var change = (+pos.slice(0, -2) - 5).toString() + "px";
-      gameContainer.css('left', change);
-      if (gameContainer.css('left') <= 0) {
-        winBanner = true;
+      gameContainer.css('marginLeft', change);
+      if (+gameContainer.css('marginLeft').slice(0,-2) <= width*.3*(-1)) {
+        $scope.winBanner = true;
+        socket.emit('gameOver');
       }
     });
     socket.on('toTheRightToTheRight', function () {
-      var pos = gameContainer.css('left');
+      var pos = gameContainer.css('marginLeft');
       console.log(pos);
       var change = (+pos.slice(0, -2) + 5).toString() + "px";
-      gameContainer.css('left', change);
-      if (gameContainer.css('left') >= ) {
-        winBanner = true;
+      gameContainer.css('marginLeft', change);
+      if (+gameContainer.css('marginLeft').slice(0,-2) >= (width/3)) {
+        $scope.winBanner = true;
+        socket.emit('gameOver');
       }
     });
 
