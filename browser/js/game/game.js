@@ -14,6 +14,7 @@ app.config(function ($stateProvider) {
   // Socket listeners
   // ================
   // socket.removeListener('connect');
+  $scope.winBanner = false;
 
   socket.on('connect', function () {
     var room = 'room';
@@ -25,7 +26,7 @@ app.config(function ($stateProvider) {
     var leftChar = $('.left-char');
     var rightChar = $('.right-char');
     var gameContainer = $('.gameContainer');
-
+    var width = screen.width/2;
     // var marg = ((screen.width - Number(gameContainer.css('width').slice(0, -2)))/2).toString() + "px";
     // console.log(marg);
     // console.log("width", gameContainer.css('width'))
@@ -63,13 +64,21 @@ app.config(function ($stateProvider) {
       var pos = gameContainer.css('left');
       var change = (+pos.slice(0, -2) - 5).toString() + "px";
       gameContainer.css('left', change);
+      if (gameContainer.css('left') <= 0) {
+        winBanner = true;
+      }
     });
     socket.on('toTheRightToTheRight', function () {
       var pos = gameContainer.css('left');
       console.log(pos);
       var change = (+pos.slice(0, -2) + 5).toString() + "px";
       gameContainer.css('left', change);
+      if (gameContainer.css('left') >= ) {
+        winBanner = true;
+      }
     });
+
+
+
   });
-  console.log("this is the frontend Socket", socket)
 });
