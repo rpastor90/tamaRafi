@@ -42,14 +42,14 @@ router.put('/:userId', ensureAuthenticated, function (req, res, next) {
     });
 });
 
-router.get('/:userId/getSwag', function(req, res, next) {
+router.get('/:userId/getSwag', ensureAuthenticated, function(req, res, next) {
     User.findOne({ _id: req.params.userId })
     .populate('animal.swags')
     .then( user => {
         res.json(user)})
 });
 
-router.put('/:userId/getSwag/:swagId', function (req, res, next) {
+router.put('/:userId/getSwag/:swagId', ensureAuthenticated, function (req, res, next) {
     if (!req.user) return 'User not found!'
     Swag.findOne({ _id: req.params.swagId })
     .then(function(swag) {
@@ -61,7 +61,7 @@ router.put('/:userId/getSwag/:swagId', function (req, res, next) {
     .then(null, next)
 });
 
-router.put('/:userId/updateCrib', function(req, res, next) {
+router.put('/:userId/updateCrib', ensureAuthenticated, function(req, res, next) {
     User.findOne({ _id: req.params.userId })
     .then(function(user) {
         // Loop trough req.body (an array of position objects)
@@ -88,7 +88,7 @@ router.put('/:userId/updateCrib', function(req, res, next) {
 
 });
 
-router.put('/:userId/updateCribSizes', function(req, res, next) {
+router.put('/:userId/updateCribSizes', ensureAuthenticated, function(req, res, next) {
 
     User.findOne({ _id: req.params.userId })
     .then(function(user) {
@@ -116,7 +116,7 @@ router.put('/:userId/updateCribSizes', function(req, res, next) {
 
 });
 
-router.put('/:userId/addFriend', function(req, res, next) {
+router.put('/:userId/addFriend', ensureAuthenticated, function(req, res, next) {
     
     var userToAddFriendTo;
     User.findOne({ _id: req.params.userId })
@@ -143,8 +143,7 @@ router.put('/:userId/addFriend', function(req, res, next) {
     .then(null,next)
 })
 
-router.put('/:userId/addPost', function(req, res, next) {
-    console.log(req.body.friend, "FRIEND")
+router.put('/:userId/addPost', ensureAuthenticated, function(req, res, next) {
     User.findOne({ _id: req.params.userId })
     .then(function(user){
         return User.findOne({ _id: req.body.friend._id})
