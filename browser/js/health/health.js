@@ -15,6 +15,7 @@ app.controller('HealthCtrl', function ($scope, $uibModal) {
     };
 })
 .controller('OpenHealthCtrl', function ($scope, user, $uibModalInstance) {
+    $scope.onDisplay = 0;
     // set goals
     $scope.goalSteps = user.animal.stepsGoal;
     $scope.goalSleep = user.animal.sleepGoal;
@@ -47,4 +48,32 @@ app.controller('HealthCtrl', function ($scope, $uibModal) {
     $scope.sleepData = [$scope.sleep, sleepDifference];
 
     $scope.weighted = ((7 * $scope.stepsPercentDiff) + (3 * $scope.sleepPercentDiff)) / 10;
-});
+
+// The following is for the weekly data
+
+    $scope.days = ["1","2","3","4","5","6","7"];
+    $scope.weekSteps = [[10000, 8000, 12000, 5000, 9000, 11500, 11125]];
+    $scope.weekSleep = [[400, 500, 480, 250, 300, 600, 640]];
+    $scope.nextData = function() {
+        $scope.onDisplay++;
+        $('.health-area').css({'background-image': 'none','background-color':'white'});
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+})
