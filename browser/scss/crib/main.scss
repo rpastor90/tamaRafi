@@ -145,13 +145,20 @@
         .center {
             text-align: center;
         }
-        #arrow {
+        #arrowR {
+            max-width: 5%;
+            position:absolute;
+            bottom: 5%;
+            right:90%;
+            
+        }
+        #arrowL {
             max-width: 5%;
             position:absolute;
             bottom: 5%;
             margin-left:50%;
         }
         .weekChart {
-            max-width:80%;        }
+            max-width:100%;        }
     }
 }

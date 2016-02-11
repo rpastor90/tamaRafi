@@ -50,15 +50,40 @@ app.controller('HealthCtrl', function ($scope, $uibModal) {
     $scope.weighted = ((7 * $scope.stepsPercentDiff) + (3 * $scope.sleepPercentDiff)) / 10;
 
 // The following is for the weekly data
+    $('#weekStepsChart')
 
     $scope.days = ["1","2","3","4","5","6","7"];
-    $scope.weekSteps = [[10000, 8000, 12000, 5000, 9000, 11500, 11125]];
+ 
+    var steps =[10000, 8000, 12000, 5000, 9000, 11500, 11125];
+    var money = steps.map(function(num) {
+        return (num/50);
+    })
+    // Chart.defaults.global.colours[1] = '#cc9900';
+    $scope.weekSteps = [steps, money];
     $scope.weekSleep = [[400, 500, 480, 250, 300, 600, 640]];
+    $scope.series = ['Steps','Coins earned']
     $scope.nextData = function() {
-        $scope.onDisplay++;
+        Chart.defaults.global.colours[1] = "#97BBCD";
+        console.log(Chart.defaults.global.colours)
+        $scope.onDisplay = ($scope.onDisplay >= 2) ? 2 : ($scope.onDisplay+1);
         $('.health-area').css({'background-image': 'none','background-color':'white'});
-    }
+        
+    };
+     $scope.prevData = function() {
+        Chart.defaults.global.colours[1] = "#CDCDCD";
+        $scope.onDisplay = ($scope.onDisplay <= 0) ? 0 : ($scope.onDisplay-1);
+        if ($scope.onDisplay === 0){
+            
+            $('.health-area').css('background','url("http://i.imgur.com/BNpVeae.jpg")');
+            $('.health-area').css('background-position','-150px -400px')
+            $('.health-area').css('background-size','1000px');    
+        }
+        
+    };
 
+    $scope.chartHover = function() {
+        console.log("hovered over chart")
+    }
 
 
 

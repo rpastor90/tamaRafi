@@ -21,17 +21,24 @@
         <h1>Weekly Steps</h1>
         <!-- //ng-show="showWeeklyHealth" -->
         <!-- Reset width later? -->
-        <canvas id="weekStepsChart" class="chart chart-line weekChart"  chart-data="weekSteps" chart-labels="days" >TEXT</canvas>
+        <canvas id="weekStepsChart" class="chart chart-line weekChart" chart-data="weekSteps" chart-labels="days" chart-series="series" chart-legend="true" colours="[{
+            fillColor: 'rgba(107, 10, 10, 0.5)',
+            strokeColor: 'rgba(107, 10, 10, 0.8)'
+},{
+            fillColor: '#cc9900',
+            strokeColor: '#cc9900'
+}]" options="{bezierCurve: false}" ></canvas>
     </div>
 
     <div id="weekSleep" ng-show="onDisplay===2"> <!-- //ng-show="showWeeklyHealth" -->
         <!-- Reset width later? -->
          <h1>Weekly Sleep</h1>
-        <canvas id="weekSleepChart" class="chart chart-bar weekChart"  chart-data="weekSleep" chart-labels="days" >TEXT</canvas>
+        <canvas id="weekSleepChart" class="chart chart-bar weekChart"  chart-data="weekSleep" chart-labels="days" ></canvas>
     </div>
     
-    <img id="arrow" src="http://i.imgur.com/ox2hSR4.png" ng-click="nextData()"/>
-    <img id="arrow" src="http://imgur.com/BjwMUgk.png" ng-click="nextData()"/>
+    
+    <img id="arrowR" src="http://i.imgur.com/ox2hSR4.png" ng-click="prevData()" ng-hide='onDisplay===0'/>
+    <img id="arrowL" src="http://imgur.com/BjwMUgk.png" ng-click="nextData()" ng-hide='onDisplay===2'/>
 </div>
 
 
