@@ -29,11 +29,13 @@ app.controller('CribCtrl', function ($rootScope, $scope, $state, user, AuthServi
     $scope.isShown = false;
     $scope.swags = swags;
 
-    var pandaHatSprite = 'http://i.imgur.com/fMwP5tf.png';
+    $scope.isHat = false;
+        var pandaHatSprite = 'http://i.imgur.com/fMwP5tf.png';
 
     $scope.wearHat = function (swag) {
         if (swag.name === 'top hat') {
-            $('#creatureContainer').css('background', 'url("' + pandaHatSprite + '")')
+            $scope.isHat = true;
+            $('#creatureContainer').css('background', 'url("' + pandaHatSprite + '")');
         }
     }
 
@@ -129,6 +131,8 @@ app.controller('CribCtrl', function ($rootScope, $scope, $state, user, AuthServi
     };
 
     $scope.reset = function() {
+        $scope.isHat = false;
+        $('#creatureContainer').css('background', 'url("http://createalittle.com/wp-content/uploads/2014/01/panda_colour.png")');
         var cribItems = $('.notTheDock li').toArray();
         cribItems.forEach(function(cribItem) {
             $(cribItem).detach();

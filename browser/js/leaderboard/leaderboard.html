@@ -2,16 +2,16 @@
     <div class="panel-heading">L E A D E R B O A R D</div>
     <table class="table">
         <thead>
-        	<th>RANK</th>
-        	<th>NAME</th>
-        	<th>TOTAL STEPS</th>
+            <th>RANK</th>
+            <th>NAME</th>
+            <th>TOTAL STEPS</th>
         </thead>
         <tbody ng-repeat='user in rankedUsers'>
-        	<tr>
-        		<td scope='row'>{{ rankedUsers.indexOf(user) + 1 }}</td>
+            <tr>
+                <td scope='row'>{{ rankedUsers.indexOf(user) + 1 }}</td>
                 <td>{{ user.name }}</td>
-        		<td>{{ user.animal.totalSteps }}</td>
-        	</tr>
+                <td>{{ user.animal.totalSteps }}</td>
+            </tr>
         </tbody>
     </table>
 </div>
