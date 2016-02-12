@@ -25,7 +25,7 @@ app.controller('LeaderboardCtrl', function ($scope, $uibModal) {
         });
     };
 })
-.controller('OpenLeaderboardCtrl', function($scope, $uibModalInstance, user, LeaderboardFactory) {
+.controller('OpenLeaderboardCtrl', function ($scope, $uibModalInstance, user, LeaderboardFactory) {
     $scope.user = user;
     
     var fullstackers = [
