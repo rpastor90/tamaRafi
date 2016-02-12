@@ -1,7 +1,7 @@
 app.controller('HealthCtrl', ['$uibModal', function ($scope, $uibModal, UserFactory) {
     $scope.animationsEnabled = true;
 
-    $scope.showHealth = function() {
+    $scope.showHealth = function () {
         console.log("this is the uibModal", $uibModal);
         $uibModal.open({
             animation: $scope.animationsEnabled,
