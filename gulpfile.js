@@ -122,7 +122,7 @@ gulp.task('buildProduction', ['buildCSSProduction', 'buildJSProduction']);
 // --------------------------------------------------------------
 
 gulp.task('build', function () {
-    if (false) {
+    if (process.env.NODE_ENV === 'production') {
         runSeq(['buildJSProduction', 'buildCSSProduction']);
     } else {
         runSeq(['buildJS', 'buildCSS']);
