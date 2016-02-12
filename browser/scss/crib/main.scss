@@ -3,6 +3,7 @@
     margin-top: 30%;
     position: absolute;
     bottom: 1px;
+    z-index: 1;
 }
 
 .crib {
@@ -26,12 +27,18 @@
         z-index: 1;
         display: inline-block;
     }
+    .sad-panda {
+        bottom: 0;
+        margin-left: 600px; 
+        position: absolute;
+    }
 }
 
 .dock {
     width: 80%;
     position: absolute;
     bottom: 1px;
+    z-index: 1;
     ul {
         text-align: center;
         width: 100%;
@@ -40,6 +47,7 @@
         padding: 0px;
         list-style: none;
         background: rgba(0, 0, 0, 0.3);
+        z-index: 1;
     }
 }
 
@@ -51,6 +59,7 @@
     margin-top: -3%;
     .cribSwag {
         position: absolute;
+        z-index: 1;
     }
 }
 

@@ -129,10 +129,10 @@ var seedSwag = function () {
             imageUrl: 'http://i.imgur.com/JjM3nLJ.png'
         },
         {
-            name: "life",
+            name: "disco ball",
             category: 'random',
-            price: 5000,
-            imageUrl: 'http://i.imgur.com/vRleqCb.png'
+            price: 500,
+            imageUrl: 'http://i.imgur.com/AohKaE3.gif'
         },
         {
             name: "music",
@@ -204,7 +204,7 @@ var seedSwag = function () {
             name: "valentine",
             category: 'holiday',
             price: 10,
-            imageUrl: 'http://i.imgur.com/jXAKwmm.png'
+            imageUrl: 'http://i.imgur.com/BapqvgP.gif'
         },
         {
             name: "pumpkin",

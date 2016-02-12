@@ -1,84 +1,91 @@
-.modal-dialog {
-    .quicklook-modal {
-        background: url('http://i.imgur.com/tcQ6vy2.png');
-        background-repeat: no-repeat;
-        background-size: 100% 100%;
-        background-position: center;
-    	width: 150%;
-    	#creaturecomputer {
-    	    font-family: Tahoma;
-    	    width: 93%;
-    	    height: 43em;
-    	    margin: auto;
-    	    padding-left: 1%;
-    	    padding-top: 3%;
-    	    #profilepic {
-    	        min-width: 12%;
-    	    }
-    	    h1 {
-    	        font-size: 1.7em;
-    	    }
-    	    #header {
-    	        background: #3b5998;
-    	        color: white;
-    	       
-    	    }
-    	    #friendName {
-    	        font-size: 1.5em;
-    	        font-weight: bold;
-                text-decoration: underline;
-                color:#0B0080;
-    	    }
-    	    #friendPost {
-    	        font-size: 1.25em;
-    	    }
-            .allPosts {
-                margin-bottom: 4%;
+.quicklook-modal {
+    background: url('http://i.imgur.com/tcQ6vy2.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center;
+    width: 150%;
+    #creaturecomputer {
+        width: 90%;
+        height: 50em;
+        margin: auto;
+        #profilepic {
+            min-width: 12%;
+        }
+        hr {
+            border: 2px solid black;
+            width: 100%;
+        }
+        h1 {
+            padding: 10px;
+            font-size: 1.7em;
+            color: white;
+            font-weight: bold;
+        }
+        #header {
+            background: #3b5998;
+            z-index: -1;
+            width: 104%;
+            height: 12%;
+            margin-top: 7%;
+            right: -20px;
+        }
+        #friendName {
+            font-size: 1.5em;
+            font-weight: bold;
+            text-decoration: underline;
+            color: #0B0080;
+        }
+        #friendPost {
+            font-size: 1.25em;
+        }
+        .allPosts {
+            margin-top: 0%;
+            margin-bottom: 1%;
+        }
+        #post {
+            /* border: .1em solid black;*/
+            #contents {
+                max-width: 100%;
+                margin-top: 2%;
+                margin-left: 1.5%;
             }
-    	    #post {
-    	        border: .1em solid black;
-    	       
-    	        
-    	        #contents {
-    	            max-width: 100%;
-    	            margin-left: 1.5%;
-    	        }
-    	    }
-    	    .friendpic {
-    	        min-width: 7%;
-                img {
-                    max-width: 15%;
-                }
-    	    }
-    	    .col-xs-2 {
-    	        span {
-    	            color: #3b5998;
-    	            font-size: 1.5em;
-    	        }
-    	        img {
-    	            max-width: 50%;
-    	        }
-    	    }
-            #addfriend {
-                text-align:left;
+        }
+        .friendpic {
+            img {
+                max-width: 10%;
+                margin-left: 5%;
             }
+        }
+        .col-xs-2 {
+            span {
+                color: #3b5998;
+                font-size: 1.5em;
+            }
+            img {
+                max-width: 50%;
+            }
+        }
+        #addfriend {
+            text-align: left;
+            margin-bottom: 15px;
+            input {
+                height: 30%;
+            }
+            img {
+                width: 20%
+            }
+        }
+        #postingForm {
+            text-align: center;
             form {
-                button {
-                    max-width:15%;
-                }
-                img {
-                    max-width:100%
-
-                    }
+                float: none;
+                margin: auto;
             }
-            #postingForm {
-                text-align:center;
-                form {
-                    float:none;
-                    margin:auto;
-                }
+        }
+        .betsys-wall {
+            #post {
+                margin-top: 5%;
             }
-
-    	}
+        }
     }
 }
