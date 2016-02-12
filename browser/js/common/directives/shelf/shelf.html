@@ -1,4 +1,5 @@
 <div ng-repeat='category in swags' class='row'>
+	<h1>{{category[0].category | uppercase }}</h1>
 	<swag ng-repeat='swag in category'></swag>
 	<hr class='shelf'>
 </div>
