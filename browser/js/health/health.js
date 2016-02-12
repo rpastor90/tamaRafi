@@ -1,4 +1,4 @@
-app.controller('HealthCtrl', function ($scope, $uibModal) {
+app.controller('HealthCtrl', ['$uibModal', function ($scope, $uibModal) {
     $scope.animationsEnabled = true;
 
     $scope.showHealth = function() {
@@ -13,8 +13,8 @@ app.controller('HealthCtrl', function ($scope, $uibModal) {
             }
         });
     };
-})
-.controller('OpenHealthCtrl', function ($scope, user, $uibModalInstance) {
+}])
+.controller('OpenHealthCtrl', ['$uibModalInstance', function ($scope, user, $uibModalInstance) {
     // set goals
     $scope.goalSteps = user.animal.stepsGoal;
     $scope.goalSleep = user.animal.sleepGoal;
@@ -50,4 +50,4 @@ app.controller('HealthCtrl', function ($scope, $uibModal) {
     $scope.sleepData = [$scope.sleep, sleepDifference];
 
     $scope.weighted = ((7 * $scope.stepsPercentDiff) + (3 * $scope.sleepPercentDiff)) / 10;
-});
+}]);
