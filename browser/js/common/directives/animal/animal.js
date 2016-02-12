@@ -22,7 +22,7 @@ app.factory('AnimalFactory', function () {
             'background-image': 'url("http://createalittle.com/wp-content/uploads/2014/01/panda_colour.png")'
         }
     }, {
-        picture: "http://i.imgur.com/NlwDVd7.png",
+        picture: "http://i.imgur.com/8fg1J0C.png",
         bio: 'A driven athlete. Tends to have a work hard/play hard attitude',
         goals: 'Better diet & sleep',
         species: 'Rhino',
@@ -32,8 +32,7 @@ app.factory('AnimalFactory', function () {
         animateStyle: {
             'width': '295px',
             'height': '190px',
-            // this pic totally works
-            'background-image': 'url("http://i.imgur.com/8fg1J0C.png")'
+            'background-image': 'url("http://i.imgur.com/OfL5Alp.png")'
         }
     }, {
         picture: "http://i.imgur.com/ESsA3Kw.png",
