@@ -25,6 +25,7 @@ module.exports = function (app) {
                     return UserModel.create({
                         name: profile._json.user.fullName,
                         avatar: profile._json.user.avatar,
+                        fitness: 'fitbit',
                         fitbit: {
                             id: profile.id,
                             tokens: {
@@ -41,9 +42,23 @@ module.exports = function (app) {
                 userToLogin.fitbit.tokens.access_token = accessToken;
                 userToLogin.fitbit.tokens.refresh_token = refreshToken;
 
-                helper.getDailyActivitySummary(userToLogin.fitbit.tokens, {})
-                .then(function (stepData) {
-                    userToLogin.fitbit.steps = stepData.summary.steps;
+                helper.getActivityTimeSeries(userToLogin.fitbit.tokens, {}, '7d', 'steps')
+                .then(function (data) {
+                    var stepsData = data['activities-tracker-steps'];
+                    stepsData.forEach(function (day) {
+                        var dayData = {};
+                        dayData.steps = Number(day.value);
+                        var oneDay = day.dateTime.split('-');
+                        var year = Number(oneDay[0]);
+                        var month = Number(oneDay[1]) - 1;
+                        var day = Number(oneDay[2]);
+                        dayData.date = new Date(year, month, day);
+                        userToLogin.fitbit.weekSteps.push(dayData);
+                    })
+                    userToLogin.fitbit.weekSteps = userToLogin.fitbit.weekSteps.reverse().slice(0, 7);
+                    var todaysSteps = userToLogin.fitbit.weekSteps[0].steps;
+                    userToLogin.fitbit.steps = todaysSteps;
+
                     var currentDate = new Date();
                     // update money only once per day
                     if (userToLogin.animal.lastLoggedIn.getFullYear() !== currentDate.getFullYear() 
@@ -68,34 +83,39 @@ module.exports = function (app) {
                                 userToLogin.animal.money += (newDifference * 0.002);
                             }
                     }
-                    return userToLogin;
+
+                    userToLogin.save()
+                    .then(function (stepsSavedUser) {
+                        helper.getSleepTimeSeries(userToLogin.fitbit.tokens, {}, '7d', 'minutesAsleep')
+                        .then(function (data) {
+                            var sleepData = data['sleep-minutesAsleep'];
+                            sleepData.forEach(function (day) {
+                                var dayData = {};
+                                dayData.minutes = Number(day.value);
+                                var oneDay = day.dateTime.split('-');
+                                var year = Number(oneDay[0]);
+                                var month = Number(oneDay[1]) - 1;
+                                var day = Number(oneDay[2]);
+                                dayData.date = new Date(year, month, day);
+                                stepsSavedUser.fitbit.weekSleep.push(dayData);
+                            })
+                            stepsSavedUser.fitbit.weekSleep = userToLogin.fitbit.weekSleep.reverse().slice(0, 7);
+                            var todaysSleep = stepsSavedUser.fitbit.weekSleep[0].minutes;
+                            stepsSavedUser.fitbit.sleep = todaysSleep;
+                            return stepsSavedUser.save();
+                        })                    
+                        .then(function () {
+                            console.log('Fitbit user has been updated and saved!')
+                        })
+                    })
                 })
-                .then(function (userSteps) {
-                    return helper.getSleepSummary(userSteps.fitbit.tokens, {})
-                    .then(function (userSleep) {
-                        userSteps.fitbit.sleep = userSleep.summary.totalMinutesAsleep;
-                        return userSteps;
-                    });
-                })
-                .then(function (user) {
-                    UserModel.findOneAndUpdate({ _id: user._id }, { fitbit: user.fitbit, animal: user.animal })
-                    .then(function () {
-                        console.log('Fitbit user has been saved!');
-                    });
-                })
-                .then(null, function (err) {
-                    console.error(err);
-                });
                 done(null, userToLogin);
-            }, function (err, user) {
-                console.error('This is a major error');
-                done(err);
-        });
-    }
-
-    ));
-
-
+            })
+        }, function (err, user) {
+            console.error('This is a major error');
+            done(err);
+        })
+    );
 
     app.get('/auth/fitbit', passport.authenticate('fitbit', {
         scope: ['activity','heartrate','location','profile','sleep','social'] }

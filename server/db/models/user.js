@@ -7,6 +7,7 @@ var _ = require('lodash');
 var schema = new Schema({
     name: String,
     avatar: String,
+    fitness: String,
     animal: {
         name: String,
         species: String,
@@ -74,7 +75,15 @@ var schema = new Schema({
             refresh_token: String
         },
         steps: Number,
-        sleep: Number
+        sleep: Number,
+        weekSteps: [{
+            steps: Number,
+            date: String
+        }],
+        weekSleep: [{
+            minutes: Number,
+            date: String
+        }]
     },
     jawbone: {
         id: String,
@@ -83,7 +92,15 @@ var schema = new Schema({
             refresh_token: String
         },
         steps: Number,
-        sleep: Number
+        sleep: Number,
+        weekSteps: [{
+            steps: Number,
+            date: String
+        }],
+        weekSleep: [{
+            minutes: Number,
+            date: String
+        }]
     },
     misfit: {
         id: String,
@@ -93,7 +110,6 @@ var schema = new Schema({
         }
     }
 });
-
 
 // PASSWORD ENCRYPTION STUFF
 // method to remove sensitive information from user objects before sending them out
