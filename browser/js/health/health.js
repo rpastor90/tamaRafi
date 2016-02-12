@@ -1,22 +1,24 @@
-app.controller('HealthCtrl', function ($scope, $uibModal) {
+app.controller('HealthCtrl', function ($scope, $uibModal, UserFactory) {
     $scope.animationsEnabled = true;
 
-    $scope.showHealth = function() {
+    $scope.showHealth = function () {
+        console.log("this is the uibModal", $uibModal);
         $uibModal.open({
             animation: $scope.animationsEnabled,
             templateUrl: '/js/health/health.html',
             controller: 'OpenHealthCtrl',
             resolve: {
-                user: function (UserFactory) {
+                user: function () {
                     return UserFactory.getUser();
                 }
             }
         });
     };
 })
-.controller('OpenHealthCtrl', function ($scope, user, $uibModalInstance) {
-   
+.controller('OpenHealthCtrl', function ($scope, user) {
     // set goals
+
+    
     $scope.goalSteps = user.animal.stepsGoal;
     $scope.goalSleep = user.animal.sleepGoal;
 

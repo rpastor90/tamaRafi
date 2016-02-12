@@ -19,7 +19,7 @@ app.controller('CreatureComputerCtrl', function ($scope, $uibModal, UserFactory)
 
 })
 
-.controller('OpenComputerController', function ($scope, $uibModalInstance, user, UserFactory) {
+.controller('OpenComputerController', function ($scope, user, UserFactory) {
     $scope.user = user;
     console.log(user);
     $scope.friends = user.animal.friends;
