@@ -7,9 +7,8 @@ app.factory('LeaderboardFactory', function ($http) {
         })
     };
     return LeaderboardFactory;
-});
-
-app.controller('LeaderboardCtrl', function ($scope, $uibModal) {
+})
+.controller('LeaderboardCtrl', function ($scope, $uibModal) {
     $scope.animationsEnabled = true;
 
     $scope.showLeaderboard = function() {
