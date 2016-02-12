@@ -1,28 +1,33 @@
 .gameContainer {
-  position: fixed;
-  bottom: 0;
-  display: block;
-  width: 100%;
-  text-align: center;
+    position: fixed;
+    bottom: 0;
+    display: block;
+    width: 100%;
+    text-align: center;
 }
 
 .winner {
-  text-align: center;
-  height: 10vh;
-  h1 {
-    font-size: 80px;
-  }
+    text-align: center;
+    h1 {
+        margin-top: 100px;
+        font-size: 80px;
+        color: white;
+        letter-spacing: 20px;
+        text-shadow: 5px 5px black;
+    }
 }
 
 .middleLine {
-  border-left: thick solid #ff0000;
-  width: 10px;
-  height: 100px;
-  position: absolute;
-  bottom: 0;
-  margin-left: 50%;
-  z-index: -1;
+    border-left: thick solid #ff0000;
+    width: 10px;
+    height: 100px;
+    position: absolute;
+    bottom: 0;
+    margin-left: 50%;
+    z-index: -1;
 }
+
+
 /*.left-char {
   text-align: center;
   background-image: url('http://i.imgur.com/x1V12Km.png');
