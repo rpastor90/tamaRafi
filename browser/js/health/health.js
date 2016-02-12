@@ -55,13 +55,6 @@ app.controller('HealthCtrl', function ($scope, $uibModal, UserFactory) {
 
     $scope.weighted = ((7 * $scope.stepsPercentDiff) + (3 * $scope.sleepPercentDiff)) / 10;
 
-
-    $('.health-area').css('background','url("http://i.imgur.com/BNpVeae.jpg")');
-    $('.health-area').css('background-position','-150px -400px');
-    $('.health-area').css('background-size','1000px');
-
-
-
     // The following is for the weekly data
 
     var fitness = user.fitness;
@@ -94,6 +87,10 @@ app.controller('HealthCtrl', function ($scope, $uibModal, UserFactory) {
     // Setting labels
     $scope.series1 = ['Steps','Coins earned'];
     $scope.series2 = ['Sleep (in hours)', 'Tug-of-war pull-factor'];
+
+    $('.health-area').css('background','url("http://i.imgur.com/BNpVeae.jpg")');
+    $('.health-area').css('background-position','-150px -400px');
+    $('.health-area').css('background-size','1000px');
 
     // Functions for arrowing through health data
 
