@@ -4,8 +4,6 @@ app.controller('CreatureComputerCtrl', function ($scope, $uibModal, UserFactory)
    
 
     $scope.showSocial = function () {
-        console.log("$uibModal", $uibModal);
-        console.log("$scope", $scope);
         $uibModal.open({
             animation: $scope.animationsEnabled,
             templateUrl: '/js/creature-computer/creature-computer.html',
