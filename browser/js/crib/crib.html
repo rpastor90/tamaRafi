@@ -21,7 +21,7 @@
         <div class="dock" ng-show="showSwag && customizing">
             <ul>
                 <li id="currentItem" ng-repeat="swag in swags track by $index" ng-model="swag" set-position>
-                    <a><img ng-click="wearHat(swag)" ng-hide='isHat && swag.name === "top hat"' ng-src="{{swag.imageUrl}}"></a>
+                    <a><img ng-click="wearHat(swag); changeBackground(swag)" ng-hide='isHat && (swag.name === "top hat" || swag.name === "storm trooper")' ng-src="{{swag.imageUrl}}"></a>
                 </li>
             </ul>
         </div>

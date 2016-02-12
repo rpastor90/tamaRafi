@@ -30,13 +30,43 @@ app.controller('CribCtrl', function ($rootScope, $scope, $state, user, AuthServi
     $scope.swags = swags;
 
     $scope.isHat = false;
-        var pandaHatSprite = 'http://i.imgur.com/fMwP5tf.png';
 
     $scope.wearHat = function (swag) {
         if (swag.name === 'top hat') {
             $scope.isHat = true;
-            $('#creatureContainer').css('background', 'url("' + pandaHatSprite + '")');
+            $('#creatureContainer').css('background', 'url("http://i.imgur.com/fMwP5tf.png")');
         }
+        if (swag.name === 'storm trooper') {
+            $scope.isHat = true;
+            $('#creatureContainer').css('background', 'url("http://i.imgur.com/JgVnEiy.png")');
+        }
+    }
+
+    $scope.changeBackground = function (swag) {
+        console.log("inside the fuction ", swag);
+        if (swag.category === 'background') {
+            if (swag.name === 'brick') {
+                $('.crib').css('background', 'url("http://i.imgur.com/Hv9Be1e.png") no-repeat center center fixed');
+    // -moz-background-size: cover;
+    // -o-background-size: cover;
+    // background-size: cover;
+    // position: fixed;
+    // top: 0;
+    // left: 0;
+            }
+            if (swag.name === 'space') {
+                $('.crib').css('background', 'url("http://i.imgur.com/cqOaGQe.png") no-repeat center center fixed');
+            }
+                $('.crib').css('-webkit-background-size', 'cover');
+                $('.crib').css('background-size', 'cover');
+                $('.crib').css('position', 'fixed');
+                $('.crib').css('top', '0');
+                $('.crib').css('left', '0');
+                $('.crib').css('min-width', '100%');
+                $('.crib').css('min-height', '100%');
+                $('.crib').css('z-index', '-1');
+        }
+
     }
 
     $scope.logout = function() {

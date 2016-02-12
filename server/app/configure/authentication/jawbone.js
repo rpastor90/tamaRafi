@@ -30,6 +30,7 @@ module.exports = function(app) {
                     return UserModel.create({
                         name: profile.data.first + " " + profile.data.last,
                         avatar: 'jawbone.com/' + profile.data.image,
+                        fitness: 'jawbone',
                         animal: {
                             lastLoggedIn: new Date()
                         },
@@ -57,9 +58,20 @@ module.exports = function(app) {
                     if (err) {
                         console.log('Error: ' + err);
                     } else {
-                        // console.log('JAWBONE STEPS FOR THE WEEK', JSON.parse(body).data)
-                        steps = JSON.parse(body).data.items[0].title.split(' ')[0].split(',').join('');
-                        userToLogin.jawbone.steps = steps;
+                        var stepsData = JSON.parse(body).data.items.slice(0, 7);
+                        stepsData.forEach(function (day) {
+                            var dayData = {};
+                            dayData.steps = Number(day.title.split(' ')[0].split(',').join(''));
+                            var oneDay = day.date.toString();
+                            var year = Number(oneDay.slice(0, 4));
+                            var month = Number(oneDay.slice(4, 6)) - 1;
+                            var day = Number(oneDay.slice(6));
+                            dayData.date = new Date(year, month, day);
+                            userToLogin.jawbone.weekSteps.push(dayData);
+                        })
+                        userToLogin.jawbone.weekSteps = userToLogin.jawbone.weekSteps.slice(0, 7);
+                        var todaysSteps = userToLogin.jawbone.weekSteps[0].steps;
+                        userToLogin.jawbone.steps = todaysSteps;
                     }
                     var currentDate = new Date();
 
@@ -94,16 +106,28 @@ module.exports = function(app) {
                             if (err) {
                                 console.log('Error: ', err);
                             } else {
-                                var sleep = JSON.parse(body).data.items[0];
-                                var hours = Number(sleep.title.split(' ')[1].slice(0, -1))*60;
-                                var minutes = Number(sleep.title.split(' ')[2].slice(0, -1));
-                                sleep = (hours + minutes);
+                                var sleepData = JSON.parse(body).data.items.slice(0, 7);
+                                sleepData.forEach(function (day) {
+                                    var dayData = {};
+                                    var sleep = day.title.split(' ');
+                                    var hours = Number(sleep[1].slice(0, -1)) * 60;
+                                    var minutes = Number(sleep[2].slice(0, -1));
+                                    dayData.minutes = (hours + minutes);
+                                    var oneDay = day.date.toString();
+                                    var year = Number(oneDay.slice(0, 4));
+                                    var month = Number(oneDay.slice(4, 6)) - 1;
+                                    var day = Number(oneDay.slice(6));
+                                    dayData.date = new Date(year, month, day);
+                                    stepsSavedUser.jawbone.weekSleep.push(dayData);
+                                })
+                                stepsSavedUser.jawbone.weekSleep = userToLogin.jawbone.weekSleep.slice(0, 7);
+                                var todaysSleep = stepsSavedUser.jawbone.weekSleep[0].minutes;
+                                stepsSavedUser.jawbone.sleep = todaysSleep;
+                                return stepsSavedUser.save();
                             }
-                            stepsSavedUser.jawbone.sleep = sleep;
-                            stepsSavedUser.save()
-                            .then(function () {
-                                console.log('Jawbone user has been updated and saved!')
-                            });
+                        })
+                        .then(function () {
+                            console.log('Jawbone user has been updated and saved!')
                         })
                     })
                     done(null, userToLogin);

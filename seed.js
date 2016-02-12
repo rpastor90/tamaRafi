@@ -30,73 +30,223 @@ var seedSwag = function () {
             name: 'cake',
             category: 'food',
             price: 30,
-            imageUrl: 'http://orig06.deviantart.net/1e60/f/2013/049/6/d/strawberry_shortcake_pixel_art_by_karisean-d5vep9n.png'
+            imageUrl: 'http://i.imgur.com/iJ8LgYn.png'
         },
         {
             name: 'pizza',
             category: 'food',
             price: 20,
-            imageUrl: 'http://41.media.tumblr.com/tumblr_mawmdsMrnf1rsfae9o1_500.png'
+            imageUrl: 'http://i.imgur.com/JBmn8pk.png'
         },
         {
             name: 'pancakes',
             category: 'food',
             price: 20,
-            imageUrl: 'https://31.media.tumblr.com/9b7d8861d8d4bc98ee2136ef3d4bb4e0/tumblr_inline_neeb3oM1Y41sc17cx.gif'
+            imageUrl: 'http://i.imgur.com/jwFGVY4.gif'
+        },
+        {
+            name: 'grilled cheese',
+            category: 'food',
+            price: 20,
+            imageUrl: 'http://i.imgur.com/1Y3mrvS.png'
+        },
+        {
+            name: 'sad ice cream',
+            category: 'food',
+            price: 10,
+            imageUrl: 'http://i.imgur.com/lkp97wZ.png'
+        },
+        {
+            name: 'donut',
+            category: 'food',
+            price: 15,
+            imageUrl: 'http://i.imgur.com/bAidepp.png'
+        },
+        {
+            name: 'sushi',
+            category: 'food',
+            price: 100,
+            imageUrl: 'http://i.imgur.com/PnJQIbf.png'
         },
         {
             name: 'sofa',
             category: 'furniture',
-            price: 200,
-            imageUrl: 'http://orig08.deviantart.net/7206/f/2013/297/4/3/pixel_couch_by_captaintoog-d6a4jzo.png'
+            price: 300,
+            imageUrl: 'http://i.imgur.com/PLSFkHR.png'
         },
         {
             name: 'bed',
             category: 'furniture',
-            price: 300,
-            imageUrl: 'http://40.media.tumblr.com/c72c5681278fb5cacacd58047007590a/tumblr_njxcsc0C7I1r7ueqyo1_400.png'
+            price: 400,
+            imageUrl: 'http://i.imgur.com/qWIJy0i.png'
+        },
+        {
+            name: 'toilet',
+            category: 'furniture',
+            price: 200,
+            imageUrl: 'http://i.imgur.com/CPmIUMw.png'
         },
         {
             name: 'table',
             category: 'furniture',
             price: 100,
-            imageUrl: 'http://piq.codeus.net/static/media/userpics/piq_26370_400x400.png'
+            imageUrl: 'http://i.imgur.com/DcSkCGa.png'
         },
         {
-            name: "santa's hat",
-            category: 'hat',
-            price: 20,
-            imageUrl: 'http://piq.codeus.net/static/media/userpics/piq_18109_400x400.png'
+            name: 'chair',
+            category: 'furniture',
+            price: 100,
+            imageUrl: 'http://i.imgur.com/6ogJ0Tm.png'
         },
         {
-            name: "mario's hat",
-            category: 'hat',
-            price: 40,
-            imageUrl: 'http://piq.codeus.net/static/media/userpics/piq_39920_400x400.png'
+            name: 'bookshelf',
+            category: 'furniture',
+            price: 500,
+            imageUrl: 'http://i.imgur.com/KZO3TGJ.jpg'
+        },
+        {
+            name: 'sink',
+            category: 'furniture',
+            price: 150,
+            imageUrl: 'http://i.imgur.com/fk0sG0t.png'
         },
         {
             name: "top hat",
-            category: 'hat',
+            category: 'random',
             price: 15,
-            imageUrl: 'http://i.imgur.com/VPNeE3i.png'
+            imageUrl: 'http://i.imgur.com/BSgEGkx.gif'
         },
         {
             name: "tv",
             category: 'random',
             price: 300,
-            imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/7/71/Pixelart-tv-iso-2.png'
+            imageUrl: 'http://i.imgur.com/BIMPm6G.png'
+        },
+        {
+            name: "flowers",
+            category: 'random',
+            price: 50,
+            imageUrl: 'http://i.imgur.com/JjM3nLJ.png'
+        },
+        {
+            name: "life",
+            category: 'random',
+            price: 5000,
+            imageUrl: 'http://i.imgur.com/vRleqCb.png'
+        },
+        {
+            name: "music",
+            category: 'random',
+            price: 5,
+            imageUrl: 'http://i.imgur.com/Gl6ad4i.gif'
+        },
+        {
+            name: "storm trooper",
+            category: 'random',
+            price: 2000,
+            imageUrl: 'http://i.imgur.com/UNrFL8k.png'
+        },
+        {
+            name: "fireplace",
+            category: 'random',
+            price: 400,
+            imageUrl: 'http://i.imgur.com/zPy330a.gif'
+        },
+        {
+            name: "dragon statue",
+            category: 'medieval',
+            price: 700,
+            imageUrl: 'http://i.imgur.com/zlFg1zz.png'
+        },
+        {
+            name: "chandelier",
+            category: 'medieval',
+            price: 200,
+            imageUrl: 'http://i.imgur.com/KjUm3OM.png'
+        },
+        {
+            name: "potion",
+            category: 'medieval',
+            price: 50,
+            imageUrl: 'http://i.imgur.com/BabvIaH.png'
+        },
+        {
+            name: "sword",
+            category: 'medieval',
+            price: 100,
+            imageUrl: 'http://i.imgur.com/c5mYxyD.png'
+        },
+        {
+            name: "flag",
+            category: 'medieval',
+            price: 75,
+            imageUrl: 'http://i.imgur.com/QpZzjHo.png'
+        },
+        {
+            name: "armor",
+            category: 'medieval',
+            price: 200,
+            imageUrl: 'http://i.imgur.com/10LjElP.png'
+        },
+        {
+            name: 'ham',
+            category: 'medieval',
+            price: 50,
+            imageUrl: 'http://i.imgur.com/eOy8HFn.gif'
+        },
+        {
+            name: "ghost",
+            category: 'holiday',
+            price: 150,
+            imageUrl: 'http://i.imgur.com/oQoKNTM.gif'
         },
         {
             name: "valentine",
-            category: 'random',
+            category: 'holiday',
             price: 10,
-            imageUrl: 'http://wifflegif.com/assets/8bitheart-desaturated-300bd91aca8a3fa03fd6f91b71340682.png'
+            imageUrl: 'http://i.imgur.com/jXAKwmm.png'
         },
         {
-            name: "fire flower",
-            category: 'random',
+            name: "pumpkin",
+            category: 'holiday',
+            price: 40,
+            imageUrl: 'http://i.imgur.com/iemoEyM.gif'
+        },
+        {
+            name: "turkey",
+            category: 'holiday',
             price: 50,
-            imageUrl: 'http://4.bp.blogspot.com/-wV7ycgn04kU/US-3RFqJZSI/AAAAAAAAE7k/EJrEh7-EgqM/s1600/flower_pixelart3.png'
+            imageUrl: 'http://i.imgur.com/kcWhtbQ.gif'
+        },
+        {
+            name: "tree",
+            category: 'holiday',
+            price: 100,
+            imageUrl: 'http://i.imgur.com/bGasKm0.gif'
+        },
+        {
+            name: "stocking",
+            category: 'holiday',
+            price: 15,
+            imageUrl: 'http://i.imgur.com/f1u7K5R.png'
+        },
+        {
+            name: "earth",
+            category: 'holiday',
+            price: 1500,
+            imageUrl: 'http://i.imgur.com/AjECFEN.gif'
+        },
+        {
+            name: 'brick',
+            category: 'background',
+            price: 10000,
+            imageUrl: 'http://i.imgur.com/Hv9Be1e.png'
+        },
+        {
+            name: 'space',
+            category: 'background',
+            price: 10000,
+            imageUrl: 'http://i.imgur.com/cqOaGQe.png'
         }
     ];
     return Swag.createAsync(swags);

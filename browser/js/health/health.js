@@ -20,15 +20,14 @@ app.controller('HealthCtrl', function ($scope, $uibModal) {
     $scope.goalSteps = user.animal.stepsGoal;
     $scope.goalSleep = user.animal.sleepGoal;
 
-    if (user.jawbone !== undefined) { 
+    if (user.fitness === 'jawbone') {
         // visualize user's most recently updated steps for the day
         $scope.steps = user.jawbone.steps;
 
         // visualize user's most recently updated sleep for the day
         $scope.sleep = (user.jawbone.sleep/60).toFixed(1);
     }
-
-    else if (user.fitbit !== undefined) {
+    else if (user.fitness === 'fitbit') {
         // visualize user's most recently updated steps for the day
         $scope.steps = user.fitbit.steps;
 
@@ -40,7 +39,11 @@ app.controller('HealthCtrl', function ($scope, $uibModal) {
     $scope.stepsPercentDiff = ($scope.steps / $scope.goalSteps) * 100;
 
     var sleepDifference = ($scope.goalSleep - $scope.sleep).toFixed(1);
+
     $scope.sleepPercentDiff = ($scope.sleep / $scope.goalSleep) * 100;
+    if ($scope.sleepPercentDiff > 100) {
+        $scope.sleepPercentDiff = 0;
+    }
 
     $scope.labels1 = ["stepped", "steps left"];
     $scope.labels2 = ["hours slept", "more sleep?"];

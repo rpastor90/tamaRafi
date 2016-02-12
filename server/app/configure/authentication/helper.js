@@ -113,10 +113,10 @@ client.getSleepTimeSeries = function (token, options, periodOfTime, typeOfData) 
 };
 
 client.postSleepLog = function (token, options, body) {
-        options = buildSleepLogOptions(options);
-        token = this.createToken(token);
-        options.access_token = token.token.access_token;
-        return createRequestPromise(options, 'POST', body)
+    options = buildSleepLogOptions(options);
+    token = this.createToken(token);
+    options.access_token = token.token.access_token;
+    return createRequestPromise(options, 'POST', body)
 }
 
 // This function gets a summary of one day's activity
