@@ -19,9 +19,7 @@
     </div>
     <div id="weekSteps" ng-show="onDisplay===1"> 
         <h1>Weekly Steps</h1>
-        <!-- //ng-show="showWeeklyHealth" -->
-        <!-- Reset width later? -->
-        <canvas id="weekStepsChart" class="chart chart-line weekChart" chart-data="weekSteps" chart-labels="days" chart-series="series" chart-legend="true" colours="[{
+        <canvas id="weekStepsChart" class="chart chart-line weekChart" chart-data="weekSteps" chart-labels="days" chart-series="series1" chart-legend="true" colours="[{
             fillColor: 'rgba(107, 10, 10, 0.5)',
             strokeColor: 'rgba(107, 10, 10, 0.8)'
 },{
@@ -30,10 +28,9 @@
 }]" options="{bezierCurve: false}" ></canvas>
     </div>
 
-    <div id="weekSleep" ng-show="onDisplay===2"> <!-- //ng-show="showWeeklyHealth" -->
-        <!-- Reset width later? -->
+    <div id="weekSleep" ng-show="onDisplay===2"> 
          <h1>Weekly Sleep</h1>
-        <canvas id="weekSleepChart" class="chart chart-bar weekChart"  chart-data="weekSleep" chart-labels="days" ></canvas>
+        <canvas id="weekSleepChart" class="chart chart-bar weekChart"  chart-data="weekSleep" chart-labels="days" chart-series="series2" chart-legend="true" ></canvas>
     </div>
     
     

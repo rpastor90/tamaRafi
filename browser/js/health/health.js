@@ -61,7 +61,8 @@ app.controller('HealthCtrl', function ($scope, $uibModal) {
     // Chart.defaults.global.colours[1] = '#cc9900';
     $scope.weekSteps = [steps, money];
     $scope.weekSleep = [[400, 500, 480, 250, 300, 600, 640]];
-    $scope.series = ['Steps','Coins earned']
+    $scope.series1 = ['Steps','Coins earned']
+    $scope.series2 = ['Sleep']
     $scope.nextData = function() {
         Chart.defaults.global.colours[1] = "#97BBCD";
         console.log(Chart.defaults.global.colours)
