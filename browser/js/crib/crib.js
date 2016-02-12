@@ -1,4 +1,6 @@
-app.config(function ($stateProvider) {
+// USERS SHOULD NOT BE ABLE TO BUY SAME SWAG TWICE!
+
+app.config(function($stateProvider) {
 
     $stateProvider.state('crib', {
         url: '/crib',
@@ -8,9 +10,9 @@ app.config(function ($stateProvider) {
             authenticate: true
         },
         resolve: {
-            user : function (UserFactory) {
+            user: function(UserFactory) {
                 return UserFactory.getUser();
-                    
+
             },
             swags: function(SwagFactory, $animate, user) {
                 return SwagFactory.fetchSwagByUser(user);
@@ -20,7 +22,7 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('CribCtrl', function ($rootScope, $scope, $state, user, AuthService, SwagFactory, swags) {
+app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthService, SwagFactory, swags) {
 
     var swagPositions = [];
     var swagSizes = [];
@@ -29,52 +31,62 @@ app.controller('CribCtrl', function ($rootScope, $scope, $state, user, AuthServi
     $scope.isShown = false;
     $scope.swags = swags;
 
-    $scope.isHat = false;
-
-    $scope.wearHat = function (swag) {
+    // sad or happy panda state
+    var steps = $scope.user[$scope.user.fitness].steps / $scope.user.animal.stepsGoal;
+    var sleep = ($scope.user[$scope.user.fitness].sleep/60) / $scope.user.animal.sleepGoal;
+    $scope.average = (steps + sleep)/2 * 100;
+    
+    
+    $scope.wearHat = function(swag) {
         if (swag.name === 'top hat') {
-            $scope.isHat = true;
+            $scope.removeMe = function (removeSwag) {
+                if (removeSwag === swag) {
+                    swag.hide = true;
+                }
+            }
             $('#creatureContainer').css('background', 'url("http://i.imgur.com/fMwP5tf.png")');
         }
         if (swag.name === 'storm trooper') {
-            $scope.isHat = true;
+            $scope.removeMe = function (removeSwag) {
+                if (removeSwag === swag) {
+                    swag.hide = true;
+                }
+            }
             $('#creatureContainer').css('background', 'url("http://i.imgur.com/JgVnEiy.png")');
         }
     }
 
-    $scope.changeBackground = function (swag) {
-        console.log("inside the fuction ", swag);
+    $scope.changeBackground = function(swag) {
         if (swag.category === 'background') {
+            $scope.removeMe = function (removeSwag) {
+                if (removeSwag === swag) {
+                    swag.hide = true;
+                }
+            }
             if (swag.name === 'brick') {
                 $('.crib').css('background', 'url("http://i.imgur.com/Hv9Be1e.png") no-repeat center center fixed');
-    // -moz-background-size: cover;
-    // -o-background-size: cover;
-    // background-size: cover;
-    // position: fixed;
-    // top: 0;
-    // left: 0;
             }
             if (swag.name === 'space') {
                 $('.crib').css('background', 'url("http://i.imgur.com/cqOaGQe.png") no-repeat center center fixed');
             }
-                $('.crib').css('-webkit-background-size', 'cover');
-                $('.crib').css('background-size', 'cover');
-                $('.crib').css('position', 'fixed');
-                $('.crib').css('top', '0');
-                $('.crib').css('left', '0');
-                $('.crib').css('min-width', '100%');
-                $('.crib').css('min-height', '100%');
-                $('.crib').css('z-index', '-1');
+            $('.crib').css('-webkit-background-size', 'cover');
+            $('.crib').css('-moz-background-size', 'cover');
+            $('.crib').css('-o-background-size', 'cover');
+            $('.crib').css('background-size', 'cover');
+            $('.crib').css('position', 'fixed');
+            $('.crib').css('top', '0');
+            $('.crib').css('left', '0');
+            $('.crib').css('min-width', '100%');
+            $('.crib').css('min-height', '100%');
+            $('.crib').css('z-index', '-1');
         }
 
     }
+    function printMousePos(event) {
+      console.log("clientX: " + event.clientX + "clientY: " + event.clientY);
+    }
 
-    $scope.logout = function() {
-        AuthService.logout()
-        .then(function() {
-            $state.go('home');
-        });
-    };
+    document.addEventListener("click", printMousePos);
 
     var onDragStop = function(event, ui, swag) {
         var bool = false;
@@ -87,31 +99,28 @@ app.controller('CribCtrl', function ($rootScope, $scope, $state, user, AuthServi
         });
 
         var swagPositionObj = {};
-
-
         if (!bool) {
             swagPositionObj.swag = swag._id;
             // Create the position object
-           swagPositionObj.posX = event.pageX - Number(ui.helper.context.style.width.slice(0,-2))/2 + 'px';
-            swagPositionObj.posY = event.pageY + Number(ui.helper.context.style.height.slice(0,-2))/2 + 'px';
+            swagPositionObj.posX = event.pageX - Number(ui.helper.context.style.width.slice(0, -2))/2 + 'px';
+            swagPositionObj.posY = event.pageY + Number(ui.helper.context.style.height.slice(0, -2))/2+ 'px';
+            console.log('xPOS', swagPositionObj.posX, 'Ypos', swagPositionObj.posY)
             swagPositions.push(swagPositionObj);
         } else {
-            swagPositions[indexStore].posX = event.pageX - Number(ui.helper.context.style.width.slice(0,-2))/2  + 'px';
-            swagPositions[indexStore].posY = event.pageY + Number(ui.helper.context.style.height.slice(0,-2))/2  + 'px';
+            swagPositions[indexStore].posX = event.pageX - Number(ui.helper.context.style.width.slice(0, -2)) + 200 + 'px';
+            swagPositions[indexStore].posY = event.pageY + Number(ui.helper.context.style.height.slice(0, -2)) - 200 + 'px';
+            console.log('xPOS and ypos', swagPositions[indexStore])
         }
         // And push to the swagPositions array
-        
         // Remove this element from the dock and set position
-
         //MIGHT STILL NEED THIS
         var detached = $(event.target).detach();
         $('.notTheDock').append(detached);
         detached.css('position', 'fixed');
         //getting rid of this && ui.helper.context.style.height
-            console.log("in reset")
-            detached.css('left', (event.pageX + 'px'));
-            detached.css('top', (event.pageY + 'px'));
-        
+        detached.css('left', (event.pageX + 'px'));
+        detached.css('top', (event.pageY + 'px'));
+
     };
 
     var onResizeStop = function(event, ui, swag) {
@@ -126,15 +135,6 @@ app.controller('CribCtrl', function ($rootScope, $scope, $state, user, AuthServi
 
         var swagSizeObj = {};
 
-        // if (!bool) {
-        //     swagSizeObj.swag = swag._id;
-        //     swagSizeObj.height = ui.helper.context.style.height + 'px';
-        //     swagSizeObj.width = ui.helper.context.style.width + 'px';
-        //     swagSizes.push(swagSizeObj);
-        // } else {
-        //     swagSizes[indexStore].height = ui.helper.context.style.height + 'px';
-        //     swagSizes[indexStore].width = ui.helper.context.style.width + 'px';
-        // }
         if (!bool) {
             swagSizeObj.swag = swag._id;
             swagSizeObj.height = ui.helper.context.style.height;
@@ -161,8 +161,23 @@ app.controller('CribCtrl', function ($rootScope, $scope, $state, user, AuthServi
     };
 
     $scope.reset = function() {
-        $scope.isHat = false;
+        swags.forEach(function (swag) {
+            swag.hide = false;
+        })
+        
         $('#creatureContainer').css('background', 'url("http://createalittle.com/wp-content/uploads/2014/01/panda_colour.png")');
+        $('.crib').css('background', 'url("http://i.imgur.com/d8C45QS.png") no-repeat center center fixed');
+        $('.crib').css('-webkit-background-size', 'cover');
+        $('.crib').css('-moz-background-size', 'cover');
+        $('.crib').css('-o-background-size', 'cover');
+        $('.crib').css('background-size', 'cover');
+        $('.crib').css('position', 'fixed');
+        $('.crib').css('top', '0');
+        $('.crib').css('left', '0');
+        $('.crib').css('min-width', '100%');
+        $('.crib').css('min-height', '100%');
+        $('.crib').css('z-index', '-1');
+
         var cribItems = $('.notTheDock li').toArray();
         cribItems.forEach(function(cribItem) {
             $(cribItem).detach();
@@ -195,7 +210,7 @@ app.controller('CribCtrl', function ($rootScope, $scope, $state, user, AuthServi
                     }
                 });
             } else {
-                console.log('THIS SHOULD PRINT IF TRYING TO RESIZE AFTER SAVE')
+                // FIX THIS: SHOULD NOT BE CUSTOMIZEABLE AFTER SAVE
                 cribItem.removeClass('ui-resizable ui-draggable ui-draggable-handle');
             }
         });
@@ -214,9 +229,6 @@ app.directive('setPosition', function() {
                     element.css('position', 'fixed');
                     element.css('left', scope.user.animal.swagPositions[i].posX);
                     element.css('top', scope.user.animal.swagPositions[i].posY);
-
-
-
                 };
             };
             for (var i = 0; i < scope.user.animal.swagSizes.length; i++) {

@@ -1,9 +1,9 @@
 <div class="quicklook-modal">
     <div id='creaturecomputer' class="container">
         <div class="row" id="header" ng-show="!showPostForm">
-            <div id="profilepic" class="col-xs-3"><img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiXyc4Q1-uTcYW0nk-ggYQVt964ASl0aLB4GiTesge6d_bx2RG'></div>
+            <div id="profilepic" class="col-xs-3"><img src='http://i.imgur.com/oDG9RI9.gif'></div>
             <div ng-click="close()" class="col-xs-9">
-                <h1>Welcome to FaceBogatchi, {{user.animal.name}}!</h1></div>
+                <h1>WELCOME TO FACEBOOGATCHI, {{user.animal.name | uppercase}}!</h1></div>
         </div>
         <!-- Joe's hardcoded facebook wall -->
         <div class="allPosts">
@@ -15,7 +15,7 @@
 						<img ng-src='http://i.imgur.com/ESsA3Kw.png'>
 					</div>
 					<div class = "col-xs-2" >
-						<span>comments </span><img src="https://ac3d197e9505f18c50e0-32b9f49f48b2c22be12b40ee79e2acc4.ssl.cf1.rackcdn.com/icon/logos_and_badges_like_button/j2lm0CeHbQRxugFMmozK/like-button-2015-06.png">
+						<span>comments </span><img src="http://i.imgur.com/cu0iUoN.png">
 					</div>
 				</div>
 			</div> -->
@@ -29,10 +29,11 @@
                         <img ng-src='http://i.imgur.com/ESsA3Kw.png'>
                     </div>
                     <div class="col-xs-2">
-                        <span>comments </span><img src="https://ac3d197e9505f18c50e0-32b9f49f48b2c22be12b40ee79e2acc4.ssl.cf1.rackcdn.com/icon/logos_and_badges_like_button/j2lm0CeHbQRxugFMmozK/like-button-2015-06.png">
+                        <span>Reply</span><img src="http://i.imgur.com/cu0iUoN.png">
                     </div>
                 </div>
             </div>
+            <hr ng-hide='showPostForm' && !showBetsy>
             <div id="post" ng-show="!showPostForm">
                 <div class="row" id="contents">
                     <div id="friendName" ng-click="goToFriendPage(post.author)" class=" col-xs-3">Chuckles</div>
@@ -43,10 +44,11 @@
                         <img ng-src='http://imgur.com/79JwbHZ.png'>
                     </div>
                     <div class="col-xs-2">
-                        <span>comments </span><img src="https://ac3d197e9505f18c50e0-32b9f49f48b2c22be12b40ee79e2acc4.ssl.cf1.rackcdn.com/icon/logos_and_badges_like_button/j2lm0CeHbQRxugFMmozK/like-button-2015-06.png">
+                        <span>Reply</span><img src="http://i.imgur.com/cu0iUoN.png">
                     </div>
                 </div>
             </div>
+            <hr ng-hide='showPostForm' && !showBetsy>
             <div id="post" ng-show="!showPostForm">
                 <div class="row" id="contents">
                     <div id="friendName" ng-click="goToFriendPage(post.author)" class=" col-xs-3">Betsy</div>
@@ -54,10 +56,10 @@
                 </div>
                 <div class="row friendpic">
                     <div class="col-xs-10">
-                        <img ng-src='http://imgur.com/KhbrGSK.png'>
+                        <img style="margin-bottom: 50px;" ng-src='http://imgur.com/KhbrGSK.png'>
                     </div>
                     <div class="col-xs-2">
-                        <span>comments </span><img src="https://ac3d197e9505f18c50e0-32b9f49f48b2c22be12b40ee79e2acc4.ssl.cf1.rackcdn.com/icon/logos_and_badges_like_button/j2lm0CeHbQRxugFMmozK/like-button-2015-06.png">
+                        <span>Reply</span><img src="http://i.imgur.com/cu0iUoN.png">
                     </div>
                 </div>
             </div>
@@ -65,22 +67,28 @@
         <div id="addfriend" class="row" ng-show="!showPostForm">
             <div class="col-xs-12">
                 <form ng-controller="CreatureComputerCtrl">
-                    <input type="text" ng-model="friend.name" name="name" />
-                    <button ng-click="addFriend(friend)"><img src="http://www.katiemillettyoga.com/__images/website-components/add-friend-button.png" /></button>
+                    <input style='height: 45px; border-radius: 20px;' type="text" ng-model="friend.name" name="name" />
+                    <a ng-click="addFriend(friend)"><img src="http://i.imgur.com/gUQucoZ.png" /></button></a>
                 </form>
             </div>
         </div>
         <!-- Posting form -->
+
         <div ng-show="showPostForm && !showBetsy" class="row" id="postingForm">
-            <h1>Post on Betsy's Wall</h1>
+            <h1 style='color: black; margin-top: 20%; font-size: 30px'>Post on Betsy's Wall</h1>
             <form ng-controller="CreatureComputerCtrl">
-                <textarea type="text" ng-model="post" name="name" rows="6" cols="50"></textarea>
+                <textarea type="text" ng-model="post" name="name" rows="6" cols="50" style='font-size: 20px'></textarea>
                 <br>
                 <button ng-click="createPost(post)" class="btn btn-primary">Create Post</button>
             </form>
         </div>
         <!-- Betsy's hardcoded facebook wall -->
-        <div class="allPosts">
+        <div class="betsys-wall">
+            <div class="row" id="header" ng-show='showBetsy'>
+                <div id="profilepic" class="col-xs-3"><img src='http://i.imgur.com/oDG9RI9.gif'></div>
+                <div ng-click="close()" class="col-xs-9">
+                    <h1>BETSY'S WALL</h1></div>
+            </div>
             <div id="post" ng-show="showBetsy">
                 <div class="row" id="contents">
                     <div id="friendName" ng-click="goToFriendPage(post.author)" class=" col-xs-3">Little Foot</div>
@@ -91,9 +99,10 @@
                         <img ng-src='http://i.imgur.com/zG5gVn5.png'>
                     </div>
                     <div class="col-xs-2">
-                        <span>comments </span><img src="https://ac3d197e9505f18c50e0-32b9f49f48b2c22be12b40ee79e2acc4.ssl.cf1.rackcdn.com/icon/logos_and_badges_like_button/j2lm0CeHbQRxugFMmozK/like-button-2015-06.png">
+                        <span>Reply</span><img src="http://i.imgur.com/cu0iUoN.png">
                     </div>
                 </div>
+                <hr>
             </div>
             <div id="post" ng-show="showBetsy">
                 <div class="row" id="contents">
@@ -102,12 +111,13 @@
                 </div>
                 <div class="row friendpic">
                     <div class="col-xs-10">
-                        <img ng-src='http://i.imgur.com/NlwDVd7.png '>
+                        <img ng-src='http://i.imgur.com/KhbrGSK.png'>
                     </div>
                     <div class="col-xs-2">
-                        <span>comments </span><img src="https://ac3d197e9505f18c50e0-32b9f49f48b2c22be12b40ee79e2acc4.ssl.cf1.rackcdn.com/icon/logos_and_badges_like_button/j2lm0CeHbQRxugFMmozK/like-button-2015-06.png">
+                        <span>Reply</span><img src="http://i.imgur.com/cu0iUoN.png">
                     </div>
                 </div>
+                <hr>
             </div>
             <div id="post" ng-show="showBetsy">
                 <div class="row" id="contents">
@@ -119,7 +129,7 @@
                         <img ng-src='http://i.imgur.com/bRqDh0u.png '>
                     </div>
                     <div class="col-xs-2">
-                        <span>comments </span><img src="https://ac3d197e9505f18c50e0-32b9f49f48b2c22be12b40ee79e2acc4.ssl.cf1.rackcdn.com/icon/logos_and_badges_like_button/j2lm0CeHbQRxugFMmozK/like-button-2015-06.png">
+                        <span>Reply</span><img src="http://i.imgur.com/cu0iUoN.png">
                     </div>
                 </div>
             </div>

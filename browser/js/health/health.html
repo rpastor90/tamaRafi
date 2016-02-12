@@ -1,5 +1,5 @@
 <div class="health-area">
-    <div id="dailyHealth" ng-show="onDisplay===0" >
+    <div id="dailyHealth" ng-show="onDisplay===0">
         <div class='eyes'>
             <div class='eye'>
                 <canvas id="doughnut1" class="chart chart-doughnut" chart-data="stepsData" chart-labels="labels1"></canvas>
@@ -16,8 +16,8 @@
             </div>
         </div>
     </div>
-    <div id="weekSteps" ng-show="onDisplay===1"> 
-        <h1>Weekly Steps</h1>
+    <div id="weekSteps" ng-show="onDisplay===1">
+        <h1>WEEKLY STEPS</h1>
         <canvas id="weekStepsChart" class="chart chart-line weekChart" chart-data="weekStepsData" chart-labels="days" chart-series="series1" chart-legend="true" colours="[{
             fillColor: 'rgba(107, 10, 10, 0.5)',
             strokeColor: 'rgba(107, 10, 10, 0.8)',
@@ -28,12 +28,11 @@
             strokeColor: '#cc9900',
             pointHighlightFill: '#cc9900',
             pointHighlightStroke: '#cc9900'
-}]" options="{bezierCurve: false}" ></canvas>
+}]" options="{bezierCurve: false}"></canvas>
     </div>
-
-    <div id="weekSleep" ng-show="onDisplay===2"> 
-         <h1>Weekly Sleep</h1>
-        <canvas id="weekSleepChart" class="chart chart-bar weekChart"  chart-data="weekSleepData" chart-labels="days" chart-series="series2" chart-legend="true" colours="[{
+    <div id="weekSleep" ng-show="onDisplay===2">
+        <h1>WEEKLY SLEEP</h1>
+        <canvas id="weekSleepChart" class="chart chart-bar weekChart" chart-data="weekSleepData" chart-labels="days" chart-series="series2" chart-legend="true" colours="[{
             fillColor: 'rgba(151,187,205, 0.5)',
             strokeColor: 'rgba(151,187,205, 0.8)',
             pointHighlightFill: 'rgba(151,187,205, 0.8)',   
@@ -44,10 +43,6 @@
             pointHighlightStroke: 'rgba(0,128,0, 0.8)'
 }]"></canvas>
     </div>
-    
-    
-    <img id="arrowR" src="http://i.imgur.com/ox2hSR4.png" ng-click="prevData()" ng-hide='onDisplay===0'/>
-    <img id="arrowL" src="http://imgur.com/BjwMUgk.png" ng-click="nextData()" ng-hide='onDisplay===2'/>
+    <img id="arrowR" src="http://i.imgur.com/ox2hSR4.png" ng-click="prevData()" ng-hide='onDisplay===0' />
+    <img id="arrowL" src="http://imgur.com/BjwMUgk.png" ng-click="nextData()" ng-hide='onDisplay===2' />
 </div>
-
-

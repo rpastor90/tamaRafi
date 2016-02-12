@@ -22,20 +22,10 @@ app.controller('HealthCtrl', function ($scope, $uibModal, UserFactory) {
     $scope.goalSteps = user.animal.stepsGoal;
     $scope.goalSleep = user.animal.sleepGoal;
 
-    if (user.fitness === 'jawbone') {
-        // visualize user's most recently updated steps for the day
-        $scope.steps = user.jawbone.steps;
-
-        // visualize user's most recently updated sleep for the day
-        $scope.sleep = (user.jawbone.sleep/60).toFixed(1);
-    }
-    else if (user.fitness === 'fitbit') {
-        // visualize user's most recently updated steps for the day
-        $scope.steps = user.fitbit.steps;
-
-        // visualize user's most recently updated sleep for the day
-        $scope.sleep = (user.fitbit.sleep/60).toFixed(1);
-    }
+    // visualize user's most recently updated steps for the day
+    $scope.steps = user[user.fitness].steps
+    // visualize user's most recently updated sleep for the day
+    $scope.sleep = (user[user.fitness].sleep/60).toFixed(1);
 
     var stepsDifference = ($scope.goalSteps - $scope.steps);
     $scope.stepsPercentDiff = ($scope.steps / $scope.goalSteps) * 100;
