@@ -53,22 +53,22 @@ app.controller('HealthCtrl', function ($scope, $uibModal, UserFactory) {
 
     var weekSteps = user[fitness].weekSteps.map(function(stepObj) {
         return stepObj.steps;
-    });
+    }).reverse();
     var weekStepsLabels = user[fitness].weekSteps.map(function(stepObj) {
         return stepObj.date.split(" ")[0];
-    });
+    }).reverse();
 
     $scope.days = weekStepsLabels;
    
     var weekSleep = user[fitness].weekSleep.map(function(sleepObj) {
         return (sleepObj.minutes/60).toFixed(2);
-    });
+    }).reverse();
     var money = weekSteps.map(function(num) {
         return Math.floor(num/50);
-    });
+    }).reverse();
     var powerUps = user[fitness].weekSleep.map(function(sleepObj) {
         return (sleepObj.minutes/100).toFixed(2);
-    });
+    }).reverse();
     
     // keeping tracks of arrowing through health data
     $scope.onDisplay = 0;
