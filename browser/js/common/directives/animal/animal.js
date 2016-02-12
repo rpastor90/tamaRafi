@@ -32,7 +32,7 @@ app.factory('AnimalFactory', function () {
         animateStyle: {
             'width': '295px',
             'height': '190px',
-            'background-image': 'url("http://i.imgur.com/YgP6OTf.png")'
+            'background-image': 'url("http://i.imgur.com/t9vcAoG.png")'
         }
     }, {
         picture: "http://i.imgur.com/ESsA3Kw.png",
