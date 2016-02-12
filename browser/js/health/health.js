@@ -14,6 +14,10 @@ app.controller('HealthCtrl', ['$uibModal', function ($scope, $uibModal, UserFact
             }
         });
     };
+
+    $scope.thisControllerWorks = function () {
+        console.log("this actually works, are you surprised??");
+    };
 }])
 .controller('OpenHealthCtrl', ['$uibModalInstance', function ($scope, user, $uibModalInstance) {
     // set goals
