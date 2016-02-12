@@ -1,14 +1,4 @@
-app.factory('LeaderboardFactory', function ($http) {
-    var LeaderboardFactory = {};
-    LeaderboardFactory.getEveryone = function () {
-        return $http.get('/api/users/')
-        .then(function (allUsers) {
-            return allUsers.data;
-        })
-    };
-    return LeaderboardFactory;
-})
-.controller('LeaderboardCtrl', function ($scope, $uibModal) {
+app.controller('LeaderboardCtrl', function ($scope, $uibModal) {
     $scope.animationsEnabled = true;
 
     $scope.showLeaderboard = function() {
@@ -48,15 +38,25 @@ app.factory('LeaderboardFactory', function ($http) {
             name: 'Jess',
             animal: { totalSteps: 33847 }
         }
-    ]
+    ];
 
     LeaderboardFactory.getEveryone()
     .then(function (allUsers) {
         fullstackers.forEach(function (fakeProfile) {
             allUsers.push(fakeProfile);
-        })
+        });
         $scope.rankedUsers = allUsers.sort(function (a, b) {
             return b.animal.totalSteps - a.animal.totalSteps;
-        })
-    })
+        });
+    });
 })
+.factory('LeaderboardFactory', function ($http) {
+    var LeaderboardFactory = {};
+    LeaderboardFactory.getEveryone = function () {
+        return $http.get('/api/users/')
+        .then(function (allUsers) {
+            return allUsers.data;
+        });
+    };
+    return LeaderboardFactory;
+});
