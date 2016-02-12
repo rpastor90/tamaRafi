@@ -56,7 +56,9 @@ app.controller('HealthCtrl', function ($scope, $uibModal, UserFactory) {
     $scope.weighted = ((7 * $scope.stepsPercentDiff) + (3 * $scope.sleepPercentDiff)) / 10;
 
 
-
+    $('.health-area').css('background','url("http://i.imgur.com/BNpVeae.jpg")');
+    $('.health-area').css('background-position','-150px -400px');
+    $('.health-area').css('background-size','1000px');
 
 
 
