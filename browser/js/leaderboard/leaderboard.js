@@ -9,7 +9,7 @@ app.factory('LeaderboardFactory', function ($http) {
     return LeaderboardFactory;
 });
 
-app.controller('LeaderboardCtrl', ['$uibModal', function ($scope, $uibModal) {
+app.controller('LeaderboardCtrl', function ($scope, $uibModal) {
     $scope.animationsEnabled = true;
 
     $scope.showLeaderboard = function() {
@@ -24,8 +24,8 @@ app.controller('LeaderboardCtrl', ['$uibModal', function ($scope, $uibModal) {
             }
         });
     };
-}])
-.controller('OpenLeaderboardCtrl', ['$uibModalInstance', function ($scope, $uibModalInstance, user, LeaderboardFactory) {
+})
+.controller('OpenLeaderboardCtrl', function ($scope, $uibModalInstance, user, LeaderboardFactory) {
     $scope.user = user;
     
     var fullstackers = [
@@ -60,4 +60,4 @@ app.controller('LeaderboardCtrl', ['$uibModal', function ($scope, $uibModal) {
             return b.animal.totalSteps - a.animal.totalSteps;
         })
     })
-}])
+})
