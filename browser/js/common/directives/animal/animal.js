@@ -32,6 +32,7 @@ app.factory('AnimalFactory', function () {
         animateStyle: {
             'width': '295px',
             'height': '190px',
+            // this pic totally works
             'background-image': 'url("http://i.imgur.com/8fg1J0C.png")'
         }
     }, {
