@@ -16,13 +16,18 @@ app.config(function($stateProvider) {
             },
             swags: function(SwagFactory, $animate, user) {
                 return SwagFactory.fetchSwagByUser(user);
+            },
+            average: function (user) {
+                var steps = user[user.fitness].steps / user.animal.stepsGoal;
+                var sleep = (user[user.fitness].sleep/60) / user.animal.sleepGoal;
+                return (steps + sleep)/2 * 100;
             }
         }
     });
 
 });
 
-app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthService, SwagFactory, swags) {
+app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthService, SwagFactory, swags, average) {
 
     var swagPositions = [];
     var swagSizes = [];
@@ -32,9 +37,7 @@ app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthServic
     $scope.swags = swags;
 
     // sad or happy panda state
-    var steps = $scope.user[$scope.user.fitness].steps / $scope.user.animal.stepsGoal;
-    var sleep = ($scope.user[$scope.user.fitness].sleep/60) / $scope.user.animal.sleepGoal;
-    $scope.average = (steps + sleep)/2 * 100;
+    $scope.average = average;
     
     
     $scope.wearHat = function(swag) {
