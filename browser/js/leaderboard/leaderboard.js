@@ -1,4 +1,4 @@
-app.controller('LeaderboardCtrl', function ($scope, $uibModal) {
+app.controller('LeaderboardCtrl', function ($scope, $uibModal, UserFactory) {
     $scope.animationsEnabled = true;
 
     $scope.showLeaderboard = function() {
@@ -7,8 +7,8 @@ app.controller('LeaderboardCtrl', function ($scope, $uibModal) {
             templateUrl: '/js/leaderboard/leaderboard.html',
             controller: 'OpenLeaderboardCtrl',
             resolve: {
-                user: function(AuthService) {
-                    return AuthService.getLoggedInUser();
+                user: function () {
+                    return UserFactory.getUser();
                 }
             }
         });
