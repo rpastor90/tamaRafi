@@ -1,12 +1,27 @@
 .gameContainer {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   display: block;
-  height: 364px;
-  width: 1022px;
-  left: 20%;
-  background-image: url('http://i.imgur.com/ySUi52m.png');
-  /*margin-bottom: 10%;*/
+  width: 100%;
+  text-align: center;
+}
+
+.winner {
+  text-align: center;
+  height: 10vh;
+  h1 {
+    font-size: 80px;
+  }
+}
+
+.middleLine {
+  border-left: thick solid #ff0000;
+  width: 10px;
+  height: 100px;
+  position: absolute;
+  bottom: 0;
+  margin-left: 50%;
+  z-index: -1;
 }
 /*.left-char {
   text-align: center;

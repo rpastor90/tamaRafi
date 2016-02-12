@@ -47,6 +47,10 @@ module.exports = function (server) {
         socket.emit('toTheRightToTheRight');
         socket.broadcast.emit('toTheRightToTheRight');
       });
+
+      socket.on('gameOver', function () {
+        socket.destroy();
+      })
        
         // Now have access to socket, wowzers!
     });
