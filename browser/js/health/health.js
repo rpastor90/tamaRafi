@@ -47,10 +47,16 @@ app.controller('HealthCtrl', function ($scope, $uibModal) {
 
     $scope.labels1 = ["stepped", "steps left"];
     $scope.labels2 = ["hours slept", "more sleep"];
-    $scope.weekSteps = [$scope.steps, stepsDifference];
+
+    $scope.stepsData = [$scope.steps, stepsDifference];
     $scope.sleepData = [$scope.sleep, sleepDifference];
 
     $scope.weighted = ((7 * $scope.stepsPercentDiff) + (3 * $scope.sleepPercentDiff)) / 10;
+
+
+
+
+
 
     // The following is for the weekly data
 
