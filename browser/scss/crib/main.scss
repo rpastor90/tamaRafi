@@ -110,6 +110,7 @@
         width: 700px;
         height: 700px;
         border: 10px solid black;
+        text-align: center;
         .eyes {
             text-align:center;
             padding-top: 50px;
@@ -140,5 +141,21 @@
         .center {
             text-align: center;
         }
+        #arrowR {
+            max-width: 5%;
+            position:absolute;
+            bottom: 5%;
+            right:90%;
+            
+        }
+        #arrowL {
+            max-width: 5%;
+            position:absolute;
+            bottom: 5%;
+            margin-left:50%;
+        }
+        .weekChart {
+            max-width:100%;
+            margin-top:10%;        }
     }
 }
