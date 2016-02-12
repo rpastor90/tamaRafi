@@ -1,18 +1,54 @@
 <div class="health-area">
-    <div class='eyes'>
-        <div class='eye'>
-            <canvas id="doughnut1" class="chart chart-doughnut" chart-data="stepsData" chart-labels="labels1"></canvas>
+    <div id="dailyHealth" ng-show="onDisplay===0">
+        <div class='eyes'>
+            <div class='eye'>
+                <canvas id="doughnut1" class="chart chart-doughnut" chart-data="stepsData" chart-labels="labels1"></canvas>
+            </div>
+            <div class='eye'>
+                <canvas id="doughnut2" class="chart chart-doughnut" chart-data="sleepData" chart-labels="labels2"></canvas>
+            </div>
         </div>
-        <div class='eye'>
-            <canvas id="doughnut2" class="chart chart-doughnut" chart-data="sleepData" chart-labels="labels2"></canvas>
+        <div class='center'>
+            <div>
+                <img id="mouth" src="http://vignette4.wikia.nocookie.net/anthropomorphicmadness/images/4/48/Mouth_Closed_Smile.png/revision/latest?cb=20120512222937" ng-show="weighted >= 75">
+                <img id="mouth" src="http://cdn.flaticon.com/png/256/53957.png" ng-show="weighted < 75 && weighted > 30">
+                <img id="mouth" src="http://vignette2.wikia.nocookie.net/officialinanimations/images/2/27/Sad-mouth-closed-noteeth.png/revision/latest?cb=20140418130230" ng-show="weighted <= 30">
+            </div>
         </div>
+       
     </div>
-    <div class='center'>
-        <div>
-            <img id="mouth" src="http://vignette4.wikia.nocookie.net/anthropomorphicmadness/images/4/48/Mouth_Closed_Smile.png/revision/latest?cb=20120512222937" ng-show="weighted >= 75">
-            <img id="mouth" src="http://cdn.flaticon.com/png/256/53957.png" ng-show="weighted < 75 && weighted > 30">
-            <img id="mouth" src="http://vignette2.wikia.nocookie.net/officialinanimations/images/2/27/Sad-mouth-closed-noteeth.png/revision/latest?cb=20140418130230" ng-show="weighted <= 30">
-        </div>
+    <div id="weekSteps" ng-show="onDisplay===1"> 
+        <h1>Weekly Steps</h1>
+        <canvas id="weekStepsChart" class="chart chart-line weekChart" chart-data="weekStepsData" chart-labels="days" chart-series="series1" chart-legend="true" colours="[{
+            fillColor: 'rgba(107, 10, 10, 0.5)',
+            strokeColor: 'rgba(107, 10, 10, 0.8)',
+            pointHighlightFill: 'rgba(107, 10, 10, 0.8)',
+            pointHighlightStroke: 'rgba(107, 10, 10, 0.8)'
+},{
+            fillColor: '#cc9900',
+            strokeColor: '#cc9900',
+            pointHighlightFill: '#cc9900',
+            pointHighlightStroke: '#cc9900'
+}]" options="{bezierCurve: false}" ></canvas>
     </div>
+
+    <div id="weekSleep" ng-show="onDisplay===2"> 
+         <h1>Weekly Sleep</h1>
+        <canvas id="weekSleepChart" class="chart chart-bar weekChart"  chart-data="weekSleepData" chart-labels="days" chart-series="series2" chart-legend="true" colours="[{
+            fillColor: 'rgba(151,187,205, 0.5)',
+            strokeColor: 'rgba(151,187,205, 0.8)',
+            pointHighlightFill: 'rgba(151,187,205, 0.8)',   
+            pointHighlightStroke: 'rgba(151,187,205, 0.8)'
+        }, { fillColor: 'rgba(0,128,0, 0.5)',
+            strokeColor: 'rgba(0,128,0, 0.8)',
+            pointHighlightFill: 'rgba(0,128,0, 0.8)',   
+            pointHighlightStroke: 'rgba(0,128,0, 0.8)'
+}]"></canvas>
+    </div>
+    
+    
+    <img id="arrowR" src="http://i.imgur.com/ox2hSR4.png" ng-click="prevData()" ng-hide='onDisplay===0'/>
+    <img id="arrowL" src="http://imgur.com/BjwMUgk.png" ng-click="nextData()" ng-hide='onDisplay===2'/>
 </div>
+
 
