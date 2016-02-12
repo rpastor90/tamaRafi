@@ -19,18 +19,31 @@
     </div>
     <div id="weekSteps" ng-show="onDisplay===1"> 
         <h1>Weekly Steps</h1>
-        <canvas id="weekStepsChart" class="chart chart-line weekChart" chart-data="weekSteps" chart-labels="days" chart-series="series1" chart-legend="true" colours="[{
+        <canvas id="weekStepsChart" class="chart chart-line weekChart" chart-data="weekStepsData" chart-labels="days" chart-series="series1" chart-legend="true" colours="[{
             fillColor: 'rgba(107, 10, 10, 0.5)',
-            strokeColor: 'rgba(107, 10, 10, 0.8)'
+            strokeColor: 'rgba(107, 10, 10, 0.8)',
+            pointHighlightFill: 'rgba(107, 10, 10, 0.8)',
+            pointHighlightStroke: 'rgba(107, 10, 10, 0.8)'
 },{
             fillColor: '#cc9900',
-            strokeColor: '#cc9900'
+            strokeColor: '#cc9900',
+            pointHighlightFill: '#cc9900',
+            pointHighlightStroke: '#cc9900'
 }]" options="{bezierCurve: false}" ></canvas>
     </div>
 
     <div id="weekSleep" ng-show="onDisplay===2"> 
          <h1>Weekly Sleep</h1>
-        <canvas id="weekSleepChart" class="chart chart-bar weekChart"  chart-data="weekSleep" chart-labels="days" chart-series="series2" chart-legend="true" ></canvas>
+        <canvas id="weekSleepChart" class="chart chart-bar weekChart"  chart-data="weekSleepData" chart-labels="days" chart-series="series2" chart-legend="true" colours="[{
+            fillColor: 'rgba(151,187,205, 0.5)',
+            strokeColor: 'rgba(151,187,205, 0.8)',
+            pointHighlightFill: 'rgba(151,187,205, 0.8)',   
+            pointHighlightStroke: 'rgba(151,187,205, 0.8)'
+        }, { fillColor: 'rgba(0,128,0, 0.5)',
+            strokeColor: 'rgba(0,128,0, 0.8)',
+            pointHighlightFill: 'rgba(0,128,0, 0.8)',   
+            pointHighlightStroke: 'rgba(0,128,0, 0.8)'
+}]"></canvas>
     </div>
     
     
