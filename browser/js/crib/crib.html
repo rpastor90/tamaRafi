@@ -2,11 +2,11 @@
     <div class='notTheDock'>
         <div>
             <a ng-controller="CreatureComputerCtrl" ng-click="showSocial()"><img id="computer" src="http://i1017.photobucket.com/albums/af297/iKP/Pixel%20Art/Isometric%20Pixel%20Art/SwanComputer_Assembled.png" /></a>
-            <div ng-show='average > 50'>
-                <crib-creature ng-hide="showSwag && customizing" ng-controller='HealthCtrl' ng-click='showHealth()'></crib-creature>
+            <div ng-hide="showSwag && customizing">
+                <crib-creature ng-hide='average <= 30' ng-controller='HealthCtrl' ng-click='showHealth()'></crib-creature>
             </div>
-            <div ng-show='average <= 50 && user.animal.species === panda' ng-controller='HealthCtrl' ng-click='showHealth()' class='sad-panda' class='sad-panda'>
-			    <img src='http://i.imgur.com/5jyeTRj.png'>
+            <div>
+			    <img ng-hide='average > 30 && user.animal.species !== Panda' ng-controller='HealthCtrl' ng-click='showHealth()' class='sad-panda' style='z-index: 1' src='http://i.imgur.com/5jyeTRj.png'>
             </div>
             <div class='crib-btns'>
                 <div>

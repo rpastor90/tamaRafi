@@ -45,14 +45,12 @@ app.factory('SwagFactory', function ($http) {
 
     SwagFactory.updateSwagPositions = function(swagPositions, user) {
         return $http.put('/api/users/' + user._id + '/updateCrib', swagPositions)
-        .then(res => res.data)
+        .then( res=> res.data);
     };
 
-     SwagFactory.updateSwagSizes = function(swagSizes, user) {
+    SwagFactory.updateSwagSizes = function(swagSizes, user) {
         return $http.put('/api/users/' + user._id + '/updateCribSizes', swagSizes)
-        .then(res => {
-            return res.data
-        });
+        .then(res =>res.data);
     };
 
     return SwagFactory;
