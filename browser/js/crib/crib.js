@@ -32,8 +32,8 @@ app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthServic
     // sad or happy panda state
     var steps = $scope.user[$scope.user.fitness].steps / $scope.user.animal.stepsGoal;
     var sleep = ($scope.user[$scope.user.fitness].sleep/60) / $scope.user.animal.sleepGoal;
-    // $scope.average = (steps + sleep)/2 * 100;
-$scope.average = 2;
+    $scope.average = (steps + sleep)/2 * 100;
+
     $scope.wearHat = function(swag) {
         if (swag.name === 'top hat') {
             $scope.removeMe = function (removeSwag) {

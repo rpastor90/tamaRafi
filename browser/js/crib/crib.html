@@ -1,7 +1,7 @@
 <div class='crib'>
     <div class='notTheDock'>
         <div>
-            <a ng-controller="CreatureComputerCtrl" ng-click="showSocial()"><img id="computer" src="http://i1017.photobucket.com/albums/af297/iKP/Pixel%20Art/Isometric%20Pixel%20Art/SwanComputer_Assembled.png" /></a>
+            <a ng-controller="CreatureComputerCtrl" ng-click="showSocial()"><img style='cursor: pointer;' id="computer" src="http://i1017.photobucket.com/albums/af297/iKP/Pixel%20Art/Isometric%20Pixel%20Art/SwanComputer_Assembled.png" /></a>
             <div ng-hide="showSwag && customizing">
                 <crib-creature ng-hide='average <= 30' ng-controller='HealthCtrl' ng-click='showHealth()'></crib-creature>
             </div>
@@ -10,7 +10,7 @@
             </div>
             <div class='crib-btns'>
                 <div>
-                <a ng-show='swags && !customizing'><img src='http://i.imgur.com/Ox6woYj.png' class='logout-btn' ng-click="showSwag = true; toggleButtons(); makeCustomizable()"></a>
+                <a ng-show='swags && !customizing'><img src='http://i.imgur.com/Ox6woYj.png' style='cursor: pointer;' class='logout-btn' ng-click="showSwag = true; toggleButtons(); makeCustomizable()"></a>
                 </div>
                 <div>
                 <a ng-show='showSwag && customizing'>

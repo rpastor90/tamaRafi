@@ -31,6 +31,8 @@ app.factory('UserFactory', function($http, AuthService, $rootScope) {
                 angular.copy(purchase.data, cachedUser);
                 return cachedUser;
             })
+        } else {
+            alert("You don't got the green for this!");
         }
     };
 
