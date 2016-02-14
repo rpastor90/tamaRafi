@@ -80,7 +80,7 @@ module.exports = function (app) {
                                 var newDifference = userToLogin.fitbit.steps - userToLogin.animal.lastLoggedInSteps;
                                 userToLogin.animal.lastLoggedInSteps += newDifference;
                                 userToLogin.animal.totalSteps += newDifference;
-                                userToLogin.animal.money += (newDifference * 0.002);
+                                userToLogin.animal.money += (newDifference/50);
                             }
                     }
 

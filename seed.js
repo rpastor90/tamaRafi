@@ -81,7 +81,7 @@ var seedSwag = function () {
             imageUrl: 'http://i.imgur.com/qWIJy0i.png'
         },
         {
-            name: 'toilet',
+            name: 'porcelain throne',
             category: 'furniture',
             price: 200,
             imageUrl: 'http://i.imgur.com/CPmIUMw.png'
@@ -135,9 +135,9 @@ var seedSwag = function () {
             imageUrl: 'http://i.imgur.com/AohKaE3.gif'
         },
         {
-            name: "music",
+            name: "musical taste",
             category: 'random',
-            price: 5,
+            price: 5000,
             imageUrl: 'http://i.imgur.com/Gl6ad4i.gif'
         },
         {

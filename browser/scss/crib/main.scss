@@ -1,11 +1,3 @@
-#computer {
-    width: 400px;
-    margin-top: 30%;
-    position: absolute;
-    bottom: 1px;
-    z-index: 1;
-}
-
 .crib {
     background: url('http://i.imgur.com/d8C45QS.png') no-repeat center center fixed;
     -webkit-background-size: cover;
@@ -31,6 +23,13 @@
         bottom: 0;
         margin-left: 600px; 
         position: absolute;
+    }
+    #computer {
+        width: 350px;
+        margin-top: 30%;
+        position: absolute;
+        bottom: 1px;
+        z-index: 1;
     }
 }
 
@@ -98,17 +97,30 @@
 }
 
 .modal-dialog {
+    .modal-content {
+        height: 0;
+    }
     width: 600px;
     .leaderboard {
-        border: 10px solid black;
-        color: black;
+        border: 5px solid black;
+        border-radius: 20px;
+        color: white;
+        text-shadow: 2px 2px black;
         font-size: 25px;
         font-weight: bold;
         background: url('http://rs271.pbsrc.com/albums/jj140/99alongway/Confetti.gif~c200');
+        background-color: rgba(0, 0, 0, 0.5);
+        thead {
+            letter-spacing: 3px;
+        }
         .panel-heading {
-            border-bottom: 5px solid black; 
+            border-bottom: 5px solid black;
+            background-color: rgba(0, 0, 0, 0.5); 
             font-size: 30px;
             text-align: center;
+            color: white;
+            text-shadow: 2px 2px black;
+            letter-spacing: 20px;
         }
         table {
             margin-bottom: 0;
@@ -124,6 +136,7 @@
         background-repeat: none;
         border: 10px solid black;
         text-align: center;
+        border-radius: 100px;
         .eyes {
             text-align:center;
             padding-top: 50px;
@@ -147,28 +160,25 @@
         #mouth {
             width: 20%;
             position: absolute;
-            bottom: 10px;
+            padding-top: 220px;
         }
         .center {
             text-align: center;
         }
         #arrowR {
             max-width: 5%;
-            position:absolute;
-            bottom: 5%;
-            right:90%;
-            
+            position: fixed;
+            right: 85%;
         }
         #arrowL {
             max-width: 5%;
-            position:absolute;
-            bottom: 5%;
-            margin-left:50%;
+            position: absolute;
+            margin-left: 45%;
         }
         .weekChart {
-            max-width:100%;
+            max-width: 100%;
             margin-top: 5%;
-            padding: 10px;        
+            padding: 20px;        
         }
     }
 }
