@@ -19,7 +19,7 @@ app.factory('AnimalFactory', function () {
         animateStyle: {
             'width': '250px',
             'height': '354px',
-            'background-image': 'url("http://createalittle.com/wp-content/uploads/2014/01/panda_colour.png")'
+            'background-image': 'url("http://i.imgur.com/hoG3HMY.png")'
         }
     }, {
         picture: "http://i.imgur.com/8fg1J0C.png",

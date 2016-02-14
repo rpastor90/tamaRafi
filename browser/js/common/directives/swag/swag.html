@@ -1,10 +1,9 @@
 <!-- This is a single swag item. -->
-<span ng-show="!moreInfo">
+<span ng-show="!moreInfo" style='cursor: pointer;'>
 	<img class="swag" src='{{ swag.imageUrl }}' ng-click="showMoreInfo()"/>
 </span>
 <span class="swag" ng-click="showMoreInfo()" ng-show="moreInfo" style='display: inline-block;'>
 	<span ng-hide="insufficientFunds">{{ swag.name }}</span><br>
 	<span>{{ swag.price | currency }}</span><br>
-	<div ng-hide="insufficientFunds" ng-click="purchase(user, swag)"><button class="logout-btn">BUY!</button></div>
-	<div ng-show="insufficientFunds">You don't got the green for this.</div>
+	<div ng-click="purchase(user, swag)"><button class="logout-btn">BUY</button></div>
 </span>

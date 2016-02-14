@@ -1,5 +1,3 @@
-// USERS SHOULD NOT BE ABLE TO BUY SAME SWAG TWICE!
-
 app.config(function($stateProvider) {
 
     $stateProvider.state('crib', {
@@ -37,8 +35,9 @@ app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthServic
     $scope.swags = swags;
 
     // sad or happy panda state
-    $scope.average = average;
-    
+    var steps = $scope.user[$scope.user.fitness].steps / $scope.user.animal.stepsGoal;
+    var sleep = ($scope.user[$scope.user.fitness].sleep/60) / $scope.user.animal.sleepGoal;
+    $scope.average = (steps + sleep)/2 * 100;
     
     $scope.wearHat = function(swag) {
         if (swag.name === 'top hat') {
@@ -85,11 +84,13 @@ app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthServic
         }
 
     }
-    function printMousePos(event) {
-      console.log("clientX: " + event.clientX + "clientY: " + event.clientY);
-    }
 
-    document.addEventListener("click", printMousePos);
+    // logs mouse coordinate on click
+    // function printMousePos(event) {
+    //   console.log("clientX: " + event.clientX + "clientY: " + event.clientY);
+    // }
+
+    // document.addEventListener("click", printMousePos);
 
     var onDragStop = function(event, ui, swag) {
         var bool = false;
@@ -100,19 +101,19 @@ app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthServic
                 indexStore = i;
             }
         });
-
+        var width = parseInt(ui.helper.context.style.width.slice(0, -2), 10);
+        var height = parseInt(ui.helper.context.style.height.slice(0, -2), 10);
+        
         var swagPositionObj = {};
         if (!bool) {
             swagPositionObj.swag = swag._id;
             // Create the position object
-            swagPositionObj.posX = event.pageX - Number(ui.helper.context.style.width.slice(0, -2))/2 + 'px';
-            swagPositionObj.posY = event.pageY + Number(ui.helper.context.style.height.slice(0, -2))/2+ 'px';
-            console.log('xPOS', swagPositionObj.posX, 'Ypos', swagPositionObj.posY)
+            swagPositionObj.posX = (event.pageX - width)  + 200 + 'px';
+            swagPositionObj.posY = (event.pageY + height) - 200 + 'px';
             swagPositions.push(swagPositionObj);
         } else {
-            swagPositions[indexStore].posX = event.pageX - Number(ui.helper.context.style.width.slice(0, -2)) + 200 + 'px';
-            swagPositions[indexStore].posY = event.pageY + Number(ui.helper.context.style.height.slice(0, -2)) - 200 + 'px';
-            console.log('xPOS and ypos', swagPositions[indexStore])
+            swagPositions[indexStore].posX = (event.pageX - width) + 200 + 'px';
+            swagPositions[indexStore].posY = (event.pageY + height) - 200 + 'px';
         }
         // And push to the swagPositions array
         // Remove this element from the dock and set position
@@ -168,7 +169,7 @@ app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthServic
             swag.hide = false;
         })
         
-        $('#creatureContainer').css('background', 'url("http://createalittle.com/wp-content/uploads/2014/01/panda_colour.png")');
+        $('#creatureContainer').css('background', 'url("http://i.imgur.com/hoG3HMY.png")');
         $('.crib').css('background', 'url("http://i.imgur.com/d8C45QS.png") no-repeat center center fixed');
         $('.crib').css('-webkit-background-size', 'cover');
         $('.crib').css('-moz-background-size', 'cover');
