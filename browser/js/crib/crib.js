@@ -14,7 +14,7 @@ app.config(function($stateProvider) {
             },
             swags: function(SwagFactory, $animate, user) {
                 return SwagFactory.fetchSwagByUser(user);
-            },
+            }
         }
     });
 
