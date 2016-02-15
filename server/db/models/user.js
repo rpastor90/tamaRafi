@@ -15,7 +15,7 @@ var schema = new Schema({
         sleepGoal: Number,
         money: {
             type: Number,
-            default: 1000
+            default: 100 // all users start with 100 coins
         },
         picture: String,
         animationForward: String,
