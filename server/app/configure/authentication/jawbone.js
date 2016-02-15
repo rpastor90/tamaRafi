@@ -54,6 +54,7 @@ module.exports = function(app) {
                 userToLogin.jawbone.tokens.refresh_token = refreshToken;
                 
                 var steps;
+                userToLogin.jawbone.weekSteps = [];
                 up.moves.get({}, function (err, body) {
                     if (err) {
                         console.log('Error: ' + err);
@@ -73,6 +74,7 @@ module.exports = function(app) {
                         var todaysSteps = userToLogin.jawbone.weekSteps[0].steps;
                         userToLogin.jawbone.steps = todaysSteps;
                     }
+
                     var currentDate = new Date();
 
                     // update money only once per day
@@ -102,6 +104,7 @@ module.exports = function(app) {
                     
                     userToLogin.save()
                     .then(function (stepsSavedUser) {
+                        stepsSavedUser.jawbone.weekSleep = [];
                         up.sleeps.get({}, function (err, body) {
                             if (err) {
                                 console.log('Error: ', err);
@@ -126,8 +129,8 @@ module.exports = function(app) {
                                 return stepsSavedUser.save();
                             }
                         })
-                        .then(function () {
-                            console.log('Jawbone user has been updated and saved!')
+                        .then(function (hi) {
+                            console.log('Jawbone user has been updated and saved!', hi)
                         })
                     })
                     done(null, userToLogin);
