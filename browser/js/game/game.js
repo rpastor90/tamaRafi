@@ -15,6 +15,9 @@ app.config(function ($stateProvider) {
   // ================
   // socket.removeListener('connect');
   $scope.winBanner = false;
+  $scope.user = user;
+  $scope.hoursSleep = (user[user.fitness].weekSleep[0].minutes/60).toFixed(2);
+  $scope.pull = (($scope.hoursSleep/user.animal.sleepGoal) *100).toFixed(1) + '%';
 
   socket.on('connect', function () {
     var room = 'room';
