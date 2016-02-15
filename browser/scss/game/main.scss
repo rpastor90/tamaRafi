@@ -1,3 +1,16 @@
+#bio{ 
+  #needsCentering {
+    text-align:center;
+  }
+  img {
+    border: solid black 0.5em;
+    border-radius: 50%;
+    padding:2em;
+    background-color:white;
+    max-width:15em;
+}
+}
+
 .gameContainer {
     position: fixed;
     bottom: 0;
@@ -16,15 +29,21 @@
         text-shadow: 5px 5px black;
     }
 }
+#stats{
+  text-align:center;
+}
+
 
 .middleLine {
-    border-left: thick solid #ff0000;
-    width: 10px;
-    height: 100px;
-    position: absolute;
-    bottom: 0;
-    margin-left: 50%;
-    z-index: -1;
+   max-width:20%;
+   margin:0px auto;
+   margin-top:10%;
+   img {
+      max-width:100%;
+      display:inline-block;
+      margin:0px auto;
+   }
+
 }
 
 
