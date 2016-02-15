@@ -1,10 +1,25 @@
 <div class="winner">
     <h1 ng-show="winBanner" class="animated tada">JOE IS THE WINNER!</h1>
 </div>
+<div id="bio" class="container">
+	<div class="row">
+		<div class="col-xs-4"></div>
+		<div class="col-xs-4" id="needsCentering"><img ng-src=" {{user.animal.picture}}"></div>
+		<div class="col-xs-4"></div>
+	</div>
+	<div class="row" id="stats">
+		<div class="col-xs-12"><h3>{{user.animal.name}}</h3>
+		</div>
+		<div class="col-xs-12"><h5> Sleep Data: {{hoursSleep}}</h5>
+		</div>
+		<div class="col-xs-12"> <h5> Tug-of-war Pull Factor: {{pull}}</h5>
+		</div>
+	</div>
+</div>
 <div class="gameContainer">
     <img class="tugOwar" src="http://i.imgur.com/743dmxK.png">
     <!--   <span class="chararcter left-char col-md-3"></span>
 	  <span class="rope col-md-3"></span>
 	  <span class="chararcter right-char col-md-3"></span> -->
 </div>
-<div class="middleLine"></div>
+<div class="middleLine"><img src="http://i.imgur.com/4Z07TEW.png"/></div>
