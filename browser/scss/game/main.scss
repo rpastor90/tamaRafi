@@ -1,12 +1,14 @@
 #bio{ 
+  text-align: center;
   #needsCentering {
     text-align:center;
   }
   img {
-    border: solid black 0.5em;
+    border: solid black 0.3em;
     border-radius: 50%;
     padding:2em;
     background-color:white;
+     box-shadow: 5px 5px 5px #4d4d4d;
     max-width:15em;
 }
 }
@@ -31,17 +33,27 @@
 }
 #stats{
   text-align:center;
+  display:inline-block;
+  background:white;
+  border: black solid 0.3em;
+  border-radius: 1em;
+  box-shadow: 5px 5px 5px #4d4d4d;
+  padding: 1em;
+  margin-top:3em;
+  h3 {
+    display:inline-block;
+    margin:0px;
+  }
 }
 
 
 .middleLine {
    max-width:20%;
    margin:0px auto;
-   margin-top:10%;
    img {
-      max-width:100%;
-      display:inline-block;
-      margin:0px auto;
+      max-width:20%;
+      position: absolute;
+      bottom:0px;
    }
 
 }
