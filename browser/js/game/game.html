@@ -1,7 +1,7 @@
 <div class="winner">
     <h1 ng-show="winBanner" class="animated tada">JOE IS THE WINNER!</h1>
 </div>
-<div id="bio" class="container">
+<div id="bio" class="container" ng-show="!winBanner">
 	<div class="row">
 		<div class="col-xs-4"></div>
 		<div class="col-xs-4" id="needsCentering"><img ng-src=" {{user.animal.picture}}"></div>
