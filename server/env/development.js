@@ -23,3 +23,4 @@ module.exports = {
     "callbackURL" : "http://localhost:1337/auth/github/callback"
   }
 };
+
