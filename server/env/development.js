@@ -24,4 +24,3 @@ module.exports = {
   }
 };
 
-//http://tamarafi.herokuapp.com/
