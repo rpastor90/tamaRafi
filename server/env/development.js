@@ -23,3 +23,5 @@ module.exports = {
     "callbackURL" : "http://localhost:1337/auth/github/callback"
   }
 };
+
+//http://tamarafi.herokuapp.com/
