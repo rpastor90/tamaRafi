@@ -25,6 +25,24 @@ router.get('/', ensureAuthenticated, function (req, res, next) {
     .then(null, next);
 });
 
+// router.post('/',  function (req, res, next) {
+//     User.create(req.body)
+//     .then(function (user) {
+//         console.log('created user routes:', user)
+//         res.status(200).send(user);
+//     })
+//     .then(null, next);
+// });
+
+router.get('/demo',  function (req, res, next) {
+    User.findOne({ name: 'Rafiel' })
+    .then(function (user) {
+        console.log('found user routes:', user)
+        res.status(200).send(user);
+    })
+    .then(null, next);
+});
+
 router.get('/:userId', ensureAuthenticated, function (req, res, next) {
     User.find({ _id: req.params.userId })
     .populate('animal.friends')

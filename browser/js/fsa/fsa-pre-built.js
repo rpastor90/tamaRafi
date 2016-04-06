@@ -51,6 +51,7 @@
     app.service('AuthService', function ($http, Session, $rootScope, AUTH_EVENTS, $q) {
 
         function onSuccessfulLogin(response) {
+            console.log('response from successful signup', response)
             var data = response.data;
             Session.create(data.id, data.user);
             $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
@@ -98,6 +99,15 @@
             return $http.get('/logout').then(function () {
                 Session.destroy();
                 $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
+            });
+        };
+
+         this.signup = function (signupInfo) {
+            console.log('Currently in auth service signup')
+            return $http.post('/signup', signupInfo)
+            .then(onSuccessfulLogin)
+            .catch(function () {
+                return $q.reject({ message: 'Invalid login credentials.' });
             });
         };
 

@@ -6,15 +6,17 @@ var passport = require('passport');
 var path = require('path');
 var mongoose = require('mongoose');
 var UserModel = mongoose.model('User');
+var flash = require('connect-flash');
 
 var ENABLED_AUTH_STRATEGIES = [
+    'local',
     'fitbit',
     'jawbone',
     'misfit'
 ];
 
 module.exports = function (app) {
-
+    console.log('I am in config/auth/index')
     // First, our session middleware will set/read sessions from the request.
     // Our sessions will get stored in Mongo using the same connection from
     // mongoose. Check out the sessions collection in your MongoCLI.
@@ -29,6 +31,7 @@ module.exports = function (app) {
     // the request session information.
     app.use(passport.initialize());
     app.use(passport.session());
+    app.use(flash());
 
     // When we give a cookie to the browser, it is just the userId (encrypted with our secret).
     passport.serializeUser(function (user, done) {

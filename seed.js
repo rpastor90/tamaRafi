@@ -22,7 +22,18 @@ var Promise = require('bluebird');
 var chalk = require('chalk');
 var connectToDb = require('./server/db');
 var Swag = Promise.promisifyAll(mongoose.model('Swag'));
+var User = Promise.promisifyAll(mongoose.model('User'));
 
+var seedUser = function() {
+    var users =[
+        {
+            email:'obama@gmail.com',
+            password: 'potus'
+
+        }
+    ]
+    return User.createAsync(users);
+}
 var seedSwag = function () {
 
     var swags = [
@@ -253,6 +264,13 @@ var seedSwag = function () {
 }; 
 
 connectToDb.then(function () {
+    User.findAsync({}).then(function (users) {
+        if (users.length === 0) {
+            return seedUser();
+        } else {
+            console.log(chalk.magenta('Users have been seeded!'));
+        }
+    })
     Swag.findAsync({}).then(function (swags) {
         if (swags.length === 0) {
             return seedSwag();
