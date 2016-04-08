@@ -8,7 +8,8 @@ app.controller('HealthCtrl', function($scope, $uibModal, UserFactory) {
                 controller: 'OpenHealthCtrl',
                 resolve: {
                     user: function() {
-                        return UserFactory.getUser();
+                        if (UserFactory.getCachedUser().animal) return UserFactory.getCachedUser();
+                        else return UserFactory.getUser();
                     }
                 }
             });
@@ -35,7 +36,6 @@ app.controller('HealthCtrl', function($scope, $uibModal, UserFactory) {
         if ($scope.sleepPercentDiff > 100) {
             sleepDifference = 0;
         }
-
         $scope.labels1 = ["stepped", "steps left"];
         $scope.labels2 = ["hours slept", "more sleep"];
 

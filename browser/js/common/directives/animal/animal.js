@@ -22,7 +22,7 @@ app.factory('AnimalFactory', function () {
             'background-image': 'url("http://i.imgur.com/hoG3HMY.png")'
         }
     }, {
-        picture: "http://i.imgur.com/NlwDVd7.png",
+        picture: "http://i.imgur.com/8fg1J0C.png",
         bio: 'A driven athlete. Tends to have a work hard/play hard attitude',
         goals: 'Better diet & sleep',
         species: 'Rhino',
@@ -32,7 +32,7 @@ app.factory('AnimalFactory', function () {
         animateStyle: {
             'width': '295px',
             'height': '190px',
-            'background-image': 'url("http://i.imgur.com/YgP6OTf.png")'
+            'background-image': 'url("http://i.imgur.com/OfL5Alp.png")'
         }
     }, {
         picture: "http://i.imgur.com/ESsA3Kw.png",

@@ -8,7 +8,8 @@ app.controller('LeaderboardCtrl', function ($scope, $uibModal, UserFactory) {
             controller: 'OpenLeaderboardCtrl',
             resolve: {
                 user: function () {
-                    return UserFactory.getUser();
+                    if (UserFactory.getCachedUser().animal) return UserFactory.getCachedUser();
+                    else return UserFactory.getUser();
                 }
             }
         });

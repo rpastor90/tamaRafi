@@ -2,6 +2,10 @@ app.factory('UserFactory', function($http, AuthService, $rootScope) {
     var userFactory = {};
     var cachedUser = {};
 
+    userFactory.getCachedUser = function () {
+        return cachedUser;
+    }
+
     userFactory.getUser = function() {
         return AuthService.getLoggedInUser()
         .then(function(user) {
