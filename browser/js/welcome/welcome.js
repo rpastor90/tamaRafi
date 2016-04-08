@@ -13,6 +13,7 @@ app.config(function ($stateProvider) {
         },
         resolve: {
             user: function (UserFactory) {
+                if (UserFactory.getCachedUser().animal) return UserFactory.getCachedUser();
                 return UserFactory.getUser();
             }
         }

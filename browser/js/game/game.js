@@ -5,7 +5,8 @@ app.config(function ($stateProvider) {
     controller: 'GameCtrl',
     resolve: {
       user: function (UserFactory) {
-        return UserFactory.getUser();
+        if (UserFactory.getCachedUser().animal) return UserFactory.getCachedUser();
+        else return UserFactory.getUser();
       }
     },
   });
