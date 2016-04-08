@@ -9,8 +9,8 @@ app.config(function($stateProvider) {
         },
         resolve: {
             user: function(UserFactory) {
-                return UserFactory.getUser();
-
+                if (UserFactory.getCachedUser().animal) return UserFactory.getCachedUser();
+                else return UserFactory.getUser();
             },
             swags: function(SwagFactory, $animate, user) {
                 return SwagFactory.fetchSwagByUser(user);
