@@ -4,7 +4,6 @@ module.exports = router;
 
 router.use('/users', require('./users'));
 router.use('/swags', require('./swag'));
-// router.use('/signup', require('./signup'));
 // router.use('/animals', require('./animals'));
 
 // Make sure this is after all of

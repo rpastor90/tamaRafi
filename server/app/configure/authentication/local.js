@@ -44,8 +44,6 @@ module.exports = function (app) {
                     //set local credentials
                     newUser.local.email = email;
                     newUser.local.password = password;
-                    console.log(newUser.local.email,newUser.local.password)
-          
                     newUser.name = faker.name.firstName()
                     newUser.animal.name = faker.name.firstName()
                  
@@ -87,11 +85,4 @@ module.exports = function (app) {
         passport.authenticate('local', authCb)(req, res, next);
 
     });
-
-    // app.post('/signup', passport.authenticate('local-signup', {
-    //     successRedirect: '/welcome',
-    //     failureRedirect: '/home',
-    //     failureFlash: true
-
-    // }))
 };

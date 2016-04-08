@@ -1,6 +1,5 @@
 'use strict';
 module.exports = function (app) {
-    console.log("I am in confi/index")
     // setValue and getValue are merely alias
     // for app.set and app.get used in the less
     // common way of setting application variables.
