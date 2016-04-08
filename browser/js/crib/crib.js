@@ -101,19 +101,17 @@ app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthServic
                 indexStore = i;
             }
         });
-        var width = parseInt(ui.helper.context.style.width.slice(0, -2), 10);
-        var height = parseInt(ui.helper.context.style.height.slice(0, -2), 10);
         
         var swagPositionObj = {};
         if (!bool) {
             swagPositionObj.swag = swag._id;
             // Create the position object
-            swagPositionObj.posX = (event.pageX - width)  + 200 + 'px';
-            swagPositionObj.posY = (event.pageY + height) - 200 + 'px';
+            swagPositionObj.left =  ui.offset.left + 'px';
+            swagPositionObj.top = ui.offset.top + 'px';
             swagPositions.push(swagPositionObj);
         } else {
-            swagPositions[indexStore].posX = (event.pageX - width) + 200 + 'px';
-            swagPositions[indexStore].posY = (event.pageY + height) - 200 + 'px';
+            swagPositions[indexStore].left = ui.offset.left + 'px';
+            swagPositions[indexStore].top = ui.offset.top + 'px';
         }
         // And push to the swagPositions array
         // Remove this element from the dock and set position
@@ -121,9 +119,8 @@ app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthServic
         var detached = $(event.target).detach();
         $('.notTheDock').append(detached);
         detached.css('position', 'fixed');
-        //getting rid of this && ui.helper.context.style.height
-        detached.css('left', (event.pageX + 'px'));
-        detached.css('top', (event.pageY + 'px'));
+        detached.css('left', (ui.offset.left + 'px'));
+        detached.css('top', (ui.offset.top + 'px'));
 
     };
 
@@ -149,10 +146,6 @@ app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthServic
             swagSizes[indexStore].height = ui.helper.context.style.height;
             swagSizes[indexStore].width = ui.helper.context.style.width;
         }
-    }
-
-    $scope.onDrag = function(event) {
-        console.log(event.pageX, event.pageY)
     };
 
     $scope.toggleButtons = function() {
@@ -210,6 +203,7 @@ app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthServic
                 })
                 cribItem.draggable({
                     stop: function(event, ui) {
+                        console.log("this is the ui", ui);
                         return onDragStop(event, ui, $scope.swags[idx])
                     }
                 });
@@ -231,8 +225,8 @@ app.directive('setPosition', function() {
                     var detached = $(element).detach();
                     $('.notTheDock').append(detached);
                     element.css('position', 'fixed');
-                    element.css('left', scope.user.animal.swagPositions[i].posX);
-                    element.css('top', scope.user.animal.swagPositions[i].posY);
+                    element.css('left', scope.user.animal.swagPositions[i].left);
+                    element.css('top', scope.user.animal.swagPositions[i].top);
                 };
             };
             for (var i = 0; i < scope.user.animal.swagSizes.length; i++) {

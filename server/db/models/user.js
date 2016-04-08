@@ -37,8 +37,8 @@ var schema = new Schema({
         }],
         swagPositions: [{
             swag: String,
-            posX: String,
-            posY: String
+            left: String,
+            top: String
         }],
         swagSizes: [{
             swag: String,
