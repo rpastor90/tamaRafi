@@ -131,6 +131,7 @@ var generateSalt = function() {
 };
 
 var encryptPassword = function(plainText, salt) {
+    console.log('in encrypt with:', 'plaintext:',plainText, 'sat:',salt)
     var hash = crypto.createHash('sha1');
     hash.update(plainText);
     hash.update(salt);
@@ -138,11 +139,12 @@ var encryptPassword = function(plainText, salt) {
 };
 
 schema.pre('save', function(next) {
-    console.log('In the pre save for user')
-    if (this.isModified('password')) {
+    console.log('In the pre save for user', this, this.isModified('password'))
+    if (this.isModified('local.password')) {
         console.log('I am encrypting password!!')
         this.salt = this.constructor.generateSalt();
-        this.password = this.constructor.encryptPassword(this.password, this.salt);
+        this.password = this.constructor.encryptPassword(this.local.password, this.salt);
+        console.log('new obj', this)
     }
 
     next();

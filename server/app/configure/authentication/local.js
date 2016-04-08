@@ -1,9 +1,10 @@
 'use strict';
-var passport = require('passport');
-// var _ = require('lodash');
-var LocalStrategy = require('passport-local').Strategy;
-var mongoose = require('mongoose');
-var User = mongoose.model('User');
+const passport = require('passport');
+// const _ = require('lodash');
+const LocalStrategy = require('passport-local').Strategy;
+const mongoose = require('mongoose');
+const User = mongoose.model('User');
+const faker = require('faker');
 
 module.exports = function (app) {
 
@@ -44,12 +45,16 @@ module.exports = function (app) {
                     newUser.local.email = email;
                     newUser.local.password = password;
                     console.log(newUser.local.email,newUser.local.password)
-
+          
+                    newUser.name = faker.name.firstName()
+                    newUser.animal.name = faker.name.firstName()
+                 
                     newUser.save()
                     .then(newUser => {
                         console.log("this is the new USERRRRR!:", newUser)
-                        return done(null, newUser);
+                        done(null, newUser);
                     })
+                    .then(null, (err) => {console.log('the error:',err)})
                 }
             })
         })
@@ -83,10 +88,10 @@ module.exports = function (app) {
 
     });
 
-    app.post('/signup', passport.authenticate('local-signup', {
-        successRedirect: '/welcome',
-        failureRedirect: '/home',
-        failureFlash: true
+    // app.post('/signup', passport.authenticate('local-signup', {
+    //     successRedirect: '/welcome',
+    //     failureRedirect: '/home',
+    //     failureFlash: true
 
-    }))
+    // }))
 };

@@ -19,6 +19,7 @@ app.controller('SignupCtrl', function ($scope, AuthService, $state) {
         AuthService.signup($scope.signup)
         .then(function(returned) {
             console.log('I am in the signup controller after sending/signup to Ath Service')
+            $state.go('firstTimeUser')
         })
         .catch(function () {
             $scope.error = 'Invalid login credentials.';

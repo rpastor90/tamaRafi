@@ -103,7 +103,7 @@
         };
 
          this.signup = function (signupInfo) {
-            console.log('Currently in auth service signup')
+            console.log('Currently in auth service signup',signupInfo)
             return $http.post('/signup', signupInfo)
             .then(onSuccessfulLogin)
             .catch(function () {
