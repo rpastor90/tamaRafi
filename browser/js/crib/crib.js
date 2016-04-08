@@ -101,8 +101,6 @@ app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthServic
                 indexStore = i;
             }
         });
-        // var width = parseInt(ui.helper.context.style.width.slice(0, -2), 10);
-        // var height = parseInt(ui.helper.context.style.height.slice(0, -2), 10);
         
         var swagPositionObj = {};
         if (!bool) {
@@ -121,7 +119,6 @@ app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthServic
         var detached = $(event.target).detach();
         $('.notTheDock').append(detached);
         detached.css('position', 'fixed');
-        //getting rid of this && ui.helper.context.style.height
         detached.css('left', (ui.offset.left + 'px'));
         detached.css('top', (ui.offset.top + 'px'));
 
@@ -149,11 +146,7 @@ app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthServic
             swagSizes[indexStore].height = ui.helper.context.style.height;
             swagSizes[indexStore].width = ui.helper.context.style.width;
         }
-    }
-
-    // $scope.onDrag = function(event) {
-    //     console.log(event.pageX, event.pageY)
-    // };
+    };
 
     $scope.toggleButtons = function() {
         $scope.customizing = !$scope.customizing;
