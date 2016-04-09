@@ -50,19 +50,22 @@ app.controller('HealthCtrl', function($scope, $uibModal, UserFactory) {
     // Get weekly steps and sleep from resolved user
     var weekSteps = user[fitness].weekSteps.map(function(stepObj) {
         return stepObj.steps;
-    });
+    }).reverse();
+
     var weekStepsLabels = user[fitness].weekSteps.map(function(stepObj) {
         return stepObj.date.split(" ")[0];
     });
 
-    $scope.days = weekStepsLabels;
+    $scope.days = weekStepsLabels.reverse();
 
     var weekSleep = user[fitness].weekSleep.map(function(sleepObj) {
         return (sleepObj.minutes / 60).toFixed(2);
-    });
+    }).reverse();
+
     var money = weekSteps.map(function(num) {
         return Math.floor(num / 50);
     });
+    
     var powerUps = user[fitness].weekSleep.map(function(sleepObj) {
         return (sleepObj.minutes / 100).toFixed(2);
     });
