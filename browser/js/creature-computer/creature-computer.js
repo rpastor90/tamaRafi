@@ -21,18 +21,14 @@ app.controller('CreatureComputerCtrl', function ($scope, $uibModal, UserFactory)
 
 .controller('OpenComputerController', function ($scope, user, UserFactory) {
     $scope.user = user;
-    console.log(user);
     $scope.friends = user.animal.friends;
     $scope.posts = user.animal.posts;
-    console.log($scope.friends);
      $scope.addFriend = function(friendName) {
         UserFactory.addFriend(user, friendName);
         
      };
      $scope.goToFriendPage = function(friend) {
-       console.log("going to firend page")
         $scope.friend = friend;
-        console.log($scope.friend, "SCOPE FRIEND")
         $scope.showPostForm = true;
 
      };

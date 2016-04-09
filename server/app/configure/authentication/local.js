@@ -28,25 +28,27 @@ module.exports = function (app) {
     passport.use(new LocalStrategy({ usernameField: 'email', passwordField: 'password' }, strategyFn));
 
     passport.use('local-signup', new LocalStrategy({
-        usernameField: 'email',
+        usernameField: 'firstName',
         passwordField: 'password',
         passReqToCallback: true // passes entire request to callback
+       
     }, 
-    function(req, email, password, done) {
-        console.log('I am in the callback function after local-signup', email, password)
+    function(req, firstName, password, done) {
+        console.log('I am in the callback function after local-signup', firstName, password)
          process.nextTick(function(){
-            User.findOne({ 'local.email': email })
+            User.findOne({ 'local.name': firstName })
             .then(user => {
                 if (user) return done(null, false, req.flash('signupMessage', 'That email is already taken.'))
                 else {
                     var newUser = new User();
-
+                    console.log('In the else')
                     //set local credentials
-                    newUser.local.email = email;
+                    newUser.local.email = faker.internet.email();
                     newUser.local.password = password;
-                    newUser.name = faker.name.firstName()
-                    newUser.animal.name = faker.name.firstName()
-                 
+                    newUser.name = firstName;
+                    newUser.animal.name = req.body.animalName;
+                    newUser.fitness = 'local';
+                    
                     newUser.save()
                     .then(newUser => {
                         console.log("this is the new USERRRRR!:", newUser)

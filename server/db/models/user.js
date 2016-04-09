@@ -114,7 +114,23 @@ var schema = new Schema({
     },
     local: {
         email: String,
-        password: String 
+        password: String,
+        steps: {
+            type: Number,
+            default: 5000
+        },
+        sleep: {
+            type:Number,
+            default: 3600
+        },
+        weekSteps: [{
+            steps: Number,
+            date: String
+        }],
+        weekSleep: [{
+            minutes: Number,
+            date: String
+        }]
     }
 });
 

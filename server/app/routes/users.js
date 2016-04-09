@@ -54,10 +54,13 @@ router.get('/:userId', ensureAuthenticated, function (req, res, next) {
 });
 
 router.put('/:userId', ensureAuthenticated, function (req, res, next) {
+    console.log('in the put route')
     User.findByIdAndUpdate(req.params.userId, req.body, { new: true })
     .then(function (user) {
+        console.log('updatedUser:', user)
         res.status(201).json(user);
-    });
+    })
+    .then(null, next)
 });
 
 router.get('/:userId/getSwag', ensureAuthenticated, function(req, res, next) {
