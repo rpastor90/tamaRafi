@@ -34,16 +34,6 @@ var schema = new Schema({
             type: Schema.Types.ObjectId,
             ref: 'Swag'
         }],
-        swagPositions: [{
-            swag: String,
-            left: String,
-            top: String
-        }],
-        swagSizes: [{
-            swag: String,
-            height: String,
-            width: String
-        }],
         lastLoggedIn: {
             type: Date,
             default: Date.now

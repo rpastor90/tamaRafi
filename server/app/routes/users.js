@@ -52,71 +52,95 @@ router.get('/:userId/getSwag', ensureAuthenticated, function(req, res, next) {
 });
 
 router.put('/:userId/getSwag/:swagId', ensureAuthenticated, function (req, res, next) {
-    if (!req.user) return 'User not found!'
-    Swag.findOne({ _id: req.params.swagId })
-    .then(function(swag) {
-        req.user.animal.swags.push(swag);
-        req.user.animal.money = req.user.animal.money - swag.price;
+    if (!req.user) return 'User not found!';
+    var swagToBuy = req.body;
+    Swag.create({
+        name: swagToBuy.name,
+        crategory: swagToBuy.crategory,
+        price: swagToBuy.price,
+        imageUrl: swagToBuy.imageUrl
+        })
+    .then(function(createdSwag) {
+        req.user.animal.swags.push(createdSwag);
+        req.user.animal.money = req.user.animal.money - createdSwag.price;
         return req.user.save();
     })
-    .then(user => res.send(user))
+    .then(user => res.json(user))
     .then(null, next)
 });
 
 router.put('/:userId/updateCrib', ensureAuthenticated, function(req, res, next) {
     User.findOne({ _id: req.params.userId })
-    .then(function(user) {
-        // Loop trough req.body (an array of position objects)
-        for (var i = 0; i< req.body.length; i++) {
-            var existingSwag = false;
-            // Loop through swagPositions field on user.animal
-            for (var j = 0; j< user.animal.swagPositions.length; j++) {
-                // If the swag from req.body already exists on user.animal
-                if (req.body[i].swag === user.animal.swagPositions[j].swag) {
-                    _.assign(user.animal.swagPositions[j], req.body[i]);
-                    existingSwag = true;
-                };
-            };
+    .populate('animal.swags')
+    .then(user => {
 
-            // If you've gone through whole loop, add this swag to the user model
-            if (!existingSwag){
-                user.animal.swagPositions.push(req.body[i]);
-            };
-        };
-        user.save()
-        .then(() => {res.send() })
-        .then(null, next)
-    });
+        var swagsToChange = req.body;
+        for (var key in swagsToChange) {
+            for (var i = 0; i < user.animal.swags.length; i++) {
+                if (user.animal.swags[i]._id == key) {
+                    // console.log("this is the thing to change", swagsToChange[key])
+                    user.animal.swags[i] = swagsToChange[key];
+                    // console.log("we got a match, so we should have something", user.animal.swags[i])
+                }
+            }
+        }
+        // console.log("will it change?", user.animal.swags);
+        return user.save();
+
+
+        // Loop trough req.body (an array of position objects)
+        // for (var i = 0; i< req.body.length; i++) {
+        //     var existingSwag = false;
+        //     // Loop through swagPositions field on user.animal
+        //     for (var j = 0; j< user.animal.swagPositions.length; j++) {
+        //         // If the swag from req.body already exists on user.animal
+        //         if (req.body[i].swag === user.animal.swagPositions[j].swag) {
+        //             _.assign(user.animal.swagPositions[j], req.body[i]);
+        //             existingSwag = true;
+        //         };
+        //     };
+
+        //     // If you've gone through whole loop, add this swag to the user model
+        //     if (!existingSwag){
+        //         user.animal.swagPositions.push(req.body[i]);
+        //     };
+        // };
+        // user.save()
+        // .then(() => {res.send() })
+        // .then(null, next)
+    })
+    .then(user => res.status(201).send(user[0]))
+    .then(null, next);
 
 });
 
-router.put('/:userId/updateCribSizes', ensureAuthenticated, function(req, res, next) {
+// router.put('/:userId/updateCribSizes', ensureAuthenticated, function(req, res, next) {
 
-    User.findOne({ _id: req.params.userId })
-    .then(function(user) {
-        // Loop trough req.body (an array of position objects)
-        for (var i = 0; i< req.body.length; i++) {
-            var existingSwag = false;
-            // Loop through swagPositions field on user.animal
-            for (var j = 0; j< user.animal.swagSizes.length; j++) {
-                // If the swag from req.body already exists on user.animal
-                if (req.body[i].swag === user.animal.swagSizes[j].swag) {
-                    _.assign(user.animal.swagSizes[j], req.body[i]);
-                    existingSwag = true;
-                };
-            };
+//     User.findOne({ _id: req.params.userId })
+//     .then(function(user) {
+//         // Loop trough req.body (an array of position objects)
+//         for (var i = 0; i< req.body.length; i++) {
+//             var existingSwag = false;
+//             // Loop through swagPositions field on user.animal
+//             for (var j = 0; j< user.animal.swagSizes.length; j++) {
+//                 // If the swag from req.body already exists on user.animal
+//                 if (req.body[i].swag === user.animal.swagSizes[j].swag) {
+//                     _.assign(user.animal.swagSizes[j], req.body[i]);
+//                     existingSwag = true;
+//                 };
+//             };
 
-            // If you've gone through whole loop, add this swag to the user model
-            if (!existingSwag){
-                user.animal.swagSizes.push(req.body[i]);
-            };
-        };
-        user.save()
-        .then(() => {res.send() })
-        .then(null, next)
-    });
+//             // If you've gone through whole loop, add this swag to the user model
+//             if (!existingSwag){
+//                 user.animal.swagSizes.push(req.body[i]);
+//             };
+//         };
+//         user.save()
+//         .then(() => {res.send() })
+//         .then(null, next)
+//     });
 
-});
+// });
 
 router.put('/:userId/addFriend', ensureAuthenticated, function(req, res, next) {
     

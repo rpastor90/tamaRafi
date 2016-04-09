@@ -6,7 +6,11 @@ var schema = new Schema({
 	name: String,
 	category: String,
 	price: Number,
-	imageUrl: String
+	imageUrl: String, 
+  height: String,
+  width: String,
+  left: String,
+  top: String
 });
 
 mongoose.model('Swag', schema);

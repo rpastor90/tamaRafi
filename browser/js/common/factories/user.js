@@ -4,7 +4,7 @@ app.factory('UserFactory', function($http, AuthService, $rootScope) {
 
     userFactory.getCachedUser = function () {
         return cachedUser;
-    }
+    };
 
     userFactory.getUser = function() {
         return AuthService.getLoggedInUser()
@@ -18,7 +18,7 @@ app.factory('UserFactory', function($http, AuthService, $rootScope) {
                 });
             }
         });
-    }
+    };
 
     userFactory.updateUser = function (user) {
         return $http.put('/api/users/' + user._id, user)
@@ -26,11 +26,11 @@ app.factory('UserFactory', function($http, AuthService, $rootScope) {
             angular.copy(updatedUser.data[0], cachedUser);
             return cachedUser;
         });
-    }
+    };
 
     userFactory.makeAPurchase = function(user, swag) {
         if (user.animal.money >= swag.price) {
-            return $http.put('/api/users/' + user._id + '/getSwag/' + swag._id)
+            return $http.put('/api/users/' + user._id + '/getSwag/' + swag._id, swag)
             .then(function(purchase) {
                 angular.copy(purchase.data, cachedUser);
                 return cachedUser;

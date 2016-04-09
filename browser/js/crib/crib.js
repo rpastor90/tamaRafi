@@ -13,7 +13,7 @@ app.config(function($stateProvider) {
                 else return UserFactory.getUser();
             },
             swags: function(SwagFactory, user) {
-                if (SwagFactory.getUserSwagCache().length) return SwagFactory.getUserSwagCache();
+                // if (SwagFactory.getUserSwagCache().length) return SwagFactory.getUserSwagCache();
                 return SwagFactory.fetchSwagByUser(user);
             },
             average: function (user) {
@@ -28,8 +28,10 @@ app.config(function($stateProvider) {
 
 app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthService, SwagFactory, swags, average) {
 
-    var swagPositions = [];
-    var swagSizes = [];
+    // var swagPositions = [];
+    // var swagSizes = [];
+
+    var editedSwagObj = {};
 
     $scope.user = user;
     $scope.isShown = false;
@@ -87,26 +89,25 @@ app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthServic
     };
 
     var onDragStop = function(event, ui, swag) {
-        var bool = false;
-        var indexStore = null;
-        swagPositions.forEach(function(swagObj, i) {
-            if (swagObj.swag === swag._id) {
-                bool = true;
-                indexStore = i;
-            }
-        });
+        // var bool = false;
+        // var indexStore = null;
+        // swagPositions.forEach(function(swagObj, i) {
+        //     if (swagObj.swag === swag._id) {
+        //         bool = true;
+        //         indexStore = i;
+        //     }
+        // });
+        swag.left =  Math.floor(ui.offset.left) + 'px';
+        swag.top = Math.floor(ui.offset.top) + 'px';
+
+        editedSwagObj[swag._id] = swag;
         
-        var swagPositionObj = {};
-        if (!bool) {
-            swagPositionObj.swag = swag._id;
-            // Create the position object
-            swagPositionObj.left =  ui.offset.left + 'px';
-            swagPositionObj.top = ui.offset.top + 'px';
-            swagPositions.push(swagPositionObj);
-        } else {
-            swagPositions[indexStore].left = ui.offset.left + 'px';
-            swagPositions[indexStore].top = ui.offset.top + 'px';
-        }
+        // if (editedSwagObj[swag._id]) {
+        //     // Create the position object
+        //     editedSwagObj.push(swag);
+        // } else {
+        //     editedSwagObj[swag._id] = [swag];
+        // }
         // And push to the swagPositions array
         // Remove this element from the dock and set position
         //MIGHT STILL NEED THIS
@@ -119,27 +120,31 @@ app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthServic
     };
 
     var onResizeStop = function(event, ui, swag) {
-        var bool = false;
-        var indexStore = null;
-        swagSizes.forEach(function(swagObj, i) {
-            if (swagObj.swag === swag._id) {
-                bool = true;
-                indexStore = i;
-            }
-        });
 
-        var swagSizeObj = {};
+        swag.height = ui.helper.context.style.height;
+        swag.width = ui.helper.context.style.width;
+        editedSwagObj[swag._id] = swag;
+        // var bool = false;
+        // var indexStore = null;
+        // swagSizes.forEach(function(swagObj, i) {
+        //     if (swagObj.swag === swag._id) {
+        //         bool = true;
+        //         indexStore = i;
+        //     }
+        // });
 
-        if (!bool) {
-            swagSizeObj.swag = swag._id;
-            swagSizeObj.height = ui.helper.context.style.height;
-            swagSizeObj.width = ui.helper.context.style.width;
-            swagSizes.push(swagSizeObj);
+        // var swagSizeObj = {};
 
-        } else {
-            swagSizes[indexStore].height = ui.helper.context.style.height;
-            swagSizes[indexStore].width = ui.helper.context.style.width;
-        }
+        // if (!bool) {
+        //     swagSizeObj.swag = swag._id;
+        //     swagSizeObj.height = ui.helper.context.style.height;
+        //     swagSizeObj.width = ui.helper.context.style.width;
+        //     swagSizes.push(swagSizeObj);
+
+        // } else {
+        //     swagSizes[indexStore].height = ui.helper.context.style.height;
+        //     swagSizes[indexStore].width = ui.helper.context.style.width;
+        // }
     };
 
     $scope.toggleButtons = function() {
@@ -147,8 +152,7 @@ app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthServic
     };
 
     $scope.saveSwagPositionsAndSizes = function() {
-        SwagFactory.updateSwagPositions(swagPositions, user);
-        SwagFactory.updateSwagSizes(swagSizes, user);
+        SwagFactory.updateCrib(editedSwagObj, user);
     };
     
     $scope.reset = function() {
@@ -215,23 +219,23 @@ app.directive('setPosition', function() {
     return {
         restrict: 'A',
         link: function(scope, element, attrs, controller) {
-            for (var i = 0; i < scope.user.animal.swagPositions.length; i++) {
-                if (scope.user.animal.swagPositions[i].swag === scope.swag._id) {
+            for (var i = 0; i < scope.user.animal.swags.length; i++) {
+                if (scope.user.animal.swags[i]._id === scope.swag._id) {
+                    console.log("this was a match, give it style", scope.user.animal.swags[i], scope.swag[i])
                     var detached = $(element).detach();
                     $('.notTheDock').append(detached);
                     element.css('position', 'fixed');
-                    element.css('left', scope.user.animal.swagPositions[i].left);
-                    element.css('top', scope.user.animal.swagPositions[i].top);
+                    element.css('left', scope.user.animal.swags[i].left);
+                    element.css('top', scope.user.animal.swags[i].top);
                 };
             };
-            for (var i = 0; i < scope.user.animal.swagSizes.length; i++) {
-                if (scope.user.animal.swagSizes[i].swag === scope.swag._id) {
+            for (var j = 0; j < scope.user.animal.swags.length; j++) {
+                if (scope.user.animal.swags[j]._id === scope.swag._id) {
                     var detached = $(element).detach();
                     $('.notTheDock').append(detached);
                     element.css('position', 'fixed');
-                    element.css('width', scope.user.animal.swagSizes[i].width);
-                    element.css('height', scope.user.animal.swagSizes[i].height);
-
+                    element.css('width', scope.user.animal.swags[i].width);
+                    element.css('height', scope.user.animal.swags[i].height);
                 };
             }
         }
