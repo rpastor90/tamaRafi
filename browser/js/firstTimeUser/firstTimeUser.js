@@ -17,12 +17,12 @@ app.config(function($stateProvider) {
     });
 });
 
-app.controller('FirstTimeUserCtrl', function($scope, $state, UserFactory, panda, user, AuthService) {
+app.controller('FirstTimeUserCtrl', function($scope, $state, UserFactory, panda, user) {
     $scope.user = user;
     $scope.panda = panda;
     
-    $scope.update = function(user) {
-        return UserFactory.updateUser(user)
+    $scope.update = function(newUser) {
+        return UserFactory.updateUser(newUser)
         .then(function() {
             $state.go('crib');
         })

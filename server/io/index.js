@@ -9,14 +9,14 @@ module.exports = function (server) {
 
     io = socketio(server);
 
-    var movesHistory = {};
+    // var movesHistory = {};
     var users = [];
 
     // console.log(io);
 
     io.on('connection', function (socket) {
 
-      var room;
+      // var room;
 
       socket.on('disconnect', function () {
         console.log("I'm Out...");

@@ -35,9 +35,7 @@ app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthServic
     $scope.swags = swags;
 
     // sad or happy panda state
-    var steps = $scope.user[$scope.user.fitness].steps / $scope.user.animal.stepsGoal;
-    var sleep = ($scope.user[$scope.user.fitness].sleep/60) / $scope.user.animal.sleepGoal;
-    $scope.average = (steps + sleep)/2 * 100;
+    $scope.average = average;
     
     $scope.wearHat = function(swag) {
         if (swag.name === 'top hat') {
@@ -99,7 +97,7 @@ app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthServic
         if (!bool) {
             swagPositionObj.swag = swag._id;
             // Create the position object
-            swagPositionObj.left =  ui.offset.left + 'px';
+            swagPositionObj.left = ui.offset.left + 'px';
             swagPositionObj.top = ui.offset.top + 'px';
             swagPositions.push(swagPositionObj);
         } else {
@@ -182,7 +180,7 @@ app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthServic
 
     $scope.makeUnCustomizable = function () {
         var allCribItems = $('.crib li').toArray();
-        allCribItems.forEach(function(cribItem, idx) {
+        allCribItems.forEach(function(cribItem) {
             $(cribItem).resizable({disabled: true}).draggable({disabled: true});
         });
     };
@@ -213,7 +211,7 @@ app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthServic
 app.directive('setPosition', function() {
     return {
         restrict: 'A',
-        link: function(scope, element, attrs, controller) {
+        link: function(scope, element, attrs) {
             for (var i = 0; i < scope.user.animal.swagPositions.length; i++) {
                 if (scope.user.animal.swagPositions[i].swag === scope.swag._id) {
                     var detached = $(element).detach();
@@ -223,13 +221,13 @@ app.directive('setPosition', function() {
                     element.css('top', scope.user.animal.swagPositions[i].top);
                 };
             };
-            for (var i = 0; i < scope.user.animal.swagSizes.length; i++) {
-                if (scope.user.animal.swagSizes[i].swag === scope.swag._id) {
-                    var detached = $(element).detach();
-                    $('.notTheDock').append(detached);
+            for (var j = 0; j < scope.user.animal.swagSizes.length; j++) {
+                if (scope.user.animal.swagSizes[j].swag === scope.swag._id) {
+                    var detached1 = $(element).detach();
+                    $('.notTheDock').append(detached1);
                     element.css('position', 'fixed');
-                    element.css('width', scope.user.animal.swagSizes[i].width);
-                    element.css('height', scope.user.animal.swagSizes[i].height);
+                    element.css('width', scope.user.animal.swagSizes[j].width);
+                    element.css('height', scope.user.animal.swagSizes[j].height);
 
                 };
             }
