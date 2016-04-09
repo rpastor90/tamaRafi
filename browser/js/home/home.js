@@ -15,9 +15,11 @@ app.config(function ($stateProvider) {
             //     })
             // }
             $scope.demo = () => {
+                console.log('demo clicked')
                 $uibModal.open({
                     animation: $scope.animationsEnabled,
-                    templateUrl: '../demo/demo.html'
+                    templateUrl: '/js/demo/demo.html',
+                    controller: 'SignupCtrl'
                 })
             }
         },

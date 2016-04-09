@@ -8,10 +8,19 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('SignupCtrl', function ($scope, AuthService, $state) {
+app.controller('SignupCtrl', function ($scope, AuthService, $state, $uibModal) {
 
     // $scope.signup = {};
     $scope.error = null;
+
+    $scope.login = () => {
+        console.log('demo clicked')
+        $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: '/js/login/login.html',
+            controller: 'LoginCtrl'
+        })
+    }
 
     $scope.sendsignup = function () {
         console.log('in the send signup area and here is AutherService', AuthService)
