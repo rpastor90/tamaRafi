@@ -8,15 +8,18 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('LoginCtrl', function ($scope, AuthService, $state, UserFactory) {
+app.controller('LoginCtrl', function ($scope, AuthService, $state) {
 
     $scope.login = {};
     $scope.error = null;
 
     $scope.sendLogin = function (loginInfo) {
         console.log('in the send login area')
-    
-        UserFactory.fetchDemoUser(loginInfo).then(function() {
+        // close the modal
+        $scope.$close();
+
+        AuthService.login(loginInfo).then(function() {
+            console.log('in the dot then after login')
             $state.go('crib')
         })
         // AuthService.login(loginInfo).then(function () {

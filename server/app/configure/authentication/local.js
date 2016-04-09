@@ -10,9 +10,11 @@ module.exports = function (app) {
 
     // When passport.authenticate('local') is used, this function will receive
     // the email and password to run the actual authentication logic.
-    var strategyFn = function (email, password, done) {
-        User.findOne({ email: email })
+    var strategyFn = function (name, password, done) {
+        console.log('trying to fins user in strategy func local auth', name, password)
+        User.findOne({ name: name })
             .then(function (user) {
+                console.log("this the user:", user)
                 // user.correctPassword is a method from the User schema.
                 if (!user || !user.correctPassword(password)) {
                     done(null, false);
@@ -25,7 +27,7 @@ module.exports = function (app) {
             });
     };
 
-    passport.use(new LocalStrategy({ usernameField: 'email', passwordField: 'password' }, strategyFn));
+    passport.use(new LocalStrategy({ usernameField: 'name', passwordField: 'password' }, strategyFn));
 
     passport.use('local-signup', new LocalStrategy({
         usernameField: 'firstName',

@@ -14,13 +14,17 @@ app.config(function ($stateProvider) {
             //         console.log("res", res)
             //     })
             // }
+            let demoModal;
             $scope.demo = () => {
                 console.log('demo clicked')
-                $uibModal.open({
+                $scope.demoModal = $uibModal.open({
                     animation: $scope.animationsEnabled,
                     templateUrl: '/js/demo/demo.html',
                     controller: 'SignupCtrl'
                 })
+            };
+            $scope.close = () => {
+                $scope.demoModal.close();
             }
         },
         resolve: {

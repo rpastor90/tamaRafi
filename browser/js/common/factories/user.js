@@ -1,10 +1,7 @@
 app.factory('UserFactory', function($http, AuthService, $rootScope) {
     var userFactory = {};
     var cachedUser = {};
-    userFactory.fetchDemoUser =function() {
-        return $http.get('/api/users/demo')
-        .then(res => res.data)
-    }
+   
     userFactory.getUser = function() {
         return AuthService.getLoggedInUser()
         .then(function(user) {

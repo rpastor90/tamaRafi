@@ -1,20 +1,21 @@
 app.config(function ($stateProvider) {
 
-    $stateProvider.state('signup', {
-        url: '/signup',
-        templateUrl: 'js/signup/signup.html',
-        controller: 'SignupCtrl'
-    });
+    // $stateProvider.state('signup', {
+    //     url: '/signup',
+    //     templateUrl: 'js/signup/signup.html',
+    //     controller: 'SignupCtrl'
+    // });
 
 });
 
 app.controller('SignupCtrl', function ($scope, AuthService, $state, $uibModal) {
-
+    console.log('scope in signup', $scope)
     // $scope.signup = {};
     $scope.error = null;
 
     $scope.login = () => {
-        console.log('demo clicked')
+        // close previous modal
+        $scope.$close()
         $uibModal.open({
             animation: $scope.animationsEnabled,
             templateUrl: '/js/login/login.html',
@@ -23,8 +24,7 @@ app.controller('SignupCtrl', function ($scope, AuthService, $state, $uibModal) {
     }
 
     $scope.sendsignup = function () {
-        console.log('in the send signup area and here is AutherService', AuthService)
-    
+        $scope.$close()
         AuthService.signup($scope.signup)
         .then(function(returned) {
             console.log('I am in the signup controller after sending/signup to Ath Service')
