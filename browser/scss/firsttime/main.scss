@@ -5,7 +5,7 @@
 	width: 80%;
 	margin-left: 10%;
 	border-radius: 50px;
-	border: 5px dashed white;
+	border: 5px solid white;
 
 	li {
 		list-style: none;
@@ -44,15 +44,12 @@
 		text-align: center;
 	}
 	p {
-		font-size: 15px;
+		font-size: 10px;
 	}
 }
 
 .animalContainer {
 	img {
-		border: 5px dotted white;
-		padding: 5px;
-		box-shadow: 3px 3px 1px black;
 		margin-bottom: 20px;
 		object-fit: cover;
 	}

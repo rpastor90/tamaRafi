@@ -7,8 +7,8 @@ app.config(function($stateProvider) {
             authenticate: true
         },
         resolve: {
-            animals: function(AnimalFactory) {
-                return AnimalFactory.fetchAnimals();
+            panda: function(PandaFactory) {
+                return PandaFactory.getPanda();
             },
             user: function(UserFactory) {
                 return UserFactory.getUser();
@@ -17,25 +17,15 @@ app.config(function($stateProvider) {
     });
 });
 
-app.controller('FirstTimeUserCtrl', function($scope, $state, UserFactory, animals, user, AuthService) {
+app.controller('FirstTimeUserCtrl', function($scope, $state, UserFactory, panda, user, AuthService) {
     $scope.user = user;
-
+    $scope.panda = panda;
+    
     $scope.update = function(user) {
         return UserFactory.updateUser(user)
         .then(function() {
             $state.go('crib');
         })
-    };
-
-    $scope.animals = animals;
-    $scope.onDisplay = 0;
-
-    $scope.user.animal = Object.assign({}, $scope.user.animal, $scope.animals[$scope.onDisplay]);
-
-    $scope.nextAnimal = function() {
-        if ($scope.onDisplay >= 2) $scope.onDisplay = 0;
-        else $scope.onDisplay++;
-        $scope.user.animal = Object.assign({}, $scope.user.animal, $scope.animals[$scope.onDisplay]);
     };
 
 });

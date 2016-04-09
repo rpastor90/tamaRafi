@@ -10,7 +10,6 @@ var schema = new Schema({
     fitness: String,
     animal: {
         name: String,
-        species: String,
         stepsGoal: Number,
         sleepGoal: Number,
         money: {

@@ -86,7 +86,5 @@ app.config(function ($stateProvider) {
       }
     });
 
-
-
   });
 });

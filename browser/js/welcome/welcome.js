@@ -4,7 +4,7 @@ app.config(function ($stateProvider) {
         url: '/welcome',
         controller: function(user, $state) {
             console.log('Welcome:', user.name);
-            if (user.animal.species) {
+            if (user.animal.name) {
                 // switch firstTimeUser to crib once crib state is set up
                 $state.go('crib');
             } else {
