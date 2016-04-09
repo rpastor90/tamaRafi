@@ -7,9 +7,6 @@ app.config(function($stateProvider) {
             authenticate: true
         },
         resolve: {
-            panda: function(PandaFactory) {
-                return PandaFactory.getPanda();
-            },
             user: function(UserFactory) {
                 return UserFactory.getUser();
             }
@@ -17,9 +14,9 @@ app.config(function($stateProvider) {
     });
 });
 
-app.controller('FirstTimeUserCtrl', function($scope, $state, UserFactory, panda, user) {
+app.controller('FirstTimeUserCtrl', function($scope, $state, UserFactory, user, PandaFactory) {
     $scope.user = user;
-    $scope.panda = panda;
+    $scope.panda = PandaFactory.getPanda();
     
     $scope.update = function(newUser) {
         return UserFactory.updateUser(newUser)
