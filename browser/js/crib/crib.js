@@ -56,7 +56,7 @@ app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthServic
             }
             $('#creatureContainer').css('background', 'url("http://i.imgur.com/JgVnEiy.png")');
         }
-    }
+    };
 
     $scope.changeBackground = function(swag) {
         if (swag.category === 'background') {
@@ -83,14 +83,7 @@ app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthServic
             $('.crib').css('z-index', '-1');
         }
 
-    }
-
-    // logs mouse coordinate on click
-    // function printMousePos(event) {
-    //   console.log("clientX: " + event.clientX + "clientY: " + event.clientY);
-    // }
-
-    // document.addEventListener("click", printMousePos);
+    };
 
     var onDragStop = function(event, ui, swag) {
         var bool = false;
@@ -153,10 +146,10 @@ app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthServic
     };
 
     $scope.saveSwagPositionsAndSizes = function() {
-        SwagFactory.updateSwagPositions(swagPositions, user)
-        SwagFactory.updateSwagSizes(swagSizes, user)
+        SwagFactory.updateSwagPositions(swagPositions, user);
+        SwagFactory.updateSwagSizes(swagSizes, user);
     };
-
+    
     $scope.reset = function() {
         swags.forEach(function (swag) {
             swag.hide = false;
@@ -187,32 +180,33 @@ app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthServic
         })
     };
 
+    $scope.makeUnCustomizable = function () {
+        var allCribItems = $('.crib li').toArray();
+        allCribItems.forEach(function(cribItem, idx) {
+            $(cribItem).resizable({disabled: true}).draggable({disabled: true});
+        });
+    };
+
     $scope.makeCustomizable = function() {
         var allCribItems = $('.crib li').toArray();
         allCribItems.forEach(function(cribItem, idx) {
             cribItem = $(cribItem);
-            if ($scope.customizing) {
-                cribItem.resizable({
-                    resize: function(e, ui) {
-                        // console.log(e, ui, "in resize")
-                    },
-                    autohide: true,
-                    stop: function(e, ui) {
-                        return onResizeStop(e, ui, $scope.swags[idx])
-                    }
-                })
-                cribItem.draggable({
-                    stop: function(event, ui) {
-                        console.log("this is the ui", ui);
-                        return onDragStop(event, ui, $scope.swags[idx])
-                    }
-                });
-            } else {
-                // FIX THIS: SHOULD NOT BE CUSTOMIZEABLE AFTER SAVE
-                cribItem.removeClass('ui-resizable ui-draggable ui-draggable-handle');
-            }
+            cribItem.resizable({
+                disabled: false,
+                autohide: true,
+                stop: function(e, ui) {
+                    return onResizeStop(e, ui, $scope.swags[idx])
+                }
+            })
+            cribItem.draggable({
+                disabled: false,
+                stop: function(event, ui) {
+                    return onDragStop(event, ui, $scope.swags[idx])
+                }
+            });
         });
-    }
+    };
+
 
 });
 
