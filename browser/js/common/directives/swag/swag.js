@@ -19,6 +19,16 @@ app.directive('swag', function(UserFactory) {
 
 app.factory('SwagFactory', function ($http) {
     var SwagFactory = {};
+    var swagCache = {};
+    var userSwagCache = [];
+
+    SwagFactory.getSwagCache = () => {
+        return swagCache;
+    };
+
+    SwagFactory.getUserSwagCache = () => {
+        return userSwagCache;
+    }
 
     SwagFactory.fetchSwag = function() {
         var shelves = {};
@@ -32,25 +42,33 @@ app.factory('SwagFactory', function ($http) {
                     shelves[swag.category].push(swag);
                 }
             });
-            return shelves;
+            angular.copy(shelves, swagCache);
+            return swagCache;
         })
     };
 
     SwagFactory.fetchSwagByUser = function(user) {
         return $http.get('/api/users/' + user._id + '/getSwag')
-        .then(function (res) {
-            return res.data.animal.swags;
+        .then(res => {
+            // console.log(res.data.animal.swags);
+            angular.copy(res.data.animal.swags, userSwagCache);
+            return userSwagCache;
         });
     };
 
     SwagFactory.updateSwagPositions = function(swagPositions, user) {
         return $http.put('/api/users/' + user._id + '/updateCrib', swagPositions)
-        .then(res=> res.data);
+        .then(res => {
+            userSwagCache = res.data;
+            return userSwagCache;
+        });
     };
 
     SwagFactory.updateSwagSizes = function(swagSizes, user) {
         return $http.put('/api/users/' + user._id + '/updateCribSizes', swagSizes)
-        .then(res =>res.data);
+        .then(res => {
+            userSwagres.data
+        });
     };
 
     return SwagFactory;

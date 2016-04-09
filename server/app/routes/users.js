@@ -46,7 +46,9 @@ router.get('/:userId/getSwag', ensureAuthenticated, function(req, res, next) {
     User.findOne({ _id: req.params.userId })
     .populate('animal.swags')
     .then( user => {
-        res.json(user)})
+        res.json(user);
+    })
+    .then(null, next);
 });
 
 router.put('/:userId/getSwag/:swagId', ensureAuthenticated, function (req, res, next) {

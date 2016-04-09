@@ -12,7 +12,8 @@ app.config(function($stateProvider) {
                 if (UserFactory.getCachedUser().animal) return UserFactory.getCachedUser();
                 else return UserFactory.getUser();
             },
-            swags: function(SwagFactory, $animate, user) {
+            swags: function(SwagFactory, user) {
+                if (SwagFactory.getUserSwagCache().length) return SwagFactory.getUserSwagCache();
                 return SwagFactory.fetchSwagByUser(user);
             },
             average: function (user) {
