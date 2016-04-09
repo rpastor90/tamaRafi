@@ -4,7 +4,7 @@ var moment = require('moment');
 var path = require('path');
 var FitbitClient = require('fitbit-client-oauth2');
 var config = require('fitbit-client-oauth2/src/config');
-var helper = require('fitbit-client-oauth2/src/helpers');
+// var helper = require('fitbit-client-oauth2/src/helpers');
 var fitbitConfig = require(path.join(__dirname, '../../../env')).FITBIT;
 var client = new FitbitClient(fitbitConfig.clientID, fitbitConfig.clientSecret);
 

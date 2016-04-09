@@ -105,7 +105,7 @@
     height: 65px;
 }
 
-[ui-view].ng-enter,
+/*[ui-view].ng-enter,
 [ui-view].ng-leave {
     position: absolute;
     left: 0;
@@ -142,7 +142,8 @@
     -webkit-transform: translate3d(100px, 0, 0);
     -moz-transform: translate3d(100px, 0, 0);
     transform: translate3d(100px, 0, 0);
-}
+}*/
+
 
 @import 'directives/main';
 @import 'home/main';

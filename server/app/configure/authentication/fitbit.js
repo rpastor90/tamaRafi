@@ -51,8 +51,8 @@ module.exports = function (app) {
                         var oneDay = day.dateTime.split('-');
                         var year = Number(oneDay[0]);
                         var month = Number(oneDay[1]) - 1;
-                        var day = Number(oneDay[2]);
-                        dayData.date = new Date(year, month, day);
+                        var dayDate = Number(oneDay[2]);
+                        dayData.date = new Date(year, month, dayDate);
                         userToLogin.fitbit.weekSteps.push(dayData);
                     })
                     userToLogin.fitbit.weekSteps = userToLogin.fitbit.weekSteps.reverse().slice(0, 7);
@@ -87,16 +87,16 @@ module.exports = function (app) {
                     userToLogin.save()
                     .then(function (stepsSavedUser) {
                         helper.getSleepTimeSeries(userToLogin.fitbit.tokens, {}, '7d', 'minutesAsleep')
-                        .then(function (data) {
-                            var sleepData = data['sleep-minutesAsleep'];
+                        .then(function (zData) {
+                            var sleepData = zData['sleep-minutesAsleep'];
                             sleepData.forEach(function (day) {
                                 var dayData = {};
                                 dayData.minutes = Number(day.value);
                                 var oneDay = day.dateTime.split('-');
                                 var year = Number(oneDay[0]);
                                 var month = Number(oneDay[1]) - 1;
-                                var day = Number(oneDay[2]);
-                                dayData.date = new Date(year, month, day);
+                                var dayDate = Number(oneDay[2]);
+                                dayData.date = new Date(year, month, dayDate);
                                 stepsSavedUser.fitbit.weekSleep.push(dayData);
                             })
                             stepsSavedUser.fitbit.weekSleep = userToLogin.fitbit.weekSleep.reverse().slice(0, 7);
@@ -111,7 +111,7 @@ module.exports = function (app) {
                 })
                 done(null, userToLogin);
             })
-        }, function (err, user) {
+        }, function (err) {
             console.error('This is a major error');
             done(err);
         })

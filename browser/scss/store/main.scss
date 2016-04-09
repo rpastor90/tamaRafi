@@ -22,20 +22,9 @@
     h1:hover {
         text-shadow: 0 0 10px rgba(255, 255, 255, 1), 0 0 20px rgba(255, 255, 255, 1), 0 0 30px rgba(255, 255, 255, 1), 0 0 40px #00ffff, 0 0 70px #00ffff, 0 0 80px #00ffff, 0 0 100px #00ffff;
     }
-    .shelf {
-        border-width: 2px;
-        height: 15px;
-        width: 95%;
-        background: #c74b61;
-        box-shadow: 3px 3px 1px black;
-        background-image: -webkit-linear-gradient(left, #61c74b, #c74b61, #4b61c7);
-        background-image: -moz-linear-gradient(left, #61c74b, #c74b61, #4b61c7);
-        background-image: -ms-linear-gradient(left, #61c74b, #c74b61, #4b61c7);
-        background-image: -o-linear-gradient(left, #61c74b, #c74b61, #4b61c7);
-    }
     .swag {
-        width: 155px;
-        height: 155px;
+        width: 125px;
+        height: 125px;
         margin: 10px;
         border: 5px dotted white;
         padding: 5px;

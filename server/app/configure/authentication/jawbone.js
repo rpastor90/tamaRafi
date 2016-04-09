@@ -53,7 +53,7 @@ module.exports = function(app) {
                 userToLogin.jawbone.tokens.access_token = accessToken;
                 userToLogin.jawbone.tokens.refresh_token = refreshToken;
                 
-                var steps;
+                // var steps;
                 userToLogin.jawbone.weekSteps = [];
                 up.moves.get({}, function (err, body) {
                     if (err) {
@@ -66,8 +66,8 @@ module.exports = function(app) {
                             var oneDay = day.date.toString();
                             var year = Number(oneDay.slice(0, 4));
                             var month = Number(oneDay.slice(4, 6)) - 1;
-                            var day = Number(oneDay.slice(6));
-                            dayData.date = new Date(year, month, day);
+                            var dayDate = Number(oneDay.slice(6));
+                            dayData.date = new Date(year, month, dayDate);
                             userToLogin.jawbone.weekSteps.push(dayData);
                         })
                         userToLogin.jawbone.weekSteps = userToLogin.jawbone.weekSteps.slice(0, 7);
@@ -119,8 +119,8 @@ module.exports = function(app) {
                                     var oneDay = day.date.toString();
                                     var year = Number(oneDay.slice(0, 4));
                                     var month = Number(oneDay.slice(4, 6)) - 1;
-                                    var day = Number(oneDay.slice(6));
-                                    dayData.date = new Date(year, month, day);
+                                    var dayDate = Number(oneDay.slice(6));
+                                    dayData.date = new Date(year, month, dayDate);
                                     stepsSavedUser.jawbone.weekSleep.push(dayData);
                                 })
                                 stepsSavedUser.jawbone.weekSleep = userToLogin.jawbone.weekSleep.slice(0, 7);
@@ -136,7 +136,7 @@ module.exports = function(app) {
                     done(null, userToLogin);
                 })
             })
-        }, function (err, user) {
+        }, function (err) {
             console.error('This is a major error');
             done(err);
         })
