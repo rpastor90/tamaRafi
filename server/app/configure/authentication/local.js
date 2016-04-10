@@ -6,6 +6,31 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const faker = require('faker');
 
+//Helper function to generate random week sleep & steps
+// data for demo user
+ function randomizedWeekData(type) {
+    let weekData = [];
+    let today = new Date();
+    let oneDay = 24*60*60*1000;
+    for (let i=0; i<7; i++){
+        //calculate date for past seven days
+        let dateInMs = today.valueOf() - oneDay*i;
+        let date = new Date(dateInMs);
+        let datum = { date:date };
+        if (type === 'steps') {
+            let randomSteps = Math.floor(Math.random() * 19000) + 5000;
+            datum.steps = randomSteps
+        } else {
+            let randomSleeps = Math.floor(Math.random() * 9) + 5;
+            datum.minutes = randomSleeps * 60;
+        }
+        weekData.push(datum)
+    }
+    console.log('weekDATA:', weekData)
+    return weekData;
+ }
+
+
 module.exports = function (app) {
 
     // When passport.authenticate('local') is used, this function will receive
@@ -50,6 +75,30 @@ module.exports = function (app) {
                     newUser.name = firstName;
                     newUser.animal.name = req.body.animalName;
                     newUser.fitness = 'local';
+
+                    newUser.local.weekSteps = randomizedWeekData('steps');
+                    newUser.local.weekSleep = randomizedWeekData('sleep');
+                    console.log(newUser.weekSteps, 'new user steps')
+                    
+
+        //             "weekSteps": [
+        //     {
+        //         "steps": 7,
+        //         "date": "Fri Feb 19 2016 00:00:00 GMT+0000 (UTC)",
+        //         "_id": {
+        //             "$oid": "56c6a39e4671de03008c8270"
+        //         }
+        //     },
+
+
+        // "weekSleep": [
+        //     {
+        //         "minutes": 0,
+        //         "date": "Fri Feb 19 2016 00:00:00 GMT+0000 (UTC)",
+        //         "_id": {
+        //             "$oid": "56c6a39e4671de03008c8277"
+        //         }
+
                     
                     newUser.save()
                     .then(newUser => {
