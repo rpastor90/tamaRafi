@@ -3,8 +3,8 @@ module.exports = {
   "DATABASE_URI" : "mongodb://admin:password@ds055575.mongolab.com:55575/tamarafi",
   "SESSION_SECRET": "Optimus Prime is my real dad",
   "FITBIT": {
-    "clientID": "227F6K",
-    "clientSecret": "aef24e49026f0f2cce0ca0eda9405831",
+    "clientID": "227QFN",
+    "clientSecret": "8ae47f5f65c32163e4e9aeda3b0c9fbd",
     "callbackURL": "http://localhost:1337/auth/fitbit/callback"
   },
   "JAWBONE": {
