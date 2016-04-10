@@ -1,17 +1,15 @@
 <div id="demo-modal">
-    <form id="login-form" name="loginForm" ng-submit="loginForm.$valid && sendLogin(login)">
-
-        <alert type="danger" ng-show="error">
-            {{ error }}
-        </alert>
-
-        <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" ng-model="login.name" class="form-control" id="email" placeholder="Enter name">
+    <form id="login-form" name="loginForm" ng-submit="loginForm.$valid && sendLogin(login)" novalidate>
+ 
+        <div class="form-group" ng-class= "{'has-error' : loginForm.name.$invalid && !loginForm.name.$pristine} ">
+            <label>Name</label>
+            <input type="text" name="name" ng-model="login.name" class="form-control" placeholder="Enter name" required>
+             <p ng-show="loginForm.name.$invalid &&!loginForm.name.$pristine" class="help-block">Your name is required.</p>
         </div>
-        <div class="form-group">
-            <label for="login-password">Password</label>
-            <input type="password" ng-model="login.password" class="form-control" id="login-password" placeholder="Password">
+        <div class="form-group" ng-class= "{'has-error' : loginForm.password.$invalid && !loginForm.password.$pristine} ">
+            <label>Password</label>
+            <input type="password" name="password" ng-model="login.password" class="form-control"  placeholder="Password" required>
+             <p ng-show="loginForm.password.$invalid &&!loginForm.password.$pristine" class="help-block">A password is required.</p>
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
     </form>
