@@ -43,9 +43,8 @@ app.factory('SwagFactory', function ($http) {
                 }
             });
             angular.copy(shelves, swagCache);
-            console.log(swagCache);
             return swagCache;
-        })
+        });
     };
 
     var objToArray = obj => {
@@ -69,6 +68,7 @@ app.factory('SwagFactory', function ($http) {
         return $http.put('/api/users/' + user._id + '/updateCrib', swags)
         .then(res => {
             userSwagCache = res.data;
+            console.log("this is the userSwagCache", userSwagCache)
             return userSwagCache;
         });
     };

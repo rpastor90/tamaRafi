@@ -14,7 +14,7 @@ app.config(function($stateProvider) {
             },
             swags: function(SwagFactory, user) {
                 if (SwagFactory.getUserSwagCache().length) return SwagFactory.getUserSwagCache();
-                return SwagFactory.fetchSwagByUser(user);
+                else return SwagFactory.fetchSwagByUser(user);
             },
             average: function (user) {
                 var steps = user[user.fitness].steps / user.animal.stepsGoal;
@@ -63,9 +63,8 @@ app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthServic
                 if (removeSwag === swag) {
                     swag.hide = true;
                 }
-            }
+            };
             if (swag.name === 'brick') {
-                console.log("getting into if statement");
                 $('.crib').removeClass('normal-background space-background').addClass('brick-background');
             }
             if (swag.name === 'space') {
@@ -78,7 +77,7 @@ app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthServic
 
         var leftPos = ui.offset.left + 'px';
         var topPos = ui.offset.top + 'px';
-        swag.left =  leftPos;
+        swag.left = leftPos;
         swag.top = topPos;
 
         editedSwagObj[swag._id] = swag;
@@ -153,11 +152,11 @@ app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthServic
 
 });
 
-app.directive('setPosition', function() {
+app.directive('setPosition', function(SwagFactory) {
     return {
         restrict: 'A',
-        link: function(scope, element, attrs, controller) {
-            var swagArray = scope.user.animal.swags
+        link: function(scope, element) {
+            var swagArray = SwagFactory.getUserSwagCache();
             for (var i = 0; i < swagArray.length; i++) {
                 if (swagArray[i]._id === scope.swag._id) {
                     var detached = $(element).detach();

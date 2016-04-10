@@ -67,19 +67,17 @@ router.put('/:userId/getSwag/:swagId', ensureAuthenticated, function (req, res, 
         return req.user.save();
     })
     .then(user => res.json(user))
-    .then(null, next)
+    .then(null, next);
 });
 
 router.put('/:userId/updateCrib', ensureAuthenticated, function(req, res, next) {
     Swag.updateMultiple(req.body)
-    .then(function () {
-        return User.findOne({ _id: req.params.userId })
+    .then(function (updatedSwag) {
+        return User.findById(req.params.userId)
+            .populate('animal.swags');
     })
     .then(function (user) {
-        return user.populate('animal.swags');
-    })
-    .then(function (user) {
-        res.status(203).json(user)
+        res.status(203).json(user.animal.swags);
     })
     .then(null, next);
 });
