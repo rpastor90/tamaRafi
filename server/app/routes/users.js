@@ -57,7 +57,7 @@ router.put('/:userId/getSwag/:swagId', ensureAuthenticated, function (req, res, 
     var swagToBuy = req.body;
     Swag.create({
         name: swagToBuy.name,
-        crategory: swagToBuy.crategory,
+        category: swagToBuy.category,
         price: swagToBuy.price,
         imageUrl: swagToBuy.imageUrl
         })

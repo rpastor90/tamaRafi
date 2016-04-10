@@ -13,7 +13,7 @@ app.config(function($stateProvider) {
                 else return UserFactory.getUser();
             },
             swags: function(SwagFactory, user) {
-                // if (SwagFactory.getUserSwagCache().length) return SwagFactory.getUserSwagCache();
+                if (SwagFactory.getUserSwagCache().length) return SwagFactory.getUserSwagCache();
                 return SwagFactory.fetchSwagByUser(user);
             },
             average: function (user) {
@@ -57,6 +57,7 @@ app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthServic
     };
 
     $scope.changeBackground = function(swag) {
+        console.log('this function ran', swag);
         if (swag.category === 'background') {
             $scope.removeMe = function (removeSwag) {
                 if (removeSwag === swag) {
@@ -64,23 +65,13 @@ app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthServic
                 }
             }
             if (swag.name === 'brick') {
-                $('.crib').css('background', 'url("http://i.imgur.com/Hv9Be1e.png") no-repeat center center fixed');
+                console.log("getting into if statement");
+                $('.crib').removeClass('normal-background space-background').addClass('brick-background');
             }
             if (swag.name === 'space') {
-                $('.crib').css('background', 'url("http://i.imgur.com/cqOaGQe.png") no-repeat center center fixed');
+                $('.crib').removeClass('normal-background brick-background').addClass('space-background');
             }
-            $('.crib').css('-webkit-background-size', 'cover');
-            $('.crib').css('-moz-background-size', 'cover');
-            $('.crib').css('-o-background-size', 'cover');
-            $('.crib').css('background-size', 'cover');
-            $('.crib').css('position', 'fixed');
-            $('.crib').css('top', '0');
-            $('.crib').css('left', '0');
-            $('.crib').css('min-width', '100%');
-            $('.crib').css('min-height', '100%');
-            $('.crib').css('z-index', '-1');
         }
-
     };
 
     var onDragStop = function(event, ui, swag) {
@@ -101,11 +92,9 @@ app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthServic
     };
 
     var onResizeStop = function(event, ui, swag) {
-
         swag.height = ui.helper.context.style.height;
         swag.width = ui.helper.context.style.width;
         editedSwagObj[swag._id] = swag;
-
     };
 
     $scope.toggleButtons = function() {
@@ -121,18 +110,7 @@ app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthServic
             swag.hide = false;
         });
         
-        $('#creatureContainer').css('background', 'url("http://i.imgur.com/hoG3HMY.png")');
-        $('.crib').css('background', 'url("http://i.imgur.com/d8C45QS.png") no-repeat center center fixed');
-        $('.crib').css('-webkit-background-size', 'cover');
-        $('.crib').css('-moz-background-size', 'cover');
-        $('.crib').css('-o-background-size', 'cover');
-        $('.crib').css('background-size', 'cover');
-        $('.crib').css('position', 'fixed');
-        $('.crib').css('top', '0');
-        $('.crib').css('left', '0');
-        $('.crib').css('min-width', '100%');
-        $('.crib').css('min-height', '100%');
-        $('.crib').css('z-index', '-1');
+        $('.crib').removeClass('space-background brick-background').addClass('normal-background');
 
         var cribItems = $('.notTheDock li').toArray();
         cribItems.forEach(function(cribItem) {

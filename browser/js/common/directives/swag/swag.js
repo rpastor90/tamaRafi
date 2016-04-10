@@ -11,8 +11,8 @@ app.directive('swag', function(UserFactory) {
                 UserFactory.makeAPurchase(user, swag)
                 .then(function () {
                     console.log("User has made a purchase!");
-                })
-            }
+                });
+            };
         }
     };
 });
@@ -28,7 +28,7 @@ app.factory('SwagFactory', function ($http) {
 
     SwagFactory.getUserSwagCache = () => {
         return userSwagCache;
-    }
+    };
 
     SwagFactory.fetchSwag = function() {
         var shelves = {};
@@ -43,6 +43,7 @@ app.factory('SwagFactory', function ($http) {
                 }
             });
             angular.copy(shelves, swagCache);
+            console.log(swagCache);
             return swagCache;
         })
     };
@@ -58,7 +59,6 @@ app.factory('SwagFactory', function ($http) {
     SwagFactory.fetchSwagByUser = function(user) {
         return $http.get('/api/users/' + user._id + '/getSwag')
         .then(res => {
-            console.log("from the resolve block", res.data.animal.swags);
             angular.copy(res.data.animal.swags, userSwagCache);
             return userSwagCache;
         });
@@ -68,7 +68,6 @@ app.factory('SwagFactory', function ($http) {
         swags = objToArray(swags);
         return $http.put('/api/users/' + user._id + '/updateCrib', swags)
         .then(res => {
-            console.log("we're updating the crib", res.data);
             userSwagCache = res.data;
             return userSwagCache;
         });

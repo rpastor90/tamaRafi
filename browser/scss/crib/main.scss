@@ -1,15 +1,4 @@
 .crib {
-    background: url('http://i.imgur.com/d8C45QS.png') no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    position: fixed;
-    top: 0;
-    left: 0;
-    min-width: 100%;
-    min-height: 100%;
-    z-index: -1;
     .crib-btns {
         text-align: right;
         margin-left: 85%;
@@ -31,6 +20,48 @@
         bottom: 1px;
         z-index: 1;
     }
+}
+
+.normal-background {
+    background: url('http://i.imgur.com/d8C45QS.png') no-repeat center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+}
+
+.space-background {
+    background: url("http://i.imgur.com/cqOaGQe.png") no-repeat center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+}
+
+.brick-background {
+    background: url("http://i.imgur.com/Hv9Be1e.png") no-repeat center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
 }
 
 .dock {
