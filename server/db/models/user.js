@@ -155,11 +155,10 @@ var encryptPassword = function(plainText, salt) {
 };
 
 schema.pre('save', function(next) {
-    console.log('In the pre save for user', this, this.isModified('password'))
-    if (this.isModified('local.password')) {
-        console.log('I am encrypting password!!')
+    if (this.isModified('password')) {
+        console.log('In presave with modified password')
         this.salt = this.constructor.generateSalt();
-        this.password = this.constructor.encryptPassword(this.local.password, this.salt);
+        this.password = this.constructor.encryptPassword(this.password, this.salt);
         console.log('new obj', this)
     }
 

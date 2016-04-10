@@ -26,7 +26,6 @@ const faker = require('faker');
         }
         weekData.push(datum)
     }
-    console.log('weekDATA:', weekData)
     return weekData;
  }
 
@@ -63,7 +62,7 @@ module.exports = function (app) {
     function(req, firstName, password, done) {
         console.log('I am in the callback function after local-signup', firstName, password)
          process.nextTick(function(){
-            User.findOne({ 'local.name': firstName })
+            User.findOne({ 'name': firstName })
             .then(user => {
                 if (user) return done(null, false, req.flash('signupMessage', 'That email is already taken.'))
                 else {
@@ -71,35 +70,15 @@ module.exports = function (app) {
                     console.log('In the else')
                     //set local credentials
                     newUser.local.email = faker.internet.email();
-                    newUser.local.password = password;
+                    newUser.password = password;
                     newUser.name = firstName;
                     newUser.animal.name = req.body.animalName;
                     newUser.fitness = 'local';
 
                     newUser.local.weekSteps = randomizedWeekData('steps');
                     newUser.local.weekSleep = randomizedWeekData('sleep');
-                    console.log(newUser.weekSteps, 'new user steps')
-                    
-
-        //             "weekSteps": [
-        //     {
-        //         "steps": 7,
-        //         "date": "Fri Feb 19 2016 00:00:00 GMT+0000 (UTC)",
-        //         "_id": {
-        //             "$oid": "56c6a39e4671de03008c8270"
-        //         }
-        //     },
-
-
-        // "weekSleep": [
-        //     {
-        //         "minutes": 0,
-        //         "date": "Fri Feb 19 2016 00:00:00 GMT+0000 (UTC)",
-        //         "_id": {
-        //             "$oid": "56c6a39e4671de03008c8277"
-        //         }
-
-                    
+     
+               
                     newUser.save()
                     .then(newUser => {
                         console.log("this is the new USERRRRR!:", newUser)
@@ -119,6 +98,7 @@ module.exports = function (app) {
             if (err) return next(err);
 
             if (!user) {
+                console.log('I am checking user here && it does not exist')
                 var error = new Error('Invalid login credentials.');
                 error.status = 401;
                 return next(error);
@@ -126,6 +106,7 @@ module.exports = function (app) {
 
             // req.logIn will establish our session.
             req.logIn(user, function (loginErr) {
+                console.log('actually her does exist')
                 if (loginErr) return next(loginErr);
                 // We respond with a response object that has user with _id and email.
                 res.status(200).send({
