@@ -1,6 +1,7 @@
 'use strict';
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var Promise = require('bluebird');
 
 var schema = new Schema({
 	name: String,
@@ -12,5 +13,11 @@ var schema = new Schema({
   left: String,
   top: String
 });
+
+schema.statics.updateMultiple = function (arr) {
+  return Promise.all(
+    arr.map(swag => this.findByIdAndUpdate(swag._id, swag, {new: true}))
+  );
+};
 
 mongoose.model('Swag', schema);

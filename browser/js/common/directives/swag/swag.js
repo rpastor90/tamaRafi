@@ -47,6 +47,14 @@ app.factory('SwagFactory', function ($http) {
         })
     };
 
+    var objToArray = obj => {
+        let arr = [];
+        for (var k in obj) {
+            arr.push(obj[k]);
+        }
+        return arr;
+    };
+
     SwagFactory.fetchSwagByUser = function(user) {
         return $http.get('/api/users/' + user._id + '/getSwag')
         .then(res => {
@@ -57,6 +65,7 @@ app.factory('SwagFactory', function ($http) {
     };
 
     SwagFactory.updateCrib = function(swags, user) {
+        swags = objToArray(swags);
         return $http.put('/api/users/' + user._id + '/updateCrib', swags)
         .then(res => {
             console.log("we're updating the crib", res.data);
