@@ -35,9 +35,7 @@ app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthServic
     $scope.swags = swags;
 
     // sad or happy panda state
-    var steps = $scope.user[$scope.user.fitness].steps / $scope.user.animal.stepsGoal;
-    var sleep = ($scope.user[$scope.user.fitness].sleep/60) / $scope.user.animal.sleepGoal;
-    $scope.average = (steps + sleep)/2 * 100;
+    $scope.average = average;
     
     $scope.wearHat = function(swag) {
         if (swag.name === 'top hat') {
@@ -150,7 +148,7 @@ app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthServic
 
     $scope.makeUnCustomizable = function () {
         var allCribItems = $('.crib li').toArray();
-        allCribItems.forEach(function(cribItem, idx) {
+        allCribItems.forEach(function(cribItem) {
             $(cribItem).resizable({disabled: true}).draggable({disabled: true});
         });
     };

@@ -26,6 +26,9 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state, 
             var removeUser = function () {
                 scope.user = null;
             };
+            
+            // tooltip for navbar
+            $('[data-toggle="tooltip"]').tooltip(); 
 
             setUser();
 

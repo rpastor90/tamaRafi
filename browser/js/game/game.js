@@ -21,14 +21,14 @@ app.config(function ($stateProvider) {
   $scope.pull = (($scope.hoursSleep/user.animal.sleepGoal) *100).toFixed(1) + '%';
 
   socket.on('connect', function () {
-    var room = 'room';
+    // var room = 'room';
 
     // socket.emit('wantToJoinRoom', room)
 
     // socket.emit('connection');
     // socket.emit('captureUser', user);
-    var leftChar = $('.left-char');
-    var rightChar = $('.right-char');
+    // var leftChar = $('.left-char');
+    // var rightChar = $('.right-char');
     var gameContainer = $('.tugOwar');
     var width = screen.width;
     console.log(screen.width);
@@ -85,8 +85,6 @@ app.config(function ($stateProvider) {
         socket.emit('gameOver');
       }
     });
-
-
 
   });
 });
