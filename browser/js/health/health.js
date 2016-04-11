@@ -51,7 +51,6 @@ app.controller('HealthCtrl', function($scope, $uibModal, UserFactory) {
         var weekSteps = user[fitness].weekSteps.map(function(stepObj) {
             return stepObj.steps;
         });
-        console.log('user:', user, "weekSteps:", weekSteps)
         var weekStepsLabels = user[fitness].weekSteps.map(function(stepObj) {
             return stepObj.date.split(" ")[0];
         });
@@ -77,7 +76,6 @@ app.controller('HealthCtrl', function($scope, $uibModal, UserFactory) {
         $scope.series2 = ['Sleep (in hours)', 'Tug-of-war pull-factor'];
 
         // Functions for arrowing through health data
-        console.log('health', $scope)
         $scope.nextData = function() {
             $scope.onDisplay = ($scope.onDisplay >= 2) ? 2 : ($scope.onDisplay + 1);
             $('.health-area').css({

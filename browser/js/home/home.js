@@ -3,23 +3,10 @@ app.config(function ($stateProvider) {
         url: '/',
         templateUrl: 'js/home/home.html',
         controller: function ($scope, $http, $uibModal, user) {
-            // $scope.testing = function () {
-            //     var obj = {
-            //         startTime: '10:00',
-            //         duration: 30000000,
-            //         date: '2016-01-20'
-            //     };
-            //     $http.post('/api/users/' + user._id + '/sleep/timeseries', obj)
-            //     .then(res => {
-            //         console.log("res", res)
-            //     })
-            // }
-            let demoModal;
             $scope.demo = () => {
-                console.log('demo clicked')
                 $scope.demoModal = $uibModal.open({
                     animation: $scope.animationsEnabled,
-                    templateUrl: '/js/demo/demo.html',
+                    templateUrl: '/js/signup/signup.html',
                     controller: 'SignupCtrl'
                 })
             };

@@ -14,20 +14,13 @@ app.controller('LoginCtrl', function ($scope, AuthService, $state) {
     $scope.error = null;
 
     $scope.sendLogin = function (loginInfo) {
-        console.log('in the send login area')
-        // close the modal
-        $scope.$close();
-
         AuthService.login(loginInfo).then(function() {
-            console.log('in the dot then after login')
+            // close the modal
+            $scope.$close();
             $state.go('crib')
         })
-        // AuthService.login(loginInfo).then(function () {
-        //     $state.go('home');
-        // }).catch(function () {
-        //     $scope.error = 'Invalid login credentials.';
-        // });
-
+        .then(null, (err) => {
+            $scope.error = 'Invalid login credentials. Please try again.'
+        })
     };
-
 });

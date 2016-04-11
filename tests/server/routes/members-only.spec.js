@@ -2,7 +2,6 @@
 var mongoose = require('mongoose');
 require('../../../server/db/models');
 var User = mongoose.model('User');
-
 var expect = require('chai').expect;
 
 var dbURI = 'mongodb://localhost:27017/tamarafi-test';

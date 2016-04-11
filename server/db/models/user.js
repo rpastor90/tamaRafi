@@ -121,7 +121,7 @@ var schema = new Schema({
         },
         sleep: {
             type:Number,
-            default: 3600
+            default: 600
         },
         weekSteps: [{
             steps: Number,
@@ -147,7 +147,6 @@ var generateSalt = function() {
 };
 
 var encryptPassword = function(plainText, salt) {
-    console.log('in encrypt with:', 'plaintext:',plainText, 'sat:',salt)
     var hash = crypto.createHash('sha1');
     hash.update(plainText);
     hash.update(salt);
@@ -156,10 +155,8 @@ var encryptPassword = function(plainText, salt) {
 
 schema.pre('save', function(next) {
     if (this.isModified('password')) {
-        console.log('In presave with modified password')
         this.salt = this.constructor.generateSalt();
         this.password = this.constructor.encryptPassword(this.password, this.salt);
-        console.log('new obj', this)
     }
 
     next();

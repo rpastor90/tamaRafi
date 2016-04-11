@@ -35,10 +35,9 @@ module.exports = function (app) {
     // When passport.authenticate('local') is used, this function will receive
     // the email and password to run the actual authentication logic.
     var strategyFn = function (name, password, done) {
-        console.log('trying to fins user in strategy func local auth', name, password)
         User.findOne({ name: name })
             .then(function (user) {
-                console.log("this the user:", user)
+                
                 // user.correctPassword is a method from the User schema.
                 if (!user || !user.correctPassword(password)) {
                     done(null, false);
@@ -60,31 +59,26 @@ module.exports = function (app) {
        
     }, 
     function(req, firstName, password, done) {
-        console.log('I am in the callback function after local-signup', firstName, password)
          process.nextTick(function(){
             User.findOne({ 'name': firstName })
             .then(user => {
                 if (user) return done(null, false, req.flash('signupMessage', 'That email is already taken.'))
                 else {
                     var newUser = new User();
-                    console.log('In the else')
                     //set local credentials
                     newUser.local.email = faker.internet.email();
                     newUser.password = password;
                     newUser.name = firstName;
                     newUser.animal.name = req.body.animalName;
                     newUser.fitness = 'local';
-
+                    // create fake weekly data
                     newUser.local.weekSteps = randomizedWeekData('steps');
                     newUser.local.weekSleep = randomizedWeekData('sleep');
-     
-               
                     newUser.save()
                     .then(newUser => {
-                        console.log("this is the new USERRRRR!:", newUser)
                         done(null, newUser);
                     })
-                    .then(null, (err) => {console.log('the error:',err)})
+                    .then(null, (err) => {return next(err)})
                 }
             })
         })
@@ -92,13 +86,9 @@ module.exports = function (app) {
 
     // A POST /login route is created to handle login.
     app.post('/login', function (req, res, next) {
-    	console.log('I am in the post login route')
         var authCb = function (err, user) {
-
             if (err) return next(err);
-
             if (!user) {
-                console.log('I am checking user here && it does not exist')
                 var error = new Error('Invalid login credentials.');
                 error.status = 401;
                 return next(error);
@@ -106,7 +96,7 @@ module.exports = function (app) {
 
             // req.logIn will establish our session.
             req.logIn(user, function (loginErr) {
-                console.log('actually her does exist')
+
                 if (loginErr) return next(loginErr);
                 // We respond with a response object that has user with _id and email.
                 res.status(200).send({
@@ -119,4 +109,10 @@ module.exports = function (app) {
         passport.authenticate('local', authCb)(req, res, next);
 
     });
+
+     app.post('/signup', passport.authenticate('local-signup', {
+        successRedirect: '/session',
+        failureRedirect: '/auth/local/failure',
+        failureFlash: true
+    }))
 };

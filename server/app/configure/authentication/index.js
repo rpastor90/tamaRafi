@@ -59,11 +59,7 @@ module.exports = function (app) {
         req.logout();
         res.status(200).end();
     });
-    app.post('/signup', passport.authenticate('local-signup', {
-        successRedirect: '/session',
-        failureRedirect: '/auth/local/failure',
-        failureFlash: true
-    }))
+   
 
     // Each strategy enabled gets registered.
     ENABLED_AUTH_STRATEGIES.forEach(function (strategyName) {
