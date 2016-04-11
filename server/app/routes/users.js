@@ -149,7 +149,7 @@ router.put('/:userId/addFriend', ensureAuthenticated, function(req, res, next) {
 
 router.put('/:userId/addPost', ensureAuthenticated, function(req, res, next) {
     User.findOne({ _id: req.params.userId })
-    .then(function(user){
+    .then(function(){
         return User.findOne({ _id: req.body.friend._id})
     })
     .then(function(userToAddPostTo) {

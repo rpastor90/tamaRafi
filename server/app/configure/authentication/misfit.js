@@ -10,12 +10,12 @@ var authenticatedToken
 //on the userSchema. It will allow us to make cleaner code for our multiple
 // oAuth files. - seth
 
-function findOrCreate(model, properties) {
-    return model.findOne(properties).exec().then(function(instance){
-        if (instance) return instance; // --> promise for found instance
-    return model.create(properties); // --> promise for created instance
-    });
-}
+// function findOrCreate(model, properties) {
+//     return model.findOne(properties).exec().then(function(instance){
+//         if (instance) return instance; // --> promise for found instance
+//     return model.create(properties); // --> promise for created instance
+//     });
+// }
 
 
 
@@ -54,7 +54,7 @@ module.exports = function (app) {
             ]
         },
 
-    function (accessToken, refreshToken, profile, done) {
+    function (accessToken, refreshToken, profile) {
         console.log('Got here. Profile :', profile)
         authenticatedToken = accessToken
         UserModel.findOne({'misfit.id': profile.userId}).exec() //find user
@@ -76,7 +76,7 @@ module.exports = function (app) {
                 }
             })
 
-            .then(user => { //get summary is limited to 30 days!!!
+            .then(() => { //get summary is limited to 30 days!!!
                 misfitHandler.getSummary(authenticatedToken, '2016-01-01', '2016-01-10', function(err, summary) {
                     console.error('error : ', err)
                     console.log(summary)

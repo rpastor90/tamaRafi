@@ -3,11 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <div ng-repeat="animal in animals">
-                    <animal ng-show="animal.idx === onDisplay">
-                    </animal>
-                </div>
-                <button class='logout-btn' ng-click="nextAnimal()">NEXT</button>
+                <panda></panda>
             </div>
             <div class="col-md-6">
                 <form name='first-time-user-form' novalidate>
@@ -23,7 +19,7 @@
                         </li>
                         <li>
                             <span>Sleep Goal:</span>
-                            <input class='name-input' style='width: 22%' type="number" ng-model="user.animal.sleepGoal" placeholder="hours" required>
+                            <input class='name-input' style='width: 25%' type="number" ng-model="user.animal.sleepGoal" placeholder="hours" required>
                             <p>* We recommend at least 7-8 hours per night :)</p>
                         </li>
                         <li>
