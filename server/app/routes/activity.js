@@ -22,6 +22,7 @@ module.exports = router;
 router.get('/timeseries', function (req, res, next) {
     return helper.getActivityTimeSeries(req.user.fitbit.tokens, {}, '7d', 'minutesFairlyActive' )
     .then(function () {
-        console.log(res, "WE ARE GETTING ACTIVITY TEST DATA")
+        console.log(res, "WE ARE GETTING ACTIVITY TEST DATA");
     })
+    .then(null, next);
 })

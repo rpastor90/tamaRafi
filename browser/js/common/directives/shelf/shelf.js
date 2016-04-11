@@ -3,7 +3,8 @@ app.directive('shelf', function () {
         restrict: 'E',
         templateUrl: 'js/common/directives/shelf/shelf.html',
         scope: {
-          swags : "="
+          swags : "=",
+          user: "="
         }
     };
 });

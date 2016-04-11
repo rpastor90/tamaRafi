@@ -32,7 +32,7 @@ app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthServic
 
     $scope.user = user;
     $scope.isShown = false;
-    $scope.swags = swags;
+    $scope.swags = SwagFactory.getUserSwagCache();
 
     // sad or happy panda state
     $scope.average = average;
@@ -43,7 +43,7 @@ app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthServic
                 if (removeSwag === swag) {
                     swag.hide = true;
                 }
-            }
+            };
             $('#creatureContainer').css('background', 'url("http://i.imgur.com/fMwP5tf.png")');
         }
         if (swag.name === 'storm trooper') {
@@ -51,13 +51,12 @@ app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthServic
                 if (removeSwag === swag) {
                     swag.hide = true;
                 }
-            }
+            };
             $('#creatureContainer').css('background', 'url("http://i.imgur.com/JgVnEiy.png")');
         }
     };
 
     $scope.changeBackground = function(swag) {
-        console.log('this function ran', swag);
         if (swag.category === 'background') {
             $scope.removeMe = function (removeSwag) {
                 if (removeSwag === swag) {
@@ -140,7 +139,7 @@ app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthServic
                 stop: function(e, ui) {
                     return onResizeStop(e, ui, $scope.swags[idx]);
                 }
-            })
+            });
             cribItem.draggable({
                 disabled: false,
                 stop: function(event, ui) {

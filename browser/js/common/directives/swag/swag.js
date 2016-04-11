@@ -35,11 +35,13 @@ app.factory('SwagFactory', function ($http) {
         return $http.get('/api/swags')
         .then(function(swags) {
             swags.data.forEach(function(swag) {
-                if (!shelves[swag.category]) {
-                    shelves[swag.category] = [];
-                    shelves[swag.category].push(swag);
-                } else {
-                    shelves[swag.category].push(swag);
+                if (!swag.userItem) {
+                    if (!shelves[swag.category]) {
+                        shelves[swag.category] = [];
+                        shelves[swag.category].push(swag);
+                    } else {
+                        shelves[swag.category].push(swag);
+                    }
                 }
             });
             angular.copy(shelves, swagCache);

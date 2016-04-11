@@ -11,7 +11,8 @@ var schema = new Schema({
   height: String,
   width: String,
   left: String,
-  top: String
+  top: String,
+  userItem: Boolean
 });
 
 schema.statics.updateMultiple = function (arr) {

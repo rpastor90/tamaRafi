@@ -4,7 +4,6 @@ module.exports = router;
 var mongoose = require('mongoose');
 var User = mongoose.models.User;
 var Swag = mongoose.models.Swag;
-var _ = require('lodash');
 
 router.use('/:userId/sleep', require('./sleep'));
 router.use('/:userId/activity', require('./activity'));
@@ -40,7 +39,8 @@ router.put('/:userId', ensureAuthenticated, function (req, res, next) {
     User.findByIdAndUpdate(req.params.userId, req.body, { new: true })
     .then(function (user) {
         res.status(201).json(user);
-    });
+    })
+    .then(null, next);
 });
 
 router.get('/:userId/getSwag', ensureAuthenticated, function(req, res, next) {
@@ -53,13 +53,13 @@ router.get('/:userId/getSwag', ensureAuthenticated, function(req, res, next) {
 });
 
 router.put('/:userId/getSwag/:swagId', ensureAuthenticated, function (req, res, next) {
-    if (!req.user) return 'User not found!';
     var swagToBuy = req.body;
     Swag.create({
         name: swagToBuy.name,
         category: swagToBuy.category,
         price: swagToBuy.price,
-        imageUrl: swagToBuy.imageUrl
+        imageUrl: swagToBuy.imageUrl,
+        userItem: true
         })
     .then(function(createdSwag) {
         req.user.animal.swags.push(createdSwag);
@@ -72,7 +72,7 @@ router.put('/:userId/getSwag/:swagId', ensureAuthenticated, function (req, res, 
 
 router.put('/:userId/updateCrib', ensureAuthenticated, function(req, res, next) {
     Swag.updateMultiple(req.body)
-    .then(function (updatedSwag) {
+    .then(function () {
         return User.findById(req.params.userId)
             .populate('animal.swags');
     })
