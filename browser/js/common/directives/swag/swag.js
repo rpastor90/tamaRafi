@@ -11,46 +11,68 @@ app.directive('swag', function(UserFactory) {
                 UserFactory.makeAPurchase(user, swag)
                 .then(function () {
                     console.log("User has made a purchase!");
-                })
-            }
+                });
+            };
         }
     };
 });
 
 app.factory('SwagFactory', function ($http) {
     var SwagFactory = {};
+    var swagCache = {};
+    var userSwagCache = [];
+
+    SwagFactory.getSwagCache = () => {
+        return swagCache;
+    };
+
+    SwagFactory.getUserSwagCache = () => {
+        return userSwagCache;
+    };
 
     SwagFactory.fetchSwag = function() {
         var shelves = {};
         return $http.get('/api/swags')
         .then(function(swags) {
             swags.data.forEach(function(swag) {
-                if (!shelves[swag.category]) {
-                    shelves[swag.category] = [];
-                    shelves[swag.category].push(swag);
-                } else {
-                    shelves[swag.category].push(swag);
+                if (!swag.userItem) {
+                    if (!shelves[swag.category]) {
+                        shelves[swag.category] = [];
+                        shelves[swag.category].push(swag);
+                    } else {
+                        shelves[swag.category].push(swag);
+                    }
                 }
             });
-            return shelves;
-        })
+            angular.copy(shelves, swagCache);
+            return swagCache;
+        });
+    };
+
+    var objToArray = obj => {
+        let arr = [];
+        for (var k in obj) {
+            arr.push(obj[k]);
+        }
+        return arr;
     };
 
     SwagFactory.fetchSwagByUser = function(user) {
         return $http.get('/api/users/' + user._id + '/getSwag')
-        .then(function (res) {
-            return res.data.animal.swags;
+        .then(res => {
+            angular.copy(res.data.animal.swags, userSwagCache);
+            return userSwagCache;
         });
     };
 
-    SwagFactory.updateSwagPositions = function(swagPositions, user) {
-        return $http.put('/api/users/' + user._id + '/updateCrib', swagPositions)
-        .then(res=> res.data);
-    };
-
-    SwagFactory.updateSwagSizes = function(swagSizes, user) {
-        return $http.put('/api/users/' + user._id + '/updateCribSizes', swagSizes)
-        .then(res =>res.data);
+    SwagFactory.updateCrib = function(swags, user) {
+        swags = objToArray(swags);
+        return $http.put('/api/users/' + user._id + '/updateCrib', swags)
+        .then(res => {
+            userSwagCache = res.data;
+            console.log("this is the userSwagCache", userSwagCache)
+            return userSwagCache;
+        });
     };
 
     return SwagFactory;

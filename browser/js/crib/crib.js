@@ -12,8 +12,9 @@ app.config(function($stateProvider) {
                 if (UserFactory.getCachedUser().animal) return UserFactory.getCachedUser();
                 else return UserFactory.getUser();
             },
-            swags: function(SwagFactory, $animate, user) {
-                return SwagFactory.fetchSwagByUser(user);
+            swags: function(SwagFactory, user) {
+                if (SwagFactory.getUserSwagCache().length) return SwagFactory.getUserSwagCache();
+                else return SwagFactory.fetchSwagByUser(user);
             },
             average: function (user) {
                 var steps = user[user.fitness].steps / user.animal.stepsGoal;
@@ -27,12 +28,11 @@ app.config(function($stateProvider) {
 
 app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthService, SwagFactory, swags, average) {
 
-    var swagPositions = [];
-    var swagSizes = [];
+    var editedSwagObj = {};
 
     $scope.user = user;
     $scope.isShown = false;
-    $scope.swags = swags;
+    $scope.swags = SwagFactory.getUserSwagCache();
 
     // sad or happy panda state
     $scope.average = average;
@@ -43,7 +43,7 @@ app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthServic
                 if (removeSwag === swag) {
                     swag.hide = true;
                 }
-            }
+            };
             $('#creatureContainer').css('background', 'url("http://i.imgur.com/fMwP5tf.png")');
         }
         if (swag.name === 'storm trooper') {
@@ -51,7 +51,7 @@ app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthServic
                 if (removeSwag === swag) {
                     swag.hide = true;
                 }
-            }
+            };
             $('#creatureContainer').css('background', 'url("http://i.imgur.com/JgVnEiy.png")');
         }
     };
@@ -62,81 +62,37 @@ app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthServic
                 if (removeSwag === swag) {
                     swag.hide = true;
                 }
-            }
+            };
             if (swag.name === 'brick') {
-                $('.crib').css('background', 'url("http://i.imgur.com/Hv9Be1e.png") no-repeat center center fixed');
+                $('.crib').removeClass('normal-background space-background').addClass('brick-background');
             }
             if (swag.name === 'space') {
-                $('.crib').css('background', 'url("http://i.imgur.com/cqOaGQe.png") no-repeat center center fixed');
+                $('.crib').removeClass('normal-background brick-background').addClass('space-background');
             }
-            $('.crib').css('-webkit-background-size', 'cover');
-            $('.crib').css('-moz-background-size', 'cover');
-            $('.crib').css('-o-background-size', 'cover');
-            $('.crib').css('background-size', 'cover');
-            $('.crib').css('position', 'fixed');
-            $('.crib').css('top', '0');
-            $('.crib').css('left', '0');
-            $('.crib').css('min-width', '100%');
-            $('.crib').css('min-height', '100%');
-            $('.crib').css('z-index', '-1');
         }
-
     };
 
     var onDragStop = function(event, ui, swag) {
-        var bool = false;
-        var indexStore = null;
-        swagPositions.forEach(function(swagObj, i) {
-            if (swagObj.swag === swag._id) {
-                bool = true;
-                indexStore = i;
-            }
-        });
-        
-        var swagPositionObj = {};
-        if (!bool) {
-            swagPositionObj.swag = swag._id;
-            // Create the position object
-            swagPositionObj.left = ui.offset.left + 'px';
-            swagPositionObj.top = ui.offset.top + 'px';
-            swagPositions.push(swagPositionObj);
-        } else {
-            swagPositions[indexStore].left = ui.offset.left + 'px';
-            swagPositions[indexStore].top = ui.offset.top + 'px';
-        }
-        // And push to the swagPositions array
-        // Remove this element from the dock and set position
-        //MIGHT STILL NEED THIS
+
+        var leftPos = ui.offset.left + 'px';
+        var topPos = ui.offset.top + 'px';
+        swag.left = leftPos;
+        swag.top = topPos;
+
+        editedSwagObj[swag._id] = swag;
+
         var detached = $(event.target).detach();
         $('.notTheDock').append(detached);
         detached.css('position', 'fixed');
-        detached.css('left', (ui.offset.left + 'px'));
-        detached.css('top', (ui.offset.top + 'px'));
+        detached.css('left', (leftPos));
+        detached.css('top', (topPos));
 
     };
 
     var onResizeStop = function(event, ui, swag) {
-        var bool = false;
-        var indexStore = null;
-        swagSizes.forEach(function(swagObj, i) {
-            if (swagObj.swag === swag._id) {
-                bool = true;
-                indexStore = i;
-            }
-        });
-
-        var swagSizeObj = {};
-
-        if (!bool) {
-            swagSizeObj.swag = swag._id;
-            swagSizeObj.height = ui.helper.context.style.height;
-            swagSizeObj.width = ui.helper.context.style.width;
-            swagSizes.push(swagSizeObj);
-
-        } else {
-            swagSizes[indexStore].height = ui.helper.context.style.height;
-            swagSizes[indexStore].width = ui.helper.context.style.width;
-        }
+        swag.height = ui.helper.context.style.height;
+        swag.width = ui.helper.context.style.width;
+        editedSwagObj[swag._id] = swag;
     };
 
     $scope.toggleButtons = function() {
@@ -144,27 +100,15 @@ app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthServic
     };
 
     $scope.saveSwagPositionsAndSizes = function() {
-        SwagFactory.updateSwagPositions(swagPositions, user);
-        SwagFactory.updateSwagSizes(swagSizes, user);
+        SwagFactory.updateCrib(editedSwagObj, user);
     };
     
     $scope.reset = function() {
         swags.forEach(function (swag) {
             swag.hide = false;
-        })
+        });
         
-        $('#creatureContainer').css('background', 'url("http://i.imgur.com/hoG3HMY.png")');
-        $('.crib').css('background', 'url("http://i.imgur.com/d8C45QS.png") no-repeat center center fixed');
-        $('.crib').css('-webkit-background-size', 'cover');
-        $('.crib').css('-moz-background-size', 'cover');
-        $('.crib').css('-o-background-size', 'cover');
-        $('.crib').css('background-size', 'cover');
-        $('.crib').css('position', 'fixed');
-        $('.crib').css('top', '0');
-        $('.crib').css('left', '0');
-        $('.crib').css('min-width', '100%');
-        $('.crib').css('min-height', '100%');
-        $('.crib').css('z-index', '-1');
+        $('.crib').removeClass('space-background brick-background').addClass('normal-background');
 
         var cribItems = $('.notTheDock li').toArray();
         cribItems.forEach(function(cribItem) {
@@ -193,44 +137,36 @@ app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthServic
                 disabled: false,
                 autohide: true,
                 stop: function(e, ui) {
-                    return onResizeStop(e, ui, $scope.swags[idx])
+                    return onResizeStop(e, ui, $scope.swags[idx]);
                 }
-            })
+            });
             cribItem.draggable({
                 disabled: false,
                 stop: function(event, ui) {
-                    return onDragStop(event, ui, $scope.swags[idx])
+                    return onDragStop(event, ui, $scope.swags[idx]);
                 }
             });
         });
     };
 
-
 });
 
-app.directive('setPosition', function() {
+app.directive('setPosition', function(SwagFactory) {
     return {
         restrict: 'A',
-        link: function(scope, element, attrs) {
-            for (var i = 0; i < scope.user.animal.swagPositions.length; i++) {
-                if (scope.user.animal.swagPositions[i].swag === scope.swag._id) {
+        link: function(scope, element) {
+            var swagArray = SwagFactory.getUserSwagCache();
+            for (var i = 0; i < swagArray.length; i++) {
+                if (swagArray[i]._id === scope.swag._id) {
                     var detached = $(element).detach();
                     $('.notTheDock').append(detached);
                     element.css('position', 'fixed');
-                    element.css('left', scope.user.animal.swagPositions[i].left);
-                    element.css('top', scope.user.animal.swagPositions[i].top);
+                    element.css('left', swagArray[i].left);
+                    element.css('top', swagArray[i].top);
+                    element.css('width', swagArray[i].width);
+                    element.css('height', swagArray[i].height);
                 };
             };
-            for (var j = 0; j < scope.user.animal.swagSizes.length; j++) {
-                if (scope.user.animal.swagSizes[j].swag === scope.swag._id) {
-                    var detached1 = $(element).detach();
-                    $('.notTheDock').append(detached1);
-                    element.css('position', 'fixed');
-                    element.css('width', scope.user.animal.swagSizes[j].width);
-                    element.css('height', scope.user.animal.swagSizes[j].height);
-
-                };
-            }
         }
-    }
+    };
 });

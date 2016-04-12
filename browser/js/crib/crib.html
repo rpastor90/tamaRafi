@@ -1,4 +1,4 @@
-<div class='crib'>
+<div class='crib normal-background'>
     <div class='notTheDock'>
         <div>
             <a ng-controller="CreatureComputerCtrl" ng-click="showSocial()"><img style='cursor: pointer;' id="computer" src="http://i1017.photobucket.com/albums/af297/iKP/Pixel%20Art/Isometric%20Pixel%20Art/SwanComputer_Assembled.png" /></a>
@@ -25,7 +25,7 @@
         <div class="dock" ng-show="showSwag && customizing">
             <ul>
                 <li id="currentItem" ng-repeat="swag in swags track by $index" ng-model="swag" set-position ng-hide="swag.hide">
-                    <img ng-click="wearHat(swag); changeBackground(swag); removeMe(swag); onDrag()" ng-src="{{swag.imageUrl}}">
+                    <img ng-click="wearHat(swag); changeBackground(swag); removeMe(swag)" ng-src="{{swag.imageUrl}}">
                 </li>
             </ul>
         </div>

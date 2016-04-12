@@ -6,7 +6,8 @@ app.config(function ($stateProvider) {
         data : { authenticate: true },
     	resolve: {
     		swags: function(SwagFactory) {
-    			return SwagFactory.fetchSwag()
+                if (SwagFactory.getSwagCache().background) return SwagFactory.getSwagCache();
+    			else return SwagFactory.fetchSwag()
     		},
     		user : function (AuthService, UserFactory) {
                 if (UserFactory.getCachedUser().animal) return UserFactory.getCachedUser();

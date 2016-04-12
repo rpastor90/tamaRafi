@@ -18,8 +18,8 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state, 
 
             var setUser = function () {
                 return UserFactory.getUser()
-                .then(function (foundUser) {
-                    scope.user = foundUser;
+                .then(() => {
+                    scope.user = UserFactory.getCachedUser();
                 })
             };
 
