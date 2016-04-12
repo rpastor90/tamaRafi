@@ -11,65 +11,6 @@ var schema = new Schema({
     salt: String,
     avatar: String,
     fitness: String,
-    animal: {
-        name: String,
-        stepsGoal: Number,
-        sleepGoal: Number,
-        money: {
-            type: Number,
-            default: 100 // all users start with 100 coins
-        },
-        picture: String,
-        animationForward: String,
-        animationBack: String,
-        animateStyle: {
-            'width': String,
-            'height': String,
-            'background-image': String
-        },
-
-        totalSteps: {
-            type: Number,
-            default: 0
-        },
-        swags: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Swag'
-        }],
-        swagPositions: [{
-            swag: String,
-            left: String,
-            top: String
-        }],
-        swagSizes: [{
-            swag: String,
-            height: String,
-            width: String
-        }],
-        lastLoggedIn: {
-            type: Date,
-            default: Date.now
-        },
-        lastLoggedInSteps: {
-            type: Number,
-            default: 0
-        },
-        friends: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'User'
-        }],
-        posts: [ 
-        {
-            text: String,
-            author: {
-                type: Schema.Types.ObjectId,
-                ref: 'User'
-            }
-        }
-        ]
-    },
     fitbit: {
         id: String,
         tokens: {
@@ -129,6 +70,50 @@ var schema = new Schema({
         weekSleep: [{
             minutes: Number,
             date: String
+        }]
+    },
+    animal: {
+        name: String,
+        stepsGoal: Number,
+        sleepGoal: Number,
+        money: {
+            type: Number,
+            default: 100 // all users start with 100 coins
+        },
+        picture: String,
+        animationForward: String,
+        animationBack: String,
+        animateStyle: {
+            'width': String,
+            'height': String,
+            'background-image': String
+        },
+        totalSteps: {
+            type: Number,
+            default: 0
+        },
+        swags: [{
+            type: Schema.Types.ObjectId,
+            ref: 'Swag'
+        }],
+        lastLoggedIn: {
+            type: Date,
+            default: Date.now
+        },
+        lastLoggedInSteps: {
+            type: Number,
+            default: 0
+        },
+        friends: [{
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        }],
+        posts: [{
+            text: String,
+            author: {
+                type: Schema.Types.ObjectId,
+                ref: 'User'
+            }
         }]
     }
 });
