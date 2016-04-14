@@ -14,9 +14,10 @@ app.config(function($stateProvider) {
                 $scope.demoModal.close();
             };
             $scope.showDemo = function() {
+                $scope.videoShown = true;
                 $uibModal.open({
                     animation: $scope.animationsEnabled,
-                    template: '<iframe width="700" height="500" src="https://www.youtube.com/embed/JrKzXQVxNi8" frameborder="0" allowfullscreen></iframe>'
+                    template: '<iframe width="700" height="500" src="https://www.youtube.com/embed/JrKzXQVxNi8" frameborder="0" allowfullscreen></iframe><button>HEY</button>'
                 });
             };
         },

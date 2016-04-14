@@ -1,4 +1,4 @@
-<nav class="navbar navbar-static-top">
+<nav ng-show="isLoggedIn()" class="navbar navbar-static-top">
     <div class="container">
         <div ng-show="user" class="buttons">
             <span class='coins'>{{ user.animal.money | roundDown }}</span>
