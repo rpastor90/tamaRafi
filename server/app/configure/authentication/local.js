@@ -1,6 +1,6 @@
 'use strict';
 const passport = require('passport');
-// const _ = require('lodash');
+const _ = require('lodash');
 const LocalStrategy = require('passport-local').Strategy;
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
@@ -9,6 +9,7 @@ const faker = require('faker');
 //Helper function to generate random week sleep & steps
 // data for demo user
  function randomizedWeekData(type) {
+    console.log('this should also just be sign up')
     let weekData = [];
     let today = new Date();
     let oneDay = 24*60*60*1000;
@@ -62,18 +63,33 @@ module.exports = function (app) {
          process.nextTick(function(){
             User.findOne({ 'name': firstName })
             .then(user => {
+                console.log('this should just be sign up')
                 if (user) return done(null, false, req.flash('signupMessage', 'That email is already taken.'))
                 else {
                     var newUser = new User();
-                    //set local credentials
-                    newUser.local.email = faker.internet.email();
-                    newUser.password = password;
-                    newUser.name = firstName;
-                    newUser.animal.name = req.body.animalName;
-                    newUser.fitness = 'local';
-                    // create fake weekly data
-                    newUser.local.weekSteps = randomizedWeekData('steps');
-                    newUser.local.weekSleep = randomizedWeekData('sleep');
+                    let dataToAdd = {
+                        local: {
+                            email: faker.internet.email(),
+                            weekSteps: randomizedWeekData('steps'),
+                            weekSleep: randomizedWeekData('sleep')
+                        },
+                        password: password,
+                        name: firstName,
+                        animal: {
+                            name: req.body.animalName
+                        },
+                        fitness: 'local'
+                    }
+                    newUser = _.merge(newUser, dataToAdd);
+                    // //set local credentials
+                    // newUser.local.email = faker.internet.email();
+                    // newUser.password = password;
+                    // newUser.name = firstName;
+                    // newUser.animal.name = req.body.animalName;
+                    // newUser.fitness = 'local';
+                    // // create fake weekly data
+                    // newUser.local.weekSteps = randomizedWeekData('steps');
+                    // newUser.local.weekSleep = randomizedWeekData('sleep');
                     newUser.save()
                     .then(newUser => {
                         done(null, newUser);
