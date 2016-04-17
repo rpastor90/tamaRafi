@@ -11,6 +11,6 @@
             <input type="password" name="password" ng-model="login.password" class="form-control"  placeholder="Password" required>
              <p ng-show="loginForm.password.$invalid &&!loginForm.password.$pristine" class="help-block">A password is required.</p>
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class="btn btn-default">Submit</button><a ng-click="backToSignUp()"> take me back to signup </a>
     </form>
 <div>
