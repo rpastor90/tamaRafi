@@ -3,13 +3,13 @@ app.config(function($stateProvider) {
         url: '/',
         templateUrl: 'js/home/home.html',
         controller: function ($scope, $http, $uibModal, user) {
-            // $scope.demo = () => {
-            //     $scope.demoModal = $uibModal.open({
-            //         animation: $scope.animationsEnabled,
-            //         templateUrl: '/js/signup/signup.html',
-            //         controller: 'SignupCtrl'
-            //     })
-            // };
+            $scope.demo = () => {
+                $scope.demoModal = $uibModal.open({
+                    animation: $scope.animationsEnabled,
+                    templateUrl: '/js/signup/signup.html',
+                    controller: 'SignupCtrl'
+                })
+            };
             $scope.close = () => {
                 $scope.demoModal.close();
             };
@@ -17,7 +17,7 @@ app.config(function($stateProvider) {
                 $scope.videoShown = true;
                 $uibModal.open({
                     animation: $scope.animationsEnabled,
-                    template: '<iframe width="700" height="500" src="https://www.youtube.com/embed/JrKzXQVxNi8" frameborder="0" allowfullscreen></iframe><button ng-click="demo()">Want to try it yourself?</button>',
+                    template: '<iframe width="700" height="500" src="https://www.youtube.com/embed/JrKzXQVxNi8" frameborder="0" allowfullscreen></iframe>',
                     controller: function($scope, $uibModal) {
                         console.log($scope)
                         
