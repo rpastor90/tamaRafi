@@ -2,10 +2,9 @@
 var mongoose = require('mongoose');
 require('../../../server/db/models');
 var User = mongoose.model('User');
-
 var expect = require('chai').expect;
 
-var dbURI = 'mongodb://localhost:27017/testingDB';
+var dbURI = 'mongodb://localhost:27017/tamarafi-test';
 var clearDB = require('mocha-mongoose')(dbURI);
 
 var supertest = require('supertest');
@@ -31,7 +30,7 @@ describe('Members Route', function () {
 		});
 
 		it('should get a 401 response', function (done) {
-			guestAgent.get('/api/members/secret-stash')
+			guestAgent.get('/api/users')
 				.expect(401)
 				.end(done);
 		});
@@ -43,8 +42,10 @@ describe('Members Route', function () {
 		var loggedInAgent;
 
 		var userInfo = {
-			email: 'joe@gmail.com',
+		
+			name: 'joeShmo',
 			password: 'shoopdawoop'
+		
 		};
 
 		beforeEach('Create a user', function (done) {
@@ -57,7 +58,7 @@ describe('Members Route', function () {
 		});
 
 		it('should get with 200 response and with an array as the body', function (done) {
-			loggedInAgent.get('/api/members/secret-stash').expect(200).end(function (err, response) {
+			loggedInAgent.get('/api/users').expect(200).end(function (err, response) {
 				if (err) return done(err);
 				expect(response.body).to.be.an('array');
 				done();

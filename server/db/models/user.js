@@ -6,6 +6,9 @@ var _ = require('lodash');
 
 var schema = new Schema({
     name: String,
+    email: String,
+    password: String,
+    salt: String,
     avatar: String,
     fitness: String,
     fitbit: {
@@ -48,6 +51,26 @@ var schema = new Schema({
             access_token: String,
             refresh_token: String
         }
+    },
+    local: {
+        email: String,
+        password: String,
+        steps: {
+            type: Number,
+            default: 5000
+        },
+        sleep: {
+            type:Number,
+            default: 600
+        },
+        weekSteps: [{
+            steps: Number,
+            date: String
+        }],
+        weekSleep: [{
+            minutes: Number,
+            date: String
+        }]
     },
     animal: {
         name: String,
@@ -115,7 +138,6 @@ var encryptPassword = function(plainText, salt) {
 };
 
 schema.pre('save', function(next) {
-
     if (this.isModified('password')) {
         this.salt = this.constructor.generateSalt();
         this.password = this.constructor.encryptPassword(this.password, this.salt);

@@ -24,6 +24,7 @@ router.get('/', ensureAuthenticated, function (req, res, next) {
     .then(null, next);
 });
 
+
 router.get('/:userId', ensureAuthenticated, function (req, res, next) {
     User.find({ _id: req.params.userId })
     .populate('animal.friends')
@@ -40,7 +41,7 @@ router.put('/:userId', ensureAuthenticated, function (req, res, next) {
     .then(function (user) {
         res.status(201).json(user);
     })
-    .then(null, next);
+    .then(null, next)
 });
 
 router.get('/:userId/getSwag', ensureAuthenticated, function(req, res, next) {

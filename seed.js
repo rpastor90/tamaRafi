@@ -22,6 +22,8 @@ var Promise = require('bluebird');
 var chalk = require('chalk');
 var connectToDb = require('./server/db');
 var Swag = Promise.promisifyAll(mongoose.model('Swag'));
+var User = Promise.promisifyAll(mongoose.model('User'));
+
 
 var seedSwag = function () {
 
