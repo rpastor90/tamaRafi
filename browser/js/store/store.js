@@ -10,8 +10,7 @@ app.config(function ($stateProvider) {
     			else return SwagFactory.fetchSwag()
     		},
     		user : function (AuthService, UserFactory) {
-                if (UserFactory.getCachedUser().animal) return UserFactory.getCachedUser();
-                else return UserFactory.getUser();
+                return UserFactory.getUser();
             } 
     	}
     })

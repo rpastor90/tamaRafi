@@ -8,8 +8,7 @@ app.controller('HealthCtrl', function($scope, $uibModal, UserFactory) {
             controller: 'OpenHealthCtrl',
             resolve: {
                 user: function() {
-                    if (UserFactory.getCachedUser().animal) return UserFactory.getCachedUser();
-                    else return UserFactory.getUser();
+                    return UserFactory.getUser();
                 }
             }
         });

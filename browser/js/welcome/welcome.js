@@ -3,7 +3,7 @@ app.config(function ($stateProvider) {
     $stateProvider.state('welcome', {
         url: '/welcome',
         controller: function(user, $state) {
-            console.log('Welcome:', user.name);
+            console.log('Welcome:', user);
             if (user.animal.name) {
                 // switch firstTimeUser to crib once crib state is set up
                 $state.go('crib');
@@ -13,7 +13,6 @@ app.config(function ($stateProvider) {
         },
         resolve: {
             user: function (UserFactory) {
-                if (UserFactory.getCachedUser().animal) return UserFactory.getCachedUser();
                 return UserFactory.getUser();
             }
         }
