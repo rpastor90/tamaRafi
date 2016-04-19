@@ -10,8 +10,7 @@ app.controller('CreatureComputerCtrl', function ($scope, $uibModal, UserFactory)
             controller: 'OpenComputerController',
             resolve: {
                 user: function() {
-                    if (UserFactory.getCachedUser().animal) return UserFactory.getCachedUser();
-                    else return UserFactory.getUser();
+                    return UserFactory.getUser();
                 }
             }
         });

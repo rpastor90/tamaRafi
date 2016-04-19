@@ -7,7 +7,8 @@ app.factory('UserFactory', function($http, AuthService, $rootScope) {
     };
 
     userFactory.getUser = function() {
-        return AuthService.getLoggedInUser()
+        if (cachedUser.animal) return cachedUser;
+        else return AuthService.getLoggedInUser()
         .then(function(user) {
             if (user) {
                 return $http.get('/api/users/' + user._id)
