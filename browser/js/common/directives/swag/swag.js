@@ -75,5 +75,16 @@ app.factory('SwagFactory', function ($http) {
         });
     };
 
+    SwagFactory.putOnDock = function (cribItem) {
+        $(cribItem).detach();
+        $('.dock ul').append(cribItem);
+        $(cribItem).css('position', 'relative');
+        $(cribItem).css('left', 'auto');
+        $(cribItem).css('top', 'auto');
+        $(cribItem).css('width', '100px');
+        $(cribItem).css('height', '100px');
+    };
+
+
     return SwagFactory;
 });

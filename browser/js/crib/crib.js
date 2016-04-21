@@ -77,6 +77,7 @@ app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthServic
         var topPos = ui.offset.top + 'px';
         swag.left = leftPos;
         swag.top = topPos;
+        swag.dockSwag = false;
 
         editedSwagObj[swag._id] = swag;
 
@@ -91,6 +92,7 @@ app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthServic
     var onResizeStop = function(event, ui, swag) {
         swag.height = ui.helper.context.style.height;
         swag.width = ui.helper.context.style.width;
+        swag.dockSwag = false;
         editedSwagObj[swag._id] = swag;
     };
 
@@ -110,15 +112,7 @@ app.controller('CribCtrl', function($rootScope, $scope, $state, user, AuthServic
         $('.crib').removeClass('space-background brick-background').addClass('normal-background');
 
         var cribItems = $('.notTheDock li').toArray();
-        cribItems.forEach(function(cribItem) {
-            $(cribItem).detach();
-            $('.dock ul').append(cribItem);
-            $(cribItem).css('position', 'relative');
-            $(cribItem).css('left', 'auto');
-            $(cribItem).css('top', 'auto');
-            $(cribItem).css('width', '100px');
-            $(cribItem).css('height', '100px');
-        })
+        cribItems.forEach(SwagFactory.putOnDock);
     };
 
     $scope.makeUnCustomizable = function () {
@@ -154,16 +148,21 @@ app.directive('setPosition', function(SwagFactory) {
     return {
         restrict: 'A',
         link: function(scope, element) {
-            var swagArray = SwagFactory.getUserSwagCache();
-            for (var i = 0; i < swagArray.length; i++) {
+            const swagArray = SwagFactory.getUserSwagCache();
+            console.log("this is the swagArray, will it update?", swagArray);
+            for (let i = 0; i < swagArray.length; i++) {
                 if (swagArray[i]._id === scope.swag._id) {
-                    var detached = $(element).detach();
-                    $('.notTheDock').append(detached);
-                    element.css('position', 'fixed');
-                    element.css('left', swagArray[i].left);
-                    element.css('top', swagArray[i].top);
-                    element.css('width', swagArray[i].width);
-                    element.css('height', swagArray[i].height);
+                    const detached = $(element).detach();
+                    if (swagArray[i].dockSwag) {
+                        SwagFactory.putOnDock(detached);
+                    } else {
+                        $('.notTheDock').append(detached);
+                        element.css('position', 'fixed');
+                        element.css('left', swagArray[i].left);
+                        element.css('top', swagArray[i].top);
+                        element.css('width', swagArray[i].width);
+                        element.css('height', swagArray[i].height);
+                    }
                 };
             };
         }
