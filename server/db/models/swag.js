@@ -12,7 +12,11 @@ var schema = new Schema({
   width: String,
   left: String,
   top: String,
-  userItem: Boolean
+  userItem: Boolean,
+  dockSwag: {
+    type: Boolean,
+    default: true
+  }
 });
 
 schema.statics.updateMultiple = function (arr) {
